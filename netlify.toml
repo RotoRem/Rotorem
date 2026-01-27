@@ -191,6 +191,11 @@
   to = "/"
   status = 301
 
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 200
+
 # Catch-all redirect for SPA routing (must be last)
 [[redirects]]
   from = "/*"
