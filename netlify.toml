@@ -196,6 +196,12 @@
   to = "/sitemap-index.xml"
   status = 200
 
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+
 # Catch-all redirect for SPA routing (must be last)
 [[redirects]]
   from = "/*"

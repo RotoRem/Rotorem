@@ -13,18 +13,12 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      filter(entry) {
+      filter: (entry) => {
         const candidate =
-          typeof entry === 'string'
-            ? entry
-            : entry?.pathname ?? '';
+          typeof entry === 'string' ? entry : entry?.pathname ?? '';
         return !candidate.startsWith('/en/');
       },
       serialize(item) {
-        if (item.url.includes('/en/') || item.url.endsWith('/en')) {
-          return null;
-        }
-
         if (
           item.url.endsWith('/') ||
           item.url.includes('/services') ||
