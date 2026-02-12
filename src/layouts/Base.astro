@@ -3,7 +3,6 @@ import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations, getRouteFromUrl, getLocalizedPath } from '../i18n/utils';
 // import LanguageToggle from '../components/LanguageToggle.astro'; // TEMPORARILY COMMENTED OUT
 import ReviewsModal from '../components/ReviewsModal.astro';
-
 interface Props {
   title?: string;
   description?: string;
@@ -357,6 +356,29 @@ const getPageSpecificSchema = () => {
     <!-- Enhanced Google Fonts Loading with font-display: swap -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Google Tag Manager -->
+    <script type="module">
+      const GTM_ID = 'GTM-TS8Q99GB';
+
+      // Инициализирайте dataLayer преди GTM скрипта
+      const existingDataLayer = window.dataLayer || [];
+      window.dataLayer = window.dataLayer || [];
+
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        const f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        if (f.parentNode) {
+          f.parentNode.insertBefore(j, f);
+        }
+      })(window, document, 'script', 'dataLayer', GTM_ID);
+    </script>
+    <!-- End Google Tag Manager -->
+    
     <!-- Enhanced SEO with better structured data -->
     <SEO
       title={title}
@@ -403,122 +425,164 @@ const getPageSpecificSchema = () => {
     <!-- Enhanced LocalBusiness Schema -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(getPageSpecificSchema())}></script>
     
-    <!-- Web Vitals and Analytics -->
+    <!-- Web Vitals and Analytics Event Tracking via dataLayer -->
     <script type="module">
-      // Enhanced Web Vitals monitoring
-      import {getCLS, getFID, getFCP, getLCP, getTTFB, getINP} from 'https://unpkg.com/web-vitals@3/dist/web-vitals.js';
+      // Initialize dataLayer if not present
+      window.dataLayer = window.dataLayer || [];
 
-      function sendToAnalytics(metric) {
-        // Send to Google Analytics 4
-        if (typeof gtag !== 'undefined') {
-          gtag('event', metric.name, {
-            event_category: 'Web Vitals',
-            event_label: metric.id,
-            value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
-            non_interaction: true,
-            custom_parameters: {
-              connection_type: navigator.connection?.effectiveType || 'unknown',
-              device_memory: navigator.deviceMemory || 'unknown',
-              is_mobile: /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-              url: window.location.pathname,
-              timestamp: Date.now()
-            }
+      /**
+       * Track events to dataLayer for GTM to handle GA4/marketing tags
+       */
+      const trackEvent = (eventData) => {
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            ...eventData,
+            page_path: window.location.pathname,
+            page_title: document.title,
+            language: document.documentElement.lang || 'en',
+            timestamp: Date.now(),
           });
-        }
-        
-        // Console logging in development
-        if (location.hostname === 'localhost' || location.hostname.includes('netlify')) {
-          const rating = metric.value <= (metric.rating?.good || 2500) ? 'good' : 
-                        metric.value <= (metric.rating?.needs_improvement || 4000) ? 'needs improvement' : 'poor';
-          console.log(`🔍 Web Vital: ${metric.name}`, {
-            value: metric.value,
-            rating: rating,
-            id: metric.id,
-            attribution: metric.attribution
-          });
-        }
-      }
 
-      // Monitor all Core Web Vitals
-      getCLS(sendToAnalytics);
-      getFID(sendToAnalytics);
-      getFCP(sendToAnalytics);
-      getLCP(sendToAnalytics);
-      getTTFB(sendToAnalytics);
-      getINP(sendToAnalytics);
-
-      // Enhanced error monitoring
-      window.addEventListener('error', function(e) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'javascript_error', {
-            event_category: 'Errors',
-            event_label: `${e.filename}:${e.lineno} - ${e.message}`,
-            value: 1,
-            custom_parameters: {
-              stack: e.error?.stack?.substring(0, 500) || 'No stack trace',
-              user_agent: navigator.userAgent
-            }
-          });
-        }
-      });
-
-      // Unhandled promise rejections
-      window.addEventListener('unhandledrejection', function(e) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'unhandled_promise_rejection', {
-            event_category: 'Errors',
-            event_label: e.reason?.message || e.reason,
-            value: 1
-          });
-        }
-      });
-
-      // 404 and error page monitoring
-      if (document.title.includes('404') || document.title.includes('Not Found')) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'page_not_found', {
-            event_category: 'Errors',
-            event_label: window.location.pathname,
-            referrer: document.referrer || 'direct'
-          });
-        }
-      }
-
-      // Monitor slow page loads
-      window.addEventListener('load', function() {
-        const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-        if (loadTime > 5000) { // If page takes more than 5 seconds
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'slow_page_load', {
-              event_category: 'Performance',
-              event_label: window.location.pathname,
-              value: Math.round(loadTime)
-            });
+          // Log in development for debugging
+          if (
+            location.hostname === 'localhost' ||
+            location.hostname.includes('netlify') ||
+            location.hostname.includes('dev')
+          ) {
+            console.log('📊 Analytics Event:', eventData);
           }
         }
+      };
+
+      // Track initial page view
+      trackEvent({
+        event: 'page_view',
+        page_type: document.body.getAttribute('data-page-type') || 'standard',
       });
 
-      // Monitor network failures
+      // Web Vitals Monitoring via dataLayer
+      import('https://unpkg.com/web-vitals@3/dist/web-vitals.js').then(
+        ({ getCLS, getFID, getFCP, getLCP, getTTFB, getINP }) => {
+          const sendToDataLayer = (metric) => {
+            const value = Math.round(
+              metric.name === 'CLS' ? metric.value * 1000 : metric.value
+            );
+            const rating =
+              metric.value <=
+              (metric.rating?.good ||
+                (metric.name === 'CLS'
+                  ? 0.1
+                  : metric.name === 'FID'
+                    ? 100
+                    : 2500))
+                ? 'good'
+                : metric.value <=
+                    (metric.rating?.needs_improvement ||
+                      (metric.name === 'CLS'
+                        ? 0.25
+                        : metric.name === 'FID'
+                          ? 300
+                          : 4000))
+                  ? 'needs_improvement'
+                  : 'poor';
+
+            trackEvent({
+              event: 'web_vital',
+              category: 'Performance',
+              action: 'measure',
+              metric_name: metric.name,
+              metric_value: value,
+              rating,
+            });
+          };
+
+          getCLS(sendToDataLayer);
+          getFID(sendToDataLayer);
+          getFCP(sendToDataLayer);
+          getLCP(sendToDataLayer);
+          getTTFB(sendToDataLayer);
+          getINP(sendToDataLayer);
+        }
+      );
+
+      // JavaScript Error Tracking
+      window.addEventListener('error', (e) => {
+        trackEvent({
+          event: 'error',
+          category: 'Errors',
+          action: 'javascript_error',
+          label: e.message,
+          error_message: e.message,
+          error_type: 'javascript_error',
+          filename: e.filename,
+          line_number: e.lineno,
+        });
+      });
+
+      // Unhandled Promise Rejection Tracking
+      window.addEventListener('unhandledrejection', (e) => {
+        trackEvent({
+          event: 'error',
+          category: 'Errors',
+          action: 'unhandled_rejection',
+          label: e.reason?.message || String(e.reason),
+          error_message: e.reason?.message || String(e.reason),
+          error_type: 'unhandled_promise_rejection',
+        });
+      });
+
+      // 404 Page Detection
+      if (document.title.includes('404') || document.title.includes('Not Found')) {
+        trackEvent({
+          event: 'page_not_found',
+          category: 'Errors',
+          action: '404',
+          label: window.location.pathname,
+          referrer: document.referrer || 'direct',
+        });
+      }
+
+      // Slow Page Load Detection
+      window.addEventListener('load', () => {
+        const loadTime =
+          performance.timing.loadEventEnd - performance.timing.navigationStart;
+        if (loadTime > 5000) {
+          trackEvent({
+            event: 'slow_page_load',
+            category: 'Performance',
+            action: 'slow_load',
+            label: window.location.pathname,
+            value: Math.round(loadTime),
+          });
+        }
+      });
+
+      // Service Worker and Network Error Tracking
       if ('serviceWorker' in navigator) {
-        // Register service worker
-        navigator.serviceWorker.register('/sw.js')
-          .then(function(registration) {
-            console.log('✅ Service Worker registered successfully:', registration.scope);
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then(() => {
+            console.log('✅ Service Worker registered successfully');
           })
-          .catch(function(error) {
-            console.log('❌ Service Worker registration failed:', error);
+          .catch(() => {
+            trackEvent({
+              event: 'error',
+              category: 'Errors',
+              action: 'service_worker_registration_failed',
+              label: 'Service Worker Registration',
+            });
           });
 
-        // Listen for service worker messages
-        navigator.serviceWorker.addEventListener('message', function(event) {
-          if (event.data && event.data.type === 'NETWORK_ERROR') {
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'network_error', {
-                event_category: 'Errors',
-                event_label: event.data.url,
-                value: 1
-              });
-            }
+        navigator.serviceWorker.addEventListener('message', (event) => {
+          if (event.data?.type === 'NETWORK_ERROR') {
+            trackEvent({
+              event: 'error',
+              category: 'Errors',
+              action: 'network_error',
+              label: event.data.url,
+              error_message: event.data.url,
+              error_type: 'network_error',
+            });
           }
         });
       }
@@ -876,6 +940,14 @@ const getPageSpecificSchema = () => {
     </style>
   </head>
   <body class="min-h-screen bg-gray-50">
+    <!-- Google Tag Manager (noscript) - ⚠️ ОБНОВЕТЕ GTM-XXXXXXX СЕ ВАШИЯ РЕАЛЕН ID!! -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    
     <!-- Header with UPDATED NAVIGATION INCLUDING DROPDOWN -->
     <header class="py-4 bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div class="container flex justify-between items-center">
@@ -1219,8 +1291,26 @@ const getPageSpecificSchema = () => {
     </footer>
   </body>
   
-  <!-- Updated script for mobile menu and Reviews modal WITH SERVICES TOGGLE -->
-  <script>
+  <!-- Updated script for mobile menu, modal interactions, and dataLayer tracking -->
+  <script type="module">
+    // Initialize dataLayer tracking helper
+    const trackDataLayerEvent = (eventData) => {
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          ...eventData,
+          timestamp: Date.now(),
+          page_path: window.location.pathname,
+        });
+
+        if (
+          location.hostname === 'localhost' ||
+          location.hostname.includes('netlify')
+        ) {
+          console.log('📍 Interaction Event:', eventData);
+        }
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
       // Mobile menu functionality
       const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -1248,6 +1338,14 @@ const getPageSpecificSchema = () => {
           menuPanel.classList.add('slide-in-right');
           document.body.style.overflow = 'hidden';
           if (floatingButton) floatingButton.style.display = 'none';
+
+          // Track menu open
+          trackDataLayerEvent({
+            event: 'menu_open',
+            category: 'Navigation',
+            action: 'opened',
+            label: 'Mobile Menu',
+          });
         }
       }
 
@@ -1263,6 +1361,14 @@ const getPageSpecificSchema = () => {
             if (floatingButton) floatingButton.style.display = 'flex';
             resetServicesSubmenus();
           }, 300);
+
+          // Track menu close
+          trackDataLayerEvent({
+            event: 'menu_close',
+            category: 'Navigation',
+            action: 'closed',
+            label: 'Mobile Menu',
+          });
         }
       }
 
@@ -1280,6 +1386,14 @@ const getPageSpecificSchema = () => {
           if (shouldOpen) {
             submenu.classList.remove('hidden');
             if (arrow) arrow.setAttribute('style', 'transform: rotate(90deg)');
+
+            // Track service submenu open
+            trackDataLayerEvent({
+              event: 'service_submenu_open',
+              category: 'Navigation',
+              action: 'opened',
+              label: key,
+            });
           }
         });
       });
@@ -1294,7 +1408,21 @@ const getPageSpecificSchema = () => {
       }
       
       mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
+        link.addEventListener('click', () => {
+          const href = link.getAttribute('href');
+          const text = link.textContent || '';
+
+          // Track navigation link click
+          trackDataLayerEvent({
+            event: 'click',
+            category: 'Navigation',
+            action: 'clicked',
+            label: text.trim(),
+            url: href,
+          });
+
+          closeMenu();
+        });
       });
 
       // Reviews modal functionality
@@ -1309,12 +1437,28 @@ const getPageSpecificSchema = () => {
         document.body.style.overflow = 'hidden';
         closeMenu();
         if (floatingButton) floatingButton.style.display = 'none';
+
+        // Track reviews modal open
+        trackDataLayerEvent({
+          event: 'modal_open',
+          category: 'User Interactions',
+          action: 'opened',
+          label: 'Reviews Modal',
+        });
       }
       
       function closeReviewsModal() {
         modal?.classList.add('hidden');
         document.body.style.overflow = '';
         if (floatingButton) floatingButton.style.display = 'flex';
+
+        // Track reviews modal close
+        trackDataLayerEvent({
+          event: 'modal_close',
+          category: 'User Interactions',
+          action: 'closed',
+          label: 'Reviews Modal',
+        });
       }
       
       modalTrigger?.addEventListener('click', openReviewsModal);
@@ -1330,6 +1474,39 @@ const getPageSpecificSchema = () => {
         if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
           closeReviewsModal();
         }
+      });
+
+      // Track phone button clicks
+      if (floatingButton) {
+        floatingButton.addEventListener('click', () => {
+          trackDataLayerEvent({
+            event: 'cta_click',
+            category: 'Conversions',
+            action: 'clicked',
+            label: 'Floating Phone Button',
+            cta_type: 'call',
+          });
+        });
+      }
+
+      // Track desktop dropdown hovers and clicks
+      const desktopDropdowns = document.querySelectorAll('.dropdown');
+      desktopDropdowns.forEach((dropdown) => {
+        const items = dropdown.querySelectorAll('.dropdown-item');
+        items.forEach((item) => {
+          item.addEventListener('click', (e) => {
+            const href = item.getAttribute('href');
+            const text = item.textContent || '';
+            
+            trackDataLayerEvent({
+              event: 'click',
+              category: 'Navigation',
+              action: 'service_clicked',
+              label: text.trim(),
+              url: href,
+            });
+          });
+        });
       });
     });
   </script>
