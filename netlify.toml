@@ -38,6 +38,7 @@
     script-src 'self' 'unsafe-inline' 'unsafe-eval'
       https://www.googletagmanager.com
       https://*.google-analytics.com
+      https://www.clarity.ms
       https://scripts.clarity.ms
       https://analytics.ahrefs.com
       https://unpkg.com;
@@ -50,6 +51,7 @@
       https://*.google-analytics.com
       https://*.analytics.google.com
       https://stats.g.doubleclick.net
+      https://www.clarity.ms
       https://scripts.clarity.ms
       https://analytics.ahrefs.com
       https://fonts.googleapis.com;
@@ -57,6 +59,7 @@
       https://www.google.com;
     object-src 'none';
     base-uri 'self';
+    """;
     """
     # FIXED: Performance headers
     X-DNS-Prefetch-Control = "on"
