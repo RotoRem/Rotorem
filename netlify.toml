@@ -60,7 +60,6 @@
     object-src 'none';
     base-uri 'self';
     """;
-    """
     # FIXED: Performance headers
     X-DNS-Prefetch-Control = "on"
     Accept-CH = "DPR, Viewport-Width, Width"
