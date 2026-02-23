@@ -347,7 +347,13 @@ const getPageSpecificSchema = () => {
     <link rel="preconnect" href="https://www.google-analytics.com">
 
     <!-- LCP image -->
-    <img src="/img/hero.webp" loading="eager" fetchpriority="high">
+    <link 
+      rel="preload" 
+      href="/img/hero.webp" 
+      as="image" 
+      type="image/webp"
+      fetchpriority="high"
+    >
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
