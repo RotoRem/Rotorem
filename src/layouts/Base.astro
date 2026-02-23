@@ -341,21 +341,17 @@ const getPageSpecificSchema = () => {
     <meta name="geo.position" content="43.2141;27.9147" />
     <meta name="ICBM" content="43.2141, 27.9147" />
     
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/img/hero.webp" as="image" type="image/webp" fetchpriority="high">
-    
-    <!-- Critical font preloading -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Uw-.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Enhanced Google Fonts Loading with font-display: swap -->
+    <link rel="preconnect" href="https://www.google-analytics.com">
+
+    <!-- Preload LCP image -->
+    <link rel="preload" href="/img/hero.webp" as="image" type="image/webp"fetchpriority="high">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+        
     <!-- Google Tag Manager -->
     <script type="module">
       const GTM_ID = 'GTM-TS8Q99GB';
@@ -414,7 +410,7 @@ const getPageSpecificSchema = () => {
         meta: [
           { name: 'theme-color', content: '#2563eb' },
           { name: 'format-detection', content: 'telephone=yes' },
-          { name: 'apple-mobile-web-app-capable', content: 'yes' },
+          { name: 'mobile-web-app-capable', content: 'yes' },
           { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
           { name: 'msapplication-TileColor', content: '#2563eb' },
           { name: 'application-name', content: isEN ? 'RotoRem Varna & Sofia' : 'РотоРем Варна и София' },
