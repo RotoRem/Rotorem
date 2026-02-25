@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Base.astro';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const isEN = lang === 'en';
+Astro.response.status = 404;
+
+const navPaths = {
+  home: isEN ? '/en' : '/',
+  services: isEN ? '/en/services' : '/services',
+  contact: isEN ? '/en/contact' : '/contact',
+  blog: isEN ? '/en/blog' : '/blog'
+};
+
+const hero = {
+  title: isEN ? 'Page Not Found' : 'Страницата не е намерена',
+  subtitle: isEN
+    ? 'It looks like the page you were trying to reach is missing. Everything else is still working, so let us guide you back on track.'
+    : 'Изглежда, че страницата, която търсите, не съществува. Всичко останало работи, така че ще ви помогнем да се върнете по правилния път.',
+  description: isEN
+    ? 'Use the links below to continue exploring our appliance repair services across Varna & Sofia or reach out directly and we will respond immediately.'
+    : 'Използвайте следващите връзки, за да продължите да разглеждате услугите ни за ремонт във Варна и София или се свържете директно с нас и ще отговорим веднага.'
+};
+
+const actionCards = [
+  {
+    label: isEN ? 'Call for help' : 'Позвънете ни',
+    detail: isEN
+      ? 'Speak with a technician in under a minute.'
+      : 'Говорете с техник за по-малко от минута.',
+    href: 'tel:+359898340982',
+    icon: 'M5 2c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h2c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1H6c-2.21 0-4 1.79-4 4v3c0 1.1.9 2 2 2h9c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1H9c-.55 0-1-.45-1-1V15c0-1.65 1.35-3 3-3h1c.82 0 1.55-.5 1.85-1.28L16 4.17c.13-.34.2-.7.2-1.07V3c0-1.1-.9-2-2-2H5z'
+  },
+  {
+    label: isEN ? 'Browse services' : 'Разгледайте услугите',
+    detail: isEN
+      ? 'See all appliance repair options in Varna & Sofia.'
+      : 'Вижте всички услуги за ремонт на уреди във Варна и София.',
+    href: navPaths.services,
+    icon: 'M4 4h16v12H4z'
+  },
+  {
+    label: isEN ? 'Contact form' : 'Формуляр за контакт',
+    detail: isEN
+      ? 'Share your issue and we will reply within the hour.'
+      : 'Опишете проблема и ще се свържем в рамките на час.',
+    href: navPaths.contact,
+    icon: 'M2 3h20v18H2z'
+  },
+  {
+    label: isEN ? 'Latest articles' : 'Последни статии',
+    detail: isEN
+      ? 'Get tips on appliance care from our blog.'
+      : 'Прочетете полезни съвети от нашия блог.',
+    href: navPaths.blog,
+    icon: 'M4 3h16v4H4z'
+  }
+];
+
+const quickLinks = [
+  { label: isEN ? 'Head back home' : 'Обратно към началото', href: navPaths.home },
+  { label: isEN ? 'Emergency repair' : 'Аварийни услуги', href: navPaths.services }
+];
+
+const pageTitle = isEN ? '404 • RotoRem' : '404 • РотоРем';
+const pageDescription = isEN
+  ? 'Custom 404 page for RotoRem, guiding site visitors back to appliance repair services in Varna & Sofia.'
+  : 'Персонализирана 404 страница на РотоРем, която помага на посетителите да се върнат към услугите във Варна и София.';
+---
+
+<Layout title={pageTitle} description={pageDescription} noindex>
+  <main class="relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-16 text-white">
+    <div class="container mx-auto px-4 lg:px-0">
+      <section class="grid gap-10 lg:grid-cols-[1.2fr,0.8fr] items-center">
+        <div class="space-y-6">
+          <p class="text-sm uppercase tracking-[0.4em] text-indigo-300">404</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">{hero.title}</h1>
+          <p class="text-lg text-slate-200 max-w-3xl">{hero.subtitle}</p>
+          <p class="text-base text-slate-300 max-w-2xl">{hero.description}</p>
+
+          <div class="flex flex-wrap gap-3">
+            <a
+              href={navPaths.home}
+              class="btn-cta inline-flex items-center justify-center gap-2"
+            >
+              {isEN ? 'Return home' : 'Назад към началото'}
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4l-8 8m0 0l8 8m-8-8h18" />
+              </svg>
+            </a>
+            <a
+              href="tel:+359898340982"
+              class="btn-primary inline-flex items-center justify-center gap-2"
+            >
+              {isEN ? 'Call the team' : 'Обадете се'}
+              <span aria-hidden="true">⇢</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="relative rounded-[28px] bg-gradient-to-br from-indigo-600/90 via-sky-600/60 to-cyan-500/70 p-8 shadow-2xl overflow-hidden">
+          <div class="absolute inset-0 opacity-40 blur-[40px] bg-gradient-to-br from-white via-indigo-400 to-transparent"></div>
+          <div class="relative space-y-6">
+            <div class="text-sm uppercase tracking-[0.3em] text-white/80">{isEN ? 'Need directions?' : 'Търсите посока?'}</div>
+            <h2 class="text-3xl font-semibold text-white">{isEN ? 'Use these shortcuts' : 'Ползвайте преки пътища'}</h2>
+            <div class="grid gap-3">
+              {quickLinks.map((link) => (
+                <a
+                  href={link.href}
+                  class="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-5 py-4 transition hover:border-white/40 hover:bg-white/20"
+                >
+                  <span class="text-sm font-semibold">{link.label}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-16 grid gap-6 md:grid-cols-2">
+        {actionCards.map((item) => (
+          <a
+            href={item.href}
+            class="group rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:border-sky-300/60 hover:bg-white/10"
+          >
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-sm uppercase tracking-[0.4em] text-slate-400">{isEN ? 'Quick jump' : 'Бърз достъп'}</p>
+                <h3 class="mt-3 text-xl font-semibold text-white">{item.label}</h3>
+              </div>
+              <div class="rounded-full bg-white/10 p-3 text-slate-200 transition group-hover:bg-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d={item.icon} />
+                </svg>
+              </div>
+            </div>
+            <p class="mt-3 text-sm text-slate-200">{item.detail}</p>
+          </a>
+        ))}
+      </section>
+    </div>
+  </main>
+</Layout>
