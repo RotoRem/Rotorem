@@ -256,24 +256,24 @@ function generateRelatedPosts(category) {
       {
         title: 'Ремонт на съдомиялни машини Варна',
         excerpt: 'Професионален ремонт на съдомиялни машини на място...',
-        url: '/services/dishwasher-repair'
+        url: '/services/dishwasher-repair/'
       },
       {
         title: 'Електроуслуги Варна - професионални решения',
         excerpt: 'Пълен спектър електротехнически услуги и монтажи...',
-        url: '/services/electrical-services'
+        url: '/services/electrical-services/'
       },
       {
         title: 'Ремонт на фурни Варна',
         excerpt: 'Професионален ремонт на електрически фурни...',
-        url: '/services/oven-repair'
+        url: '/services/oven-repair/'
       }
     ],
     'Електроуслуги': [
       {
         title: 'Ремонт на перални машини Варна',
         excerpt: 'Професионален ремонт на перални машини на място...',
-        url: '/services/washing-machine-repair'
+        url: '/services/washing-machine-repair/'
       },
       {
         title: 'Ремонт на фурни Варна',
@@ -283,7 +283,7 @@ function generateRelatedPosts(category) {
       {
         title: 'Ремонт на съдомиялни машини Варна',
         excerpt: 'Експертен ремонт на съдомиялни машини...',
-        url: '/services/dishwasher-repair'
+        url: '/services/dishwasher-repair/'
       }
     ]
   };
@@ -292,17 +292,17 @@ function generateRelatedPosts(category) {
     {
       title: 'Ремонт на перални машини Варна',
       excerpt: 'Професионален ремонт на перални машини на място...',
-      url: '/services/washing-machine-repair'
+      url: '/services/washing-machine-repair/'
     },
     {
       title: 'Електроуслуги Варна',
       excerpt: 'Пълен спектър електротехнически услуги...',
-      url: '/services/electrical-services'
+      url: '/services/electrical-services/'
     },
     {
       title: 'Ремонт на съдомиялни машини Варна',
       excerpt: 'Експертен ремонт на съдомиялни машини...',
-      url: '/services/dishwasher-repair'
+      url: '/services/dishwasher-repair/'
     }
   ];
 

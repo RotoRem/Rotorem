@@ -102,10 +102,10 @@ ${blogPostsArray}
               </div>
               <div class="p-6">
                 <h3 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
-                  <a href={\`/blog/\${post.slug}\`} class="hover:text-primary transition-colors">{post.title}</a>
+                  <a href={\`/blog/\${post.slug}/\`} class="hover:text-primary transition-colors">{post.title}</a>
                 </h3>
                 <p class="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
-                <a href={\`/blog/\${post.slug}\`} class="text-primary font-medium hover:text-primary-dark transition-colors">
+                <a href={\`/blog/\${post.slug}/\`} class="text-primary font-medium hover:text-primary-dark transition-colors">
                   Прочетете повече →
                 </a>
               </div>

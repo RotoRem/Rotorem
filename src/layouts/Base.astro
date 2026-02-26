@@ -30,7 +30,7 @@ const navPaths = {
 const serviceDefinitions = [
   {
     key: 'washing',
-    slug: 'washing-machine-repair/',
+    slug: 'washing-machine-repair',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="14" r="4"/><circle cx="12" cy="7" r="1.5"/></svg>`,
     titles: {
       en: 'Washing Machine Repair',
@@ -41,7 +41,7 @@ const serviceDefinitions = [
   },
   {
     key: 'dryer',
-    slug: 'dryer-repair/',
+    slug: 'dryer-repair',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M10 11l2 2 2-2"/><path d="M10 15l2-2 2 2"/></svg>`,
     titles: {
       en: 'Dryer Repair',
@@ -52,7 +52,7 @@ const serviceDefinitions = [
   },
   {
     key: 'dishwasher',
-    slug: 'dishwasher-repair/',
+    slug: 'dishwasher-repair',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M8 16v-4"/><path d="M16 16v-4"/></svg>`,
     titles: {
       en: 'Dishwasher Repair',
@@ -63,7 +63,7 @@ const serviceDefinitions = [
   },
   {
     key: 'oven',
-    slug: 'oven-repair/',
+    slug: 'oven-repair',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M7 16h10"/><path d="M7 8h10"/></svg>`,
     titles: {
       en: 'Oven Repair',
@@ -74,7 +74,7 @@ const serviceDefinitions = [
   },
   {
     key: 'boiler',
-    slug: 'boiler-repair/',
+    slug: 'boiler-repair',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="12" height="18" x="6" y="3" rx="2"/><path d="M9 7h6"/><path d="M9 11h6"/><path d="M12 15v4"/><path d="M10 19h4"/></svg>`,
     titles: {
       en: 'Boiler Repair',
@@ -85,7 +85,7 @@ const serviceDefinitions = [
   },
   {
     key: 'electrical',
-    slug: 'electrical-services/',
+    slug: 'electrical-services',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 12h4l-1 8 6-11h-4l2-5z"/></svg>`,
     titles: {
       en: 'Electrical Services',
@@ -100,19 +100,19 @@ const serviceCityConfigs = [
   {
     key: 'varna',
     label: isEN ? 'Varna' : 'Варна',
-    pathSuffix: '/'
+    pathSuffix: ''
   },
   {
     key: 'sofia',
     label: isEN ? 'Sofia' : 'София',
-    pathSuffix: '/sofia/'
+    pathSuffix: 'sofia'
   }
 ];
 
 const baseServicesPath = isEN ? '/en/services' : '/services';
 
 const serviceMenuSections = serviceCityConfigs.map(({ key, label, pathSuffix }) => {
-  const allServicesUrl = pathSuffix ? `${baseServicesPath}${pathSuffix}` : baseServicesPath;
+  const allServicesUrl = pathSuffix ? `${baseServicesPath}/${pathSuffix}/` : `${baseServicesPath}/`;
   const buttonLabel = isEN ? `${label} Services` : `Услуги ${label}`;
   const viewAllLabel = isEN ? `View all ${label} services` : `Всички услуги за ${label}`;
 
@@ -131,7 +131,7 @@ const serviceMenuSections = serviceCityConfigs.map(({ key, label, pathSuffix }) 
       .map((item) => ({
         title: item.titles[locale],
         icon: item.icon,
-        url: `${allServicesUrl}/${item.slug}`
+        url: `${allServicesUrl}${item.slug}/`
       }))
   };
 });
@@ -1006,12 +1006,9 @@ const getPageSpecificSchema = () => {
               </div>
             ))}
             
-            <button 
-              id="reviews-modal-trigger"
-              class="text-gray-700 hover:text-primary font-medium font-heading transition-colors"
-            >
+            <a href={navPaths.reviews} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
               {t('nav.reviews')}
-            </button>
+            </a>
             <a href={navPaths.blog} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
               {t('nav.blog')}
             </a>
@@ -1079,12 +1076,9 @@ const getPageSpecificSchema = () => {
               </div>
             ))}
             
-            <button 
-              id="reviews-modal-trigger-mobile"
-              class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading text-left"
-            >
+            <a href={navPaths.reviews} class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading">
               {t('nav.reviews')}
-            </button>
+            </a>
             <a href={navPaths.blog} class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading">
               {t('nav.blog')}
             </a>
@@ -1259,12 +1253,7 @@ const getPageSpecificSchema = () => {
                 {isEN ? 'Company' : 'Компания'}
               </li>
               <li>
-                <button 
-                  id="reviews-modal-trigger-footer"
-                  class="hover:text-white font-heading text-left text-sm"
-                >
-                  {t('nav.reviews')}
-                </button>
+                <a href={navPaths.reviews} class="hover:text-white font-heading text-sm">{t('nav.reviews')}</a>
               </li>
               <li>
                 <a href={navPaths.blog} class="hover:text-white font-heading text-sm">{t('nav.blog')}</a>
