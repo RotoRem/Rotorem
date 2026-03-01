@@ -1,0 +1,50 @@
+---
+import { buildBreadcrumbs } from '../utils/breadcrumbs';
+
+const { route, title, isEN, navPaths, t } = Astro.props;
+
+const breadcrumbs = buildBreadcrumbs({
+  route,
+  title,
+  isEN,
+  navPaths,
+  t,
+});
+
+const site = Astro.site;
+const currentUrl = site ? new URL(Astro.url.pathname, site).toString() : '';
+const breadcrumbSchema = breadcrumbs.length > 1 ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: breadcrumbs.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.label,
+    item: item.href && site ? new URL(item.href, site).toString() : currentUrl,
+  })),
+} : null;
+---
+
+{breadcrumbs.length > 1 && (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  <nav aria-label="Breadcrumb" class="bg-white/90 backdrop-blur border-b border-gray-200/70">
+    <div class="container py-3">
+      <ol class="flex flex-wrap items-center gap-2 text-sm text-gray-600 font-heading">
+        {breadcrumbs.map((item, index) => (
+          <li class="flex items-center gap-2">
+            {index > 0 && <span class="text-gray-400">&gt;</span>}
+            {item.href ? (
+              <a href={item.href} class="hover:text-primary transition-colors">
+                {item.label}
+              </a>
+            ) : (
+              <span class="text-gray-900 font-semibold" aria-current="page">
+                {item.label}
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+)}

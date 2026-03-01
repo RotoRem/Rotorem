@@ -3,6 +3,7 @@ import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations, getRouteFromUrl, getLocalizedPath } from '../i18n/utils';
 // import LanguageToggle from '../components/LanguageToggle.astro'; // TEMPORARILY COMMENTED OUT
 import ReviewsModal from '../components/ReviewsModal.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 interface Props {
   title?: string;
   description?: string;
@@ -1118,6 +1119,8 @@ const getPageSpecificSchema = () => {
         </div>
       </div>
     </header>
+
+    <Breadcrumbs route={route} title={title} isEN={isEN} navPaths={navPaths} t={t} />
     
     <!-- Reviews Modal -->
     <ReviewsModal />
