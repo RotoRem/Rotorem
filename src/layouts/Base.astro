@@ -698,6 +698,80 @@ const getPageSpecificSchema = () => {
           @apply px-4 pt-2 pb-1 text-xs font-semibold tracking-wide text-gray-400 uppercase;
         }
 
+        .rotorem-seo-text {
+          font-size: 0.95rem !important;
+          color: #6b7280 !important;
+          margin-top: 45px;
+          padding: 1.5rem 0 2rem;
+        }
+
+        .rotorem-seo-text h2,
+        .rotorem-seo-text h3,
+        .rotorem-seo-text h4 {
+          font-size: 1.05rem !important;
+          font-weight: 600 !important;
+          color: #4b5563 !important;
+        }
+
+        .rotorem-seo-text p,
+        .rotorem-seo-text li {
+          line-height: 1.7 !important;
+        }
+
+        .rotorem-seo-text p {
+          margin: 0 0 0.8rem;
+        }
+
+        .rotorem-seo-text ul {
+          margin: 0.8rem 0 1.1rem;
+          padding-left: 0;
+          list-style: none;
+        }
+
+        .rotorem-seo-text li {
+          position: relative;
+          margin: 0.4rem 0;
+          padding-left: 1.1rem;
+        }
+
+        .rotorem-seo-text li::before {
+          content: '-';
+          position: absolute;
+          left: 0;
+          color: #9ca3af;
+        }
+
+        .rotorem-seo-details {
+          margin-top: 0.75rem;
+        }
+
+        .rotorem-seo-summary {
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-weight: 600;
+          color: #374151;
+        }
+
+        .rotorem-seo-summary svg {
+          width: 1rem;
+          height: 1rem;
+          transition: transform 0.2s ease;
+        }
+
+        .rotorem-seo-summary::-webkit-details-marker {
+          display: none;
+        }
+
+        .rotorem-seo-details[open] .rotorem-seo-summary svg {
+          transform: rotate(180deg);
+        }
+
+        .rotorem-seo-body {
+          margin-top: 0.75rem;
+        }
+
         .dropdown-section + .dropdown-section {
           @apply border-t border-gray-200 mt-2 pt-2;
         }
@@ -1468,6 +1542,50 @@ const getPageSpecificSchema = () => {
         if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
           closeReviewsModal();
         }
+      });
+
+      const seoSections = document.querySelectorAll('.rotorem-seo-text');
+      const isEnglish = document.documentElement.lang === 'en' || window.location.pathname.startsWith('/en/');
+      const readMoreLabel = isEnglish ? 'Read more' : 'Прочети още';
+
+      seoSections.forEach((section) => {
+        const container = section.querySelector('.container');
+        if (!container) return;
+
+        const elements = Array.from(container.children);
+        if (elements.length <= 2) return;
+
+        const details = document.createElement('details');
+        details.className = 'rotorem-seo-details';
+
+        const summary = document.createElement('summary');
+        summary.className = 'rotorem-seo-summary';
+        const labelText = section.getAttribute('data-read-more-label') || readMoreLabel;
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = labelText;
+
+        const chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        chevron.setAttribute('viewBox', '0 0 24 24');
+        chevron.setAttribute('fill', 'none');
+        chevron.setAttribute('stroke', 'currentColor');
+        chevron.setAttribute('stroke-width', '2');
+        chevron.setAttribute('stroke-linecap', 'round');
+        chevron.setAttribute('stroke-linejoin', 'round');
+
+        const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+        polyline.setAttribute('points', '6 9 12 15 18 9');
+        chevron.appendChild(polyline);
+
+        summary.appendChild(labelSpan);
+        summary.appendChild(chevron);
+        details.appendChild(summary);
+
+        const hiddenWrapper = document.createElement('div');
+        hiddenWrapper.className = 'rotorem-seo-body';
+
+        elements.slice(2).forEach((element) => hiddenWrapper.appendChild(element));
+        details.appendChild(hiddenWrapper);
+        container.appendChild(details);
       });
 
       // Track phone button clicks
