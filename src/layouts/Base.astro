@@ -743,6 +743,8 @@ const getPageSpecificSchema = () => {
 
         .rotorem-seo-details {
           margin-top: 0.75rem;
+          display: flex;
+          flex-direction: column;
         }
 
         .rotorem-seo-summary {
@@ -752,6 +754,7 @@ const getPageSpecificSchema = () => {
           gap: 0.5rem;
           font-weight: 600;
           color: #374151;
+          order: 1;
         }
 
         .rotorem-seo-summary svg {
@@ -768,8 +771,18 @@ const getPageSpecificSchema = () => {
           transform: rotate(180deg);
         }
 
+        .rotorem-seo-details[open] .rotorem-seo-summary {
+          order: 3;
+          margin-top: 0.75rem;
+        }
+
         .rotorem-seo-body {
           margin-top: 0.75rem;
+          order: 2;
+        }
+
+        .rotorem-seo-details[open] .rotorem-seo-body {
+          order: 1;
         }
 
         .dropdown-section + .dropdown-section {
@@ -1546,7 +1559,8 @@ const getPageSpecificSchema = () => {
 
       const seoSections = document.querySelectorAll('.rotorem-seo-text');
       const isEnglish = document.documentElement.lang === 'en' || window.location.pathname.startsWith('/en/');
-      const readMoreLabel = isEnglish ? 'Read more' : 'Прочети още';
+      const readMoreLabel = isEnglish ? 'Read more' : 'Прочети повече';
+      const readLessLabel = isEnglish ? 'See less' : 'Виж по-малко';
 
       seoSections.forEach((section) => {
         const container = section.querySelector('.container');
@@ -1561,6 +1575,7 @@ const getPageSpecificSchema = () => {
         const summary = document.createElement('summary');
         summary.className = 'rotorem-seo-summary';
         const labelText = section.getAttribute('data-read-more-label') || readMoreLabel;
+        const lessLabelText = section.getAttribute('data-read-less-label') || readLessLabel;
         const labelSpan = document.createElement('span');
         labelSpan.textContent = labelText;
 
@@ -1586,6 +1601,10 @@ const getPageSpecificSchema = () => {
         elements.slice(2).forEach((element) => hiddenWrapper.appendChild(element));
         details.appendChild(hiddenWrapper);
         container.appendChild(details);
+
+        details.addEventListener('toggle', () => {
+          labelSpan.textContent = details.open ? lessLabelText : labelText;
+        });
       });
 
       // Track phone button clicks
