@@ -173,6 +173,347 @@
   to = "/services/electrical-services"
   status = 301
 
+# Blog article redirects (from XLSX mapping)
+[[redirects]]
+  from = "/blog/el-remonti-varna-otstranyavane-na-avarii-24-7-elektrotehnik-i-servis-bitova-tehnika-varna/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-tehnik-varna-nameri-specialist-remont-na-bitova-tehnika-varna/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-uslugi-varna-barz-elektrotehnik-za-doma-i-ofisa-servis-byala-tehnika-varna/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remonti-po-domovete-varna-bitova-tehnika-zaiavi-posestenie-dnes/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-boyler-varna-kape-ne-zagryava-mirishe-servis-domakinski-uredi-varna/"
+  to = "/services/boiler-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-peralni-varna-smyana-lageri-pompa-tshetki-remont-byala-tehnika-varna/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-furni-varna-servis-za-gotovarski-pechki-varna-ne-zagryava-greshki-termostat/"
+  to = "/services/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-furni-varna-vgradeni-i-svobodno-stoyashti-remont-na-domakinski-uredi/"
+  to = "/services/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-sushilni-varna-ne-sushi-spira-tsikal-servis-sushilni-varna-s-garantsiya/"
+  to = "/services/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-sushilni-ne-sushi-spira-cykyl-serviz-sushilni-garanciq/"
+  to = "/services/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-sushilnq-shum-miris-greshka-na-displeya-serviz-domakinski-uredi/"
+  to = "/services/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/avariini-elektro-remonti-varna-speshen-elektrotehnik-elektro-remont-el-tehnik-cena-pri-avariya/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/boylerat-ne-zagryava-varna-i-sofia-shumove-kapki-i-padashti-predpaziteli/"
+  to = "/services/boiler-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/domashen-maystor-varna-i-sofia-remont-na-byala-tehnika/"
+  to = "/services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-remonti-otstranqvane-na-avarii-24-7-elektrotehnik-i-serviz-bitova-tehnika/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-tehnici-varna-el-instalacii-varna-i-okabeliavane-varna-ceni-srokove/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-tehnik-montaj-demontaj-na-kluchove-i-kontakti/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-tehnik-nameri-specialist-remont-na-bitova-tehnika/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-tehnik-varna-priznaci-za-opasna-el-instalaciya-i-remont-na-adres-ceni/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-tehnik-varna-remonti-po-domovete-diagnostika-i-bezopasnost/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-tehnik-varna-riskove-diagnostika-i-remont-el-instalacii-ceni-rotorem-varna-i-sofia/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/el-uslugi-byrz-elektrotehnik-za-doma-i-ofica/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/elektro-uslugi-varna-izgrajdane-i-poddruzhka-servis-elektrotehnik-po-domovete/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/elektrotehnik-el-tehnik-za-avarii-i-montazhi/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/gotvarski-pechki-varna-furni-plotove-keramichni-kotloni-funkcii-izbor-i-ceni/"
+  to = "/services/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/izgrajdane-na-nova-instalacia-varna-okabeliavane-novi-predpaziteli-za-kontakti-i-tablo/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/kogato-peralnyata-spre-remont-na-peralni-kojto-idva-na-myasto/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/korekten-maystor-za-remont-na-tehnika-varna-i-sofia/"
+  to = "/services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/peralnya-ne-centrofugira-remont-na-peralni-sofia-i-varna/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-boileri-varna-ceni-chesti-povredi-i-barz-serviz/"
+  to = "/services/boiler-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-furni-sofia-serviz-na-myasto-s-garantsiya-za-spokoystvie/"
+  to = "/services/sofia/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-gotvarski-pechki-varna-iskrene-i-predpazitel/"
+  to = "/services/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-boiler-kape-ne-zagryava-mirishe-serviz-domakinski-uredi/"
+  to = "/services/boiler-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-boileri-reshava-problema-na-momenta-na-myasto/"
+  to = "/services/boiler-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-boileri-varna-serviz-boiler-smyana-nagrevatel-boileri-boiler-ne-zagryava-realna-cena/"
+  to = "/services/boiler-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-boyleri-sofia-profesionalen-serviz-po-domovete-s-tochna-diagnostika-rotorem/"
+  to = "/services/sofia/boiler-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-byala-tehnika-sofia-i-varna-realni-ceni-za-peralni-sushilni-i-furni/"
+  to = "/services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-furni-serviz-za-gotvarski-pechki-ne-zagrqva-greshki-termosta/"
+  to = "/services/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-furni-varna-serviz-furna-remont-gotvarski-pechki-kotloni-i-furni-orientirovachni-ceni/"
+  to = "/services/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-furni-vgradeni-i-svobodnostoyashti-remont-na-domakinski-uredi/"
+  to = "/services/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-kotloni-staklokeramichen-plot-i-indukcionni/"
+  to = "/services/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-peralni-smyana-lageri-pompa-chetki-remont-blyala-tehnika/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-peralni-sofia-i-varna-serviz-peralnya-cena-remont-peralni-rotorem-sofia/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-peralni-varna-serviz-na-myasto-yasni-ceni/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-peralni-varna-serviz-peralni-remont-peralnya-po-domovete-yasni-ceni/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-peralnya-sofia-lyukat-ne-se-otvarya-vodata-vatre/"
+  to = "/services/sofia/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-sudomyalni-varna-serviz-sudomyalna-montazh-sudomyalni-remont-sudomyalna-aktualni-ceni/"
+  to = "/services/dishwasher-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-sushilni-sofia-sabira-voda-i-spira-na-myasto/"
+  to = "/services/sofia/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-sushilni-varna-serviz-na-myasto-ceni/"
+  to = "/services/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-sushilni-varna-serviz-sushilni-remont-sushilnya-sushilnya-ne-sushi-proverete-ceni/"
+  to = "/services/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-na-sushilnya-varna-shum-miris-greshka-na-displeya-servis-domakinski-uredi/"
+  to = "/services/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-peralni-i-sushilni/"
+  to = "/services/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-peralni-sofia-serviz-po-adres-i-yasni-ceni-palen-narachnik/"
+  to = "/services/sofia/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-peralnia-varna-barza-diagnostika-po-domovete-cena-i-garancia/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-sadomiyalna-varna-serviz-ne-iztochva-mazni-petna/"
+  to = "/services/dishwasher-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-sadomiyalni-sofia-barz-serviz-na-myasto-rotorem-sofia/"
+  to = "/services/sofia/dishwasher-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-sadomiyalni-sofia-na-adres-techove-i-uplatneniya/"
+  to = "/services/sofia/dishwasher-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/remont-sushilni-sofia-podreden-proces-i-barz-rezultat-rotorem/"
+  to = "/services/sofia/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/sadomiyalna-ne-iztochva-sofia-i-varna-serviz-na-myasto/"
+  to = "/services/dishwasher-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/serviz-na-myasto-sofia-nadezhden-remont-na-peralni-sushilni-furni-i-boyleri/"
+  to = "/services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/serviz-na-myasto-varna-i-sofia-cheklist-predi-remont/"
+  to = "/services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/serviz-peralni-varna-motor-bramchi-baraban-ne-varti/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/shum-i-udari-v-centrofuga-remont-na-peralni-sofia-na-adres/"
+  to = "/services/sofia/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/shumna-peralnya-sofia-i-varna-prichini-i-remont/"
+  to = "/services/washing-machine-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/smiana-na-kluchove-kontakti-i-osvetitelni-tela-praktichen-cheklist/"
+  to = "/services/electrical-services/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/staklok%D0%B5%D1%80%D0%B0%D0%BC%D0%B8chen-plot-i-kotloni-sofia-i-varna-pregrqvane-i-serviz/"
+  to = "/services/sofia/oven-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/sushilnya-spira-po-sredata-remont-i-ceni-vav-varna-i-sofia/"
+  to = "/services/dryer-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/tablo-bushoni-ili-avtomatichen-predpazitel-el-tehnici-varna/"
+  to = "/services/electrical-services/"
+  status = 301
+
 # FIXED: Old URL patterns redirect
 [[redirects]]
   from = "/repair/*"
