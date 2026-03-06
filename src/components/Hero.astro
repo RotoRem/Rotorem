@@ -17,7 +17,7 @@ const t = useTranslations(lang);
 const isEN = lang === 'en';
 
 // Google Reviews URL
-const googleReviewsUrl = "https://g.page/r/CdqG6cGsgqQzEBM/review";
+const googleReviewsUrl = "https://g.page/r/CdqG6cGsgqQzEBM/review/";
 
 // Focus on core services for a cleaner look
 const allServices = [
@@ -78,7 +78,7 @@ const reviews = [
       <!-- Only use WebP if the file exists, otherwise fall back to JPG -->
       <source srcset="/img/hero.webp" type="image/webp">
       <img 
-        src="/img/hero.jpg" 
+        src="/img/hero.webp" 
         alt="RotoRem appliance repair service - professional technician repairing washing machine in modern home" 
         class="w-full h-full object-cover object-center"
         width="1920"
@@ -88,7 +88,7 @@ const reviews = [
         loading="eager"
         style="content-visibility: auto; contain-intrinsic-size: 1920px 1080px;"
         onload="this.style.opacity = '1'; console.log('Hero image loaded successfully')"
-        onerror="console.error('Hero image failed to load:', this.src); this.src='/img/hero.jpg'"
+        onerror="console.error('Hero image failed to load:', this.src); this.src='/img/hero.webp'"
       />
     </picture>
     <!-- Darkened overlay for good text contrast on ALL screen sizes -->
