@@ -16,7 +16,11 @@ export default defineConfig({
       filter: (entry) => {
         const candidate =
           typeof entry === 'string' ? entry : entry?.pathname ?? '';
-        return !candidate.startsWith('/en/');
+        if (candidate.startsWith('/en/')) {
+          return false;
+        }
+
+        return !candidate.startsWith('/thankyou/') && !candidate.startsWith('/book/');
       },
       serialize(item) {
         if (
@@ -26,11 +30,6 @@ export default defineConfig({
         ) {
           item.priority = 0.9;
         }
-
-        if (item.url.includes('/thankyou')) {
-          item.priority = 0.1;
-        }
-
         return item;
       },
     }),
