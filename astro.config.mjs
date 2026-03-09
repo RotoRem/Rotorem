@@ -14,13 +14,13 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       filter: (entry) => {
-        const candidate =
-          typeof entry === 'string' ? entry : entry?.pathname ?? '';
-        if (candidate.startsWith('/en/')) {
-          return false;
-        }
+        const candidate = typeof entry === 'string' ? entry : entry?.pathname ?? entry?.url ?? '';
 
-        return !candidate.startsWith('/thankyou/') && !candidate.startsWith('/book/');
+        const path = candidate.startsWith('http')
+          ? new URL(candidate).pathname
+          : candidate;
+
+        return !path.startsWith('/thankyou') && !path.startsWith('/book');
       },
       serialize(item) {
         if (
