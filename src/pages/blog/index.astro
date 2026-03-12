@@ -1,8 +1,9 @@
 ---
 import Layout from '../../layouts/Base.astro';
-import { getLangFromUrl } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const isEN = lang === 'en';
 
 const title = isEN 
@@ -14,12 +15,9 @@ const description = isEN
   : 'Полезни съвети и ръководства за поддръжка и ремонт на битова техника от експертите на РотоРем Варна.';
 
 // Auto-generated blog posts
-const blogPosts: Array<{
-  title: string;
-  slug: string;
-  excerpt: string;
-  image: string;
-}> = [];
+const blogPosts = [
+
+];
 ---
 
 <Layout title={title} description={description}>
