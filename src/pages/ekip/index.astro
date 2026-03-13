@@ -12,6 +12,7 @@ const teamMembers = [
     href: '/ekip/nikolay-ivanov/',
     initials: 'НИ',
     variant: 'nikolay',
+    image: '/profil/avatar-1.jpg',
     highlights: [
       'Диагностика и ремонт на едра бяла техника',
       'Електронна и механична поддръжка',
@@ -25,6 +26,7 @@ const teamMembers = [
     href: '/ekip/georgi-nikolov/',
     initials: 'ГН',
     variant: 'georgi',
+    image: '/profil/avatar-2.jpg',
     highlights: [
       'Отстраняване на аварии и проблеми в табла',
       'Монтаж на ключове, контакти, LED решения',
@@ -38,6 +40,7 @@ const teamMembers = [
     href: '/ekip/lyubomir-dimitrov/',
     initials: 'ЛД',
     variant: 'lyubomir',
+    image: '/profil/avatar-3.jpg',
     highlights: [
       'Сервизиране на перални и сушилни',
       'Ремонт на фурни, котлони, бойлери',
@@ -85,7 +88,7 @@ const teamMembers = [
           <article class="team-card" data-variant={member.variant}>
             <div class="team-avatar" data-variant={member.variant}>
               <div class="avatar-core">
-                <span class="avatar-initials">{member.initials}</span>
+                <img src={member.image} alt={member.name} class="h-full w-full rounded-full object-cover" loading="lazy" />
               </div>
             </div>
             <div class="mt-6">
