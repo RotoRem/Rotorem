@@ -14,8 +14,15 @@ const description = isEN
   ? 'Helpful tips and guides for appliance maintenance and repair from RotoRem Varna experts.'
   : 'Полезни съвети и ръководства за поддръжка и ремонт на битова техника от експертите на РотоРем Варна.';
 
+type BlogPost = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  image: string;
+};
+
 // Auto-generated blog posts
-const blogPosts = [
+const blogPosts: BlogPost[] = [
 
 ];
 ---
