@@ -11,6 +11,7 @@ type NavPaths = {
   reviews: string;
   faq: string;
   careers: string;
+  team: string;
 };
 
 type BreadcrumbOptions = {
@@ -49,6 +50,7 @@ export function buildBreadcrumbs({
     reviews: t('nav.reviews'),
     faq: t('nav.faq'),
     careers: isEN ? 'Careers' : 'Кариери',
+    team: t('nav.team'),
   };
 
   const items: BreadcrumbItem[] = [
@@ -105,6 +107,17 @@ export function buildBreadcrumbs({
 
   if (normalizedRoute === '/careers') {
     items.push({ label: labels.careers });
+    return items;
+  }
+
+  if (normalizedRoute === '/ekip') {
+    items.push({ label: labels.team });
+    return items;
+  }
+
+  if (normalizedRoute.startsWith('/ekip')) {
+    items.push({ label: labels.team, href: navPaths.team });
+    items.push({ label: pageLabel });
     return items;
   }
 

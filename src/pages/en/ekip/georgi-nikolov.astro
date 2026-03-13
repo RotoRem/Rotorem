@@ -1,0 +1,304 @@
+---
+import Layout from '../../../layouts/Base.astro';
+
+const title = 'Georgi Nikolov - Professional Electrical Services in Varna';
+const description = 'Looking for a reliable electrician in Varna? Georgi Nikolov delivers quality electrical services: emergency fixes, panel work, and LED lighting installs.';
+---
+
+<Layout title={title} description={description}>
+  <section class="profile-hero relative overflow-hidden">
+    <div class="profile-glow profile-glow-left"></div>
+    <div class="profile-glow profile-glow-right"></div>
+    <div class="container relative py-16 md:py-20">
+      <div class="grid md:grid-cols-[auto,1fr] gap-8 items-center">
+        <div class="profile-avatar" data-variant="georgi">
+          <div class="avatar-core">
+            <span class="avatar-initials">GN</span>
+          </div>
+        </div>
+        <div>
+          <p class="profile-eyebrow">Electrician</p>
+          <h1 class="profile-title font-heading">Georgi Nikolov</h1>
+          <p class="profile-subtitle">
+            Georgi Nikolov is a key part of the RotoRem team, handling electrical services in Varna.
+            He combines precision and clean workmanship with a strong focus on safety, from small
+            home fixes to complex electrical installations.
+          </p>
+          <div class="profile-actions">
+            <a href="tel:+359 89 834 0982" class="btn-primary">Call now</a>
+            <a href="/en/ekip/" class="btn-secondary">Back to Team</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="container grid lg:grid-cols-[1.1fr,0.9fr] gap-10">
+      <div>
+        <h2 class="section-title font-heading">Summary</h2>
+        <p class="section-text">
+          Georgi follows a strict process that ensures quality and transparent pricing before work starts.
+        </p>
+        <div class="info-card">
+          <h3 class="info-title">Specialization</h3>
+          <ul class="info-list">
+            <li>Emergency fixes (short circuits, outages, panel issues).</li>
+            <li>Switches, outlets, lighting fixtures, and LED solutions.</li>
+            <li>Replacement of fuses and automatic breakers.</li>
+            <li>Design and redesign of electrical systems during renovations.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stacked-cards">
+        <div class="info-card">
+          <h3 class="info-title">Work Style</h3>
+          <ul class="info-list">
+            <li>Phone pre-consultation.</li>
+            <li>On-site diagnosis and fixed price before start.</li>
+            <li>Professional execution and system testing.</li>
+            <li>Safety recommendations for everyday use.</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3 class="info-title">Focus</h3>
+          <ul class="info-list">
+            <li>Technical safety and long-term reliability.</li>
+            <li>Clean installation with respect for the home.</li>
+            <li>Fast response for urgent situations.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-slate-50">
+    <div class="container">
+      <div class="cta-panel">
+        <div>
+          <h2 class="cta-title font-heading">Need an electrician in Varna?</h2>
+          <p class="cta-text">Georgi Nikolov provides safe, clean, and reliable service.</p>
+        </div>
+        <a href="tel:+359 89 834 0982" class="cta-button">Contact now</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .profile-hero {
+    background: radial-gradient(circle at top left, rgba(250, 204, 21, 0.2), transparent 45%),
+      radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.28), transparent 50%),
+      linear-gradient(120deg, #0f172a, #0f172a 45%, #0b3a3a 100%);
+    color: #f8fafc;
+  }
+
+  .profile-glow {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+  }
+
+  .profile-glow-left {
+    top: -100px;
+    left: -120px;
+    background: rgba(250, 204, 21, 0.5);
+  }
+
+  .profile-glow-right {
+    bottom: -120px;
+    right: -80px;
+    background: rgba(59, 130, 246, 0.4);
+  }
+
+  .profile-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 0.75rem;
+    color: rgba(226, 232, 240, 0.7);
+  }
+
+  .profile-title {
+    font-size: clamp(2.3rem, 4vw, 3.6rem);
+    margin-top: 0.6rem;
+  }
+
+  .profile-subtitle {
+    margin-top: 1.4rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(226, 232, 240, 0.9);
+  }
+
+  .profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  .btn-primary {
+    background: #facc15;
+    color: #0f172a;
+  }
+
+  .btn-secondary {
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    color: #e2e8f0;
+  }
+
+  .profile-avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+  }
+
+  .profile-avatar::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 999px;
+    background: conic-gradient(from 120deg, rgba(250, 204, 21, 0.35), rgba(56, 189, 248, 0.35), rgba(14, 116, 144, 0.2));
+    filter: blur(10px);
+    animation: spin 12s linear infinite;
+  }
+
+  .profile-avatar::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    animation: pulse 3.6s ease-in-out infinite;
+  }
+
+  .avatar-core {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    border-radius: 999px;
+    background: linear-gradient(140deg, #fde68a, #bae6fd);
+    color: #0f172a;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    animation: float 4.5s ease-in-out infinite;
+  }
+
+  .avatar-initials {
+    letter-spacing: 0.12em;
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    color: #0f172a;
+  }
+
+  .section-text {
+    margin-top: 1rem;
+    color: #475569;
+    font-size: 1.05rem;
+  }
+
+  .info-card {
+    margin-top: 2rem;
+    background: #f8fafc;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  .info-title {
+    font-size: 1.25rem;
+    color: #0f172a;
+    margin-bottom: 1rem;
+  }
+
+  .info-list {
+    display: grid;
+    gap: 0.6rem;
+    color: #475569;
+  }
+
+  .stacked-cards {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .cta-panel {
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 24px;
+    padding: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.08);
+  }
+
+  .cta-title {
+    font-size: 2rem;
+    color: #0f172a;
+  }
+
+  .cta-text {
+    color: #475569;
+  }
+
+  .cta-button {
+    background: #facc15;
+    color: #0f172a;
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 0.85;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+</style>

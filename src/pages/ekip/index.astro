@@ -1,0 +1,332 @@
+---
+import Layout from '../../layouts/Base.astro';
+
+const title = 'Екип от специалисти | Запознайте се с нашите техници - РотоРем';
+const description = 'Запознайте се с екипа на РотоРем - квалифицирани техници и инженери, осигуряващи прецизен ремонт на бяла техника и професионални електро услуги във Варна и София.';
+
+const teamMembers = [
+  {
+    name: 'Николай Иванов',
+    role: 'Технически специалист (Ремонт на електроуреди)',
+    summary: 'Инженерен подход, прецизна диагностика и решения, които удължават живота на уреда.',
+    href: '/ekip/nikolay-ivanov/',
+    initials: 'НИ',
+    variant: 'nikolay',
+    highlights: [
+      'Диагностика и ремонт на едра бяла техника',
+      'Електронна и механична поддръжка',
+      'Автоматизация и системи за управление'
+    ]
+  },
+  {
+    name: 'Георги Николов',
+    role: 'Електротехник (Електро услуги), гр. Варна',
+    summary: 'Фокус върху безопасността, чистата работа и надеждни електро решения за дома и офиса.',
+    href: '/ekip/georgi-nikolov/',
+    initials: 'ГН',
+    variant: 'georgi',
+    highlights: [
+      'Отстраняване на аварии и проблеми в табла',
+      'Монтаж на ключове, контакти, LED решения',
+      'Проектиране и преработка на инсталации'
+    ]
+  },
+  {
+    name: 'Любомир Димитров',
+    role: 'Специалист бяла техника',
+    summary: '10+ години опит, аналитична диагностика и детайлен тест след ремонта.',
+    href: '/ekip/lyubomir-dimitrov/',
+    initials: 'ЛД',
+    variant: 'lyubomir',
+    highlights: [
+      'Сервизиране на перални и сушилни',
+      'Ремонт на фурни, котлони, бойлери',
+      'Насоки за правилна експлоатация'
+    ]
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <section class="team-hero relative overflow-hidden">
+    <div class="hero-blur hero-blur-left"></div>
+    <div class="hero-blur hero-blur-right"></div>
+    <div class="container relative py-20 py-24">
+      <div class="max-w-3xl">
+        <p class="hero-eyebrow">Нашият екип</p>
+        <h1 class="hero-title font-heading">Нашият екип</h1>
+        <p class="hero-subtitle">
+          В РотоРем вярваме, че качественият ремонт започва с правилната диагностика. Нашият екип се
+          състои от дипломирани инженери и технически специалисти, които прилагат системен подход при
+          всеки проблем - от сервизиране на перални и фурни в София до прецизна поправка на
+          домакински уреди и отстраняване на електроповреди във Варна.
+        </p>
+        <div class="hero-badges">
+          <span>Инженерен подход</span>
+          <span>Прозрачна комуникация</span>
+          <span>Работа на място</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-b from-white via-slate-50 to-white">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title font-heading">Специалистите на РотоРем</h2>
+        <p class="section-subtitle">
+          Разгледайте индивидуалните профили, за да научите повече за опита и методите на работа на
+          всеки специалист.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        {teamMembers.map((member) => (
+          <article class="team-card" data-variant={member.variant}>
+            <div class="team-avatar" data-variant={member.variant}>
+              <div class="avatar-core">
+                <span class="avatar-initials">{member.initials}</span>
+              </div>
+            </div>
+            <div class="mt-6">
+              <h3 class="text-2xl font-semibold text-slate-900 font-heading">{member.name}</h3>
+              <p class="text-sm uppercase tracking-[0.2em] text-slate-500 mt-2">{member.role}</p>
+              <p class="text-slate-600 mt-4">{member.summary}</p>
+              <ul class="mt-4 space-y-2 text-sm text-slate-600">
+                {member.highlights.map((item) => (
+                  <li class="flex items-start gap-2">
+                    <span class="mt-1 h-2 w-2 rounded-full bg-emerald-500"></span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href={member.href} class="team-link">Виж пълния профил</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .team-hero {
+    background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.18), transparent 45%),
+      radial-gradient(circle at 70% 20%, rgba(56, 189, 248, 0.22), transparent 50%),
+      linear-gradient(130deg, #0f172a 0%, #0f172a 40%, #0b3a3a 100%);
+    color: #f8fafc;
+  }
+
+  .hero-blur {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+  }
+
+  .hero-blur-left {
+    top: -120px;
+    left: -120px;
+    background: rgba(16, 185, 129, 0.5);
+  }
+
+  .hero-blur-right {
+    bottom: -120px;
+    right: -80px;
+    background: rgba(59, 130, 246, 0.45);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.45em;
+    color: rgba(226, 232, 240, 0.7);
+  }
+
+  .hero-title {
+    font-size: clamp(2.6rem, 4vw, 4.2rem);
+    margin-top: 0.8rem;
+  }
+
+  .hero-subtitle {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(226, 232, 240, 0.9);
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.8rem;
+  }
+
+  .hero-badges span {
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: #e2e8f0;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 3rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: #0f172a;
+  }
+
+  .section-subtitle {
+    margin-top: 1rem;
+    color: #475569;
+    font-size: 1.05rem;
+  }
+
+  .team-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 2.2rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .team-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(14, 116, 144, 0.08), transparent 45%);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 40px 80px rgba(15, 23, 42, 0.12);
+  }
+
+  .team-avatar {
+    position: relative;
+    width: 104px;
+    height: 104px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto;
+  }
+
+  .team-avatar::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 999px;
+    background: conic-gradient(from 90deg, rgba(16, 185, 129, 0.25), rgba(59, 130, 246, 0.35), rgba(14, 116, 144, 0.2));
+    filter: blur(8px);
+    animation: spin 12s linear infinite;
+  }
+
+  .team-avatar::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    animation: pulse 3.6s ease-in-out infinite;
+  }
+
+  .avatar-core {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: #0f172a;
+    font-weight: 700;
+    background: linear-gradient(140deg, #d1fae5, #e0f2fe);
+    animation: float 4.5s ease-in-out infinite;
+  }
+
+  .avatar-initials {
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+  }
+
+  .team-card[data-variant='nikolay'] .avatar-core {
+    background: linear-gradient(140deg, #bbf7d0, #bae6fd);
+  }
+
+  .team-card[data-variant='georgi'] .avatar-core {
+    background: linear-gradient(140deg, #fde68a, #bae6fd);
+  }
+
+  .team-card[data-variant='lyubomir'] .avatar-core {
+    background: linear-gradient(140deg, #fecaca, #dbeafe);
+  }
+
+  .team-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    color: #0f766e;
+  }
+
+  .team-link::after {
+    content: '→';
+    transition: transform 0.2s ease;
+  }
+
+  .team-link:hover::after {
+    transform: translateX(4px);
+  }
+
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-badges {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

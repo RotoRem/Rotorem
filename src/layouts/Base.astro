@@ -24,6 +24,7 @@ const navPaths = {
   blog: isEN ? '/en/blog/' : '/blog/',
   faq: isEN ? '/en/faq/' : '/faq/',
   careers: isEN ? '/en/careers/' : '/careers/', // Added careers path
+  team: isEN ? '/en/ekip/' : '/ekip/',
   home: isEN ? '/en/' : '/'
 };
 
@@ -1100,6 +1101,9 @@ const getPageSpecificSchema = () => {
             <a href={navPaths.blog} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
               {t('nav.blog')}
             </a>
+            <a href={navPaths.team} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
+              {t('nav.team')}
+            </a>
             <a href={navPaths.contact} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
               {t('nav.contact')}
             </a>
@@ -1169,6 +1173,9 @@ const getPageSpecificSchema = () => {
             </a>
             <a href={navPaths.blog} class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading">
               {t('nav.blog')}
+            </a>
+            <a href={navPaths.team} class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading">
+              {t('nav.team')}
             </a>
             <a href={navPaths.careers} class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading">
               {isEN ? 'Careers' : 'Кариери'}
@@ -1347,6 +1354,9 @@ const getPageSpecificSchema = () => {
               </li>
               <li>
                 <a href={navPaths.blog} class="hover:text-white font-heading text-sm">{t('nav.blog')}</a>
+              </li>
+              <li>
+                <a href={navPaths.team} class="hover:text-white font-heading text-sm">{t('nav.team')}</a>
               </li>
               <li>
                 <a href={navPaths.careers} class="hover:text-white font-heading text-sm">

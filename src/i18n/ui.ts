@@ -17,6 +17,7 @@ export const ui = {
     'nav.contact': 'Контакти',
     'nav.faq': 'Въпроси',
     'nav.blog': 'Блог',
+    'nav.team': 'Екип',
     
     // Hero Section
     'hero.title': 'Професионален ремонт на домакински уреди',
@@ -123,6 +124,7 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.faq': 'FAQ',
     'nav.blog': 'Blog',
+    'nav.team': 'Team',
     
     // Hero Section
     'hero.title': 'Professional Appliance Repairs',
