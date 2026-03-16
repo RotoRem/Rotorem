@@ -5,17 +5,17 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const title = 'Ремонт на сушилни Варна | Професионален сервиз | RotoRem';
-const description = 'Ремонт на сушилни във Варна ✓ Сервиз на място ✓ Гаранция ✓ Същия ден ✓ Всички марки ✓ Техник за сушилни Варна ☎ 089 834 0982';
+const title = 'Ремонт на сушилни във Варна | Професионален сервиз РотоРем';
+const description = 'Сервиз за ремонт и монтаж на сушилни във Варна по домовете ✓ Бърза диагностика и ремонт в същия ден за всички марки ✓ Обадете се сега на ☎ 089 834 0982!';
 ---
 
-<Layout title='Ремонт на сушилни Варна – сервиз по домовете с гаранция | РотоРем Варна' description='Ремонт на сушилни Варна от опитни техници. Сервиз сушилни по домовете, ясни цени и гаранция. Обади се на 089 834 0982 или се обади още днес!'>
+<Layout title={title} description={description}>
   <article class="">
     <!-- Hero Section -->
     <section class="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-16 mb-16">
       <div class="container max-w-4xl text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          Ремонт на сушилни Варна
+          Ремонт и монтаж на сушилни по домовете във Варна
         </h1>
         <p class="text-xl md:text-2xl text-indigo-100 max-w-3xl mx-auto mb-8">
           Професионален ремонт на сушилни във Варна и околността. Бърз сервиз на място с гаранция за качество.

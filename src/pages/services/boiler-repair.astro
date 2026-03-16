@@ -5,17 +5,17 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const title = 'Ремонт на бойлери Варна | Професионален сервиз | RotoRem';
-const description = 'Ремонт на бойлери във Варна ✓ Сервиз на място ✓ Гаранция ✓ Същия ден ✓ Всички марки ✓ Техник за бойлери Варна ☎ 089 834 0982';
+const title = 'Ремонт и монтаж на бойлери във Варна | Сервиз РотоРем';
+const description = 'Ремонт на бойлери Варна с бърз сервиз на адрес ✓ Професионален монтаж и демонтаж ✓ Гаранция за качество ✓ Свържете се с нас на ☎ 089 834 0982!';
 ---
 
-<Layout title='Ремонт на бойлери Варна – сервиз бойлери | РотоРем Варна' description='Ремонт на бойлери Варна с бърз сервиз на адрес. Смяна нагревател, уплътнения и профилактика. Гаранция от РотоРем Варна. Обади се на 089 834 0982.'>
+<Layout title={title} description={description}>
   <article class="">
     <!-- Hero Section -->
     <section class="bg-gradient-to-r from-teal-600 to-teal-800 text-white py-16 mb-16">
       <div class="container max-w-4xl text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          Ремонт на бойлери Варна
+          Ремонт и монтаж на бойлери във Варна
         </h1>
         <p class="text-xl md:text-2xl text-teal-100 max-w-3xl mx-auto mb-8">
           Професионален ремонт и поддръжка на електрически бойлери във Варна. Бърз сервиз на място с гаранция.
