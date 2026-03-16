@@ -72,7 +72,14 @@ const description = isEN
   : 'Полезни съвети и ръководства за поддръжка и ремонт на битова техника от експертите на РотоРем Варна.';
 
 // Auto-generated blog posts
-const blogPosts = [
+interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  publishDate: string;
+}
+const blogPosts: BlogPost[] = [
 ${blogPostsArray}
 ];
 ---

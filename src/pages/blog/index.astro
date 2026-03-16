@@ -15,9 +15,13 @@ const description = isEN
   : 'Научете как да удължите живота на вашите уреди ✓ Полезни съвети за поддръжка и ремонт на битова техника от експертите на РотоРем';
 
 // Auto-generated blog posts
-const blogPosts = [
-
-];
+interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  image: string;
+}
+const blogPosts: BlogPost[] = [];
 ---
 
 <Layout title={title} description={description}>
