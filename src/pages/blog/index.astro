@@ -1,64 +1,25 @@
 ---
 import Layout from '../../layouts/Base.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const isEN = lang === 'en';
+const title = 'Съвети и ръководства за ремонти на битова техника от РотоРем';
+const description = 'Научете как да удължите живота на вашите уреди ✓ Полезни съвети за поддръжка и ремонт на битова техника от експертите на РотоРем';
 
-const title = isEN 
-  ? 'Appliance Repair Blog | Tips & Guides | RotoRem Varna'
-  : 'Съвети и ръководства за ремонти на битова техника от РотоРем';
-
-const description = isEN 
-  ? 'Helpful tips and guides for appliance maintenance and repair from RotoRem Varna experts.'
-  : 'Научете как да удължите живота на вашите уреди ✓ Полезни съвети за поддръжка и ремонт на битова техника от експертите на РотоРем';
-
-// Auto-generated blog posts
-interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  image: string;
-}
-const blogPosts: BlogPost[] = [];
+const heading = 'Блог за ремонт на битова техника';
+const subheading = 'Новини и полезни ръководства от екипа на РотоРем.';
+const emptyMessage = 'В момента няма публикувани статии.';
 ---
 
 <Layout title={title} description={description}>
   <section class="py-16">
-    <div class="container max-w-6xl">
-      <header class="text-center max-w-3xl mx-auto mb-16">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">
-          Блог за ремонт на битова техника
-        </h1>
+    <div class="container max-w-3xl">
+      <header class="text-center mb-10">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">{heading}</h1>
         <div class="w-20 h-1 bg-accent mx-auto my-4"></div>
-        <p class="text-xl text-gray-600">
-          Експертни съвети и ръководства от РотоРем Варна и София за поддръжка и ремонт на вашите уреди
-        </p>
+        <p class="text-xl text-gray-600">{subheading}</p>
       </header>
 
-      <div class="mb-16">
-        <h2 class="text-2xl font-semibold mb-8 text-gray-900">
-          Последни статии
-        </h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map(post => (
-            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div class="aspect-video overflow-hidden">
-                <img src={post.image} alt={post.title} class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
-                  <a href={`/blog/${post.slug}/`} class="hover:text-primary transition-colors">{post.title}</a>
-                </h3>
-                <p class="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
-                <a href={`/blog/${post.slug}/`} class="text-primary font-medium hover:text-primary-dark transition-colors">
-                  Прочетете повече →
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
+      <div class="rounded-xl border border-gray-200 bg-white p-8 text-center text-gray-700">
+        <p class="text-lg">{emptyMessage}</p>
       </div>
     </div>
   </section>

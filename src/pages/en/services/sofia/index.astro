@@ -1,0 +1,91 @@
+---
+import Layout from '../../../../layouts/Base.astro';
+
+type IconKey = 'washing-machine' | 'dishwasher' | 'oven' | 'dryer' | 'boiler';
+
+const title = 'Appliance Repair in Sofia | In-Home Service by RotoRem';
+const description = 'Professional in-home appliance repair in Sofia for washing machines, dryers, dishwashers, ovens, and boilers.';
+
+const serviceColors: Record<IconKey, string> = {
+  'washing-machine': 'from-blue-700/80 to-blue-600/80',
+  'dishwasher': 'from-emerald-700/80 to-emerald-600/80',
+  'oven': 'from-amber-700/80 to-amber-600/80',
+  'dryer': 'from-indigo-700/80 to-indigo-600/80',
+  'boiler': 'from-teal-700/80 to-teal-600/80',
+};
+
+const services = [
+  {
+    icon: 'washing-machine' as IconKey,
+    title: 'Washing Machines',
+    description: 'Leaks, spinning issues, noise, pump and electronics repair for all major brands.',
+    url: '/en/services/sofia/washing-machine-repair/',
+  },
+  {
+    icon: 'dryer' as IconKey,
+    title: 'Dryers',
+    description: 'No heat, drum not spinning, sensor and board errors, and preventive maintenance.',
+    url: '/en/services/sofia/dryer-repair/',
+  },
+  {
+    icon: 'dishwasher' as IconKey,
+    title: 'Dishwashers',
+    description: 'Water intake, draining, leak, and control issues fixed on-site in Sofia.',
+    url: '/en/services/sofia/dishwasher-repair/',
+  },
+  {
+    icon: 'oven' as IconKey,
+    title: 'Ovens & Cooktops',
+    description: 'Heating elements, thermostats, sensors, and electrical diagnostics for safe operation.',
+    url: '/en/services/sofia/oven-repair/',
+  },
+  {
+    icon: 'boiler' as IconKey,
+    title: 'Boilers',
+    description: 'Heating element replacement, thermostat repair, leak diagnostics, and descaling.',
+    url: '/en/services/sofia/boiler-repair/',
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <section class="bg-gradient-to-r from-primary to-primary-dark text-white py-16">
+    <div class="container max-w-4xl text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Appliance Repair Services in Sofia</h1>
+      <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">
+        Fast in-home diagnostics and repair for washing machines, dryers, dishwashers, ovens, and boilers.
+      </p>
+      <a href="tel:+359 89 834 0982" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg inline-flex">📞 089 834 0982</a>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-gradient-to-b from-blue-50 to-white">
+    <div class="container">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary">Available services in Sofia</h2>
+        <p class="mt-4 text-xl text-gray-600">All repairs are performed at your home by experienced technicians.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <div class="relative rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
+            <div class="absolute inset-0">
+              <div class={`absolute inset-0 bg-gradient-to-br ${serviceColors[service.icon]} group-hover:opacity-80 transition-opacity duration-300`}></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 p-6 h-full flex flex-col text-white">
+              <h3 class="text-xl font-semibold drop-shadow-sm">{service.title}</h3>
+              <p class="mt-2 text-white/90 flex-grow">{service.description}</p>
+              <div class="mt-6 pt-4 border-t border-white/20">
+                <a href={service.url} class="bg-white/30 hover:bg-white/40 backdrop-blur-sm text-white font-medium py-2 px-4 rounded-lg inline-flex items-center transition-colors shadow-sm">
+                  Learn more
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

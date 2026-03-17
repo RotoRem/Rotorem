@@ -1,0 +1,44 @@
+---
+import Layout from '../../../../layouts/Base.astro';
+
+const title = 'Boiler Repair in Sofia | On-Site Service by RotoRem';
+const description = 'Professional electric boiler repair in Sofia with fast diagnostics, heating element and thermostat replacement, leak repair, and warranty.';
+---
+
+<Layout title={title} description={description}>
+  <article>
+    <section class="bg-gradient-to-r from-teal-600 to-teal-800 text-white py-16 mb-16">
+      <div class="container max-w-4xl text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Boiler Repair in Sofia</h1>
+        <p class="text-xl md:text-2xl text-teal-100 max-w-3xl mx-auto mb-8">
+          Reliable on-site electric boiler service in Sofia with transparent pricing and quality guarantee.
+        </p>
+        <a href="tel:+359 89 834 0982" class="bg-white text-teal-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg inline-flex">📞 089 834 0982</a>
+      </div>
+    </section>
+
+    <div class="container max-w-4xl">
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">What we repair</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-teal-500">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">No hot water</h3>
+            <p class="text-gray-700">Heating element and thermostat checks with safe component replacement.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Boiler leaking</h3>
+            <p class="text-gray-700">Diagnosis of gaskets, flange, valves, and tank-related leakage risks.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Breaker trips</h3>
+            <p class="text-gray-700">Electrical safety diagnostics for short circuits and insulation faults.</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Scale and poor efficiency</h3>
+            <p class="text-gray-700">Descaling and preventive maintenance for better performance and longer life.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+</Layout>
