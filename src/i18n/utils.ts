@@ -30,17 +30,40 @@ export function getRouteFromUrl(url: URL): string {
 }
 
 export function getLocalizedPath(path: string, lang: keyof typeof ui) {
+  const normalizedPath = path === '/' ? '/' : path.replace(/\/+$/, '');
+
+  const mapTeamRoute = (inputPath: string) => {
+    const mappings: Array<{ from: string; to: string }> = [
+      { from: '/team', to: '/ekip' },
+      { from: '/ekip', to: '/team' },
+    ];
+
+    for (const mapping of mappings) {
+      if (inputPath === mapping.from) {
+        return mapping.to;
+      }
+
+      if (inputPath.startsWith(`${mapping.from}/`)) {
+        return `${mapping.to}${inputPath.slice(mapping.from.length)}`;
+      }
+    }
+
+    return inputPath;
+  };
+
+  const localizedPath = mapTeamRoute(normalizedPath);
+
   // If the language is the default language and the path doesn't start with the language,
   // return the path as is
   if (lang === defaultLang) {
-    return path;
+    return localizedPath;
   }
   
   // For non-default languages, prefix the path with the language code
   // If the path is the home page (/), just return the language code
-  if (path === '/') {
+  if (localizedPath === '/') {
     return `/${lang}`;
   }
   
-  return `/${lang}${path}`;
+  return `/${lang}${localizedPath}`;
 }

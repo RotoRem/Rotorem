@@ -23,7 +23,7 @@ const navPaths = {
   blog: isEN ? '/en/blog/' : '/blog/',
   faq: isEN ? '/en/faq/' : '/faq/',
   careers: isEN ? '/en/careers/' : '/careers/', // Added careers path
-  team: isEN ? '/en/ekip/' : '/ekip/',
+  team: isEN ? '/en/team/' : '/ekip/',
   home: isEN ? '/en/' : '/'
 };
 
@@ -153,6 +153,7 @@ const route = getRouteFromUrl(Astro.url);
 const canonicalPath = Astro.url.pathname;
 const canonicalURL = new URL(canonicalPath, Astro.site);
 const shouldNoindex = noindexProp;
+const isHomeRoute = route === '/';
 
 // Generate hreflang URLs with proper fallbacks
 const bgPath = getLocalizedPath(route, 'bg');
@@ -330,6 +331,7 @@ const getPageSpecificSchema = () => {
     <link rel="manifest" href="/site.webmanifest" />
     
     <meta name="generator" content={Astro.generator} />
+    {isHomeRoute && <meta name="msvalidate.01" content="B7D17E7B09E9699C794865F6DFFAFA56" />}
     
     {shouldNoindex && <meta name="robots" content="noindex, nofollow" />}
     {!shouldNoindex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}

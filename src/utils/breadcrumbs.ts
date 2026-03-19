@@ -38,6 +38,7 @@ export function buildBreadcrumbs({
 }: BreadcrumbOptions): BreadcrumbItem[] {
   const normalizedRoute = normalizeRoute(route);
   const pageLabel = getPageLabel(title);
+  const teamBaseRoute = isEN ? '/team' : '/ekip';
 
   if (normalizedRoute === '/') return [];
 
@@ -110,12 +111,12 @@ export function buildBreadcrumbs({
     return items;
   }
 
-  if (normalizedRoute === '/ekip') {
+  if (normalizedRoute === teamBaseRoute) {
     items.push({ label: labels.team });
     return items;
   }
 
-  if (normalizedRoute.startsWith('/ekip')) {
+  if (normalizedRoute.startsWith(`${teamBaseRoute}/`)) {
     items.push({ label: labels.team, href: navPaths.team });
     items.push({ label: pageLabel });
     return items;
