@@ -20,9 +20,16 @@ const description = 'In-home dishwasher repair and installation service in Sofia
         <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">
           Expert dishwasher repair throughout Sofia – diagnostics, replacement parts, and full restoration carried out at your address.
         </p>
+        <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto mb-8">
+          Visit and diagnostics in Sofia - 25,57 € (50 BGN)
+        </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="tel:+359 89 834 0982" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            📞 089 834 0982
+          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Send Email
           </a>
           <a href="tel:+359 89 834 0982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
             Call 089 834 0982
@@ -106,6 +113,17 @@ const description = 'In-home dishwasher repair and installation service in Sofia
             <h3 class="text-xl font-semibold text-amber-900 mb-3">Full workmanship warranty</h3>
             <p class="text-amber-800">Enjoy peace of mind with clear paperwork that covers both labour and the parts we install.</p>
           </div>
+
+          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
+            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-lime-900 mb-3">Fair prices</h3>
+            <p class="text-lime-800">Visit and diagnostics in Sofia - 25,57 € (50 BGN). Transparent pricing with no hidden fees.</p>
+          </div>
         </div>
       </section>
 
@@ -150,6 +168,52 @@ const description = 'In-home dishwasher repair and installation service in Sofia
         </div>
       </section>
 
+      <!-- Repair Process Section -->
+      <section class="mb-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dishwasher repair process in Sofia</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center group">
+            <div class="relative mb-6">
+              <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
+                <span class="text-2xl font-bold">1</span>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">You call us</h3>
+              <p class="text-gray-700">Call 089 834 0982 to book dishwasher repair in Sofia.</p>
+            </div>
+          </div>
+
+          <div class="text-center group">
+            <div class="relative mb-6">
+              <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
+                <span class="text-2xl font-bold">2</span>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">We come to you</h3>
+              <p class="text-gray-700">Our technician arrives on time with all required tools and parts.</p>
+            </div>
+          </div>
+
+          <div class="text-center group">
+            <div class="relative mb-6">
+              <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
+                <span class="text-2xl font-bold">3</span>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">We repair</h3>
+              <p class="text-gray-700">We diagnose the issue and repair your dishwasher the same day whenever possible.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Service Areas Section -->
       <section class="mb-16 bg-gray-50 border border-gray-200 rounded-2xl p-8">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">We cover the whole of Sofia</h2>
@@ -178,16 +242,29 @@ const description = 'In-home dishwasher repair and installation service in Sofia
         </div>
       </section>
 
-      <!-- Call To Action -->
-      <section class="bg-blue-600 text-white rounded-2xl p-8 md:p-12 text-center shadow-xl">
-        <h2 class="text-3xl font-bold mb-4">Book dishwasher repair in Sofia</h2>
-        <p class="text-blue-100 text-lg max-w-2xl mx-auto mb-6">
-          Schedule diagnostics and repair at a convenient time. We work seven days a week and offer transparent pricing before any work begins.
-        </p>
-        <a href="tel:+359 89 834 0982" class="inline-flex items-center justify-center gap-2 bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-blue-50 transition-colors">
-          <span>📞 089 834 0982</span>
-          <span class="text-sm text-blue-500">Schedule a visit</span>
-        </a>
+      <!-- Final CTA -->
+      <section class="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white p-12 rounded-2xl shadow-2xl">
+        <h2 class="text-3xl font-bold mb-4">Need dishwasher repair in Sofia?</h2>
+        <p class="text-xl mb-8 text-blue-100">Call now for fast on-site repair!</p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Send Email
+          </a>
+          <a href="tel:+359 89 834 0982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+            Call 089 834 0982
+          </a>
+        </div>
+
+        <div class="text-blue-100">
+          <p class="text-sm">
+            Visit and diagnostics: Sofia - 25,57 € (50 BGN) • Quality guarantee • Service in Sofia
+          </p>
+        </div>
       </section>
     </div>
   </article>

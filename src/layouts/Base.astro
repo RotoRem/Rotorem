@@ -1,7 +1,7 @@
 ---
 import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations, getRouteFromUrl, getLocalizedPath } from '../i18n/utils';
-import ReviewsModal from '../components/ReviewsModal.astro';
+// import ReviewsModal from '../components/ReviewsModal.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 interface Props {
   title?: string;
@@ -1248,7 +1248,7 @@ const getPageSpecificSchema = () => {
     <Breadcrumbs route={route} title={title} isEN={isEN} navPaths={navPaths} t={t} />
     
     <!-- Reviews Modal -->
-    <ReviewsModal />
+    <!-- <ReviewsModal /> -->
     
     <main>
       <slot />
@@ -1334,9 +1334,9 @@ const getPageSpecificSchema = () => {
             
             <!-- Updated working hours -->
             <div class="mt-4">
-              <h4 class="font-medium text-gray-300 mb-2 font-heading">
+              <h3 class="font-medium text-gray-300 mb-2 font-heading">
                 {isEN ? 'Working Hours' : 'Работно време'}
-              </h4>
+              </h3>
               <div class="text-sm text-gray-400 space-y-1">
                 <div>{isEN ? 'Mon-Fri' : 'Пон-Пет'}: 08:00-18:00</div>
                 <div>{isEN ? 'Saturday' : 'Събота'}: {t('contact.closed')}</div>
@@ -1547,65 +1547,14 @@ const getPageSpecificSchema = () => {
         });
       });
 
-      // Reviews modal functionality
-      const modalTrigger = document.getElementById('reviews-modal-trigger');
-      const modalTriggerMobile = document.getElementById('reviews-modal-trigger-mobile');
-      const modalTriggerFooter = document.getElementById('reviews-modal-trigger-footer');
-      const modal = document.getElementById('reviews-modal');
-      const closeModal = document.getElementById('close-reviews-modal');
-      
-      function openReviewsModal() {
-        modal?.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        closeMenu();
-        if (floatingButton) floatingButton.style.display = 'none';
-
-        // Track reviews modal open
-        trackDataLayerEvent({
-          event: 'modal_open',
-          category: 'User Interactions',
-          action: 'opened',
-          label: 'Reviews Modal',
-        });
-      }
-      
-      function closeReviewsModal() {
-        modal?.classList.add('hidden');
-        document.body.style.overflow = '';
-        if (floatingButton) floatingButton.style.display = 'flex';
-
-        // Track reviews modal close
-        trackDataLayerEvent({
-          event: 'modal_close',
-          category: 'User Interactions',
-          action: 'closed',
-          label: 'Reviews Modal',
-        });
-      }
-      
-      modalTrigger?.addEventListener('click', openReviewsModal);
-      modalTriggerMobile?.addEventListener('click', openReviewsModal);
-      modalTriggerFooter?.addEventListener('click', openReviewsModal);
-      closeModal?.addEventListener('click', closeReviewsModal);
-      
-      modal?.addEventListener('click', function(e) {
-        if (e.target === modal) closeReviewsModal();
-      });
-      
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
-          closeReviewsModal();
-        }
-      });
-
+      // SEO Sections
       const seoSections = document.querySelectorAll('.rotorem-seo-text');
       const isEnglish = document.documentElement.lang === 'en' || window.location.pathname.startsWith('/en/');
       const readMoreLabel = isEnglish ? 'Read more' : 'Прочети повече';
       const readLessLabel = isEnglish ? 'See less' : 'Виж по-малко';
 
       seoSections.forEach((section) => {
-        const container = section.querySelector('.container');
-        if (!container) return;
+        const container = section.querySelector('.container') || section;
 
         const elements = Array.from(container.children);
         if (elements.length <= 2) return;

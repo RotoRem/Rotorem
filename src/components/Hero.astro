@@ -213,9 +213,10 @@ const reviews = [
       <!-- Desktop view - show 4 services with white cards -->
       <div class="hidden md:grid md:grid-cols-4 gap-3">
         {allServices.map((service) => (
+        <h3 class="block rounded-lg text-center bg-white/90 backdrop-blur shadow-sm border border-gray-100 transition-all hover:shadow-md hover:-translate-y-1 touch-manipulation">
           <a 
             href="#services" 
-            class="block p-3 rounded-lg text-center bg-white/90 backdrop-blur shadow-sm border border-gray-100 transition-all hover:shadow-md hover:-translate-y-1 touch-manipulation"
+            class="p-3"
             style="min-height: 120px;"
           >
             <div class={`${service.color} w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2`}>
@@ -223,6 +224,7 @@ const reviews = [
             </div>
             <h3 class="font-medium text-sm text-gray-900 font-heading">{service.title}</h3>
           </a>
+        </h3>
         ))}
       </div>
       
@@ -231,16 +233,18 @@ const reviews = [
         <div class="flex overflow-x-auto pb-3 scrollbar-hide" style="scroll-snap-type: x mandatory;">
           <div class="flex gap-3 px-2">
             {allServices.map((service) => (
+            <h3 class={`flex flex-col items-center rounded-lg shadow-md flex-shrink-0 w-28 bg-gradient-to-br ${service.gradientColor} text-white touch-manipulation`}>
               <a 
                 href="#services" 
-                class={`flex flex-col items-center p-4 rounded-lg shadow-md flex-shrink-0 w-28 bg-gradient-to-br ${service.gradientColor} text-white touch-manipulation`}
+                class="p-4"
                 style="scroll-snap-align: start; min-height: 120px;"
               >
-                <div class="bg-white/20 w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                <div class="bg-white/20 w-12 h-12 rounded-full flex items-center justify-center m-auto mb-2">
                   <Fragment set:html={service.icon} />
                 </div>
                 <span class="font-medium text-sm text-center font-heading">{service.title}</span>
               </a>
+            </h3>
             ))}
           </div>
         </div>

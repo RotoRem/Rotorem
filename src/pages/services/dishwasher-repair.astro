@@ -20,9 +20,16 @@ const description = 'Сервиз за ремонт и монтаж на съд�
         <p class="text-xl md:text-2xl text-emerald-100 max-w-3xl mx-auto mb-8">
           Професионален ремонт на съдомиялни машини във Варна и околността. Бърз сервиз на място с гаранция за качество.
         </p>
+        <p class="text-base md:text-lg text-emerald-100 max-w-2xl mx-auto mb-8">
+          Диагностика във Варна - 20,46 € (40лв)
+        </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="tel:+359 89 834 0982" class="bg-white text-emerald-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            📞 089 834 0982
+          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-emerald-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Изпратете имейл
           </a>
           <a href="tel:+359 89 834 0982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
             Обади се на 089 834 0982
@@ -135,7 +142,7 @@ const description = 'Сервиз за ремонт и монтаж на съд�
               </svg>
             </div>
             <h3 class="text-xl font-semibold text-lime-900 mb-3">Справедливи цени</h3>
-            <p class="text-lime-800">Диагностика само Варна - 20,46 € (40лв) Ясни цени без скрити такси за ремонт на съдомиялни машини във Варна.</p>
+            <p class="text-lime-800">Диагностика във Варна - 20,46 € (40лв). <br> Ясни цени без скрити такси за ремонт на съдомиялни машини във Варна.</p>
           </div>
         </div>
       </section>
@@ -150,7 +157,7 @@ const description = 'Сервиз за ремонт и монтаж на съд�
         <div class="bg-gradient-to-r from-emerald-50 via-white to-emerald-50 p-8 rounded-2xl shadow-xl border border-emerald-100">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-emerald-500">
-              <h3 class="text-lg font-semibold text-emerald-900 mb-3">Съдомиялната тече вода</h3>
+              <h3 class="text-lg font-semibold text-emerald-900 mb-3">Теч от съдомиялната</h3>
               <p class="text-emerald-800">Течове отдолу, от вратата или от маркучите. Нашият техник ще намери и отстрани теча бързо.</p>
             </div>
 
@@ -175,7 +182,7 @@ const description = 'Сервиз за ремонт и монтаж на съд�
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
-              <h3 class="text-lg font-semibold text-indigo-900 mb-3">Съдомиялната прави шум</h3>
+              <h3 class="text-lg font-semibold text-indigo-900 mb-3">Чува се шум от машината</h3>
               <p class="text-indigo-800">Износени помпи, разхлабени части или чужди предмети. Отстраняваме всички причини за шум.</p>
             </div>
           </div>
@@ -196,9 +203,9 @@ const description = 'Сервиз за ремонт и монтаж на съд�
               'Indesit', 'Candy', 'Miele', 'Други марки'
             ].map((brand) => (
               <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200 group hover:border-emerald-300">
-                <h4 class="font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
                   {brand}
-                </h4>
+                </h3>
                 <p class="text-xs text-gray-600">
                   {brand === 'Други марки' ? 'Всички други марки' : `Ремонт на ${brand}`}
                 </p>
@@ -221,8 +228,12 @@ const description = 'Сервиз за ремонт и монтаж на съд�
         <p class="text-xl mb-8 text-emerald-100">Обадете се сега за бърз ремонт на място!</p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="tel:+359 89 834 0982" class="bg-white text-emerald-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            📞 089 834 0982
+          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-emerald-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Изпрати имейл
           </a>
           <a href="tel:+359 89 834 0982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
             Обади се на 089 834 0982
@@ -231,7 +242,7 @@ const description = 'Сервиз за ремонт и монтаж на съд�
         
         <div class="text-emerald-100">
           <p class="text-sm">
-            Посещение и диагностика: Варна - 20,46 € (40лв) | София - 25,57 € (50лв) • Гаранция за качество • Сервиз във Варна и София
+            Посещение и диагностика: Варна - 20,46 € (40лв) • Гаранция за качество • Сервиз във Варна
           </p>
         </div>
       </section>

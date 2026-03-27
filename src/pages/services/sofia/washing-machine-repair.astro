@@ -20,9 +20,16 @@ const description = 'Експертен сервиз за ремонт и мон
         <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">
           Професионален ремонт на перални машини в София и околните квартали. Бърз сервиз на място с гаранция за качеството.
         </p>
+        <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto mb-8">
+          Диагностика в София - 25,57 € (50лв)
+        </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="tel:+359 89 834 0982" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            📞 089 834 0982
+          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Изпратете имейл
           </a>
           <a href="tel:+359 89 834 0982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
             Обади се на 089 834 0982
@@ -106,6 +113,17 @@ const description = 'Експертен сервиз за ремонт и мон
             <h3 class="text-xl font-semibold text-amber-900 mb-3">Гаранция за извършения ремонт</h3>
             <p class="text-amber-800">Получи писмена гаранция и подробен протокол след приключване на ремонта на пералнята.</p>
           </div>
+
+          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
+            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-lime-900 mb-3">Справедливи цени</h3>
+            <p class="text-lime-800">Диагностика в София - 25,57 € (50лв). Ясни цени без скрити такси за ремонт на перални.</p>
+          </div>
         </div>
       </section>
 
@@ -150,6 +168,52 @@ const description = 'Експертен сервиз за ремонт и мон
         </div>
       </section>
 
+      <!-- Repair Process Section -->
+      <section class="mb-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Процес на ремонт на перални в София</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center group">
+            <div class="relative mb-6">
+              <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
+                <span class="text-2xl font-bold">1</span>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Вие ни звъните</h3>
+              <p class="text-gray-700">Обадете се на 089 834 0982 за ремонт на пералня в София.</p>
+            </div>
+          </div>
+
+          <div class="text-center group">
+            <div class="relative mb-6">
+              <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
+                <span class="text-2xl font-bold">2</span>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Ние идваме при вас</h3>
+              <p class="text-gray-700">Нашият техник пристига в уговореното време с всички необходими инструменти и части.</p>
+            </div>
+          </div>
+
+          <div class="text-center group">
+            <div class="relative mb-6">
+              <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
+                <span class="text-2xl font-bold">3</span>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Ремонтираме</h3>
+              <p class="text-gray-700">Диагностицираме проблема и ремонтираме пералнята ви още същия ден в дома ви в София.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Service Areas Section -->
       <section class="mb-16 bg-gray-50 border border-gray-200 rounded-2xl p-8">
         <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Обслужваме всички райони на София</h2>
@@ -178,16 +242,29 @@ const description = 'Експертен сервиз за ремонт и мон
         </div>
       </section>
 
-      <!-- Call To Action -->
-      <section class="bg-blue-600 text-white rounded-2xl p-8 md:p-12 text-center shadow-xl">
-        <h2 class="text-3xl font-bold mb-4">Нуждаете се от ремонт на пералня в София?</h2>
-        <p class="text-blue-100 text-lg max-w-2xl mx-auto mb-6">
-          Свържете се с нас за диагностика и ремонт в най-кратък срок. Работим с всички марки перални машини и предлагаме гаранция за извършената услуга.
-        </p>
-        <a href="tel:+359 89 834 0982" class="inline-flex items-center justify-center gap-2 bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-blue-50 transition-colors">
-          <span>📞 089 834 0982</span>
-          <span class="text-sm text-blue-500">Обадете се сега</span>
-        </a>
+      <!-- Final CTA -->
+      <section class="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white p-12 rounded-2xl shadow-2xl">
+        <h2 class="text-3xl font-bold mb-4">Нужен ви е ремонт на пералня в София?</h2>
+        <p class="text-xl mb-8 text-blue-100">Обадете се сега за бърз ремонт на място!</p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Изпрати имейл
+          </a>
+          <a href="tel:+359 89 834 0982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+            Обади се на 089 834 0982
+          </a>
+        </div>
+
+        <div class="text-blue-100">
+          <p class="text-sm">
+            Посещение и диагностика: София - 25,57 € (50лв) • Гаранция за качество • Сервиз в София
+          </p>
+        </div>
       </section>
     </div>
   </article>
