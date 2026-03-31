@@ -16,11 +16,20 @@ export default defineConfig({
       filter: (entry) => {
         const candidate = typeof entry === 'string' ? entry : entry?.pathname ?? entry?.url ?? '';
 
+        if (candidate.includes('/en/ekip')) {
+          return false;
+        }
+
         const path = candidate.startsWith('http')
           ? new URL(candidate).pathname
           : candidate;
 
-        return !path.startsWith('/thankyou') && !path.startsWith('/book');
+        const isExcludedByPrefix =
+          path.startsWith('/thankyou') ||
+          path.startsWith('/book') ||
+          path.startsWith('/en/ekip');
+
+        return !isExcludedByPrefix;
       },
       serialize(item) {
         if (

@@ -146,6 +146,11 @@
   to = "/faq"
   status = 301
 
+[[redirects]]
+  from = "/book/"
+  to = "/contact/"
+  status = 301
+
 # English redirects
 [[redirects]]
   from = "/en/услуги"
