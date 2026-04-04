@@ -1,0 +1,133 @@
+---
+import Layout from '../../../layouts/Base.astro';
+
+const title = 'Cookie Policy';
+const description = 'Official cookie policy. Types of technologies used, processing purposes, and instructions for managing your settings.';
+---
+
+<Layout title={title} description={description}>
+  <section class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white py-16">
+    <div class="container max-w-5xl">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4">Cookie Policy</h1>
+      <p class="text-indigo-100 text-lg">Information about technologies used, processing purposes, and how to manage your preferences.</p>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="container max-w-5xl space-y-8">
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">1. What Are Cookies</h2>
+        <p class="text-gray-700">Cookies are small text files stored on your device when you visit a website. They can be necessary for proper website operation, preference storage, website usage analysis, and, in specific configurations, marketing purposes.</p>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Cookie Categories We Use</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-3 text-left">Category</th>
+                <th class="p-3 text-left">Purpose</th>
+                <th class="p-3 text-left">Legal Basis</th>
+                <th class="p-3 text-left">Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="p-3 font-medium">Necessary</td>
+                <td class="p-3">Provide essential website functionality, security, session handling, and cookie consent preference storage.</td>
+                <td class="p-3">Legitimate interest / necessity for website service delivery.</td>
+                <td class="p-3">Consent preference cookie, technical platform/hosting cookies.</td>
+              </tr>
+              <tr class="border-t bg-gray-50">
+                <td class="p-3 font-medium">Functional</td>
+                <td class="p-3">Store selected settings and improve usability.</td>
+                <td class="p-3">Consent, where not strictly necessary.</td>
+                <td class="p-3">Language/preferences cookies, if enabled.</td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-3 font-medium">Analytics</td>
+                <td class="p-3">Measure visits, on-page behavior, and website effectiveness.</td>
+                <td class="p-3">Consent.</td>
+                <td class="p-3">Google Analytics 4 via Google Tag Manager.</td>
+              </tr>
+              <tr class="border-t bg-gray-50">
+                <td class="p-3 font-medium">Marketing</td>
+                <td class="p-3">Track behavior for advertising/remarketing purposes.</td>
+                <td class="p-3">Consent.</td>
+                <td class="p-3">As of this document date, these should not be activated without separate consent and policy update.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Google Tag Manager and Google Analytics</h2>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+          <li>Google Tag Manager ("GTM") is a tag management tool. GTM itself is generally not an analytics service; it manages loading of other scripts/tags.</li>
+          <li>When Google Analytics 4 ("GA4") is implemented via GTM, analytics tags should be activated only after valid analytics consent.</li>
+          <li>With consent mode / consent checks, analytics storage should be blocked by default and enabled only after explicit user choice.</li>
+          <li>In a standard GA4 setup, first-party cookies may be used to distinguish users and sessions. Specific cookie names and durations depend on configuration and cookie banner/CMP settings.</li>
+        </ul>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">4. How to Manage Your Choice</h2>
+        <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+          <li>On first visit, a cookie banner/panel allows you to accept, reject, or customize cookie categories.</li>
+          <li>Necessary cookies cannot be disabled via the banner, as they are required for basic functionality and security.</li>
+          <li>Analytics and other non-essential cookies are activated only if you provide consent.</li>
+          <li>You can change preferences at any time via the "Cookie Settings" link/button on the site or browser settings.</li>
+        </ol>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Sample Cookie Declaration</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-3 text-left">Category</th>
+                <th class="p-3 text-left">Name/example</th>
+                <th class="p-3 text-left">Description</th>
+                <th class="p-3 text-left">Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="p-3">Necessary</td>
+                <td class="p-3">cookie_consent / cmp_*</td>
+                <td class="p-3">Stores your cookie choice and/or technical banner settings.</td>
+                <td class="p-3">According to banner/CMP settings</td>
+              </tr>
+              <tr class="border-t bg-gray-50">
+                <td class="p-3">Analytics</td>
+                <td class="p-3">_ga</td>
+                <td class="p-3">Used by Google Analytics to distinguish users and sessions when analytics is enabled.</td>
+                <td class="p-3">According to GA4 configuration</td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-3">Analytics</td>
+                <td class="p-3">_ga_&lt;measurement-id&gt;</td>
+                <td class="p-3">Used by GA4 for session state/reporting when analytics is enabled.</td>
+                <td class="p-3">According to GA4 configuration</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-gray-700 mt-4">Note: the table above reflects a typical GA4/GTM setup. If an actual site scan detects additional or different cookies, the table should be updated and synchronized with the cookie banner configuration.</p>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Browser Settings</h2>
+        <p class="text-gray-700">Most browsers let you manage cookies via their own settings, including deleting, blocking, or limiting cookies for specific websites. If you block all cookies, parts of the website may not function properly.</p>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Policy Changes</h2>
+        <p class="text-gray-700">This policy may be updated when the website, technologies used, providers, or legal requirements change. The current version is always published on the website.</p>
+      </article>
+    </div>
+  </section>
+</Layout>

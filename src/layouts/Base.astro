@@ -1400,6 +1400,20 @@ const getPageSpecificSchema = () => {
               <li>
                 <a href={isEN ? '/en/faq/' : '/faq/'} class="hover:text-white font-heading text-sm">{t('nav.faq')}</a>
               </li>
+
+              <li class="text-xs uppercase tracking-wide text-gray-400 font-heading pt-4">
+                {isEN ? 'Legal' : 'Правна информация'}
+              </li>
+              <li>
+                <a href={isEN ? '/en/terms-and-privacy-policy/' : '/obshti-uslovia-i-politika-za-zashtita-na-lichni-danni/'} class="hover:text-white font-heading text-sm">
+                  {isEN ? 'Terms & Privacy Policy' : 'Общи условия и лични данни'}
+                </a>
+              </li>
+              <li>
+                <a href={isEN ? '/en/cookie-policy/' : '/politika-za-biskvitki/'} class="hover:text-white font-heading text-sm">
+                  {isEN ? 'Cookie Policy' : 'Политика за бисквитки'}
+                </a>
+              </li>
             </ul>
           </div>
         </div>

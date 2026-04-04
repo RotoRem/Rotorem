@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Base.astro';
+
+const title = 'Политика за бисквитки (Cookie Policy)';
+const description = 'Официална политика за бисквитки. Видове използвани технологии, цели на обработката и инструкции за управление на настройките.';
+---
+
+<Layout title={title} description={description}>
+  <section class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white py-16">
+    <div class="container max-w-5xl">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4">Политика за бисквитки (Cookie Policy)</h1>
+      <p class="text-indigo-100 text-lg">Информация за използваните технологии, целите на обработката и Вашия контрол върху настройките.</p>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="container max-w-5xl space-y-8">
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Какво представляват бисквитките</h2>
+        <p class="text-gray-700">Бисквитките (cookies) са малки текстови файлове, които се записват на Вашето устройство при посещение на даден сайт. Те могат да бъдат необходими за правилното функциониране на сайта, за запомняне на предпочитанията Ви, за анализ на използването на сайта и - при определени конфигурации - за маркетингови цели.</p>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Какви категории бисквитки използваме</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-3 text-left">Категория</th>
+                <th class="p-3 text-left">Цел</th>
+                <th class="p-3 text-left">Правно основание</th>
+                <th class="p-3 text-left">Примери</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="p-3 font-medium">Необходими</td>
+                <td class="p-3">Осигуряват базовото функциониране на сайта, сигурността, управлението на сесията и запомнянето на избора за cookies.</td>
+                <td class="p-3">Легитимен интерес / необходимост за предоставяне на услугата на сайта.</td>
+                <td class="p-3">Cookie за запомняне на избора за съгласие, технически cookies на платформата/хостинга.</td>
+              </tr>
+              <tr class="border-t bg-gray-50">
+                <td class="p-3 font-medium">Функционални</td>
+                <td class="p-3">Запомнят определени настройки и улесняват използването на сайта.</td>
+                <td class="p-3">Съгласие, когато не са строго необходими.</td>
+                <td class="p-3">Настройки за език/предпочитания, ако са активирани.</td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-3 font-medium">Аналитични</td>
+                <td class="p-3">Измерват посещения, поведение на страниците и ефективност на сайта.</td>
+                <td class="p-3">Съгласие.</td>
+                <td class="p-3">Google Analytics 4, активиран през Google Tag Manager.</td>
+              </tr>
+              <tr class="border-t bg-gray-50">
+                <td class="p-3 font-medium">Маркетингови</td>
+                <td class="p-3">Проследяват поведението за рекламни/ремаркетинг цели.</td>
+                <td class="p-3">Съгласие.</td>
+                <td class="p-3">Към датата на документа не следва да се активират без отделно съгласие и без допълване на политиката.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Google Tag Manager и Google Analytics</h2>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+          <li>Google Tag Manager („GTM“) е инструмент за управление на тагове. По правило GTM сам по себе си не служи като отделна аналитична услуга, а управлява зареждането на други скриптове/тагове.</li>
+          <li>Когато чрез GTM е внедрен Google Analytics 4 („GA4“), аналитичните тагове следва да се активират само след валидно съгласие за аналитични cookies.</li>
+          <li>При настройка с consent mode / consent checks аналитичното съхранение трябва да е блокирано по подразбиране и да се разрешава само след изричен избор на потребителя.</li>
+          <li>В рамките на стандартна GA4 конфигурация могат да се използват first-party cookies, чрез които се различават потребители и сесии. Конкретните имена и срокове зависят от внедрената конфигурация и настройките на cookie banner/CMP.</li>
+        </ul>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Как управлявате избора си</h2>
+        <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+          <li>При първо посещение на сайта виждате банер/панел за cookies, чрез който можете да приемете, да откажете или да персонализирате използването на категориите cookies.</li>
+          <li>Необходими cookies не могат да бъдат изключени през банера, тъй като са нужни за основното функциониране и сигурност на сайта.</li>
+          <li>Аналитични и други неосновни cookies се активират само ако дадете съгласие.</li>
+          <li>Можете да промените предпочитанията си по всяко време чрез линка/бутона „Настройки за бисквитки“ на сайта или чрез настройките на браузъра си.</li>
+        </ol>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Примерна декларация за използвани cookies</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-3 text-left">Категория</th>
+                <th class="p-3 text-left">Наименование/пример</th>
+                <th class="p-3 text-left">Описание</th>
+                <th class="p-3 text-left">Продължителност</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="p-3">Необходими</td>
+                <td class="p-3">cookie_consent / cmp_*</td>
+                <td class="p-3">Съхранява избора Ви относно cookies и/или техническите настройки на банера.</td>
+                <td class="p-3">Според настройката на банера/CMP</td>
+              </tr>
+              <tr class="border-t bg-gray-50">
+                <td class="p-3">Аналитични</td>
+                <td class="p-3">_ga</td>
+                <td class="p-3">Използва се от Google Analytics за разграничаване на потребители и сесии, когато аналитиката е разрешена.</td>
+                <td class="p-3">Според конфигурацията на GA4</td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-3">Аналитични</td>
+                <td class="p-3">_ga_&lt;measurement-id&gt;</td>
+                <td class="p-3">Използва се от Google Analytics 4 за поддържане на състоянието на сесията/отчитането, когато аналитиката е разрешена.</td>
+                <td class="p-3">Според конфигурацията на GA4</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-gray-700 mt-4">Забележка: горната таблица е подготвена за типична конфигурация с GA4/GTM. Ако реалният скан на сайта установи допълнителни или различни cookies, таблицата следва да бъде актуализирана, а банерът - синхронизиран с тях.</p>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Браузърни настройки</h2>
+        <p class="text-gray-700">Повечето браузъри позволяват да контролирате cookies чрез собствените им настройки - например да изтривате, блокирате или ограничавате cookies за определени сайтове. Ако блокирате всички cookies, е възможно части от сайта да не функционират правилно.</p>
+      </article>
+
+      <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-6 md:p-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Промени в политиката</h2>
+        <p class="text-gray-700">Настоящата политика може да бъде актуализирана при промяна на сайта, на използваните технологии, на доставчиците или на законовите изисквания. Актуалната версия се публикува на сайта.</p>
+      </article>
+    </div>
+  </section>
+</Layout>

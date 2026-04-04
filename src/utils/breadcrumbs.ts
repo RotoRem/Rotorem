@@ -122,5 +122,6 @@ export function buildBreadcrumbs({
     return items;
   }
 
+  items.push({ label: pageLabel });
   return items;
 }

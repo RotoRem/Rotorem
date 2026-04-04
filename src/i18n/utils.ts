@@ -34,6 +34,27 @@ export function getLocalizedPath(path: string, lang: keyof typeof ui) {
     ? '/'
     : `/${path.replace(/^\/+/, '').replace(/\/+$/, '')}`;
 
+  const mapLegalRoute = (inputPath: string, targetLang: keyof typeof ui) => {
+    const routeMap: Record<string, { bg: string; en: string }> = {
+      termsPrivacy: {
+        bg: '/obshti-uslovia-i-politika-za-zashtita-na-lichni-danni',
+        en: '/terms-and-privacy-policy',
+      },
+      cookiePolicy: {
+        bg: '/politika-za-biskvitki',
+        en: '/cookie-policy',
+      },
+    };
+
+    for (const route of Object.values(routeMap)) {
+      if (inputPath === route.bg || inputPath === route.en) {
+        return targetLang === defaultLang ? route.bg : route.en;
+      }
+    }
+
+    return inputPath;
+  };
+
   const mapTeamRoute = (inputPath: string, targetLang: keyof typeof ui) => {
     if (targetLang === defaultLang) {
       if (inputPath === '/team') return '/ekip';
@@ -46,7 +67,7 @@ export function getLocalizedPath(path: string, lang: keyof typeof ui) {
     return inputPath;
   };
 
-  const localizedPath = mapTeamRoute(normalizedPath, lang);
+  const localizedPath = mapLegalRoute(mapTeamRoute(normalizedPath, lang), lang);
 
   let resolvedPath = localizedPath;
 
