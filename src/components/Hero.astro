@@ -158,7 +158,7 @@ const reviews = [
       </div>
       
       <h1 class="text-5xl font-bold text-white mb-6 drop-shadow-sm font-heading text-shadow-md">
-        {isEN ? 'Professional Appliance Repair' : 'Ремонт на електроуреди в София и Варна'}
+        {isEN ? 'Electrical Appliance Repair in Sofia & Varna' : 'Ремонт на електроуреди в София и Варна'}
       </h1>
       
       <p class="text-xl text-white mb-4 drop-shadow-sm font-heading text-shadow">
@@ -213,7 +213,7 @@ const reviews = [
       <!-- Desktop view - show 4 services with white cards -->
       <div class="hidden md:grid md:grid-cols-4 gap-3">
         {allServices.map((service) => (
-        <h3 class="block rounded-lg text-center bg-white/90 backdrop-blur shadow-sm border border-gray-100 transition-all hover:shadow-md hover:-translate-y-1 touch-manipulation">
+        <div class="block rounded-lg text-center bg-white/90 backdrop-blur shadow-sm border border-gray-100 transition-all hover:shadow-md hover:-translate-y-1 touch-manipulation">
           <a 
             href="#services" 
             class="p-3"
@@ -224,7 +224,7 @@ const reviews = [
             </div>
             <h3 class="font-medium text-sm text-gray-900 font-heading">{service.title}</h3>
           </a>
-        </h3>
+        </div>
         ))}
       </div>
       
@@ -233,7 +233,7 @@ const reviews = [
         <div class="flex overflow-x-auto pb-3 scrollbar-hide" style="scroll-snap-type: x mandatory;">
           <div class="flex gap-3 px-2">
             {allServices.map((service) => (
-            <h3 class={`flex flex-col items-center rounded-lg shadow-md flex-shrink-0 w-28 bg-gradient-to-br ${service.gradientColor} text-white touch-manipulation`}>
+            <div class={`flex flex-col items-center rounded-lg shadow-md flex-shrink-0 w-28 bg-gradient-to-br ${service.gradientColor} text-white touch-manipulation`}>
               <a 
                 href="#services" 
                 class="p-4"
@@ -242,9 +242,9 @@ const reviews = [
                 <div class="bg-white/20 w-12 h-12 rounded-full flex items-center justify-center m-auto mb-2">
                   <Fragment set:html={service.icon} />
                 </div>
-                <span class="font-medium text-sm text-center font-heading">{service.title}</span>
+                <h3 class="font-medium text-sm text-center font-heading">{service.title}</h3>
               </a>
-            </h3>
+            </div>
             ))}
           </div>
         </div>
