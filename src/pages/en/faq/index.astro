@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../../layouts/Base.astro';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const title = 'Frequently Asked Questions about Appliance Repair | RotoRem Varna & Sofia';
-const description = 'Answers to the most common questions about appliance repair in Varna & Sofia ✓ Prices ✓ Warranty ✓ Repair time ✓ Service areas ☎ 089 834 0982';
+const description = 'Answers to the most common questions about appliance repair in Varna & Sofia - Prices - Warranty - Repair time - Service areas 089 834 0982';
 
 // Extended FAQ questions in English
 const faqs = [
@@ -15,7 +15,7 @@ const faqs = [
     questions: [
       {
         question: 'How much does the diagnostic service cost?',
-        answer: 'Our diagnostic fee is Varna - 20,46 € (40лв) | Sofia - 25,57 € (50лв), which covers the home visit, inspection, and diagnosis of your appliance issue. This fee is applied regardless of whether you proceed with the repair.'
+        answer: 'Our diagnostic fee is Varna - €20.46 (40 BGN) | Sofia - €25.57 (50 BGN), which covers the home visit, inspection, and diagnosis of your appliance issue. This fee is applied regardless of whether you proceed with the repair.'
       },
       {
         question: 'Do you provide same-day repairs?',
@@ -23,7 +23,7 @@ const faqs = [
       },
       {
         question: 'What areas do you service?',
-        answer: 'We service Varna and Sofia plus surrounding areas within approximately 20km of each city, including neighborhoods such as Chayka, Mladost, Lyulin, Lozenets, Asparuhovo, Studentski Grad, Levski, and the downtown districts, as well as nearby villages and towns.'
+        answer: 'We service Varna city and Sofia city and surrounding areas within a 20 km radius, including all neighborhoods and nearby villages and towns.'
       },
       {
         question: 'Do you provide warranty on repairs?',
@@ -104,7 +104,7 @@ const faqs = [
     questions: [
       {
         question: 'How are repair prices determined?',
-        answer: 'Prices are based on the diagnostic fee (Varna - 20,46 € (40лв) | Sofia - 25,57 € (50лв)) plus the cost of labor and necessary parts. You always receive a clear quote before we begin the repair.'
+        answer: 'Prices are based on the diagnostic fee (Varna - €20.46 (40 BGN) | Sofia - €25.57 (50 BGN)) plus the cost of labor and necessary parts. You always receive a clear quote before we begin the repair.'
       },
       {
         question: 'What payment methods do you accept?',
@@ -121,7 +121,7 @@ const faqs = [
     questions: [
       {
         question: 'What are your working hours?',
-        answer: 'We work Monday through Friday from 08:00 to 18:00. We’re closed on Saturday and Sunday, but you can leave a message and we will contact you on Monday.'
+        answer: 'We work Monday through Friday from 08:00 to 18:00. We\'re closed on Saturday and Sunday, but you can leave a message and we will contact you on Monday.'
       },
       {
         question: 'How can I schedule an appointment?',
@@ -148,7 +148,7 @@ const faqs = [
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="tel:+359 89 834 0982" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-          📞 089 834 0982
+          089 834 0982
         </a>
         <a href="mailto:n.ivanov.ivanov@abv.bg" class="bg-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-dark transition-colors shadow-lg">
           Send Email
@@ -211,7 +211,7 @@ const faqs = [
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="tel:+359 89 834 0982" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            📞 089 834 0982
+            089 834 0982
           </a>
           <a href="mailto:n.ivanov.ivanov@abv.bg" class="bg-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-dark transition-colors shadow-lg">
             Send Email
@@ -235,7 +235,7 @@ const faqs = [
         "name": "How much does the diagnostic service cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Our diagnostic fee is Varna - 20,46 € (40лв) | Sofia - 25,57 € (50лв), which covers the home visit, inspection, and diagnosis of your appliance issue."
+          "text": "Our diagnostic fee is Varna - €20.46 (40 BGN) | Sofia - €25.57 (50 BGN), which covers the home visit, inspection, and diagnosis of your appliance issue."
         }
       },
       {
@@ -251,7 +251,7 @@ const faqs = [
         "name": "What areas do you service?", 
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We service Varna city and surrounding areas within a 20km radius, including all neighborhoods and nearby villages and towns."
+          "text": "We service Varna city and Sofia city and surrounding areas within a 20 km radius, including all neighborhoods and nearby villages and towns."
         }
       },
       {
@@ -294,3 +294,5 @@ const faqs = [
     }
   }
 </style>
+
+

@@ -728,6 +728,27 @@ const getPageSpecificSchema = () => {
           margin: 0 0 0.8rem;
         }
 
+        .rotorem-seo-text a {
+          color: var(--color-primary, #2563eb) !important;
+          font-weight: 500;
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-decoration-color: rgba(37, 99, 235, 0.45);
+          text-underline-offset: 0.14em;
+          transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+
+        .rotorem-seo-text a:hover {
+          color: var(--color-primary-dark, #1d4ed8) !important;
+          text-decoration-color: rgba(29, 78, 216, 0.75);
+        }
+
+        .rotorem-seo-text a:focus-visible {
+          outline: 2px solid rgba(37, 99, 235, 0.35);
+          outline-offset: 2px;
+          border-radius: 2px;
+        }
+
         .rotorem-seo-text ul {
           margin: 0.8rem 0 1.1rem;
           padding-left: 0;

@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../../layouts/Base.astro';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const title = 'Reviews and Feedback from Our Satisfied Customers | RotoRem';
-const description = 'See what customers say about RotoRem ✓ Real reviews of our services in Sofia and Varna ✓ Proven quality and fairness ✓ Warranty for every repair';
+const description = 'See what customers say about RotoRem - Real reviews of our services in Sofia and Varna - Proven quality and fairness - Warranty for every repair';
 
 // Google Reviews URL
 const googleReviewsUrl = "https://g.page/r/CdqG6cGsgqQzEBM/review";
@@ -246,7 +246,7 @@ const totalReviews = 15;
         
         <div class="text-center">
           <div class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-2xl font-bold">5★</span>
+            <span class="text-2xl font-bold">5в…</span>
           </div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Excellent Rating</h3>
           <p class="text-gray-600">Average rating of 5 stars from all customers</p>
@@ -283,7 +283,7 @@ const totalReviews = 15;
       </div>
       
       <p class="mt-6 text-green-200">
-        Visit and diagnostics: Varna - 20,46 € (40лв) | Sofia - 25,57 € (50лв) • Quality Guarantee • Service in Varna and Sofia
+        Visit and diagnostics: Varna - €20.46 (40 BGN) | Sofia - €25.57 (50 BGN) | Quality Guarantee | Service in Varna and Sofia
       </p>
     </div>
   </section>
@@ -329,3 +329,5 @@ const totalReviews = 15;
   })}>
   </script>
 </Layout>
+
+
