@@ -1,6 +1,7 @@
 ---
 import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations, getRouteFromUrl, getLocalizedPath } from '../i18n/utils';
+import { getJsonLdOverride } from '../lib/jsonldOverrides';
 // import ReviewsModal from '../components/ReviewsModal.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 interface Props {
@@ -313,6 +314,8 @@ const getPageSpecificSchema = () => {
 
   return baseSchema;
 };
+
+const jsonLdSchema = getJsonLdOverride(canonicalPath) ?? getPageSpecificSchema();
 ---
 
 <!DOCTYPE html>
@@ -432,7 +435,7 @@ const getPageSpecificSchema = () => {
     />
     
     <!-- Enhanced LocalBusiness Schema -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(getPageSpecificSchema())}></script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)}></script>
     
     <!-- Web Vitals and Analytics Event Tracking via dataLayer -->
     <script type="module">

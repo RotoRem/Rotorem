@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../../../layouts/Base.astro';
 import Contact from '../../../components/Contact.astro';
 import Map from '../../../components/Map.astro';
@@ -155,7 +155,7 @@ const description = 'Contact RotoRem for professional appliance repair - We serv
           <div class="space-y-4">
             <div class="bg-white/70 p-4 rounded-lg">
               <h4 class="font-semibold text-green-900 mb-2">Diagnosis</h4>
-              <p class="text-sm text-green-800">Varna - €20.46 (40 BGN) | Sofia - €25.57 (50 BGN) including on-site visit</p>
+              <p class="text-sm text-green-800">Varna - 20.46 EUR (40 BGN) | Sofia - 25.57 EUR (50 BGN) including on-site visit</p>
             </div>
             
             <div class="bg-white/70 p-4 rounded-lg">
@@ -240,7 +240,7 @@ const description = 'Contact RotoRem for professional appliance repair - We serv
               </svg>
             </summary>
             <div class="mt-4 text-gray-700">
-              <p>Diagnosis costs Varna - €20.46 (40 BGN) | Sofia - €25.57 (50 BGN) and includes on-site visit, inspection and problem diagnosis. Repair cost is discussed after diagnosis.</p>
+              <p>Diagnosis costs Varna - 20.46 EUR (40 BGN) | Sofia - 25.57 EUR (50 BGN) and includes on-site visit, inspection and problem diagnosis. Repair cost is discussed after diagnosis.</p>
             </div>
           </details>
         </div>
@@ -268,45 +268,6 @@ const description = 'Contact RotoRem for professional appliance repair - We serv
       </p>
     </div>
   </section>
-
-  <!-- Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Contact - RotoRem Varna & Sofia",
-    "description": "Contact RotoRem Varna & Sofia for professional appliance repair. Phone 089 834 0982, online booking, serving Varna, Sofia and nearby areas.",
-    "url": "https://www.rotorem.bg/en/contact",
-    "mainEntity": {
-      "@type": "LocalBusiness",
-      "name": "RotoRem Varna & Sofia",
-      "telephone": "+359 89 834 0982",
-      "email": "n.ivanov.ivanov@abv.bg",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Varna",
-        "addressCountry": "BG"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        }
-      ],
-      "areaServed": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": 43.2141,
-          "longitude": 27.9147
-        },
-        "geoRadius": "20000"
-      }
-    }
-  }
-  </script>
 </Layout>
 
 
