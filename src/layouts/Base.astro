@@ -4,6 +4,7 @@ import { getLangFromUrl, useTranslations, getRouteFromUrl, getLocalizedPath } fr
 import { getJsonLdOverride } from '../lib/jsonldOverrides';
 // import ReviewsModal from '../components/ReviewsModal.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ServiceFAQ from '../components/ServiceFAQ.astro';
 interface Props {
   title?: string;
   description?: string;
@@ -1276,6 +1277,9 @@ const jsonLdSchema = getJsonLdOverride(canonicalPath) ?? getPageSpecificSchema()
     
     <main>
       <slot />
+      <div class="container max-w-4xl">
+        <ServiceFAQ />
+      </div>
     </main>
     
     <!-- Floating phone button -->

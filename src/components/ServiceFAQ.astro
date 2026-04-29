@@ -1,0 +1,93 @@
+---
+import { getServiceFaqItems } from '../lib/jsonldOverrides';
+import { getLangFromUrl } from '../i18n/utils';
+
+const faqs = getServiceFaqItems(Astro.url.pathname);
+const lang = getLangFromUrl(Astro.url);
+const sectionTitle = lang === 'en' ? 'Frequently asked questions' : 'Често задавани въпроси';
+---
+
+{faqs.length > 0 && (
+  <>
+    <section id="faq" class="mb-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">{sectionTitle}</h2>
+        <div class="w-20 h-1 bg-accent mx-auto"></div>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+            <details class="group">
+              <summary class="flex justify-between items-center p-5 cursor-pointer">
+                <h3 class="text-lg font-semibold text-gray-900">{faq.q}</h3>
+                <div class="flex-shrink-0 ml-2 text-gray-500 transition-transform duration-300 group-open:rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </summary>
+              <div class="p-5 pt-0 text-gray-700 border-t border-gray-100 animate-fadeIn">
+                <p>{faq.a}</p>
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <style>
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.3s ease-out;
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const faqSection = document.getElementById('faq');
+        const article = document.querySelector('main article');
+
+        if (faqSection && article) {
+          const sections = article.querySelectorAll('section');
+          const finalCtaSection = sections[sections.length - 1];
+
+          if (finalCtaSection && finalCtaSection !== faqSection) {
+            finalCtaSection.parentElement?.insertBefore(faqSection, finalCtaSection);
+          }
+        }
+
+        const detailsElements = document.querySelectorAll('#faq details');
+
+        detailsElements.forEach((details) => {
+          const summary = details.querySelector('summary');
+          if (!summary) return;
+
+          summary.addEventListener('click', () => {
+            if (details.hasAttribute('open')) return;
+
+            detailsElements.forEach((el) => {
+              if (el !== details) {
+                el.removeAttribute('open');
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </>
+)}

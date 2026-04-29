@@ -1126,7 +1126,7 @@ const serviceConfigs: ServiceConfig[] = [
     faq: [
       { q: "Давате ли гаранция за ремонта?", a: "Да, всички извършени дейности са с гаранция, което ви осигурява спокойствие след обслужването." },
       { q: "Какви проблеми с перални машини ремонтирате най-често?", a: "Най-честите проблеми включват: течове на вода, неработещо центрофугиране, проблеми с източването на вода, неработещи програми, шум по време на работа и проблеми с нагряването на водата." },
-      { q: "Ремонтирате ли перални в същия ден?", a: "В повечето случаи ремонтът се извършва още при посещението в София, ако проблемът позволява работа на място." }
+      { q: "Колко време отнема ремонтът на пералня?", a: "В повечето случаи ремонтът се завършва в рамките на 1-2 часа в същия ден. По-сложни ремонти могат да отнемат повече време или да изискват повторно посещение ако трябва да поръчаме специфични части." }
     ]
   },
   {
@@ -1178,7 +1178,7 @@ const serviceConfigs: ServiceConfig[] = [
     faq: [
       { q: "Какво да правя ако съдомиялната не измива съдовете добре?", a: "Най-честите причини са запушени филтри, износени дюзи или проблеми с водното налягане. Нашият техник ще диагностицира точната причина и ще я отстрани." },
       { q: "Ремонтирате ли вградени съдомиялни машини?", a: "Да, ремонтираме всички типове съдомиялни машини включително вградени модели. Нашият техник има опит с демонтаж и монтаж на вградени уреди при необходимост." },
-      { q: "Ремонтирате ли съдомиялни в същия ден?", a: "В повечето случаи ремонтът се извършва още при посещението в София, ако техническото състояние на уреда го позволява." }
+      { q: "Колко време отнема ремонтът на съдомиялна?", a: "В повечето случаи проблемът се отстранява в рамките на едно посещение, ако не се налага специфична част." }
     ]
   },
   {
@@ -1386,7 +1386,7 @@ const serviceConfigs: ServiceConfig[] = [
     faq: [
       { q: "What should I do if my appliances stop working?", a: "Please contact us for a prompt diagnosis and repair. Our specialists will identify the root cause and resolve the issue." },
       { q: "Do you have certifications for electrical work?", a: "Yes, all electrical services are performed by certified electrical engineers in accordance with current safety standards." },
-      { q: "Do you provide emergency electrical repairs?", a: "Yes, we provide emergency electrical services for situations like short circuits or power outages. Call 089 834 0982 for immediate assistance." }
+      { q: "Do you provide emergency electrical repairs?", a: "Yes, we provide emergency electrical services for situations like short circuits or power outages. Call +359898340982 for immediate assistance." }
     ]
   },
   {
@@ -1524,6 +1524,16 @@ const serviceConfigs: ServiceConfig[] = [
 const serviceOverrides: Record<string, JsonLd> = Object.fromEntries(
   serviceConfigs.map((cfg) => [cfg.path, buildServiceGraph(cfg)])
 );
+
+function normalizeServicePath(pathname: string): string {
+  return pathname.endsWith('/') ? pathname : `${pathname}/`;
+}
+
+export function getServiceFaqItems(pathname: string): FaqItem[] {
+  const normalizedPath = normalizeServicePath(pathname);
+  const config = serviceConfigs.find((item) => item.path === normalizedPath);
+  return config?.faq ?? [];
+}
 
 const bgTeamGraph = {
   "@context": "https://schema.org",
