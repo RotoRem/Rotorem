@@ -1,7 +1,7 @@
 ---
 import { buildBreadcrumbs } from '../utils/breadcrumbs';
 
-const { route, title, isEN, navPaths, t } = Astro.props;
+const { route, title, isEN, navPaths, t, renderJsonLd = true } = Astro.props;
 
 const breadcrumbs = buildBreadcrumbs({
   route,
@@ -26,7 +26,10 @@ const breadcrumbSchema = breadcrumbs.length > 1 ? {
 ---
 
 {breadcrumbs.length > 1 && (
+  <>
+  {renderJsonLd && (
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  )}
   <nav aria-label="Breadcrumb" class="bg-white/90 backdrop-blur border-b border-gray-200/70">
     <div class="container py-3">
       <ol class="flex flex-wrap items-center gap-2 text-sm text-gray-600 font-heading">
@@ -47,4 +50,5 @@ const breadcrumbSchema = breadcrumbs.length > 1 ? {
       </ol>
     </div>
   </nav>
+  </>
 )}

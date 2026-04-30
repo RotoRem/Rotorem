@@ -1606,13 +1606,94 @@ const bgNikolayProfileGraph = {
       "mainEntity": { "@id": "https://www.rotorem.bg/ekip/nikolay-ivanov/#person" }
     },
     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.rotorem.bg/ekip/nikolay-ivanov/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Начало",
+          "item": "https://www.rotorem.bg/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Екип",
+          "item": "https://www.rotorem.bg/ekip/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Николай Иванов - Професионален ел техник",
+          "item": "https://www.rotorem.bg/ekip/nikolay-ivanov/"
+        }
+      ]
+    },
+    {
       "@type": "Person",
       "@id": "https://www.rotorem.bg/ekip/nikolay-ivanov/#person",
       "name": "Николай Иванов",
       "jobTitle": "Главен сервизен техник",
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Инженер по автоматизация и сервизна поддръжка",
+        "occupationalCategory": "7412",
+        "experienceRequirements": "15+ години професионален опит",
+        "description": "Експерт в диагностиката, поддръжката и ремонта на електронни модули и сложни системи за управление в домакинските уреди."
+      },
+      "gender": "https://schema.org/Male",
       "image": "https://www.rotorem.bg/profil/avatar-1.jpg",
+      "description": "Инженер-магистър с дългогодишен практически опит в диагностиката, поддръжката и основния ремонт на перални, сушилни, съдомиялни и фурни. Специалист по ремонт на електронни модули и управление на битови уреди.",
       "worksFor": { "@id": "https://www.rotorem.bg/#localbusiness" },
-      "url": "https://www.rotorem.bg/ekip/nikolay-ivanov/"
+      "url": "https://www.rotorem.bg/ekip/nikolay-ivanov/",
+      "knowsLanguage": [
+        { "@type": "Language", "name": "Bulgarian" },
+        { "@type": "Language", "name": "English" }
+      ],
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Технически университет Варна",
+          "sameAs": "https://www.tu-varna.bg/"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Техникум по електротехника Димитър Ганев, гр. Варна"
+        }
+      ],
+      "knowsAbout": [
+        "Ремонт на перални машини",
+        "Ремонт на сушилни машини",
+        "Ремонт на съдомиялни машини",
+        "Ремонт на фурни и готварски печки",
+        "Ремонт на електронни платки и модули",
+        "Автоматика и системи за управление"
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "Магистър по Автоматика и системи за управление",
+          "recognizedBy": {
+            "@type": "EducationalOrganization",
+            "name": "Технически университет Варна"
+          }
+        }
+      ]
+    },
+    {
+      "@type": ["Electrician", "LocalBusiness"],
+      "@id": "https://www.rotorem.bg/#localbusiness",
+      "name": "РотоРем",
+      "url": "https://www.rotorem.bg",
+      "logo": "https://www.rotorem.bg/favicon.svg",
+      "telephone": "+359 89 834 0982",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Varna",
+        "postalCode": "9000",
+        "addressCountry": "BG"
+      }
     }
   ]
 };
@@ -1630,13 +1711,70 @@ const bgGeorgiProfileGraph = {
       "mainEntity": { "@id": "https://www.rotorem.bg/ekip/georgi-nikolov/#person" }
     },
     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.rotorem.bg/ekip/georgi-nikolov/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Начало",
+          "item": "https://www.rotorem.bg/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Екип",
+          "item": "https://www.rotorem.bg/ekip/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Георги Николов - Професионални електро услуги във Варна",
+          "item": "https://www.rotorem.bg/ekip/georgi-nikolov/"
+        }
+      ]
+    },
+    {
       "@type": "Person",
       "@id": "https://www.rotorem.bg/ekip/georgi-nikolov/#person",
       "name": "Георги Николов",
       "jobTitle": "Електротехник",
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Електротехник по сградни инсталации и оборудване",
+        "occupationalCategory": "7411",
+        "description": "Специалист по проектиране, изграждане и ремонт на електрически инсталации, монтаж на ел. табла и отстраняване на аварии."
+      },
+      "gender": "https://schema.org/Male",
       "image": "https://www.rotorem.bg/profil/avatar-2.jpg",
+      "description": "Квалифициран електротехник с фокус върху безопасността и надеждността на домашните ел. системи. Експерт в монтажа на защитна апаратура и диагностиката на ел. повреди в района на Варна.",
       "worksFor": { "@id": "https://www.rotorem.bg/#localbusiness" },
-      "url": "https://www.rotorem.bg/ekip/georgi-nikolov/"
+      "url": "https://www.rotorem.bg/ekip/georgi-nikolov/",
+      "knowsLanguage": [
+        { "@type": "Language", "name": "Bulgarian" }
+      ],
+      "knowsAbout": [
+        "Електроуслуги",
+        "Монтаж на ел. табла",
+        "Проектиране на ел. инсталации",
+        "Смяна на ел. ключове и контакти",
+        "Аварийни електроремонти",
+        "Заземяване и мълниезащита"
+      ]
+    },
+    {
+      "@type": ["Electrician", "LocalBusiness"],
+      "@id": "https://www.rotorem.bg/#localbusiness",
+      "name": "РотоРем",
+      "url": "https://www.rotorem.bg",
+      "logo": "https://www.rotorem.bg/favicon.svg",
+      "telephone": "+359 89 834 0982",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Varna",
+        "postalCode": "9000",
+        "addressCountry": "BG"
+      }
     }
   ]
 };
@@ -1654,13 +1792,85 @@ const bgLyubomirProfileGraph = {
       "mainEntity": { "@id": "https://www.rotorem.bg/ekip/lyubomir-dimitrov/#person" }
     },
     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.rotorem.bg/ekip/lyubomir-dimitrov/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Начало",
+          "item": "https://www.rotorem.bg/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Екип",
+          "item": "https://www.rotorem.bg/ekip/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Любомир Димитров - Майстор на перални, съдомиялни, печки и др.",
+          "item": "https://www.rotorem.bg/ekip/lyubomir-dimitrov/"
+        }
+      ]
+    },
+    {
       "@type": "Person",
       "@id": "https://www.rotorem.bg/ekip/lyubomir-dimitrov/#person",
       "name": "Любомир Димитров",
       "jobTitle": "Сервизен техник на бяла техника",
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Инженер по сградна автоматизация и сервизна поддръжка",
+        "occupationalCategory": "7412",
+        "experienceRequirements": "10+ години професионален опит",
+        "description": "Специалист по поддръжка на автоматизирани системи и диагностика на домакински електроуреди."
+      },
+      "gender": "https://schema.org/Male",
       "image": "https://www.rotorem.bg/profil/avatar-3.jpg",
+      "description": "Инженер-магистър по Сградна автоматизация с богат опит в ремонта на перални, съдомиялни и сушилни машини. Специализиран в обслужването на клиенти в района на София.",
       "worksFor": { "@id": "https://www.rotorem.bg/#localbusiness" },
-      "url": "https://www.rotorem.bg/ekip/lyubomir-dimitrov/"
+      "url": "https://www.rotorem.bg/ekip/lyubomir-dimitrov/",
+      "knowsLanguage": [
+        { "@type": "Language", "name": "Bulgarian" }
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Технически университет Варна",
+        "sameAs": "https://www.tu-varna.bg/"
+      },
+      "knowsAbout": [
+        "Ремонт на перални",
+        "Ремонт на сушилни",
+        "Ремонт на съдомиялни машини",
+        "Ремонт на фурни и котлони",
+        "Сградна автоматизация",
+        "Електротехническа диагностика"
+      ],
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "Магистър по Сградна автоматизация",
+        "recognizedBy": {
+          "@type": "EducationalOrganization",
+          "name": "Технически университет – Варна"
+        }
+      }
+    },
+    {
+      "@type": ["Electrician", "LocalBusiness"],
+      "@id": "https://www.rotorem.bg/#localbusiness",
+      "name": "РотоРем",
+      "url": "https://www.rotorem.bg",
+      "logo": "https://www.rotorem.bg/favicon.svg",
+      "telephone": "+359 89 834 0982",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Sofia",
+        "postalCode": "1000",
+        "addressCountry": "BG"
+      }
     }
   ]
 };
@@ -1678,13 +1888,94 @@ const enNikolayProfileGraph = {
       "mainEntity": { "@id": "https://www.rotorem.bg/en/team/nikolay-ivanov/#person" }
     },
     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.rotorem.bg/en/team/nikolay-ivanov/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.rotorem.bg/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Team",
+          "item": "https://www.rotorem.bg/en/team/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nikolay Ivanov - Professional Appliance Technician",
+          "item": "https://www.rotorem.bg/en/team/nikolay-ivanov/"
+        }
+      ]
+    },
+    {
       "@type": "Person",
       "@id": "https://www.rotorem.bg/en/team/nikolay-ivanov/#person",
       "name": "Nikolay Ivanov",
       "jobTitle": "Chief Service Technician",
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Automation and Service Maintenance Engineer",
+        "occupationalCategory": "7412",
+        "experienceRequirements": "15+ years of professional experience",
+        "description": "Expert in diagnostics, maintenance, and repair of electronic modules and complex control systems in household appliances."
+      },
+      "gender": "https://schema.org/Male",
       "image": "https://www.rotorem.bg/profil/avatar-1.jpg",
+      "description": "Engineer-master with extensive practical experience in diagnostics, maintenance, and major repair of washing machines, dryers, dishwashers, and ovens. Specialist in repairing electronic modules and control systems for household appliances.",
       "worksFor": { "@id": "https://www.rotorem.bg/en/#localbusiness" },
-      "url": "https://www.rotorem.bg/en/team/nikolay-ivanov/"
+      "url": "https://www.rotorem.bg/en/team/nikolay-ivanov/",
+      "knowsLanguage": [
+        { "@type": "Language", "name": "Bulgarian" },
+        { "@type": "Language", "name": "English" }
+      ],
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Technical University of Varna",
+          "sameAs": "https://www.tu-varna.bg/"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Dimitar Ganev Vocational School of Electrical Engineering, Varna"
+        }
+      ],
+      "knowsAbout": [
+        "Washing Machine Repair",
+        "Dryer Repair",
+        "Dishwasher Repair",
+        "Oven and Stove Repair",
+        "Electronic Board and Module Repair",
+        "Automation and Control Systems"
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "Master in Automation and Control Systems",
+          "recognizedBy": {
+            "@type": "EducationalOrganization",
+            "name": "Technical University of Varna"
+          }
+        }
+      ]
+    },
+    {
+      "@type": ["Electrician", "LocalBusiness"],
+      "@id": "https://www.rotorem.bg/en/#localbusiness",
+      "name": "RotoRem",
+      "url": "https://www.rotorem.bg/en/",
+      "logo": "https://www.rotorem.bg/favicon.svg",
+      "telephone": "+359 89 834 0982",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Varna",
+        "postalCode": "9000",
+        "addressCountry": "BG"
+      }
     }
   ]
 };
@@ -1702,13 +1993,70 @@ const enGeorgiProfileGraph = {
       "mainEntity": { "@id": "https://www.rotorem.bg/en/team/georgi-nikolov/#person" }
     },
     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.rotorem.bg/en/team/georgi-nikolov/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.rotorem.bg/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Team",
+          "item": "https://www.rotorem.bg/en/team/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Georgi Nikolov - Professional Electrical Services in Varna",
+          "item": "https://www.rotorem.bg/en/team/georgi-nikolov/"
+        }
+      ]
+    },
+    {
       "@type": "Person",
       "@id": "https://www.rotorem.bg/en/team/georgi-nikolov/#person",
       "name": "Georgi Nikolov",
       "jobTitle": "Electrician",
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Electrician for building installations and equipment",
+        "occupationalCategory": "7411",
+        "description": "Specialist in the design, construction, and repair of electrical installations, installation of electrical panels, and emergency fault rectification."
+      },
+      "gender": "https://schema.org/Male",
       "image": "https://www.rotorem.bg/profil/avatar-2.jpg",
+      "description": "Qualified electrician with a focus on the safety and reliability of domestic electrical systems. Expert in the installation of protective equipment and diagnostics of electrical faults in the Varna region.",
       "worksFor": { "@id": "https://www.rotorem.bg/en/#localbusiness" },
-      "url": "https://www.rotorem.bg/en/team/georgi-nikolov/"
+      "url": "https://www.rotorem.bg/en/team/georgi-nikolov/",
+      "knowsLanguage": [
+        { "@type": "Language", "name": "Bulgarian" }
+      ],
+      "knowsAbout": [
+        "Electrical Services",
+        "Electrical Panel Installation",
+        "Electrical System Design",
+        "Replacement of Switches and Sockets",
+        "Emergency Electrical Repairs",
+        "Grounding and Lightning Protection"
+      ]
+    },
+    {
+      "@type": ["Electrician", "LocalBusiness"],
+      "@id": "https://www.rotorem.bg/en/#localbusiness",
+      "name": "RotoRem",
+      "url": "https://www.rotorem.bg/en/",
+      "logo": "https://www.rotorem.bg/favicon.svg",
+      "telephone": "+359 89 834 0982",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Varna",
+        "postalCode": "9000",
+        "addressCountry": "BG"
+      }
     }
   ]
 };
@@ -1726,13 +2074,85 @@ const enLyubomirProfileGraph = {
       "mainEntity": { "@id": "https://www.rotorem.bg/en/team/lyubomir-dimitrov/#person" }
     },
     {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.rotorem.bg/en/team/lyubomir-dimitrov/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.rotorem.bg/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Team",
+          "item": "https://www.rotorem.bg/en/team/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Lyubomir Dimitrov - Appliance Repair Specialist",
+          "item": "https://www.rotorem.bg/en/team/lyubomir-dimitrov/"
+        }
+      ]
+    },
+    {
       "@type": "Person",
       "@id": "https://www.rotorem.bg/en/team/lyubomir-dimitrov/#person",
       "name": "Lyubomir Dimitrov",
       "jobTitle": "White Goods Service Technician",
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Building Automation and Service Maintenance Engineer",
+        "occupationalCategory": "7412",
+        "experienceRequirements": "10+ years of professional experience",
+        "description": "Specialist in maintenance of automated systems and diagnostics of household electrical appliances."
+      },
+      "gender": "https://schema.org/Male",
       "image": "https://www.rotorem.bg/profil/avatar-3.jpg",
+      "description": "Engineer-Master in Building Automation with extensive experience in repairing washing machines, dishwashers, and dryers. Specialized in serving customers in the Sofia area.",
       "worksFor": { "@id": "https://www.rotorem.bg/en/#localbusiness" },
-      "url": "https://www.rotorem.bg/en/team/lyubomir-dimitrov/"
+      "url": "https://www.rotorem.bg/en/team/lyubomir-dimitrov/",
+      "knowsLanguage": [
+        { "@type": "Language", "name": "Bulgarian" }
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Technical University of Varna",
+        "sameAs": "https://www.tu-varna.bg/"
+      },
+      "knowsAbout": [
+        "Washing Machine Repair",
+        "Dryer Repair",
+        "Dishwasher Repair",
+        "Oven and Hob Repair",
+        "Building Automation",
+        "Electrical Diagnostics"
+      ],
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "Master in Building Automation",
+        "recognizedBy": {
+          "@type": "EducationalOrganization",
+          "name": "Technical University of Varna"
+        }
+      }
+    },
+    {
+      "@type": ["Electrician", "LocalBusiness"],
+      "@id": "https://www.rotorem.bg/en/#localbusiness",
+      "name": "RotoRem",
+      "url": "https://www.rotorem.bg/en/",
+      "logo": "https://www.rotorem.bg/favicon.svg",
+      "telephone": "+359 89 834 0982",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Sofia",
+        "postalCode": "1000",
+        "addressCountry": "BG"
+      }
     }
   ]
 };

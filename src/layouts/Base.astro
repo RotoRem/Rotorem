@@ -316,7 +316,30 @@ const getPageSpecificSchema = () => {
   return baseSchema;
 };
 
-const jsonLdSchema = getJsonLdOverride(canonicalPath) ?? getPageSpecificSchema();
+const jsonLdOverride = getJsonLdOverride(canonicalPath);
+const jsonLdSchema = jsonLdOverride ?? getPageSpecificSchema();
+
+const hasBreadcrumbListInJsonLd = (schema: unknown): boolean => {
+  if (!schema || typeof schema !== 'object') return false;
+
+  const data = schema as Record<string, unknown>;
+  const typeValue = data['@type'];
+  if (typeValue === 'BreadcrumbList') return true;
+  if (Array.isArray(typeValue) && typeValue.includes('BreadcrumbList')) return true;
+
+  const graph = data['@graph'];
+  if (Array.isArray(graph)) {
+    return graph.some((item) => {
+      if (!item || typeof item !== 'object') return false;
+      const graphType = (item as Record<string, unknown>)['@type'];
+      return graphType === 'BreadcrumbList' || (Array.isArray(graphType) && graphType.includes('BreadcrumbList'));
+    });
+  }
+
+  return false;
+};
+
+const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
 ---
 
 <!DOCTYPE html>
@@ -1270,7 +1293,7 @@ const jsonLdSchema = getJsonLdOverride(canonicalPath) ?? getPageSpecificSchema()
       </div>
     </header>
 
-    <Breadcrumbs route={route} title={title} isEN={isEN} navPaths={navPaths} t={t} />
+    <Breadcrumbs route={route} title={title} isEN={isEN} navPaths={navPaths} t={t} renderJsonLd={shouldRenderBreadcrumbJsonLd} />
     
     <!-- Reviews Modal -->
     <!-- <ReviewsModal /> -->
