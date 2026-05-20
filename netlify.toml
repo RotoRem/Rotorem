@@ -5,6 +5,9 @@
   # Build environment variables
   environment = { NODE_VERSION = "18", PNPM_VERSION = "8.15.5" }
 
+[functions]
+  directory = "netlify/functions"
+
 [build.processing]
   # Let Netlify handle some optimizations
   skip_processing = false

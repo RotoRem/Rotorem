@@ -72,6 +72,9 @@ Create `.env` locally or configure variables on Netlify:
 | --- | --- | --- |
 | `PUBLIC_GA_MEASUREMENT_ID` | Google Analytics property | Required for production analytics |
 | `PUBLIC_GOOGLE_SCRIPT_URL` | Legacy booking form Apps Script endpoint | Currently unused on the front-end; still referenced in docs |
+| `GOOGLE_PLACES_API_KEY` | Server-side key for Google Places API | Required by `netlify/functions/gbp-reviews.js` to fetch GBP reviews |
+| `GOOGLE_PLACE_ID` | Google Place ID for the business profile | Required by `netlify/functions/gbp-reviews.js` |
+| `GOOGLE_REVIEWS_MIN_RATING` | Minimum rating threshold for showing reviews | Optional, defaults to `4` |
 | `NETLIFY_AUTH_TOKEN` | Netlify CLI deploys | Only needed for manual CLI deploys |
 | `NETLIFY_SITE_ID` | Netlify CLI deploys | Same as above |
 | `NETLIFY_EMAILS_SECRET` | Required if `src/netlify/functions/send-booking-email.js` is re-enabled | Generated in Netlify “Emails” integration |

@@ -19,6 +19,10 @@ const isEN = lang === 'en';
 // Google Reviews URL
 const googleReviewsUrl = "https://g.page/r/CdqG6cGsgqQzEBM/review/";
 
+const initialReviewText = isEN
+  ? 'Loading latest Google reviews...'
+  : 'Зареждане на най-новите Google отзиви...';
+
 // Focus on core services for a cleaner look
 const allServices = [
   {
@@ -47,27 +51,6 @@ const allServices = [
   }
 ];
 
-// Real Google reviews from June 2025
-const reviews = [
-  {
-    name: isEN ? 'Velizar Dimov' : 'Велизар Димов',
-    date: isEN ? 'June 20, 2025' : '20 юни, 2025',
-    text: isEN ? 'Very very satisfied! They responded instantly, super competent, the problem with the dishwasher was solved. Wife happy, me calm :) huge THANKS TO THE TEAM!' : 'Много много доволен ! Реагираха мигновенно,супер компетентни,проблема беше решен със съдомиялната машина.Жената доволна аз спокоен :) огромно БЛАГОДАРЯ НА ЕКИПА !',
-    appliance: isEN ? 'Dishwasher' : 'Съдомиялна'
-  },
-  {
-    name: isEN ? 'Martin Ivanov' : 'Мартин Иванов',
-    date: isEN ? 'June 15, 2025' : '15 юни, 2025',
-    text: isEN ? 'I had a problem with the water heater. After I called, the next day Mr. N. Ivanov responded and quickly fixed the damage. I recommend!' : 'Имах проблем с бойлера.След като се обадих на другия ден г-н Н.Иванов се отзова и бързо отстрани повредата.Препоръчвам!',
-    appliance: isEN ? 'Water Heater' : 'Бойлер'
-  },
-  {
-    name: isEN ? 'Desislava Zlateva' : 'Десислава Златева',
-    date: isEN ? 'June 10, 2025' : '10 юни, 2025',
-    text: isEN ? 'Quality and fast service! I recommend!' : 'Качествено и бързо обслужване! Препоръчвам!',
-    appliance: isEN ? 'Washing Machine' : 'Пералня'
-  }
-];
 ---
 
 <section class="relative overflow-hidden pb-8">
@@ -297,32 +280,10 @@ const reviews = [
             </div>
           </div>
           
-          <div class="grid md:grid-cols-3 gap-4">
-            {reviews.map((review, index) => (
-              <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                <div class="flex justify-between items-start mb-3">
-                  <div>
-                    <h3 class="font-semibold text-gray-900 font-heading">{review.name}</h3>
-                    <p class="text-sm text-gray-500">{review.date}</p>
-                  </div>
-                  <div class="flex">
-                    {Array.from({ length: 5 }).map(() => (
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-500" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                      </svg>
-                    ))}
-                  </div>
-                </div>
-                
-                <p class="text-gray-800 font-heading">{review.text}</p>
-                
-                <div class="mt-3 pt-3 border-t border-gray-200">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 font-heading">
-                    {review.appliance}
-                  </span>
-                </div>
-              </div>
-            ))}
+          <div id="desktop-reviews-grid" class="grid md:grid-cols-3 gap-4"></div>
+
+          <div id="desktop-reviews-empty" class="hidden text-center text-sm text-gray-600 mt-2">
+            {isEN ? 'No positive reviews available right now.' : 'В момента няма налични положителни отзиви.'}
           </div>
 
           <!-- Google Reviews CTA for Desktop - Updated for phone-only -->
@@ -394,8 +355,8 @@ const reviews = [
             <!-- First review only for initial display -->
             <div class="flex justify-between items-start p-5 pb-0">
               <div>
-                <h3 id="review-name" class="font-semibold text-gray-900 font-heading">{reviews[0].name}</h3>
-                <p id="review-date" class="text-sm text-gray-500">{reviews[0].date}</p>
+                <h3 id="review-name" class="font-semibold text-gray-900 font-heading">Google</h3>
+                <p id="review-date" class="text-sm text-gray-500">...</p>
               </div>
               <div class="flex">
                 {Array.from({ length: 5 }).map(() => (
@@ -407,13 +368,19 @@ const reviews = [
             </div>
             
             <div class="flex-grow overflow-y-auto p-5 pt-3">
-              <p id="review-text" class="text-gray-800 font-heading">{reviews[0].text}</p>
+              <p id="review-text" class="text-gray-800 font-heading">{initialReviewText}</p>
             </div>
             
             <div class="px-5 pb-5 pt-3 border-t border-gray-200 flex justify-between items-center">
-              <span id="review-appliance" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 font-heading">
-                {reviews[0].appliance}
-              </span>
+              <a
+                id="review-link"
+                href={googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 font-heading"
+              >
+                {isEN ? 'Open in Google' : 'Отвори в Google'}
+              </a>
               
               <!-- "Verified customer" badge -->
               <span class="inline-flex items-center text-xs text-green-700 font-heading">
@@ -434,11 +401,7 @@ const reviews = [
               </svg>
             </button>
             
-            <div class="flex gap-1">
-              <span class="review-dot w-2 h-2 rounded-full bg-primary"></span>
-              <span class="review-dot w-2 h-2 rounded-full bg-gray-300"></span>
-              <span class="review-dot w-2 h-2 rounded-full bg-gray-300"></span>
-            </div>
+            <div id="review-dots" class="flex gap-1"></div>
             
             <button id="review-next" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur border border-gray-200 text-gray-500 hover:bg-gray-50 active:bg-gray-100 touch-manipulation shadow-sm">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -518,77 +481,186 @@ const reviews = [
 </style>
 
 <script>
-  // Client-side JavaScript for mobile carousels - with real reviews
   document.addEventListener('DOMContentLoaded', () => {
-    // Reviews carousel functionality
-    const reviewCarousel = {
-      currentIndex: 0,
-      reviews: [
-        {
-          name: 'Велизар Димов',
-          date: '20 юни, 2025',
-          text: 'Много много доволен ! Реагираха мигновенно,супер компетентни,проблема беше решен със съдомиялната машина.Жената доволна аз спокоен :) огромно БЛАГОДАРЯ НА ЕКИПА !',
-          appliance: 'Съдомиялна'
-        },
-        {
-          name: 'Мартин Иванов',
-          date: '15 юни, 2025',
-          text: 'Имах проблем с бойлера.След като се обадих на другия ден г-н Н.Иванов се отзова и бързо отстрани повредата.Препоръчвам!',
-          appliance: 'Бойлер'
-        },
-        {
-          name: 'Десислава Златева',
-          date: '10 юни, 2025',
-          text: 'Качествено и бързо обслужване! Препоръчвам!',
-          appliance: 'Пералня'
-        }
-      ],
-      
-      init() {
-        const prevButton = document.getElementById('review-prev');
-        const nextButton = document.getElementById('review-next');
-        
-        if (prevButton && nextButton) {
-          prevButton.addEventListener('click', () => this.navigate(-1));
-          nextButton.addEventListener('click', () => this.navigate(1));
-        }
-      },
-      
-      navigate(direction: number) {
-        // Update current index with wrapping
-        this.currentIndex = (this.currentIndex + direction + this.reviews.length) % this.reviews.length;
-        this.updateReview();
-        this.updateDots();
-      },
-      
-      updateReview() {
-        const review = this.reviews[this.currentIndex];
-        const nameElement = document.getElementById('review-name');
-        const dateElement = document.getElementById('review-date');
-        const textElement = document.getElementById('review-text');
-        const applianceElement = document.getElementById('review-appliance');
-        
-        if (nameElement) nameElement.textContent = review.name;
-        if (dateElement) dateElement.textContent = review.date;
-        if (textElement) textElement.textContent = review.text;
-        if (applianceElement) applianceElement.textContent = review.appliance;
-      },
-      
-      updateDots() {
-        const dots = document.querySelectorAll('.review-dot');
-        dots.forEach((dot, index) => {
-          if (index === this.currentIndex) {
-            dot.classList.remove('bg-gray-300');
-            dot.classList.add('bg-primary');
-          } else {
-            dot.classList.remove('bg-primary');
-            dot.classList.add('bg-gray-300');
-          }
-        });
-      }
+    type GoogleReviewItem = {
+      authorName?: string;
+      rating?: number;
+      text?: string;
+      relativePublishTimeDescription?: string;
+      publishTime?: string;
+      originalUrl?: string;
     };
-    
-    // Initialize the review carousel
-    reviewCarousel.init();
+
+    const isEN = document.documentElement.lang?.toLowerCase().startsWith('en');
+    const defaultGoogleReviewUrl = 'https://g.page/r/CdqG6cGsgqQzEBM/review/';
+    const labels = {
+      source: isEN ? 'Open in Google' : 'Отвори в Google',
+      noReviews: isEN ? 'No positive reviews available right now.' : 'В момента няма налични положителни отзиви.',
+      loading: isEN ? 'Loading latest Google reviews...' : 'Зареждане на най-новите Google отзиви...',
+    };
+
+    const desktopGrid = document.getElementById('desktop-reviews-grid');
+    const desktopEmpty = document.getElementById('desktop-reviews-empty');
+    const nameElement = document.getElementById('review-name');
+    const dateElement = document.getElementById('review-date');
+    const textElement = document.getElementById('review-text');
+    const reviewLink = document.getElementById('review-link');
+    const prevButton = document.getElementById('review-prev');
+    const nextButton = document.getElementById('review-next');
+    const dotsContainer = document.getElementById('review-dots');
+
+    let currentIndex = 0;
+    let reviews: GoogleReviewItem[] = [];
+
+    function escapeHtml(value: unknown) {
+      return String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function formatDate(review: GoogleReviewItem) {
+      if (review.relativePublishTimeDescription) {
+        return review.relativePublishTimeDescription;
+      }
+
+      if (!review.publishTime) {
+        return '';
+      }
+
+      const date = new Date(review.publishTime);
+      if (Number.isNaN(date.getTime())) {
+        return '';
+      }
+
+      return new Intl.DateTimeFormat(isEN ? 'en' : 'bg-BG', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+      }).format(date);
+    }
+
+    function renderDesktop(reviewItems: GoogleReviewItem[]) {
+      if (!desktopGrid || !desktopEmpty) {
+        return;
+      }
+
+      desktopGrid.innerHTML = '';
+
+      if (!reviewItems.length) {
+        desktopEmpty.classList.remove('hidden');
+        desktopEmpty.textContent = labels.noReviews;
+        return;
+      }
+
+      desktopEmpty.classList.add('hidden');
+      const topThree = reviewItems.slice(0, 3);
+
+      desktopGrid.innerHTML = topThree
+        .map((review: GoogleReviewItem) => {
+          const stars = '★'.repeat(Math.max(0, Math.min(5, Number(review.rating || 0))));
+          return `
+            <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
+              <div class="flex justify-between items-start mb-3 gap-3">
+                <div>
+                  <h3 class="font-semibold text-gray-900 font-heading">${escapeHtml(review.authorName || 'Google user')}</h3>
+                  <p class="text-sm text-gray-500">${escapeHtml(formatDate(review))}</p>
+                </div>
+                <p class="text-yellow-600 font-semibold text-sm" aria-label="${escapeHtml(`${review.rating || 0} stars`)}">${escapeHtml(stars)}</p>
+              </div>
+              <p class="text-gray-800 font-heading">${escapeHtml(review.text)}</p>
+              <div class="mt-3 pt-3 border-t border-gray-200">
+                <a href="${escapeHtml(review.originalUrl || defaultGoogleReviewUrl)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 font-heading">
+                  ${escapeHtml(labels.source)}
+                </a>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    function renderDots() {
+      if (!dotsContainer) {
+        return;
+      }
+
+      dotsContainer.innerHTML = reviews
+        .map((_, index) => {
+          const base = 'review-dot w-2 h-2 rounded-full';
+          const color = index === currentIndex ? 'bg-primary' : 'bg-gray-300';
+          return `<span class="${base} ${color}"></span>`;
+        })
+        .join('');
+    }
+
+    function renderCurrentMobile() {
+      const review = reviews[currentIndex];
+      if (!review || !nameElement || !dateElement || !textElement || !reviewLink) {
+        return;
+      }
+
+      nameElement.textContent = review.authorName || 'Google user';
+      dateElement.textContent = formatDate(review);
+      textElement.textContent = review.text || labels.loading;
+      reviewLink.setAttribute('href', review.originalUrl || defaultGoogleReviewUrl);
+      renderDots();
+    }
+
+    function navigate(direction: number) {
+      if (!reviews.length) {
+        return;
+      }
+
+      currentIndex = (currentIndex + direction + reviews.length) % reviews.length;
+      renderCurrentMobile();
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener('click', () => navigate(-1));
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener('click', () => navigate(1));
+    }
+
+    async function loadReviews() {
+      try {
+        const response = await fetch(`/.netlify/functions/gbp-reviews?lang=${isEN ? 'en' : 'bg'}`);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const payload = await response.json();
+        reviews = Array.isArray(payload.reviews)
+          ? payload.reviews.filter((item: GoogleReviewItem) => Number(item.rating || 0) >= 4 && item.text)
+          : [];
+
+        renderDesktop(reviews);
+
+        if (!reviews.length) {
+          if (nameElement) nameElement.textContent = 'Google';
+          if (dateElement) dateElement.textContent = '';
+          if (textElement) textElement.textContent = labels.noReviews;
+          if (reviewLink) reviewLink.setAttribute('href', payload.placeUrl || defaultGoogleReviewUrl);
+          renderDots();
+          return;
+        }
+
+        currentIndex = 0;
+        renderCurrentMobile();
+      } catch (error) {
+        renderDesktop([]);
+        if (nameElement) nameElement.textContent = 'Google';
+        if (dateElement) dateElement.textContent = '';
+        if (textElement) textElement.textContent = labels.noReviews;
+        if (reviewLink) reviewLink.setAttribute('href', defaultGoogleReviewUrl);
+        renderDots();
+      }
+    }
+
+    loadReviews();
   });
 </script>

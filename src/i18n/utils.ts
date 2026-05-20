@@ -67,7 +67,28 @@ export function getLocalizedPath(path: string, lang: keyof typeof ui) {
     return inputPath;
   };
 
-  const localizedPath = mapLegalRoute(mapTeamRoute(normalizedPath, lang), lang);
+  const mapBlogRoute = (inputPath: string, targetLang: keyof typeof ui) => {
+    const routeMap: Record<string, { bg: string; en: string }> = {
+      boilerDangerGuide: {
+        bg: '/blog/koga-e-opasen-boilerat',
+        en: '/blog/when-is-a-water-heater-dangerous',
+      },
+      washingMachineSpinGuide: {
+        bg: '/blog/peralnyata-ne-tsentrofugira-prichini',
+        en: '/blog/washing-machine-wont-spin-causes',
+      },
+    };
+
+    for (const route of Object.values(routeMap)) {
+      if (inputPath === route.bg || inputPath === route.en) {
+        return targetLang === defaultLang ? route.bg : route.en;
+      }
+    }
+
+    return inputPath;
+  };
+
+  const localizedPath = mapLegalRoute(mapBlogRoute(mapTeamRoute(normalizedPath, lang), lang), lang);
 
   let resolvedPath = localizedPath;
 
