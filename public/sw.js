@@ -1,11 +1,11 @@
-const STATIC_CACHE = 'rotorem-static-v2';
-const DYNAMIC_CACHE = 'rotorem-dynamic-v2';
+const STATIC_CACHE = 'rotorem-static-v3';
+const DYNAMIC_CACHE = 'rotorem-dynamic-v3';
 
 // Files to cache on install
 const STATIC_ASSETS = [
   '/',
   '/img/hero.webp',
-  '/img/hero.avif',
+  '/img/blog/default.webp',
   '/favicon.svg',
   '/favicon-32x32.png',
   '/favicon-16x16.png'
@@ -69,12 +69,25 @@ self.addEventListener('fetch', (event) => {
 // Cache First
 async function cacheFirst(request) {
   const cached = await caches.match(request);
-  if (cached) return cached;
+  if (cached && cached.ok) return cached;
 
-  const response = await fetch(request);
-  const cache = await caches.open(STATIC_CACHE);
-  cache.put(request, response.clone());
-  return response;
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) {
+      const cache = await caches.open(STATIC_CACHE);
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch (error) {
+    if (cached) return cached;
+
+    if (request.destination === 'image') {
+      const fallback = await caches.match('/img/blog/default.webp') || await caches.match('/img/hero.webp');
+      if (fallback) return fallback;
+    }
+
+    throw error;
+  }
 }
 
 // Network First
