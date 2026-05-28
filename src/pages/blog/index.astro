@@ -27,14 +27,14 @@ const blogPosts: BlogPost[] = [
     title: 'Кога е опасен бойлерът: Ръководство при теч и аварии',
     excerpt: 'Домът е нашето убежище, той е мястото, където се чувстваме защитени и спокойни. В центъра на този комфорт стоят домакинс...',
     slug: 'koga-e-opasen-boilerat',
-    image: '/img/blog/man-repairing-water-heater.jpg',
+    image: '/img/blog/default.webp',
     publishDate: '1970-01-01'
   },
   {
     title: 'Пералнята не центрофугира: Какви са причините за повредата',
     excerpt: 'Ежедневието в модерния дом се крепи на предвидимост и автоматизация. Разчитаме на домакинските уреди да спестяват време ...',
     slug: 'peralnyata-ne-tsentrofugira-prichini',
-    image: '/img/blog/man-repairing-washing-machine-with-cloth-in-home.jpg',
+    image: '/img/blog/default.webp',
     publishDate: '1970-01-01'
   }
 ];
@@ -61,16 +61,7 @@ const blogPosts: BlogPost[] = [
           {blogPosts.map(post => (
             <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
               <div class="aspect-video overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                  decoding="async"
-                  width="1280"
-                  height="720"
-                  onerror="this.onerror=null;this.src='/img/blog/default.webp';"
-                />
+                <img src={post.image} alt={post.title} class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
               </div>
               <div class="p-6">
                 <h3 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
