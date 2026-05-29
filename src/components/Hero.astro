@@ -503,6 +503,68 @@ const allServices = [
       loading: isEN ? 'Loading latest Google reviews...' : 'Зареждане на най-новите Google отзиви...',
     };
 
+    const fallbackReviews: GoogleReviewItem[] = isEN
+      ? [
+          {
+            authorName: 'Velizar Dimov',
+            rating: 5,
+            text: 'Very satisfied! They reacted immediately, were very competent, and solved the dishwasher issue quickly. Big thanks to the team!',
+            relativePublishTimeDescription: 'June 2025',
+            originalUrl: defaultGoogleReviewUrl,
+          },
+          {
+            authorName: 'Martin Ivanov',
+            rating: 5,
+            text: 'I had a boiler problem. Mr. Ivanov responded the next day and fixed the issue quickly. I recommend them!',
+            relativePublishTimeDescription: 'June 2025',
+            originalUrl: defaultGoogleReviewUrl,
+          },
+          {
+            authorName: 'Desislava Zlateva',
+            rating: 5,
+            text: 'Quality and fast service. Highly recommended!',
+            relativePublishTimeDescription: 'June 2025',
+            originalUrl: defaultGoogleReviewUrl,
+          },
+          {
+            authorName: 'Elena Stoyanova',
+            rating: 5,
+            text: 'Perfect service! They arrived on time, diagnosed the issue quickly, and fixed it on-site. My washing machine works like new.',
+            relativePublishTimeDescription: 'June 2025',
+            originalUrl: defaultGoogleReviewUrl,
+          },
+        ]
+      : [
+          {
+            authorName: 'Велизар Димов',
+            rating: 5,
+            text: 'Много много доволен ! Реагираха мигновенно, супер компетентни, проблема беше решен със съдомиялната машина. Жената доволна, аз спокоен. Огромно благодаря на екипа!',
+            relativePublishTimeDescription: 'юни 2025',
+            originalUrl: defaultGoogleReviewUrl,
+          },
+          {
+            authorName: 'Мартин Иванов',
+            rating: 5,
+            text: 'Имах проблем с бойлера. След като се обадих, на другия ден г-н Н. Иванов се отзова и бързо отстрани повредата. Препоръчвам!',
+            relativePublishTimeDescription: 'юни 2025',
+            originalUrl: defaultGoogleReviewUrl,
+          },
+          {
+            authorName: 'Десислава Златева',
+            rating: 5,
+            text: 'Качествено и бързо обслужване! Препоръчвам!',
+            relativePublishTimeDescription: 'юни 2025',
+            originalUrl: defaultGoogleReviewUrl,
+          },
+          {
+            authorName: 'Елена Стоянова',
+            rating: 5,
+            text: 'Перфектно обслужване! Дойдоха в уговореното време, диагностицираха проблема бързо и го решиха на място. Пералнята работи като нова.',
+            relativePublishTimeDescription: 'юни 2025',
+            originalUrl: defaultGoogleReviewUrl,
+          },
+        ];
+
     const desktopGrid = document.getElementById('desktop-reviews-grid');
     const desktopEmpty = document.getElementById('desktop-reviews-empty');
     const nameElement = document.getElementById('review-name');
@@ -645,23 +707,22 @@ const allServices = [
         renderDesktop(reviews);
 
         if (!reviews.length) {
-          if (nameElement) nameElement.textContent = 'Google';
-          if (dateElement) dateElement.textContent = '';
-          if (textElement) textElement.textContent = labels.noReviews;
+          reviews = fallbackReviews;
+          renderDesktop(reviews);
+          currentIndex = 0;
           if (reviewLink) reviewLink.setAttribute('href', payload.placeUrl || defaultGoogleReviewUrl);
-          renderDots();
+          renderCurrentMobile();
           return;
         }
 
         currentIndex = 0;
         renderCurrentMobile();
       } catch (error) {
-        renderDesktop([]);
-        if (nameElement) nameElement.textContent = 'Google';
-        if (dateElement) dateElement.textContent = '';
-        if (textElement) textElement.textContent = labels.noReviews;
+        reviews = fallbackReviews;
+        renderDesktop(reviews);
+        currentIndex = 0;
+        renderCurrentMobile();
         if (reviewLink) reviewLink.setAttribute('href', defaultGoogleReviewUrl);
-        renderDots();
       }
     }
 
