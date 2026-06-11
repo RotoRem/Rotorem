@@ -6,6 +6,7 @@ const description = 'Разберете защо вашата пералня н�
 
 const canonicalUrl = 'https://www.rotorem.bg/blog/peralnyata-ne-tsentrofugira-prichini/';
 const publishDate = '2026-05-20';
+const blogImage = '/img/blog/man-repairing-washing-machine-with-cloth-in-home.jpg';
 const authorName = 'Николай Иванов';
 const authorUrl = 'https://www.rotorem.bg/ekip/nikolay-ivanov/';
 const coverImage = '/img/blog/man-repairing-washing-machine-with-cloth-in-home.jpg';
@@ -182,31 +183,29 @@ const emailHref = 'mailto:n.ivanov.ivanov@abv.bg';
     </section>
   </article>
 
-  <script is:inline type="application/ld+json">
-    {JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: title,
-      description,
-      image: `https://www.rotorem.bg${coverImage}`,
-      datePublished: publishDate,
-      dateModified: publishDate,
-      author: {
-        '@type': 'Person',
-        name: authorName,
-        url: authorUrl
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'РотоРем',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://www.rotorem.bg/favicon.svg'
-        }
-      },
-      mainEntityOfPage: canonicalUrl
-    })}
-  </script>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    image: `https://www.rotorem.bg${coverImage}`,
+    datePublished: publishDate,
+    dateModified: publishDate,
+    author: {
+      '@type': 'Person',
+      name: authorName,
+      url: authorUrl
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'РотоРем',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.rotorem.bg/favicon.svg'
+      }
+    },
+    mainEntityOfPage: canonicalUrl
+  })} />
 </Layout>
 
 <style>
