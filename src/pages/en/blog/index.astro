@@ -23,6 +23,13 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    slug: 'water-heater-popping-noises-causes-and-warning-signs',
+    title: 'Water Heater Popping Noises: Causes, Fixes & Warning Signs',
+    excerpt: 'Discover why your water heater makes popping, clicking, or banging noises, what causes them, and when they signal a serious fault.',
+    image: '/img/blog/man-repairing-water-heater-for-a-woman-at-home.jpg',
+    publishDate: '2026-06-24'
+  },
+  {
     slug: 'dryer-not-collecting-water-common-container-reservoir-problems',
     title: 'Why Your Dryer Is Not Collecting Water: 5 Common Causes of Container and Reservoir Problems',
     excerpt: 'Learn why your dryer is not collecting water, how to troubleshoot safely, and when to call a professional repair technician.',
@@ -48,14 +55,14 @@ const blogPosts: BlogPost[] = [
 
 <Layout title={title} description={description}>
   <section class="py-16">
-    <div class="container max-w-3xl">
-      <header class="text-center mb-10">
+    <div class="container max-w-6xl">
+      <header class="text-center max-w-3xl mx-auto mb-16">
         <h1 class="text-4xl font-bold text-gray-900 mb-4">{heading}</h1>
         <div class="w-20 h-1 bg-accent mx-auto my-4"></div>
         <p class="text-xl text-gray-600">{subheading}</p>
       </header>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.map(post => (
           <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
             <div class="aspect-video overflow-hidden">

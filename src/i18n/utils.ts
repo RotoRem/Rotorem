@@ -73,6 +73,14 @@ export function getLocalizedPath(path: string, lang: keyof typeof ui) {
         bg: '/blog/koga-e-opasen-boilerat',
         en: '/blog/when-is-a-water-heater-dangerous',
       },
+      waterHeaterNoiseGuide: {
+        bg: '/blog/stranen-shum-ili-pukane-ot-boilera-na-kakvo-mozhe-da-se-dalzhi',
+        en: '/blog/water-heater-popping-noises-causes-and-warning-signs',
+      },
+      dryerWaterGuide: {
+        bg: '/blog/sushilnyata-ne-sabira-voda-5-prichini',
+        en: '/blog/dryer-not-collecting-water-common-container-reservoir-problems',
+      },
       washingMachineSpinGuide: {
         bg: '/blog/peralnyata-ne-tsentrofugira-prichini',
         en: '/blog/washing-machine-wont-spin-causes',

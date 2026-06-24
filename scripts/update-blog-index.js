@@ -12,15 +12,20 @@ const BLOG_INDEX_FILE = path.join(BLOG_OUTPUT_DIR, 'index.astro');
 function extractMetadata(astroContent, filename) {
   const titleMatch = astroContent.match(/const title = '([^']+)'/);
   const descMatch = astroContent.match(/const description = '([^']+)'/);
-  const dateMatch = astroContent.match(/const datePublished = '([^']+)'/);
-  const imageMatch = astroContent.match(/const blogImage = '([^']+)'/);
+  const excerptMatch = astroContent.match(/const excerpt = '([^']+)'/);
+  const dateMatch = astroContent.match(/const datePublished = '([^']+)'/) || astroContent.match(/const publishDate = '([^']+)'/);
+  const imageMatch = astroContent.match(/const blogImage = '([^']+)'/) || astroContent.match(/const coverImage = '([^']+)'/);
 
   const slug = filename.replace('.astro', '');
 
-  // Extract excerpt from first paragraph
-  const contentMatch = astroContent.match(/<div class="prose[^>]*">\s*(.*?)\s*<\/div>/s);
+  // Prefer explicit summary text, then fall back to the description or first paragraph.
+  const contentMatch = astroContent.match(/<div class="prose[^>]*>\s*(.*?)\s*<\/div>/s);
   let excerpt = 'Професионални съвети от експертите на РотоРем Варна...';
-  if (contentMatch) {
+  if (excerptMatch) {
+    excerpt = excerptMatch[1];
+  } else if (descMatch) {
+    excerpt = descMatch[1];
+  } else if (contentMatch) {
     const firstPMatch = contentMatch[1].match(/<p[^>]*>(.*?)<\/p>/s);
     if (firstPMatch) {
       excerpt = firstPMatch[1]
