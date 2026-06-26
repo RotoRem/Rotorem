@@ -182,8 +182,7 @@ const emailHref = 'mailto:n.ivanov.ivanov@abv.bg';
     </section>
   </article>
 
-  <script is:inline type="application/ld+json">
-    {JSON.stringify({
+  <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
       headline: title,
@@ -205,8 +204,7 @@ const emailHref = 'mailto:n.ivanov.ivanov@abv.bg';
         }
       },
       mainEntityOfPage: canonicalUrl
-    })}
-  </script>
+    })} />
 </Layout>
 
 <style>
