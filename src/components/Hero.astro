@@ -1,5 +1,11 @@
 ---
 import { getLangFromUrl, useTranslations, getRouteFromUrl, getLocalizedPath } from '../i18n/utils';
+import reviewsData from '../data/google-reviews.json';
+import {
+  formatReviewDate,
+  getLocalizedReviewComment,
+  truncateReviewText,
+} from '../utils/googleReviews';
 
 // Define a type for valid icon keys
 type IconKey = 'phone' | 'mail' | 'map' | 'clock';
@@ -17,7 +23,61 @@ const t = useTranslations(lang);
 const isEN = lang === 'en';
 
 // Google Reviews URL
+const locations = reviewsData.accounts.flatMap((account) => account.locations);
+
+const reviews = locations
+  .flatMap((location) => location.reviews)
+  .filter(
+    (review) =>
+      ['FOUR', 'FIVE'].includes(review.starRating) &&
+      review.comment
+  );
+
+function ratingToNumber(starRating: string) {
+  const map: Record<string, number> = {
+    ONE: 1,
+    TWO: 2,
+    THREE: 3,
+    FOUR: 4,
+    FIVE: 5,
+  };
+
+  return map[starRating] || 0;
+}
+
+function renderStars(starRating: string) {
+  const rating = ratingToNumber(starRating);
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+}
+
+const reviewLang = isEN ? 'en' : 'bg';
+
 const googleReviewsUrl = "https://g.page/r/CdqG6cGsgqQzEBM/review/";
+
+const desktopReviews = reviews.slice(0, 3).map((review) => {
+  const text = getLocalizedReviewComment(review.comment, reviewLang);
+  const { preview, isTruncated } = truncateReviewText(text);
+
+  return {
+    authorName: review.reviewer.displayName || 'Google User',
+    date: formatReviewDate(review.createTime, reviewLang),
+    stars: renderStars(review.starRating),
+    starRating: ratingToNumber(review.starRating),
+    text,
+    preview,
+    isTruncated,
+  };
+});
+
+const mobileReviews = reviews
+  .slice(0, 4)
+  .map(review => ({
+    authorName: review.reviewer.displayName || 'Google User',
+    rating: ratingToNumber(review.starRating),
+    text: getLocalizedReviewComment(review.comment, reviewLang),
+    date: formatReviewDate(review.createTime, reviewLang),
+    url: googleReviewsUrl,
+  }));
 
 const initialReviewText = isEN
   ? 'Loading latest Google reviews...'
@@ -284,11 +344,71 @@ const allServices = [
             </div>
           </div>
           
-          <div id="desktop-reviews-grid" class="grid md:grid-cols-3 gap-4"></div>
+          <div id="desktop-reviews-grid" class="grid md:grid-cols-3 gap-4 items-start">
+          {
+            desktopReviews.map((review) => (
+              <article class="hero-review-card bg-gray-50 p-4 rounded-lg shadow-sm flex flex-col self-start w-full">
+                <div class="flex justify-between items-start mb-3 gap-3">
+                  <div>
+                    <h3 class="font-semibold text-gray-900 font-heading">
+                      {review.authorName}
+                    </h3>
 
-          <div id="desktop-reviews-empty" class="hidden text-center text-sm text-gray-600 mt-2">
-            {isEN ? 'No positive reviews available right now.' : 'В момента няма налични положителни отзиви.'}
-          </div>
+                    <p class="text-sm text-gray-500">
+                      {review.date}
+                    </p>
+                  </div>
+
+                  <p
+                    class="text-yellow-600 font-semibold text-sm"
+                    aria-label={`${review.starRating} stars`}
+                  >
+                    {review.stars}
+                  </p>
+                </div>
+
+                <div class="flex-grow">
+                  {review.isTruncated ? (
+                    <div class="hero-review-body">
+                      <p class="hero-review-short text-gray-800 font-heading">{review.preview}</p>
+                      <p class="hero-review-full text-gray-800 font-heading" hidden>{review.text}</p>
+                      <button
+                        type="button"
+                        class="hero-review-toggle mt-2 text-left text-sm font-medium text-primary hover:text-primary-dark transition-colors"
+                        aria-expanded="false"
+                      >
+                        {isEN ? 'Read more' : 'Прочети повече'}
+                      </button>
+                    </div>
+                  ) : (
+                    <p class="text-gray-800 font-heading">{review.text}</p>
+                  )}
+                </div>
+
+                <div class="mt-3 pt-3 border-t border-gray-200">
+                  <a
+                    href={googleReviewsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 font-heading"
+                  >
+                    {isEN ? 'Open in Google' : 'Отвори в Google'}
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        {
+          reviews.length === 0 && (
+            <div class="text-center text-sm text-gray-600 mt-2">
+              {isEN
+                ? 'No positive reviews available right now.'
+                : 'В момента няма налични положителни отзиви.'}
+            </div>
+          )
+        }
 
           <!-- Google Reviews CTA for Desktop - Updated for phone-only -->
           <div class="mt-6 pt-6 border-t border-gray-200">
@@ -482,250 +602,89 @@ const allServices = [
   a, button {
     transition: all 0.2s ease-in-out;
   }
+
+  .hero-review-full[hidden] {
+    display: none;
+  }
 </style>
 
-<script>
+<script define:vars={{ mobileReviews, readMoreLabel: isEN ? 'Read more' : 'Прочети повече', readLessLabel: isEN ? 'Show less' : 'Виж по-малко' }}>
   document.addEventListener('DOMContentLoaded', () => {
-    type GoogleReviewItem = {
-      authorName?: string;
-      rating?: number;
-      text?: string;
-      relativePublishTimeDescription?: string;
-      publishTime?: string;
-      originalUrl?: string;
-    };
 
-    const isEN = document.documentElement.lang?.toLowerCase().startsWith('en');
-    const defaultGoogleReviewUrl = 'https://g.page/r/CdqG6cGsgqQzEBM/review/';
-    const labels = {
-      source: isEN ? 'Open in Google' : 'Отвори в Google',
-      noReviews: isEN ? 'No positive reviews available right now.' : 'В момента няма налични положителни отзиви.',
-      loading: isEN ? 'Loading latest Google reviews...' : 'Зареждане на най-новите Google отзиви...',
-    };
+    const reviewsGrid = document.getElementById('desktop-reviews-grid');
 
-    const fallbackReviews: GoogleReviewItem[] = isEN
-      ? [
-          {
-            authorName: 'Velizar Dimov',
-            rating: 5,
-            text: 'Very satisfied! They reacted immediately, were very competent, and solved the dishwasher issue quickly. Big thanks to the team!',
-            relativePublishTimeDescription: 'June 2025',
-            originalUrl: defaultGoogleReviewUrl,
-          },
-          {
-            authorName: 'Martin Ivanov',
-            rating: 5,
-            text: 'I had a boiler problem. Mr. Ivanov responded the next day and fixed the issue quickly. I recommend them!',
-            relativePublishTimeDescription: 'June 2025',
-            originalUrl: defaultGoogleReviewUrl,
-          },
-          {
-            authorName: 'Desislava Zlateva',
-            rating: 5,
-            text: 'Quality and fast service. Highly recommended!',
-            relativePublishTimeDescription: 'June 2025',
-            originalUrl: defaultGoogleReviewUrl,
-          },
-          {
-            authorName: 'Elena Stoyanova',
-            rating: 5,
-            text: 'Perfect service! They arrived on time, diagnosed the issue quickly, and fixed it on-site. My washing machine works like new.',
-            relativePublishTimeDescription: 'June 2025',
-            originalUrl: defaultGoogleReviewUrl,
-          },
-        ]
-      : [
-          {
-            authorName: 'Велизар Димов',
-            rating: 5,
-            text: 'Много много доволен ! Реагираха мигновенно, супер компетентни, проблема беше решен със съдомиялната машина. Жената доволна, аз спокоен. Огромно благодаря на екипа!',
-            relativePublishTimeDescription: 'юни 2025',
-            originalUrl: defaultGoogleReviewUrl,
-          },
-          {
-            authorName: 'Мартин Иванов',
-            rating: 5,
-            text: 'Имах проблем с бойлера. След като се обадих, на другия ден г-н Н. Иванов се отзова и бързо отстрани повредата. Препоръчвам!',
-            relativePublishTimeDescription: 'юни 2025',
-            originalUrl: defaultGoogleReviewUrl,
-          },
-          {
-            authorName: 'Десислава Златева',
-            rating: 5,
-            text: 'Качествено и бързо обслужване! Препоръчвам!',
-            relativePublishTimeDescription: 'юни 2025',
-            originalUrl: defaultGoogleReviewUrl,
-          },
-          {
-            authorName: 'Елена Стоянова',
-            rating: 5,
-            text: 'Перфектно обслужване! Дойдоха в уговореното време, диагностицираха проблема бързо и го решиха на място. Пералнята работи като нова.',
-            relativePublishTimeDescription: 'юни 2025',
-            originalUrl: defaultGoogleReviewUrl,
-          },
-        ];
+    reviewsGrid?.addEventListener('click', (event) => {
+      const toggle = event.target.closest('.hero-review-toggle');
+      if (!toggle) return;
 
-    const desktopGrid = document.getElementById('desktop-reviews-grid');
-    const desktopEmpty = document.getElementById('desktop-reviews-empty');
+      const card = toggle.closest('.hero-review-card');
+      if (!card) return;
+
+      const shortText = card.querySelector('.hero-review-short');
+      const fullText = card.querySelector('.hero-review-full');
+      if (!shortText || !fullText) return;
+
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+
+      if (expanded) {
+        shortText.hidden = false;
+        fullText.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = readMoreLabel;
+      } else {
+        shortText.hidden = true;
+        fullText.hidden = false;
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.textContent = readLessLabel;
+      }
+    });
+
     const nameElement = document.getElementById('review-name');
     const dateElement = document.getElementById('review-date');
     const textElement = document.getElementById('review-text');
     const reviewLink = document.getElementById('review-link');
+
     const prevButton = document.getElementById('review-prev');
     const nextButton = document.getElementById('review-next');
     const dotsContainer = document.getElementById('review-dots');
 
-    let currentIndex = 0;
-    let reviews: GoogleReviewItem[] = [];
-
-    function escapeHtml(value: unknown) {
-      return String(value || '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
-    }
-
-    function formatDate(review: GoogleReviewItem) {
-      if (review.relativePublishTimeDescription) {
-        return review.relativePublishTimeDescription;
-      }
-
-      if (!review.publishTime) {
-        return '';
-      }
-
-      const date = new Date(review.publishTime);
-      if (Number.isNaN(date.getTime())) {
-        return '';
-      }
-
-      return new Intl.DateTimeFormat(isEN ? 'en' : 'bg-BG', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-      }).format(date);
-    }
-
-    function renderDesktop(reviewItems: GoogleReviewItem[]) {
-      if (!desktopGrid || !desktopEmpty) {
-        return;
-      }
-
-      desktopGrid.innerHTML = '';
-
-      if (!reviewItems.length) {
-        desktopEmpty.classList.remove('hidden');
-        desktopEmpty.textContent = labels.noReviews;
-        return;
-      }
-
-      desktopEmpty.classList.add('hidden');
-      const topThree = reviewItems.slice(0, 3);
-
-      desktopGrid.innerHTML = topThree
-        .map((review: GoogleReviewItem) => {
-          const stars = '★'.repeat(Math.max(0, Math.min(5, Number(review.rating || 0))));
-          return `
-            <article class="bg-gray-50 p-4 rounded-lg shadow-sm">
-              <div class="flex justify-between items-start mb-3 gap-3">
-                <div>
-                  <h3 class="font-semibold text-gray-900 font-heading">${escapeHtml(review.authorName || 'Google user')}</h3>
-                  <p class="text-sm text-gray-500">${escapeHtml(formatDate(review))}</p>
-                </div>
-                <p class="text-yellow-600 font-semibold text-sm" aria-label="${escapeHtml(`${review.rating || 0} stars`)}">${escapeHtml(stars)}</p>
-              </div>
-              <p class="text-gray-800 font-heading">${escapeHtml(review.text)}</p>
-              <div class="mt-3 pt-3 border-t border-gray-200">
-                <a href="${escapeHtml(review.originalUrl || defaultGoogleReviewUrl)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 font-heading">
-                  ${escapeHtml(labels.source)}
-                </a>
-              </div>
-            </article>
-          `;
-        })
-        .join('');
-    }
+    let current = 0;
 
     function renderDots() {
-      if (!dotsContainer) {
-        return;
-      }
-
-      dotsContainer.innerHTML = reviews
-        .map((_, index) => {
-          const base = 'review-dot w-2 h-2 rounded-full';
-          const color = index === currentIndex ? 'bg-primary' : 'bg-gray-300';
-          return `<span class="${base} ${color}"></span>`;
-        })
+      dotsContainer.innerHTML = mobileReviews
+        .map((_, i) => `
+          <span
+            class="w-2 h-2 rounded-full ${
+              i === current ? 'bg-primary' : 'bg-gray-300'
+            }">
+          </span>
+        `)
         .join('');
     }
 
-    function renderCurrentMobile() {
-      const review = reviews[currentIndex];
-      if (!review || !nameElement || !dateElement || !textElement || !reviewLink) {
-        return;
-      }
+    function render() {
 
-      nameElement.textContent = review.authorName || 'Google user';
-      dateElement.textContent = formatDate(review);
-      textElement.textContent = review.text || labels.loading;
-      reviewLink.setAttribute('href', review.originalUrl || defaultGoogleReviewUrl);
+      const review = mobileReviews[current];
+
+      nameElement.textContent = review.authorName;
+      dateElement.textContent = review.date;
+      textElement.textContent = review.text;
+      reviewLink.href = review.url;
+
       renderDots();
     }
 
-    function navigate(direction: number) {
-      if (!reviews.length) {
-        return;
-      }
+    prevButton?.addEventListener('click', () => {
+      current = (current - 1 + mobileReviews.length) % mobileReviews.length;
+      render();
+    });
 
-      currentIndex = (currentIndex + direction + reviews.length) % reviews.length;
-      renderCurrentMobile();
-    }
+    nextButton?.addEventListener('click', () => {
+      current = (current + 1) % mobileReviews.length;
+      render();
+    });
 
-    if (prevButton) {
-      prevButton.addEventListener('click', () => navigate(-1));
-    }
+    render();
 
-    if (nextButton) {
-      nextButton.addEventListener('click', () => navigate(1));
-    }
-
-    async function loadReviews() {
-      try {
-        const response = await fetch(`/.netlify/functions/gbp-reviews?lang=${isEN ? 'en' : 'bg'}`);
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const payload = await response.json();
-        reviews = Array.isArray(payload.reviews)
-          ? payload.reviews.filter((item: GoogleReviewItem) => Number(item.rating || 0) >= 4 && item.text)
-          : [];
-
-        renderDesktop(reviews);
-
-        if (!reviews.length) {
-          reviews = fallbackReviews;
-          renderDesktop(reviews);
-          currentIndex = 0;
-          if (reviewLink) reviewLink.setAttribute('href', payload.placeUrl || defaultGoogleReviewUrl);
-          renderCurrentMobile();
-          return;
-        }
-
-        currentIndex = 0;
-        renderCurrentMobile();
-      } catch (error) {
-        reviews = fallbackReviews;
-        renderDesktop(reviews);
-        currentIndex = 0;
-        renderCurrentMobile();
-        if (reviewLink) reviewLink.setAttribute('href', defaultGoogleReviewUrl);
-      }
-    }
-
-    loadReviews();
   });
 </script>

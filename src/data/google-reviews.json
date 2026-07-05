@@ -1,0 +1,2347 @@
+{
+  "syncedAt": "2026-06-28T18:41:41.152Z",
+  "totalReviews": 81,
+  "accounts": [
+    {
+      "name": "accounts/110736349932411984459",
+      "accountName": "Doroteya Garbachkova",
+      "type": "PERSONAL",
+      "locations": [
+        {
+          "name": "locations/12353870598532082839",
+          "title": "РотоРем - Варна",
+          "placeId": "ChIJhd9sC_36P6kR2obpwayCpDM",
+          "mapsUri": "https://maps.google.com/maps?cid=3721242870614165210",
+          "newReviewUri": "https://search.google.com/local/writereview?placeid=ChIJhd9sC_36P6kR2obpwayCpDM",
+          "websiteUri": "https://www.rotorem.bg/services/",
+          "phone": "089 834 0982",
+          "totalReviews": 81,
+          "reviews": [
+            {
+              "reviewId": "AbFvOql9VJBh_nzaSgJayzGGLOJDrESzKbine7Aw2O9IKzDFlkUQurkRdKCETAhP_t9Jqj1mBpe9MA",
+              "reviewer": {
+                "displayName": "vanina",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWj5buCjUj2QBUmzm4gOfXXiJwonPg-YbM00T0nNRkWe5GPGnA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много съм доволна от услугата. Фурната ни Whirlpool започна да събаря предпазителя на апартамента и не можехме да я използваме нормално. Обадихме се на РотоРем и майсторът дойде на адрес във Варна, кв. Чайка.\n\nСлед проверка установи, че проблемът е в долния нагревател. Смени го на място и след ремонта фурната вече работи нормално, без да изключва тока.\n\nКоректно отношение, бърза реакция и добре свършена работа. Препоръчвам!\n❤️\n\n(Translated by Google)\nI am very pleased with the service. Our Whirlpool oven started to blow the fuse in the apartment and we could not use it normally. We called RotoRem and the master came to the address in Varna, Chaika district.\n\nAfter checking, he found that the problem was in the lower heater. He replaced it on the spot and after the repair, the oven is now working normally, without turning off the power.\n\nCorrect attitude, quick response and a job well done. I recommend!\n❤️",
+              "createTime": "2026-06-27T11:30:36.514720Z",
+              "updateTime": "2026-06-27T11:30:36.514720Z",
+              "reviewReply": {
+                "comment": "Благодарим за споделеното мнение и високата оценка :)",
+                "updateTime": "2026-06-28T11:14:16.622915Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOql9VJBh_nzaSgJayzGGLOJDrESzKbine7Aw2O9IKzDFlkUQurkRdKCETAhP_t9Jqj1mBpe9MA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWj5buCjUj2QBUmzm4gOfXXiJwonPg-YbM00T0nNRkWe5GPGnA=s120-c-rp-mo-br100",
+                  "displayName": "vanina"
+                },
+                "starRating": "FIVE",
+                "comment": "Много съм доволна от услугата. Фурната ни Whirlpool започна да събаря предпазителя на апартамента и не можехме да я използваме нормално. Обадихме се на РотоРем и майсторът дойде на адрес във Варна, кв. Чайка.\n\nСлед проверка установи, че проблемът е в долния нагревател. Смени го на място и след ремонта фурната вече работи нормално, без да изключва тока.\n\nКоректно отношение, бърза реакция и добре свършена работа. Препоръчвам!\n❤️\n\n(Translated by Google)\nI am very pleased with the service. Our Whirlpool oven started to blow the fuse in the apartment and we could not use it normally. We called RotoRem and the master came to the address in Varna, Chaika district.\n\nAfter checking, he found that the problem was in the lower heater. He replaced it on the spot and after the repair, the oven is now working normally, without turning off the power.\n\nCorrect attitude, quick response and a job well done. I recommend!\n❤️",
+                "createTime": "2026-06-27T11:30:36.514720Z",
+                "updateTime": "2026-06-27T11:30:36.514720Z",
+                "reviewReply": {
+                  "comment": "Благодарим за споделеното мнение и високата оценка :)",
+                  "updateTime": "2026-06-28T11:14:16.622915Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOql9VJBh_nzaSgJayzGGLOJDrESzKbine7Aw2O9IKzDFlkUQurkRdKCETAhP_t9Jqj1mBpe9MA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnDJl7Zdj_eObV6hqDy1GuSZvOpEFppyhRNd4faMWvI2XjacyBBTEd7kByCprnM5BnEhio3",
+              "reviewer": {
+                "displayName": "Kaloyan Dimitrov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKaWgRY6-dGZyzXMqGDu5uFgIQlsiGfivbpBsNtJvmqSqyvn7Y=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много съм доволен от посещението на РотоРем. Фурната ми Samsung нямаше никакви индикации и не работеше изобщо. Техникът дойде във Варна, кв. Възраждане, направи диагностика и установи, че проблемът е в основната платка. Обясни ми спокойно какъв е вариантът за ремонт и какво би струвало, без да ме притиска. В крайна сметка реших да не ремонтирам уреда, но останах с много добро впечатление от коректното отношение, точната диагностика и професионалния подход. Препоръчвам РотоРем!\n\n(Translated by Google)\nI am very pleased with the visit to RotoRem. My Samsung oven had no indications and was not working at all. The technician came to Varna, Vazrazhdane district, performed diagnostics and found that the problem was in the main circuit board. He calmly explained to me what the repair option was and what it would cost, without pressuring me. In the end, I decided not to repair the appliance, but I was left with a very good impression of the correct attitude, accurate diagnostics and professional approach. I recommend RotoRem!",
+              "createTime": "2026-06-26T06:29:06.094144Z",
+              "updateTime": "2026-06-26T06:29:06.094144Z",
+              "reviewReply": {
+                "comment": "Благодарим ви за високата оценка.За нас е приоритет всеки клиент да получи точна диагностика и качествено изпълнение на услугата.Радваме се,че сте останали доволни от работата на нашия сервиз в град Варна.",
+                "updateTime": "2026-06-26T07:53:02.921968Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnDJl7Zdj_eObV6hqDy1GuSZvOpEFppyhRNd4faMWvI2XjacyBBTEd7kByCprnM5BnEhio3",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKaWgRY6-dGZyzXMqGDu5uFgIQlsiGfivbpBsNtJvmqSqyvn7Y=s120-c-rp-mo-br100",
+                  "displayName": "Kaloyan Dimitrov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много съм доволен от посещението на РотоРем. Фурната ми Samsung нямаше никакви индикации и не работеше изобщо. Техникът дойде във Варна, кв. Възраждане, направи диагностика и установи, че проблемът е в основната платка. Обясни ми спокойно какъв е вариантът за ремонт и какво би струвало, без да ме притиска. В крайна сметка реших да не ремонтирам уреда, но останах с много добро впечатление от коректното отношение, точната диагностика и професионалния подход. Препоръчвам РотоРем!\n\n(Translated by Google)\nI am very pleased with the visit to RotoRem. My Samsung oven had no indications and was not working at all. The technician came to Varna, Vazrazhdane district, performed diagnostics and found that the problem was in the main circuit board. He calmly explained to me what the repair option was and what it would cost, without pressuring me. In the end, I decided not to repair the appliance, but I was left with a very good impression of the correct attitude, accurate diagnostics and professional approach. I recommend RotoRem!",
+                "createTime": "2026-06-26T06:29:06.094144Z",
+                "updateTime": "2026-06-26T06:29:06.094144Z",
+                "reviewReply": {
+                  "comment": "Благодарим ви за високата оценка.За нас е приоритет всеки клиент да получи точна диагностика и качествено изпълнение на услугата.Радваме се,че сте останали доволни от работата на нашия сервиз в град Варна.",
+                  "updateTime": "2026-06-26T07:53:02.921968Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnDJl7Zdj_eObV6hqDy1GuSZvOpEFppyhRNd4faMWvI2XjacyBBTEd7kByCprnM5BnEhio3"
+              }
+            },
+            {
+              "reviewId": "AbFvOqms1sateJvbUxQxFKrVfw2xmwgsklCwF47kqw_uR7M7uYYuuN56dAJ6HAiANjFN437a8x8Jyg",
+              "reviewer": {
+                "displayName": "Ivo Yordanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUIjUXQdJBh2KLdbDS5_h6-M6sXZNI654DEKUbACPV-QKylGXzo=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много съм доволен от услугата на РотоРем - Варна. Имах проблем със съдомиялна Bosch, в град Варна, която показваше грешка E19 и не работеше нормално. Техникът реагира бързо, обясни ми какъв е проблемът и извърши ремонта професионално и коректно. Съдомиялната вече работи отлично. Препоръчвам РотоРем за ремонт на съдомиялни и домакински електроуреди.\n\n(Translated by Google)\nI am very satisfied with the service of RotoRem - Varna. I had a problem with a Bosch dishwasher in the city of Varna, which showed an error E19 and was not working normally. The technician responded quickly, explained to me what the problem was and carried out the repair professionally and correctly. The dishwasher is now working perfectly. I recommend RotoRem for the repair of dishwashers and household appliances.",
+              "createTime": "2026-06-18T15:35:59.351178Z",
+              "updateTime": "2026-06-18T15:35:59.351178Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата оценка .",
+                "updateTime": "2026-06-18T16:37:50.323501Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqms1sateJvbUxQxFKrVfw2xmwgsklCwF47kqw_uR7M7uYYuuN56dAJ6HAiANjFN437a8x8Jyg",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUIjUXQdJBh2KLdbDS5_h6-M6sXZNI654DEKUbACPV-QKylGXzo=s120-c-rp-mo-br100",
+                  "displayName": "Ivo Yordanov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много съм доволен от услугата на РотоРем - Варна. Имах проблем със съдомиялна Bosch, в град Варна, която показваше грешка E19 и не работеше нормално. Техникът реагира бързо, обясни ми какъв е проблемът и извърши ремонта професионално и коректно. Съдомиялната вече работи отлично. Препоръчвам РотоРем за ремонт на съдомиялни и домакински електроуреди.\n\n(Translated by Google)\nI am very satisfied with the service of RotoRem - Varna. I had a problem with a Bosch dishwasher in the city of Varna, which showed an error E19 and was not working normally. The technician responded quickly, explained to me what the problem was and carried out the repair professionally and correctly. The dishwasher is now working perfectly. I recommend RotoRem for the repair of dishwashers and household appliances.",
+                "createTime": "2026-06-18T15:35:59.351178Z",
+                "updateTime": "2026-06-18T15:35:59.351178Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата оценка .",
+                  "updateTime": "2026-06-18T16:37:50.323501Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqms1sateJvbUxQxFKrVfw2xmwgsklCwF47kqw_uR7M7uYYuuN56dAJ6HAiANjFN437a8x8Jyg"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlUXcKeSnEYOqzJ3mVc708j4dHwoWIuhpPc9Q8dnZALpHwo3SDCedjSRoqbFQ8OqG_C1P3Bug",
+              "reviewer": {
+                "displayName": "Tsvetomir I",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocL-_vp_iys4pXJBVxR5WyLmUkv84-mgEhp0Fyk3ld6Bl0FTQA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Пералнята ми AEG спря да пълни вода и се обърнах към РотоРем. Адресът беше в района около ВиК във Варна. Техникът дойде навреме, установи проблема и го отстрани бързо и професионално. Много коректно отношение и ясна комуникация. Пералнята вече работи отлично. Препоръчвам!\n\n(Translated by Google)\nMy AEG washing machine stopped filling with water and I contacted RotoRem. The address was in the area around the Waterworks in Varna. The technician arrived on time, identified the problem and fixed it quickly and professionally. Very correct attitude and clear communication. The washing machine is now working perfectly. I recommend!",
+              "createTime": "2026-06-17T17:14:45.813630Z",
+              "updateTime": "2026-06-17T17:14:45.813630Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата оценка и дадената от вас обратна връзка.",
+                "updateTime": "2026-06-17T17:19:41.016615Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlUXcKeSnEYOqzJ3mVc708j4dHwoWIuhpPc9Q8dnZALpHwo3SDCedjSRoqbFQ8OqG_C1P3Bug",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocL-_vp_iys4pXJBVxR5WyLmUkv84-mgEhp0Fyk3ld6Bl0FTQA=s120-c-rp-mo-br100",
+                  "displayName": "Tsvetomir I"
+                },
+                "starRating": "FIVE",
+                "comment": "Пералнята ми AEG спря да пълни вода и се обърнах към РотоРем. Адресът беше в района около ВиК във Варна. Техникът дойде навреме, установи проблема и го отстрани бързо и професионално. Много коректно отношение и ясна комуникация. Пералнята вече работи отлично. Препоръчвам!\n\n(Translated by Google)\nMy AEG washing machine stopped filling with water and I contacted RotoRem. The address was in the area around the Waterworks in Varna. The technician arrived on time, identified the problem and fixed it quickly and professionally. Very correct attitude and clear communication. The washing machine is now working perfectly. I recommend!",
+                "createTime": "2026-06-17T17:14:45.813630Z",
+                "updateTime": "2026-06-17T17:14:45.813630Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата оценка и дадената от вас обратна връзка.",
+                  "updateTime": "2026-06-17T17:19:41.016615Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlUXcKeSnEYOqzJ3mVc708j4dHwoWIuhpPc9Q8dnZALpHwo3SDCedjSRoqbFQ8OqG_C1P3Bug"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnSvmOQWGTw3OLMVF9-V0J3sZ_FRmyWmOSPJ4B_xeSVmlRndEiyKdIU0COfUae-gfjfzKY_kw",
+              "reviewer": {
+                "displayName": "Ekaterina Dimitrova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJ2utIOfVnW_HdNZ2EXIqI6srcxJqnj9xTJlwCcuTgQu_RQ5g=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Препоръчвам РотоРем - Варна при нужда от ремонт на сушилни, перални, съдомиялни и др. Възхитих се от бързата реакция, диагностиката, ремонта, отношението! Работят много професионално и коректно!\n\n(Translated by Google)\nI recommend RotoRem - Varna when you need repairs for dryers, washing machines, dishwashers, etc. I was impressed by the quick response, diagnostics, repairs, and attitude! They work very professionally and correctly!",
+              "createTime": "2026-06-12T07:44:14.822716Z",
+              "updateTime": "2026-06-12T07:44:14.822716Z",
+              "reviewReply": {
+                "comment": "Благодарим Ви за доверието в услугите на РотоРем.Радваме се,че посещението на наш техник в град Варна е било полезно за вас.Оставаме на разположение при нужда от бъдещо съдействие с вашите електроуреди.",
+                "updateTime": "2026-06-13T07:03:01.492715Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnSvmOQWGTw3OLMVF9-V0J3sZ_FRmyWmOSPJ4B_xeSVmlRndEiyKdIU0COfUae-gfjfzKY_kw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJ2utIOfVnW_HdNZ2EXIqI6srcxJqnj9xTJlwCcuTgQu_RQ5g=s120-c-rp-mo-br100",
+                  "displayName": "Ekaterina Dimitrova"
+                },
+                "starRating": "FIVE",
+                "comment": "Препоръчвам РотоРем - Варна при нужда от ремонт на сушилни, перални, съдомиялни и др. Възхитих се от бързата реакция, диагностиката, ремонта, отношението! Работят много професионално и коректно!\n\n(Translated by Google)\nI recommend RotoRem - Varna when you need repairs for dryers, washing machines, dishwashers, etc. I was impressed by the quick response, diagnostics, repairs, and attitude! They work very professionally and correctly!",
+                "createTime": "2026-06-12T07:44:14.822716Z",
+                "updateTime": "2026-06-12T07:44:14.822716Z",
+                "reviewReply": {
+                  "comment": "Благодарим Ви за доверието в услугите на РотоРем.Радваме се,че посещението на наш техник в град Варна е било полезно за вас.Оставаме на разположение при нужда от бъдещо съдействие с вашите електроуреди.",
+                  "updateTime": "2026-06-13T07:03:01.492715Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnSvmOQWGTw3OLMVF9-V0J3sZ_FRmyWmOSPJ4B_xeSVmlRndEiyKdIU0COfUae-gfjfzKY_kw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkK-p-brEGe4ugaN1bS6O-v6O4jGyw-4lrHTUQMXhT1cyDXZMC9dd5fhR3a9ZAtThFtfLqa",
+              "reviewer": {
+                "displayName": "Krasimira Deneva",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWgj2bQno5PDlWv9BSoJJjDI1Zh6u7ZdtmVUx9xijYMG8iT-0qB=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Доволна съм!Обадих се за сушилня Грундиг,издаваща ужасен шум по време на работа.Служителят за гр.Варна се отзова бързо и направи точна диагностика.Съобрази се с работното ми време и за два работни дни имах разрешен проблем!Благодаря!\n\n(Translated by Google)\nI am satisfied! I called about a Grundig dryer that was making a terrible noise while working. The employee for the city of Varna responded quickly and made an accurate diagnosis. He respected my working hours and in two working days I had the problem resolved! Thank you!",
+              "createTime": "2026-06-11T09:28:28.022938Z",
+              "updateTime": "2026-06-11T11:23:01.308679Z",
+              "reviewReply": {
+                "comment": "Благодаря за споделеното мнение и висока оценка :)",
+                "updateTime": "2026-06-11T10:35:11.494837Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqkK-p-brEGe4ugaN1bS6O-v6O4jGyw-4lrHTUQMXhT1cyDXZMC9dd5fhR3a9ZAtThFtfLqa",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWgj2bQno5PDlWv9BSoJJjDI1Zh6u7ZdtmVUx9xijYMG8iT-0qB=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Krasimira Deneva"
+                },
+                "starRating": "FIVE",
+                "comment": "Доволна съм!Обадих се за сушилня Грундиг,издаваща ужасен шум по време на работа.Служителят за гр.Варна се отзова бързо и направи точна диагностика.Съобрази се с работното ми време и за два работни дни имах разрешен проблем!Благодаря!\n\n(Translated by Google)\nI am satisfied! I called about a Grundig dryer that was making a terrible noise while working. The employee for the city of Varna responded quickly and made an accurate diagnosis. He respected my working hours and in two working days I had the problem resolved! Thank you!",
+                "createTime": "2026-06-11T09:28:28.022938Z",
+                "updateTime": "2026-06-11T11:23:01.308679Z",
+                "reviewReply": {
+                  "comment": "Благодаря за споделеното мнение и висока оценка :)",
+                  "updateTime": "2026-06-11T10:35:11.494837Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkK-p-brEGe4ugaN1bS6O-v6O4jGyw-4lrHTUQMXhT1cyDXZMC9dd5fhR3a9ZAtThFtfLqa"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlq-2GwJrGZpZe8DBhQd0ZCUQN-aNV0oWWv1g4Mq8U1x6_SOKq913bnvkdunjpAipiv8cDAQw",
+              "reviewer": {
+                "displayName": "Генриетта Димитрова",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVbHCUEHkhGkgXb8AbB-0h8rbjN2qjg075dM0ZE4pz3HGqv_rAN=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Изключително съм доволна от обслужването! Реакцията беше много бърза, а ремонтът на съдомиялнята беше извършен изцяло още в деня на повикването. Проблемът беше диагностициран професионално и отстранен качествено.\n\nОсобено впечатление ми направи, че техникът подробно обясни причината за повредата и ми даде полезни съвети как да предотвратя подобни проблеми в бъдеще. Рядко се среща такова отношение към клиента: не само ремонт, а и реална грижа и консултация.\n\nПрепоръчвам с удоволствие на всеки, който търси коректен, компетентен и бърз сервиз!\n\n(Translated by Google)\nI am extremely satisfied with the service! The response was very fast, and the dishwasher repair was completed on the day of the call. The problem was diagnosed professionally and repaired qualitatively.\n\nI was particularly impressed that the technician explained in detail the cause of the damage and gave me useful advice on how to prevent similar problems in the future. Such an attitude towards the customer is rare: not just a repair, but also real care and consultation.\n\nI would gladly recommend it to anyone looking for a correct, competent and fast service!",
+              "createTime": "2026-06-05T04:22:42.662174Z",
+              "updateTime": "2026-06-05T04:22:42.662174Z",
+              "reviewReply": {
+                "comment": "Благодарим Ви за доверието в услугите на РотоРем. Радваме се, че посещението на наш техник в град  Варна е било полезно за Вас. Оставаме на разположение при нужда от бъдещо съдействие с Вашите електроуреди.\n",
+                "updateTime": "2026-06-05T09:54:44.275501Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlq-2GwJrGZpZe8DBhQd0ZCUQN-aNV0oWWv1g4Mq8U1x6_SOKq913bnvkdunjpAipiv8cDAQw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVbHCUEHkhGkgXb8AbB-0h8rbjN2qjg075dM0ZE4pz3HGqv_rAN=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Генриетта Димитрова"
+                },
+                "starRating": "FIVE",
+                "comment": "Изключително съм доволна от обслужването! Реакцията беше много бърза, а ремонтът на съдомиялнята беше извършен изцяло още в деня на повикването. Проблемът беше диагностициран професионално и отстранен качествено.\n\nОсобено впечатление ми направи, че техникът подробно обясни причината за повредата и ми даде полезни съвети как да предотвратя подобни проблеми в бъдеще. Рядко се среща такова отношение към клиента: не само ремонт, а и реална грижа и консултация.\n\nПрепоръчвам с удоволствие на всеки, който търси коректен, компетентен и бърз сервиз!\n\n(Translated by Google)\nI am extremely satisfied with the service! The response was very fast, and the dishwasher repair was completed on the day of the call. The problem was diagnosed professionally and repaired qualitatively.\n\nI was particularly impressed that the technician explained in detail the cause of the damage and gave me useful advice on how to prevent similar problems in the future. Such an attitude towards the customer is rare: not just a repair, but also real care and consultation.\n\nI would gladly recommend it to anyone looking for a correct, competent and fast service!",
+                "createTime": "2026-06-05T04:22:42.662174Z",
+                "updateTime": "2026-06-05T04:22:42.662174Z",
+                "reviewReply": {
+                  "comment": "Благодарим Ви за доверието в услугите на РотоРем. Радваме се, че посещението на наш техник в град  Варна е било полезно за Вас. Оставаме на разположение при нужда от бъдещо съдействие с Вашите електроуреди.\n",
+                  "updateTime": "2026-06-05T09:54:44.275501Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlq-2GwJrGZpZe8DBhQd0ZCUQN-aNV0oWWv1g4Mq8U1x6_SOKq913bnvkdunjpAipiv8cDAQw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkxEXQiCnmboSk_zrMcaj4s5o7N_6w1FS8gdB3F9Xu6imwFWjsobk6ch28v5OVjNOgJoYqGUw",
+              "reviewer": {
+                "displayName": "Dimitar Dimitrov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUykyS2ZhDNtKgufxXHL8LSSn_wl2OB1yEeR9sUnSeUvCxbYqzG=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много съм доволен от Росен . Въпреки , че графикът му беше запълнен  успя  да дойде и да направи ремонт на бойлера. Сутринта му позвъних и след обяд  между  15.20 и 16.20 купи и смени 2 реотана . Бойлера работи перфектно.\n\n(Translated by Google)\nI am very pleased with Rosen. Even though his schedule was full, he managed to come and repair the water heater. I called him in the morning and after lunch between 15.20 and 16.20 he bought and replaced 2 radiators. The water heater works perfectly.",
+              "createTime": "2026-05-30T08:14:53.486524Z",
+              "updateTime": "2026-05-30T08:16:41.264965Z",
+              "reviewReply": {
+                "comment": "Благодарим Ви за доверието в услугите на РотоРем. Радваме се, че посещението на наш техник в град  Варна е било полезно за Вас. Оставаме на разположение при нужда от бъдещо съдействие с Вашите електроуреди.\n",
+                "updateTime": "2026-06-05T09:55:16.151053Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqkxEXQiCnmboSk_zrMcaj4s5o7N_6w1FS8gdB3F9Xu6imwFWjsobk6ch28v5OVjNOgJoYqGUw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUykyS2ZhDNtKgufxXHL8LSSn_wl2OB1yEeR9sUnSeUvCxbYqzG=s120-c-rp-mo-br100",
+                  "displayName": "Dimitar Dimitrov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много съм доволен от Росен . Въпреки , че графикът му беше запълнен  успя  да дойде и да направи ремонт на бойлера. Сутринта му позвъних и след обяд  между  15.20 и 16.20 купи и смени 2 реотана . Бойлера работи перфектно.\n\n(Translated by Google)\nI am very pleased with Rosen. Even though his schedule was full, he managed to come and repair the water heater. I called him in the morning and after lunch between 15.20 and 16.20 he bought and replaced 2 radiators. The water heater works perfectly.",
+                "createTime": "2026-05-30T08:14:53.486524Z",
+                "updateTime": "2026-05-30T08:16:41.264965Z",
+                "reviewReply": {
+                  "comment": "Благодарим Ви за доверието в услугите на РотоРем. Радваме се, че посещението на наш техник в град  Варна е било полезно за Вас. Оставаме на разположение при нужда от бъдещо съдействие с Вашите електроуреди.\n",
+                  "updateTime": "2026-06-05T09:55:16.151053Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkxEXQiCnmboSk_zrMcaj4s5o7N_6w1FS8gdB3F9Xu6imwFWjsobk6ch28v5OVjNOgJoYqGUw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnrA1_eAvqXztTpOiMAPZqnVDVAFO0r0hmrhML8OMD3J3YuSUWO0uAWPjRGKmaXbiw1CeQD",
+              "reviewer": {
+                "displayName": "Паула Петрова",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXlyIH35fKdwYvDPcphd4sXa7ki772rDU7fc3wsD8VRZB-D3C6A=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2026-05-29T14:01:00.060881Z",
+              "updateTime": "2026-05-29T14:01:00.060881Z",
+              "reviewReply": {
+                "comment": "Благодаря за високата оценка",
+                "updateTime": "2026-05-29T14:15:10.917421Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnrA1_eAvqXztTpOiMAPZqnVDVAFO0r0hmrhML8OMD3J3YuSUWO0uAWPjRGKmaXbiw1CeQD",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXlyIH35fKdwYvDPcphd4sXa7ki772rDU7fc3wsD8VRZB-D3C6A=s120-c-rp-mo-br100",
+                  "displayName": "Паула Петрова"
+                },
+                "starRating": "FIVE",
+                "createTime": "2026-05-29T14:01:00.060881Z",
+                "updateTime": "2026-05-29T14:01:00.060881Z",
+                "reviewReply": {
+                  "comment": "Благодаря за високата оценка",
+                  "updateTime": "2026-05-29T14:15:10.917421Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnrA1_eAvqXztTpOiMAPZqnVDVAFO0r0hmrhML8OMD3J3YuSUWO0uAWPjRGKmaXbiw1CeQD"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmx8haIMbXx5OpOKbDd6bPNTKp8ZJFtS-AEJuwbqq29kIf9pZityhy_SZc0n501wlpbS5mL3Q",
+              "reviewer": {
+                "displayName": "Diana Anastasova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjW-Qj7dOEG-F6_xQ5q87B29CZgjluxr1In-_kLO8XCN_JPH5Rmv=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много съм доволна. Отзоваха се бързо независимо че машината се развали по Нова Година. Диагностиката беше точна и частта беше сменена веднага. Миналата ми работи без грешка 😊. Силно препоръчвам.\n\n(Translated by Google)\nI am very pleased. They responded quickly even though the machine broke down on New Year's. The diagnosis was accurate and the part was replaced immediately. My previous one worked flawlessly 😊. I highly recommend it.",
+              "createTime": "2026-05-24T18:12:30.598479Z",
+              "updateTime": "2026-05-24T18:12:30.598479Z",
+              "reviewReply": {
+                "comment": "Благодаря за споделеното мнение и висока оценка.",
+                "updateTime": "2026-05-24T18:28:10.258733Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqmx8haIMbXx5OpOKbDd6bPNTKp8ZJFtS-AEJuwbqq29kIf9pZityhy_SZc0n501wlpbS5mL3Q",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjW-Qj7dOEG-F6_xQ5q87B29CZgjluxr1In-_kLO8XCN_JPH5Rmv=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Diana Anastasova"
+                },
+                "starRating": "FIVE",
+                "comment": "Много съм доволна. Отзоваха се бързо независимо че машината се развали по Нова Година. Диагностиката беше точна и частта беше сменена веднага. Миналата ми работи без грешка 😊. Силно препоръчвам.\n\n(Translated by Google)\nI am very pleased. They responded quickly even though the machine broke down on New Year's. The diagnosis was accurate and the part was replaced immediately. My previous one worked flawlessly 😊. I highly recommend it.",
+                "createTime": "2026-05-24T18:12:30.598479Z",
+                "updateTime": "2026-05-24T18:12:30.598479Z",
+                "reviewReply": {
+                  "comment": "Благодаря за споделеното мнение и висока оценка.",
+                  "updateTime": "2026-05-24T18:28:10.258733Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmx8haIMbXx5OpOKbDd6bPNTKp8ZJFtS-AEJuwbqq29kIf9pZityhy_SZc0n501wlpbS5mL3Q"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkQTGMjgbWkfvSdi0EySi6b4wkZLEAKaZd530T9Iyk155hef_LFG3ETRaJQTMPM96Kip6ZoLQ",
+              "reviewer": {
+                "displayName": "Дамян Димитров",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLpiQpOpfX8jIDqFi-TAFM_hQpHQvYkpIw5zqNT0RJ2gexp_Q=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2026-05-24T10:04:49.297591Z",
+              "updateTime": "2026-05-24T10:04:49.297591Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата оценка",
+                "updateTime": "2026-05-24T10:15:49.672071Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqkQTGMjgbWkfvSdi0EySi6b4wkZLEAKaZd530T9Iyk155hef_LFG3ETRaJQTMPM96Kip6ZoLQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLpiQpOpfX8jIDqFi-TAFM_hQpHQvYkpIw5zqNT0RJ2gexp_Q=s120-c-rp-mo-br100",
+                  "displayName": "Дамян Димитров"
+                },
+                "starRating": "FIVE",
+                "createTime": "2026-05-24T10:04:49.297591Z",
+                "updateTime": "2026-05-24T10:04:49.297591Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата оценка",
+                  "updateTime": "2026-05-24T10:15:49.672071Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkQTGMjgbWkfvSdi0EySi6b4wkZLEAKaZd530T9Iyk155hef_LFG3ETRaJQTMPM96Kip6ZoLQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnDEbMQR4MgsfLoI1LIi3tUK6BwykBWBJePkT6z5q2EL8PJApnYrD0O_W8rGfdNvy5XiAeKAQ",
+              "reviewer": {
+                "displayName": "Lusi Todorova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIuO7n4hOvLn5Z5pqorEIqDFWS6ewb_EwwNh6LQmXSQ0SPw0Q=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Учтиво и професионално отношение, обяснение на клиента.\n\n(Translated by Google)\nPolite and professional attitude, explanation to the client.",
+              "createTime": "2026-05-15T19:02:13.699540Z",
+              "updateTime": "2026-05-15T19:03:41.242274Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата оценка.",
+                "updateTime": "2026-05-15T19:14:48.476049Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnDEbMQR4MgsfLoI1LIi3tUK6BwykBWBJePkT6z5q2EL8PJApnYrD0O_W8rGfdNvy5XiAeKAQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIuO7n4hOvLn5Z5pqorEIqDFWS6ewb_EwwNh6LQmXSQ0SPw0Q=s120-c-rp-mo-br100",
+                  "displayName": "Lusi Todorova"
+                },
+                "starRating": "FIVE",
+                "comment": "Учтиво и професионално отношение, обяснение на клиента.\n\n(Translated by Google)\nPolite and professional attitude, explanation to the client.",
+                "createTime": "2026-05-15T19:02:13.699540Z",
+                "updateTime": "2026-05-15T19:03:41.242274Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата оценка.",
+                  "updateTime": "2026-05-15T19:14:48.476049Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnDEbMQR4MgsfLoI1LIi3tUK6BwykBWBJePkT6z5q2EL8PJApnYrD0O_W8rGfdNvy5XiAeKAQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkcHYuW_JDbMaxHrJ26dgzLlgW5hj9Dv7BxmvIHq_z4gzXnUzXG0U9n44K8tUvENG7al6eXaA",
+              "reviewer": {
+                "displayName": "Христина Иванова",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJgSxvQwUoc_CCCI1UXgKLLMA5wSgp2I_IqBkEFegPqEkMFvg=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Бързо и адекватно реагиране на проблема ми с пералнята. Благодаря!\n\n(Translated by Google)\nQuick and adequate response to my washing machine problem. Thank you!",
+              "createTime": "2026-05-11T11:12:45.382654Z",
+              "updateTime": "2026-05-11T13:08:36.364221Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата оценка и споделено мнение.",
+                "updateTime": "2026-05-11T11:46:52.185211Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqkcHYuW_JDbMaxHrJ26dgzLlgW5hj9Dv7BxmvIHq_z4gzXnUzXG0U9n44K8tUvENG7al6eXaA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJgSxvQwUoc_CCCI1UXgKLLMA5wSgp2I_IqBkEFegPqEkMFvg=s120-c-rp-mo-br100",
+                  "displayName": "Христина Иванова"
+                },
+                "starRating": "FIVE",
+                "comment": "Бързо и адекватно реагиране на проблема ми с пералнята. Благодаря!\n\n(Translated by Google)\nQuick and adequate response to my washing machine problem. Thank you!",
+                "createTime": "2026-05-11T11:12:45.382654Z",
+                "updateTime": "2026-05-11T13:08:36.364221Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата оценка и споделено мнение.",
+                  "updateTime": "2026-05-11T11:46:52.185211Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkcHYuW_JDbMaxHrJ26dgzLlgW5hj9Dv7BxmvIHq_z4gzXnUzXG0U9n44K8tUvENG7al6eXaA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkNtIARLXG3Sc-YATIVviguXpNV3K3fQL7wND5Hnj1O58N0nfdrvO-FRwrDtvX38zOShhBS",
+              "reviewer": {
+                "displayName": "Kaloyan Dimitrow",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjV3_3Bo7R7EZkXYT-QLx-wE7-D9ZTFGe_xb9pnmB8an7Ddpyko=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Изключително обслужване!\nСлужителите са точни, не губят време, захващат се за работа и си личи че разбират. Пералнята ми не искаше да тръгне, дойдоха и за по-малко от половин час свършиха работа.\nБлагодаря!\n\n(Translated by Google)\nExceptional service!\nThe employees are punctual, they don't waste time, they get down to work and it's obvious that they understand. My washing machine wouldn't start, they came and did the job in less than half an hour.\nThank you!",
+              "createTime": "2026-05-07T17:09:16.192387Z",
+              "updateTime": "2026-05-07T17:09:16.192387Z",
+              "reviewReply": {
+                "comment": "Благодаря ви много за споделеното мнение.",
+                "updateTime": "2026-05-07T17:37:19.436985Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqkNtIARLXG3Sc-YATIVviguXpNV3K3fQL7wND5Hnj1O58N0nfdrvO-FRwrDtvX38zOShhBS",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjV3_3Bo7R7EZkXYT-QLx-wE7-D9ZTFGe_xb9pnmB8an7Ddpyko=s120-c-rp-mo-br100",
+                  "displayName": "Kaloyan Dimitrow"
+                },
+                "starRating": "FIVE",
+                "comment": "Изключително обслужване!\nСлужителите са точни, не губят време, захващат се за работа и си личи че разбират. Пералнята ми не искаше да тръгне, дойдоха и за по-малко от половин час свършиха работа.\nБлагодаря!\n\n(Translated by Google)\nExceptional service!\nThe employees are punctual, they don't waste time, they get down to work and it's obvious that they understand. My washing machine wouldn't start, they came and did the job in less than half an hour.\nThank you!",
+                "createTime": "2026-05-07T17:09:16.192387Z",
+                "updateTime": "2026-05-07T17:09:16.192387Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви много за споделеното мнение.",
+                  "updateTime": "2026-05-07T17:37:19.436985Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkNtIARLXG3Sc-YATIVviguXpNV3K3fQL7wND5Hnj1O58N0nfdrvO-FRwrDtvX38zOShhBS",
+                "reviewMediaItems": [
+                  {
+                    "thumbnailUrl": "https://lh3.googleusercontent.com/grass-cs/ANxoTn1UXKwzzgxvBt-5JDEXX8l0g1iA8QkGQgixsQZHTw3qV1hJbQTOYYl4EjnCWehn8yus28uT70Wzj9iIkgT06Wn7bhn8RrBXOzQNzXgqVEjXDkGcZYg8S4s2DzCeNGWrGtD2JeIu7vuglHs=k-no"
+                  }
+                ]
+              }
+            },
+            {
+              "reviewId": "AbFvOqmx3I8vLzvPDDArMDDJ1nThjK7YSrjDExMWVfTh2uzOYQnQsOuLKiRZ0mY-HvOwR5wRhmAzHA",
+              "reviewer": {
+                "displayName": "Александър Златев",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWfKByhh-2E7_24iXARh2fLNhQsPKWUrt16eVmebtzYhPiLGEa5=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Благодаря за бързата и професионална услуга.😀\n\n(Translated by Google)\nThank you for the fast and professional service.😀",
+              "createTime": "2026-05-06T19:50:59.551986Z",
+              "updateTime": "2026-05-06T19:50:59.551986Z",
+              "reviewReply": {
+                "comment": "Благодаря за гласуваното доверие.",
+                "updateTime": "2026-05-07T05:29:03.655006Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqmx3I8vLzvPDDArMDDJ1nThjK7YSrjDExMWVfTh2uzOYQnQsOuLKiRZ0mY-HvOwR5wRhmAzHA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWfKByhh-2E7_24iXARh2fLNhQsPKWUrt16eVmebtzYhPiLGEa5=s120-c-rp-mo-br100",
+                  "displayName": "Александър Златев"
+                },
+                "starRating": "FIVE",
+                "comment": "Благодаря за бързата и професионална услуга.😀\n\n(Translated by Google)\nThank you for the fast and professional service.😀",
+                "createTime": "2026-05-06T19:50:59.551986Z",
+                "updateTime": "2026-05-06T19:50:59.551986Z",
+                "reviewReply": {
+                  "comment": "Благодаря за гласуваното доверие.",
+                  "updateTime": "2026-05-07T05:29:03.655006Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmx3I8vLzvPDDArMDDJ1nThjK7YSrjDExMWVfTh2uzOYQnQsOuLKiRZ0mY-HvOwR5wRhmAzHA",
+                "reviewMediaItems": [
+                  {
+                    "thumbnailUrl": "https://lh3.googleusercontent.com/grass-cs/ANxoTn1STFk_VIE6qFsw_eXfGJanTEiF-tSJV-OTPhAwbdlVL6ZRV1RNmYSkjA0_BNMKDppPs__cNxOQWynvlhDyp0otnuXOd-j5Rw8I-fKKGHtSX4IQHJLEWKVPmjs8bkbc983QrASqVItDw9Cg=k-no"
+                  }
+                ]
+              }
+            },
+            {
+              "reviewId": "AbFvOqlOhf-uU2jVZ9hbJ1biFcodDYwHvUffmaqcUWK7LhcR3UQHyfFY2G0pvBRmU9DRxJBAR18riw",
+              "reviewer": {
+                "displayName": "Michael Mihnev",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLVENXUM5IG-7bVvOQ32YRWo4-DKVpj-1IohJqydEGyC-dzJA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2026-04-29T15:57:16.563334Z",
+              "updateTime": "2026-04-29T16:07:01.016036Z",
+              "reviewReply": {
+                "comment": "Винаги опитваме да се в помощ на нашите клиенти.",
+                "updateTime": "2026-05-07T05:29:41.166924Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlOhf-uU2jVZ9hbJ1biFcodDYwHvUffmaqcUWK7LhcR3UQHyfFY2G0pvBRmU9DRxJBAR18riw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLVENXUM5IG-7bVvOQ32YRWo4-DKVpj-1IohJqydEGyC-dzJA=s120-c-rp-mo-br100",
+                  "displayName": "Michael Mihnev"
+                },
+                "starRating": "FIVE",
+                "createTime": "2026-04-29T15:57:16.563334Z",
+                "updateTime": "2026-04-29T16:07:01.016036Z",
+                "reviewReply": {
+                  "comment": "Винаги опитваме да се в помощ на нашите клиенти.",
+                  "updateTime": "2026-05-07T05:29:41.166924Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlOhf-uU2jVZ9hbJ1biFcodDYwHvUffmaqcUWK7LhcR3UQHyfFY2G0pvBRmU9DRxJBAR18riw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkzDGgILugsPyklc6sZSzCjAtw_iKUnGOSLct-31RWDGfC10_sdTGS2phErA3sfUQX3qRVimA",
+              "reviewer": {
+                "displayName": "Iavor Pavlov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWVj8pde4i7SuyWmQ1TAaFfLvRTo6hpkgTzH2jSGWMb6TpljK7I=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много бързо и компетентно обслужване,препоръчвам.\n\n(Translated by Google)\nVery fast and competent service, I recommend.",
+              "createTime": "2026-04-25T11:14:29.878179Z",
+              "updateTime": "2026-04-25T11:23:10.977634Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата оценка.",
+                "updateTime": "2026-05-07T05:30:23.567170Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqkzDGgILugsPyklc6sZSzCjAtw_iKUnGOSLct-31RWDGfC10_sdTGS2phErA3sfUQX3qRVimA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWVj8pde4i7SuyWmQ1TAaFfLvRTo6hpkgTzH2jSGWMb6TpljK7I=s120-c-rp-mo-br100",
+                  "displayName": "Iavor Pavlov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много бързо и компетентно обслужване,препоръчвам.\n\n(Translated by Google)\nVery fast and competent service, I recommend.",
+                "createTime": "2026-04-25T11:14:29.878179Z",
+                "updateTime": "2026-04-25T11:23:10.977634Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата оценка.",
+                  "updateTime": "2026-05-07T05:30:23.567170Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkzDGgILugsPyklc6sZSzCjAtw_iKUnGOSLct-31RWDGfC10_sdTGS2phErA3sfUQX3qRVimA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlkkqGRKz5OIXO3RPFtO4ZjlOKmteYcxtanFsLg_DNkKZE0Hqz-FnMRXYIjeqizmrS1nhf_iw",
+              "reviewer": {
+                "displayName": "Ttedystefy Georgievi",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIV0FlY2oue8PbhA4fZhe3xOluoBDQQmj9huDseAMh6X3iUmg=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Изключително експидитативно отношение !\nДва пъти ми се наложи да използвам сервизното обслужване на два различни уреди и всичко е повече от прекрасно !\nБлагодаря !\nПрепоръчвам с две ръце !\n\n(Translated by Google)\nExtremely expeditious attitude!\nI had to use the service twice on two different devices and everything was more than wonderful!\nThank you!\nI recommend with both hands!",
+              "createTime": "2026-04-24T10:11:37.353726Z",
+              "updateTime": "2026-04-24T10:11:37.353726Z",
+              "reviewReply": {
+                "comment": "Благодаря ви",
+                "updateTime": "2026-05-07T05:30:49.266232Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlkkqGRKz5OIXO3RPFtO4ZjlOKmteYcxtanFsLg_DNkKZE0Hqz-FnMRXYIjeqizmrS1nhf_iw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIV0FlY2oue8PbhA4fZhe3xOluoBDQQmj9huDseAMh6X3iUmg=s120-c-rp-mo-br100",
+                  "displayName": "Ttedystefy Georgievi"
+                },
+                "starRating": "FIVE",
+                "comment": "Изключително експидитативно отношение !\nДва пъти ми се наложи да използвам сервизното обслужване на два различни уреди и всичко е повече от прекрасно !\nБлагодаря !\nПрепоръчвам с две ръце !\n\n(Translated by Google)\nExtremely expeditious attitude!\nI had to use the service twice on two different devices and everything was more than wonderful!\nThank you!\nI recommend with both hands!",
+                "createTime": "2026-04-24T10:11:37.353726Z",
+                "updateTime": "2026-04-24T10:11:37.353726Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви",
+                  "updateTime": "2026-05-07T05:30:49.266232Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlkkqGRKz5OIXO3RPFtO4ZjlOKmteYcxtanFsLg_DNkKZE0Hqz-FnMRXYIjeqizmrS1nhf_iw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlqyiBloGZ9JAECLp2i_BaAOCKP2ZBDPgGd6rF78Eeg8oyVtifYfhjgHGEbuaTwxGhZ6vXQMA",
+              "reviewer": {
+                "displayName": "Yoanna Milkova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjV1rNTvhAiXgpVovVStcpl4LjudQBRzLHh_O5WoHJorlNXWBqrrMw=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Изключително доволна съм от услугите на РотоРем! Имах проблем с пералнята в събота вечер, свързахме се в неделя, а във вторник всичко вече беше поправено. Майсторът работи много бързо и чисто.\n\n(Translated by Google)\nI am extremely satisfied with the services of RotoRem! I had a problem with my washing machine on Saturday night, we contacted them on Sunday, and on Tuesday everything was fixed. The technician worked very quickly and cleanly.",
+              "createTime": "2026-04-21T11:39:00.558006Z",
+              "updateTime": "2026-04-21T11:39:00.558006Z",
+              "reviewReply": {
+                "comment": "Благодарим ви за споделеното мнение.Радваме се,че сме ви били полезни.",
+                "updateTime": "2026-04-21T12:26:18.301685Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlqyiBloGZ9JAECLp2i_BaAOCKP2ZBDPgGd6rF78Eeg8oyVtifYfhjgHGEbuaTwxGhZ6vXQMA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjV1rNTvhAiXgpVovVStcpl4LjudQBRzLHh_O5WoHJorlNXWBqrrMw=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Yoanna Milkova"
+                },
+                "starRating": "FIVE",
+                "comment": "Изключително доволна съм от услугите на РотоРем! Имах проблем с пералнята в събота вечер, свързахме се в неделя, а във вторник всичко вече беше поправено. Майсторът работи много бързо и чисто.\n\n(Translated by Google)\nI am extremely satisfied with the services of RotoRem! I had a problem with my washing machine on Saturday night, we contacted them on Sunday, and on Tuesday everything was fixed. The technician worked very quickly and cleanly.",
+                "createTime": "2026-04-21T11:39:00.558006Z",
+                "updateTime": "2026-04-21T11:39:00.558006Z",
+                "reviewReply": {
+                  "comment": "Благодарим ви за споделеното мнение.Радваме се,че сме ви били полезни.",
+                  "updateTime": "2026-04-21T12:26:18.301685Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlqyiBloGZ9JAECLp2i_BaAOCKP2ZBDPgGd6rF78Eeg8oyVtifYfhjgHGEbuaTwxGhZ6vXQMA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnxAc-EHQQeIM0ZED7RMkmtde1t6Ebe4u4YHyh-lnKr5EsfP-5taiXKEGJTTs7c3v7-FPW7",
+              "reviewer": {
+                "displayName": "Събина Енева",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocInk011ScB3t7T9xCzVgTFWP4TBv0O4mHuCVNdLWFaG9LXkbw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Бързо и адекватно обслужване!\n\n(Translated by Google)\nFast and adequate service!",
+              "createTime": "2026-04-19T19:15:25.017863Z",
+              "updateTime": "2026-04-19T19:17:45.738392Z",
+              "reviewReply": {
+                "comment": "Благодарим ви за високата оценка и споделено мнение.",
+                "updateTime": "2026-04-21T12:25:15.209539Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnxAc-EHQQeIM0ZED7RMkmtde1t6Ebe4u4YHyh-lnKr5EsfP-5taiXKEGJTTs7c3v7-FPW7",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocInk011ScB3t7T9xCzVgTFWP4TBv0O4mHuCVNdLWFaG9LXkbw=s120-c-rp-mo-br100",
+                  "displayName": "Събина Енева"
+                },
+                "starRating": "FIVE",
+                "comment": "Бързо и адекватно обслужване!\n\n(Translated by Google)\nFast and adequate service!",
+                "createTime": "2026-04-19T19:15:25.017863Z",
+                "updateTime": "2026-04-19T19:17:45.738392Z",
+                "reviewReply": {
+                  "comment": "Благодарим ви за високата оценка и споделено мнение.",
+                  "updateTime": "2026-04-21T12:25:15.209539Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnxAc-EHQQeIM0ZED7RMkmtde1t6Ebe4u4YHyh-lnKr5EsfP-5taiXKEGJTTs7c3v7-FPW7"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnQCatCSRzmw1IfoppR02GhFGyjOdJwc2xd2g0Ws2o9pqMLP2qu-yJ4PZJ9-gd3Jsw7sufywQ",
+              "reviewer": {
+                "displayName": "Ivaylo Ivanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJMl8t8MdqAfM5rnlv2ZUKIi2U6RXhsyieH8NdxEEK7YotfxA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Супер отзивчиви, с бърза и адекватна реакция. Препоръчвам.\n\n(Translated by Google)\nSuper responsive, with a quick and adequate response. I recommend.",
+              "createTime": "2026-04-16T17:33:53.945119Z",
+              "updateTime": "2026-04-16T17:33:53.945119Z",
+              "reviewReply": {
+                "comment": "Благодарим ви за високата оценка.За нас е приоритет всеки клиент да получи точна диагностика и качествено изпълнение на услугата.",
+                "updateTime": "2026-04-17T04:15:55.976017Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnQCatCSRzmw1IfoppR02GhFGyjOdJwc2xd2g0Ws2o9pqMLP2qu-yJ4PZJ9-gd3Jsw7sufywQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJMl8t8MdqAfM5rnlv2ZUKIi2U6RXhsyieH8NdxEEK7YotfxA=s120-c-rp-mo-br100",
+                  "displayName": "Ivaylo Ivanov"
+                },
+                "starRating": "FIVE",
+                "comment": "Супер отзивчиви, с бърза и адекватна реакция. Препоръчвам.\n\n(Translated by Google)\nSuper responsive, with a quick and adequate response. I recommend.",
+                "createTime": "2026-04-16T17:33:53.945119Z",
+                "updateTime": "2026-04-16T17:33:53.945119Z",
+                "reviewReply": {
+                  "comment": "Благодарим ви за високата оценка.За нас е приоритет всеки клиент да получи точна диагностика и качествено изпълнение на услугата.",
+                  "updateTime": "2026-04-17T04:15:55.976017Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnQCatCSRzmw1IfoppR02GhFGyjOdJwc2xd2g0Ws2o9pqMLP2qu-yJ4PZJ9-gd3Jsw7sufywQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnXHz2IumiXIgjRd8Vlk4Z_jdIc4111HIMN8WYGbgss6tCe0ZfAbEzUiAzOURP3jZo5dq8",
+              "reviewer": {
+                "displayName": "zornica petrova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocI6nosURgsHyQzpVIuZn3kQwoQdfrFwVTkPK0kA887t3uOogQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2026-04-16T10:05:15.001152Z",
+              "updateTime": "2026-04-16T10:05:15.001152Z",
+              "reviewReply": {
+                "comment": "Благодарим ви за споделеното мнение.Радваме се,че извършения ремонт на сушилнята е отговорил на очакванията ви за качество и бързина.Екипът ни в град Варна е на разположение при необходимост от други ремонти или ел.услуги.",
+                "updateTime": "2026-04-17T04:13:26.449217Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnXHz2IumiXIgjRd8Vlk4Z_jdIc4111HIMN8WYGbgss6tCe0ZfAbEzUiAzOURP3jZo5dq8",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocI6nosURgsHyQzpVIuZn3kQwoQdfrFwVTkPK0kA887t3uOogQ=s120-c-rp-mo-br100",
+                  "displayName": "zornica petrova"
+                },
+                "starRating": "FIVE",
+                "createTime": "2026-04-16T10:05:15.001152Z",
+                "updateTime": "2026-04-16T10:05:15.001152Z",
+                "reviewReply": {
+                  "comment": "Благодарим ви за споделеното мнение.Радваме се,че извършения ремонт на сушилнята е отговорил на очакванията ви за качество и бързина.Екипът ни в град Варна е на разположение при необходимост от други ремонти или ел.услуги.",
+                  "updateTime": "2026-04-17T04:13:26.449217Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnXHz2IumiXIgjRd8Vlk4Z_jdIc4111HIMN8WYGbgss6tCe0ZfAbEzUiAzOURP3jZo5dq8"
+              }
+            },
+            {
+              "reviewId": "AbFvOqn39OJJ2m1aUcQKncSdIGRUgcyT3In3RspuBbHCUtu4VMapTdYjDZCHXmXlDIi04d8daETjdg",
+              "reviewer": {
+                "displayName": "Nikola Nikolov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIl6MkvIU2osZ0b1MwTVFVekSohpic_oxlEnEUZAICtl917Vg=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Имах шум в кондензаторна сушилня Siemens. Техникът Росен дойде преди уговорения час и много бързо откри причината, след което ремонтът беше извършен. Хареса ми адекватното поведение, съвети за експлоатация и поддръжка базирани на знания и силно препоръчвам този сервиз. Благодаря\n\n(Translated by Google)\nI had a noise in my Siemens condenser dryer. The technician Rosen came before the appointed time and very quickly found the cause, after which the repair was carried out. I liked the adequate behavior, knowledge-based advice on operation and maintenance and I highly recommend this service. Thank you",
+              "createTime": "2026-04-07T14:15:19.997664Z",
+              "updateTime": "2026-04-07T14:15:19.997664Z",
+              "reviewReply": {
+                "comment": "Благодаря за високата оценка",
+                "updateTime": "2026-04-07T16:53:12.450501Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqn39OJJ2m1aUcQKncSdIGRUgcyT3In3RspuBbHCUtu4VMapTdYjDZCHXmXlDIi04d8daETjdg",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIl6MkvIU2osZ0b1MwTVFVekSohpic_oxlEnEUZAICtl917Vg=s120-c-rp-mo-br100",
+                  "displayName": "Nikola Nikolov"
+                },
+                "starRating": "FIVE",
+                "comment": "Имах шум в кондензаторна сушилня Siemens. Техникът Росен дойде преди уговорения час и много бързо откри причината, след което ремонтът беше извършен. Хареса ми адекватното поведение, съвети за експлоатация и поддръжка базирани на знания и силно препоръчвам този сервиз. Благодаря\n\n(Translated by Google)\nI had a noise in my Siemens condenser dryer. The technician Rosen came before the appointed time and very quickly found the cause, after which the repair was carried out. I liked the adequate behavior, knowledge-based advice on operation and maintenance and I highly recommend this service. Thank you",
+                "createTime": "2026-04-07T14:15:19.997664Z",
+                "updateTime": "2026-04-07T14:15:19.997664Z",
+                "reviewReply": {
+                  "comment": "Благодаря за високата оценка",
+                  "updateTime": "2026-04-07T16:53:12.450501Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqn39OJJ2m1aUcQKncSdIGRUgcyT3In3RspuBbHCUtu4VMapTdYjDZCHXmXlDIi04d8daETjdg"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnDzT-6sSmd20YznRYB2FRjl-1XK5IzqaJzc8e_vQ2lv-Q-JH9K9M7rJHFw-K1ufVgQtF8P",
+              "reviewer": {
+                "displayName": "Нина Георгиева",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLM8YJdvqo7jbogTECH7bj_SHuTOXRgRuG0-uth7YL5zeKAOw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Качествено, бързо и ефективно осъществен ремонт на пералнята ми! Благодаря за професионализма!\n\n(Translated by Google)\nMy washing machine was repaired qualitatively, quickly and efficiently! Thank you for the professionalism!",
+              "createTime": "2026-04-04T11:18:03.072971Z",
+              "updateTime": "2026-04-04T11:18:34.080996Z",
+              "reviewReply": {
+                "comment": "Благодаря ви високата оценка.",
+                "updateTime": "2026-04-04T13:26:52.021167Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnDzT-6sSmd20YznRYB2FRjl-1XK5IzqaJzc8e_vQ2lv-Q-JH9K9M7rJHFw-K1ufVgQtF8P",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLM8YJdvqo7jbogTECH7bj_SHuTOXRgRuG0-uth7YL5zeKAOw=s120-c-rp-mo-br100",
+                  "displayName": "Нина Георгиева"
+                },
+                "starRating": "FIVE",
+                "comment": "Качествено, бързо и ефективно осъществен ремонт на пералнята ми! Благодаря за професионализма!\n\n(Translated by Google)\nMy washing machine was repaired qualitatively, quickly and efficiently! Thank you for the professionalism!",
+                "createTime": "2026-04-04T11:18:03.072971Z",
+                "updateTime": "2026-04-04T11:18:34.080996Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви високата оценка.",
+                  "updateTime": "2026-04-04T13:26:52.021167Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnDzT-6sSmd20YznRYB2FRjl-1XK5IzqaJzc8e_vQ2lv-Q-JH9K9M7rJHFw-K1ufVgQtF8P"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmRp2Ktp2bRQ63ZupaqolLYXKFSrPumDMNPi8VJpHhFSa6J-P-sNF8mvD91UyQlEopevIZe",
+              "reviewer": {
+                "displayName": "Petar Petrov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWzmYogIx9KeNeodWKydqy-TYLGq9bIMDCHWLQuqbwUsQg6OONr=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много сме  доволни . Техника  дойде  на време , смени горен  реотан  на фурна Bosch . Ако се наложи  отново  ще използваме  вашите  услуги .\n\n(Translated by Google)\nWe are very satisfied. The technician arrived on time, replaced the upper radiator on a Bosch oven. If necessary, we will use your services again.",
+              "createTime": "2026-04-02T15:56:29.163462Z",
+              "updateTime": "2026-04-02T15:56:29.163462Z",
+              "reviewReply": {
+                "comment": "Благодаря за споделеното мнение",
+                "updateTime": "2026-04-04T13:27:16.416447Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqmRp2Ktp2bRQ63ZupaqolLYXKFSrPumDMNPi8VJpHhFSa6J-P-sNF8mvD91UyQlEopevIZe",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWzmYogIx9KeNeodWKydqy-TYLGq9bIMDCHWLQuqbwUsQg6OONr=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Petar Petrov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много сме  доволни . Техника  дойде  на време , смени горен  реотан  на фурна Bosch . Ако се наложи  отново  ще използваме  вашите  услуги .\n\n(Translated by Google)\nWe are very satisfied. The technician arrived on time, replaced the upper radiator on a Bosch oven. If necessary, we will use your services again.",
+                "createTime": "2026-04-02T15:56:29.163462Z",
+                "updateTime": "2026-04-02T15:56:29.163462Z",
+                "reviewReply": {
+                  "comment": "Благодаря за споделеното мнение",
+                  "updateTime": "2026-04-04T13:27:16.416447Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmRp2Ktp2bRQ63ZupaqolLYXKFSrPumDMNPi8VJpHhFSa6J-P-sNF8mvD91UyQlEopevIZe"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlgtGfmpz-BdmACbHPuoKPGuhWylqaUYabqTRnapDl0N46AhBVsZLUqrryfPflgSsU5NScNUA",
+              "reviewer": {
+                "displayName": "Moni Reiser",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWvzKyvV0UO2tODRU1DrVVyqhOHlXi7f2zLish66qNXJ-1xPKMj=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много професионален и бърз ремонт на пералнята. Горещо ги препоръчвам, благодаря ви много.\n\n(Translated by Google)\nVery professional and fast washing machine repair. I highly recommend them, thank you very much.",
+              "createTime": "2026-04-01T14:05:45.672050Z",
+              "updateTime": "2026-04-01T14:05:45.672050Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата оценка и споделения отзив.",
+                "updateTime": "2026-04-01T16:13:28.764610Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlgtGfmpz-BdmACbHPuoKPGuhWylqaUYabqTRnapDl0N46AhBVsZLUqrryfPflgSsU5NScNUA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWvzKyvV0UO2tODRU1DrVVyqhOHlXi7f2zLish66qNXJ-1xPKMj=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Moni Reiser"
+                },
+                "starRating": "FIVE",
+                "comment": "Много професионален и бърз ремонт на пералнята. Горещо ги препоръчвам, благодаря ви много.\n\n(Translated by Google)\nVery professional and fast washing machine repair. I highly recommend them, thank you very much.",
+                "createTime": "2026-04-01T14:05:45.672050Z",
+                "updateTime": "2026-04-01T14:05:45.672050Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата оценка и споделения отзив.",
+                  "updateTime": "2026-04-01T16:13:28.764610Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlgtGfmpz-BdmACbHPuoKPGuhWylqaUYabqTRnapDl0N46AhBVsZLUqrryfPflgSsU5NScNUA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqknCncT6oU8SVe4wirIji1G_5XGGVC8-Wp44cf2j2IB25j742K7Xyu-C2B14fW_KUgnAJdp",
+              "reviewer": {
+                "displayName": "Mario Smarkov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXPYqBh1ElEaFK9StYj3KByMbBpxciCek_GOixub1xPyseANl3zbw=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Изключително внимателно отношение, висок професионанализъм, качествено обслужване на достъпна цена.\nПрепоръчвам\n\n(Translated by Google)\nExtremely attentive attitude, high professionalism, quality service at an affordable price.\nI recommend",
+              "createTime": "2026-04-01T08:45:31.191711Z",
+              "updateTime": "2026-04-01T08:45:31.191711Z",
+              "reviewReply": {
+                "comment": "Благодаря ви",
+                "updateTime": "2026-04-01T16:13:47.429170Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqknCncT6oU8SVe4wirIji1G_5XGGVC8-Wp44cf2j2IB25j742K7Xyu-C2B14fW_KUgnAJdp",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXPYqBh1ElEaFK9StYj3KByMbBpxciCek_GOixub1xPyseANl3zbw=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Mario Smarkov"
+                },
+                "starRating": "FIVE",
+                "comment": "Изключително внимателно отношение, висок професионанализъм, качествено обслужване на достъпна цена.\nПрепоръчвам\n\n(Translated by Google)\nExtremely attentive attitude, high professionalism, quality service at an affordable price.\nI recommend",
+                "createTime": "2026-04-01T08:45:31.191711Z",
+                "updateTime": "2026-04-01T08:45:31.191711Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви",
+                  "updateTime": "2026-04-01T16:13:47.429170Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqknCncT6oU8SVe4wirIji1G_5XGGVC8-Wp44cf2j2IB25j742K7Xyu-C2B14fW_KUgnAJdp"
+              }
+            },
+            {
+              "reviewId": "AbFvOqliq0xI-B4frcSZ3kUtunrMPJMQQ81a1C77aV9hf-EnI6QMQIbXH0ogfa5IfhNBKb05A_LhHA",
+              "reviewer": {
+                "displayName": "Галина Георгиева",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJQq-LNLGmt3rOOoLYIFPrQ16zvM4aVrIV2BokiQY6vRiBcUw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много съм доволна от обслужването, точни и коректни - препоръчвам!\n\n(Translated by Google)\nI am very pleased with the service, accurate and correct - I recommend it!",
+              "createTime": "2026-03-26T10:11:38.462093Z",
+              "updateTime": "2026-03-26T10:11:38.462093Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата  оценка и споделено мнение",
+                "updateTime": "2026-03-26T12:26:40.089358Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqliq0xI-B4frcSZ3kUtunrMPJMQQ81a1C77aV9hf-EnI6QMQIbXH0ogfa5IfhNBKb05A_LhHA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJQq-LNLGmt3rOOoLYIFPrQ16zvM4aVrIV2BokiQY6vRiBcUw=s120-c-rp-mo-br100",
+                  "displayName": "Галина Георгиева"
+                },
+                "starRating": "FIVE",
+                "comment": "Много съм доволна от обслужването, точни и коректни - препоръчвам!\n\n(Translated by Google)\nI am very pleased with the service, accurate and correct - I recommend it!",
+                "createTime": "2026-03-26T10:11:38.462093Z",
+                "updateTime": "2026-03-26T10:11:38.462093Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата  оценка и споделено мнение",
+                  "updateTime": "2026-03-26T12:26:40.089358Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqliq0xI-B4frcSZ3kUtunrMPJMQQ81a1C77aV9hf-EnI6QMQIbXH0ogfa5IfhNBKb05A_LhHA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnGjoIDfKA4PIkVjfUPMuqBPAC96-uh-Run7b5jB2WySM0AT57sY6deXA2uWajCjLHiO9arWA",
+              "reviewer": {
+                "displayName": "Yosif Yordanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUbdOCR67oHXKrZRXUL0XVupBv5YUGEe1Y0juB4yoKb_nLqBdr_=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много бърза и надеждна услуга. Техникът работи много прецизно. Извърши диагностиката, откри проблема, смени частта и оправи сушилнята. Обясни какъв точно е проблемът и какво точно ремонтира. Още преди да престъпи прага на къщата си сложи калцуни. В случай че ми се налага да ползвам отново подобни услуги, ще го потърся.\n\n(Translated by Google)\nVery fast and reliable service. The technician worked very precisely. He performed the diagnostics, found the problem, replaced the part and fixed the dryer. He explained exactly what the problem was and what exactly he was repairing. Before he even stepped foot in the house, he put on his boots. In case I need to use similar services again, I will seek him out.",
+              "createTime": "2026-03-23T10:56:01.276466Z",
+              "updateTime": "2026-03-23T10:56:01.276466Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за високата оценка",
+                "updateTime": "2026-03-26T06:33:16.582662Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnGjoIDfKA4PIkVjfUPMuqBPAC96-uh-Run7b5jB2WySM0AT57sY6deXA2uWajCjLHiO9arWA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUbdOCR67oHXKrZRXUL0XVupBv5YUGEe1Y0juB4yoKb_nLqBdr_=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Yosif Yordanov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много бърза и надеждна услуга. Техникът работи много прецизно. Извърши диагностиката, откри проблема, смени частта и оправи сушилнята. Обясни какъв точно е проблемът и какво точно ремонтира. Още преди да престъпи прага на къщата си сложи калцуни. В случай че ми се налага да ползвам отново подобни услуги, ще го потърся.\n\n(Translated by Google)\nVery fast and reliable service. The technician worked very precisely. He performed the diagnostics, found the problem, replaced the part and fixed the dryer. He explained exactly what the problem was and what exactly he was repairing. Before he even stepped foot in the house, he put on his boots. In case I need to use similar services again, I will seek him out.",
+                "createTime": "2026-03-23T10:56:01.276466Z",
+                "updateTime": "2026-03-23T10:56:01.276466Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за високата оценка",
+                  "updateTime": "2026-03-26T06:33:16.582662Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnGjoIDfKA4PIkVjfUPMuqBPAC96-uh-Run7b5jB2WySM0AT57sY6deXA2uWajCjLHiO9arWA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlVQ7IfUeRsDIsq1y3aK3-cNXMPDLejfAu0nPtQY8xzAsRKYl1yYeuGioCxlH_augdl1MAb",
+              "reviewer": {
+                "displayName": "Bistra Cvetkova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXVaWzVoqpJeVjNO_8gDhgIdN4uXgomsmALl_QwfEUmZwLkN6Us=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2026-03-22T21:00:09.088427Z",
+              "updateTime": "2026-03-22T21:00:09.088427Z",
+              "reviewReply": {
+                "comment": "Благодаря за гласуваното ни доверие",
+                "updateTime": "2026-03-23T04:52:13.587003Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlVQ7IfUeRsDIsq1y3aK3-cNXMPDLejfAu0nPtQY8xzAsRKYl1yYeuGioCxlH_augdl1MAb",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXVaWzVoqpJeVjNO_8gDhgIdN4uXgomsmALl_QwfEUmZwLkN6Us=s120-c-rp-mo-br100",
+                  "displayName": "Bistra Cvetkova"
+                },
+                "starRating": "FIVE",
+                "createTime": "2026-03-22T21:00:09.088427Z",
+                "updateTime": "2026-03-22T21:00:09.088427Z",
+                "reviewReply": {
+                  "comment": "Благодаря за гласуваното ни доверие",
+                  "updateTime": "2026-03-23T04:52:13.587003Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlVQ7IfUeRsDIsq1y3aK3-cNXMPDLejfAu0nPtQY8xzAsRKYl1yYeuGioCxlH_augdl1MAb"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlNLELkOi5nER0kez8956bPIC8kamEbj03Kk-v5u_Mgqd13tPYT3pqF93RJY7pK7W3dqIW1ew",
+              "reviewer": {
+                "displayName": "Dilyan Chipriyanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKuwWaF3B4N3qJ67-iwclncEXjhQc3sxRJktMdzSoox19waaQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Страхотно отношение и много бърза и качествена работа !!!\n\n(Translated by Google)\nGreat attitude and very fast and high quality work!!!",
+              "createTime": "2026-03-22T18:16:20.338126Z",
+              "updateTime": "2026-03-22T18:16:20.338126Z",
+              "reviewReply": {
+                "comment": "Оценяваме вашето мнение и споделената оценка относно нашето обслужване.",
+                "updateTime": "2026-03-22T18:18:30.519303Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlNLELkOi5nER0kez8956bPIC8kamEbj03Kk-v5u_Mgqd13tPYT3pqF93RJY7pK7W3dqIW1ew",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKuwWaF3B4N3qJ67-iwclncEXjhQc3sxRJktMdzSoox19waaQ=s120-c-rp-mo-br100",
+                  "displayName": "Dilyan Chipriyanov"
+                },
+                "starRating": "FIVE",
+                "comment": "Страхотно отношение и много бърза и качествена работа !!!\n\n(Translated by Google)\nGreat attitude and very fast and high quality work!!!",
+                "createTime": "2026-03-22T18:16:20.338126Z",
+                "updateTime": "2026-03-22T18:16:20.338126Z",
+                "reviewReply": {
+                  "comment": "Оценяваме вашето мнение и споделената оценка относно нашето обслужване.",
+                  "updateTime": "2026-03-22T18:18:30.519303Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlNLELkOi5nER0kez8956bPIC8kamEbj03Kk-v5u_Mgqd13tPYT3pqF93RJY7pK7W3dqIW1ew"
+              }
+            },
+            {
+              "reviewId": "AbFvOqn_wxEH_8vCSd-_ose-2Scu1Y9AJ8hGi0qPuV1b8LE1h2dEDci_77m-nZLgESh45EUSkqyIMA",
+              "reviewer": {
+                "displayName": "Lyuben Petkov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXQRQAcBi8fGC8F2DmZQ5JPuw4IAXmdPIwWRtm8AtmGTlFWZApy=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Доволен съм от услугата ремонт на съдомиялна машина. Специалиста дойде в уреченото време, свърши работата професионално и замина. Какво повече! Препоръчвам !\n\n(Translated by Google)\nI am satisfied with the dishwasher repair service. The specialist came at the appointed time, did the job professionally and left. What more! I recommend!",
+              "createTime": "2026-03-18T20:32:42.536961Z",
+              "updateTime": "2026-03-18T20:32:42.536961Z",
+              "reviewReply": {
+                "comment": "Благодаря за изразеното ви мнение",
+                "updateTime": "2026-03-26T06:33:47.104169Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqn_wxEH_8vCSd-_ose-2Scu1Y9AJ8hGi0qPuV1b8LE1h2dEDci_77m-nZLgESh45EUSkqyIMA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXQRQAcBi8fGC8F2DmZQ5JPuw4IAXmdPIwWRtm8AtmGTlFWZApy=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Lyuben Petkov"
+                },
+                "starRating": "FIVE",
+                "comment": "Доволен съм от услугата ремонт на съдомиялна машина. Специалиста дойде в уреченото време, свърши работата професионално и замина. Какво повече! Препоръчвам !\n\n(Translated by Google)\nI am satisfied with the dishwasher repair service. The specialist came at the appointed time, did the job professionally and left. What more! I recommend!",
+                "createTime": "2026-03-18T20:32:42.536961Z",
+                "updateTime": "2026-03-18T20:32:42.536961Z",
+                "reviewReply": {
+                  "comment": "Благодаря за изразеното ви мнение",
+                  "updateTime": "2026-03-26T06:33:47.104169Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqn_wxEH_8vCSd-_ose-2Scu1Y9AJ8hGi0qPuV1b8LE1h2dEDci_77m-nZLgESh45EUSkqyIMA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqka3jlzSLJnDGyGuCLOz28rjRveVPIb78UxB47NDFJf6_oHhFRHCjoe0C9rnuyqa4vZ8vG_",
+              "reviewer": {
+                "displayName": "Borislav Ivanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJEfO5tOwMYUmeIaqoSHGoEfJRwgJgdr9d5Tj1Q_Ei7l4f9jA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2026-03-17T09:45:48.230365Z",
+              "updateTime": "2026-03-17T09:45:48.230365Z",
+              "reviewReply": {
+                "comment": "Благодаря ви",
+                "updateTime": "2026-03-17T10:49:44.537093Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqka3jlzSLJnDGyGuCLOz28rjRveVPIb78UxB47NDFJf6_oHhFRHCjoe0C9rnuyqa4vZ8vG_",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJEfO5tOwMYUmeIaqoSHGoEfJRwgJgdr9d5Tj1Q_Ei7l4f9jA=s120-c-rp-mo-br100",
+                  "displayName": "Borislav Ivanov"
+                },
+                "starRating": "FIVE",
+                "createTime": "2026-03-17T09:45:48.230365Z",
+                "updateTime": "2026-03-17T09:45:48.230365Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви",
+                  "updateTime": "2026-03-17T10:49:44.537093Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqka3jlzSLJnDGyGuCLOz28rjRveVPIb78UxB47NDFJf6_oHhFRHCjoe0C9rnuyqa4vZ8vG_"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlRFUTV1e7mW38rLtftVOU1mIOKju-d5FFNe3J-o4xUnhBwBHii5sICc1n0gllbUZhC1l5O",
+              "reviewer": {
+                "displayName": "Georgi Stoyanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLxiYzkH2CDijxE6AHeKXhvz4RMQwfxhL6aIDcae9ThRLLwWQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Изключително професионално и коректно отношение! Да не му се налага на човек, но при нужда от навременна и добре изпълнена намеса, препоръчвам с две ръце!\n\n(Translated by Google)\nExtremely professional and correct attitude! Not to impose on a person, but if you need timely and well-executed intervention, I recommend it with both hands!",
+              "createTime": "2026-03-15T13:46:20.173854Z",
+              "updateTime": "2026-03-16T19:31:11.988145Z",
+              "reviewReply": {
+                "comment": "Благодаря за споделения отзив",
+                "updateTime": "2026-03-17T10:49:29.081428Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlRFUTV1e7mW38rLtftVOU1mIOKju-d5FFNe3J-o4xUnhBwBHii5sICc1n0gllbUZhC1l5O",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLxiYzkH2CDijxE6AHeKXhvz4RMQwfxhL6aIDcae9ThRLLwWQ=s120-c-rp-mo-br100",
+                  "displayName": "Georgi Stoyanov"
+                },
+                "starRating": "FIVE",
+                "comment": "Изключително професионално и коректно отношение! Да не му се налага на човек, но при нужда от навременна и добре изпълнена намеса, препоръчвам с две ръце!\n\n(Translated by Google)\nExtremely professional and correct attitude! Not to impose on a person, but if you need timely and well-executed intervention, I recommend it with both hands!",
+                "createTime": "2026-03-15T13:46:20.173854Z",
+                "updateTime": "2026-03-16T19:31:11.988145Z",
+                "reviewReply": {
+                  "comment": "Благодаря за споделения отзив",
+                  "updateTime": "2026-03-17T10:49:29.081428Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlRFUTV1e7mW38rLtftVOU1mIOKju-d5FFNe3J-o4xUnhBwBHii5sICc1n0gllbUZhC1l5O"
+              }
+            },
+            {
+              "reviewId": "AbFvOqn_T4je6w2Vi7Cb9CHbwUqI3TD3WGdX4IoIMNm3ifv_3cIIif8aPCRqtyRSXiEEKFAseHmFdQ",
+              "reviewer": {
+                "displayName": "Veneta Marinova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXawh9qs6LeiM5WceVSVgbJJZ1dysQNv-x3w3HIDC3FEQ1T6-My=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Веднага отреагираха, работата беше свършена в рамките на 10мин. Човекът ми обясни всичко изключително подробно. Препоръчвам!\n\n(Translated by Google)\nThey responded immediately, the job was done within 10 minutes. The guy explained everything to me in great detail. I recommend!",
+              "createTime": "2026-03-14T19:29:43.396815Z",
+              "updateTime": "2026-03-14T19:30:23.752622Z",
+              "reviewReply": {
+                "comment": "Благодаря ви  за споделеното  мнение",
+                "updateTime": "2026-04-01T16:14:39.675653Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqn_T4je6w2Vi7Cb9CHbwUqI3TD3WGdX4IoIMNm3ifv_3cIIif8aPCRqtyRSXiEEKFAseHmFdQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXawh9qs6LeiM5WceVSVgbJJZ1dysQNv-x3w3HIDC3FEQ1T6-My=s120-c-rp-mo-br100",
+                  "displayName": "Veneta Marinova"
+                },
+                "starRating": "FIVE",
+                "comment": "Веднага отреагираха, работата беше свършена в рамките на 10мин. Човекът ми обясни всичко изключително подробно. Препоръчвам!\n\n(Translated by Google)\nThey responded immediately, the job was done within 10 minutes. The guy explained everything to me in great detail. I recommend!",
+                "createTime": "2026-03-14T19:29:43.396815Z",
+                "updateTime": "2026-03-14T19:30:23.752622Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви  за споделеното  мнение",
+                  "updateTime": "2026-04-01T16:14:39.675653Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqn_T4je6w2Vi7Cb9CHbwUqI3TD3WGdX4IoIMNm3ifv_3cIIif8aPCRqtyRSXiEEKFAseHmFdQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmqDSBi7MFLpMS65rPvKWRZn2EyLdmiCqIxAONIoLFn-XxXpJeftJTywlr66V-NR_D__GKJ2A",
+              "reviewer": {
+                "displayName": "Billy",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKiCQUofuqK3vsPszPpUmjrki_h33K9qg9cgU7hHXeD6uJacA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много добри\n\n(Translated by Google)\nVery good",
+              "createTime": "2026-03-12T07:07:16.464734Z",
+              "updateTime": "2026-03-12T07:07:16.464734Z",
+              "reviewReply": {
+                "comment": "Благодарим ви за споделеното мнение.",
+                "updateTime": "2026-03-12T11:20:00.415555Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqmqDSBi7MFLpMS65rPvKWRZn2EyLdmiCqIxAONIoLFn-XxXpJeftJTywlr66V-NR_D__GKJ2A",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKiCQUofuqK3vsPszPpUmjrki_h33K9qg9cgU7hHXeD6uJacA=s120-c-rp-mo-br100",
+                  "displayName": "Billy"
+                },
+                "starRating": "FIVE",
+                "comment": "Много добри\n\n(Translated by Google)\nVery good",
+                "createTime": "2026-03-12T07:07:16.464734Z",
+                "updateTime": "2026-03-12T07:07:16.464734Z",
+                "reviewReply": {
+                  "comment": "Благодарим ви за споделеното мнение.",
+                  "updateTime": "2026-03-12T11:20:00.415555Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmqDSBi7MFLpMS65rPvKWRZn2EyLdmiCqIxAONIoLFn-XxXpJeftJTywlr66V-NR_D__GKJ2A"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlt7s9iTEzZ8TOjR-bZt6fshGnycPo30YV9YbnJhoif9SrlsYjQCcJERLodljNuGTAVMQ8xPA",
+              "reviewer": {
+                "displayName": "Tihomir Todorov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLj2MUQr2u1IENnzaM-1fR8LFtNxeXQJ_Ybzbp-U4sN8fZauA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2026-03-07T14:59:18.296237Z",
+              "updateTime": "2026-03-07T14:59:18.296237Z",
+              "reviewReply": {
+                "comment": "Блогадаря ви за доверието",
+                "updateTime": "2026-03-12T11:20:21.774744Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlt7s9iTEzZ8TOjR-bZt6fshGnycPo30YV9YbnJhoif9SrlsYjQCcJERLodljNuGTAVMQ8xPA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocLj2MUQr2u1IENnzaM-1fR8LFtNxeXQJ_Ybzbp-U4sN8fZauA=s120-c-rp-mo-br100",
+                  "displayName": "Tihomir Todorov"
+                },
+                "starRating": "FIVE",
+                "createTime": "2026-03-07T14:59:18.296237Z",
+                "updateTime": "2026-03-07T14:59:18.296237Z",
+                "reviewReply": {
+                  "comment": "Блогадаря ви за доверието",
+                  "updateTime": "2026-03-12T11:20:21.774744Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlt7s9iTEzZ8TOjR-bZt6fshGnycPo30YV9YbnJhoif9SrlsYjQCcJERLodljNuGTAVMQ8xPA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlLyS-Ck5n57hkG2WYS6TwlJq_EHfrLJArdhg-0lnF1yW0ravD35WfZ21S0kDLnBEg7wcNrCQ",
+              "reviewer": {
+                "displayName": "Gerasim Goranov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjV8RzsZSKneJK-SE46V3Cfp0vIxizxFy_SKA940XXDbjGghq6f3=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Бърза реакция и професионално обгрижване, проблемът с пералнята беше отстранен за нула време. Благодаря, при необходимост ще ви търся отново...\n\n(Translated by Google)\nQuick response and professional care, the problem with the washing machine was fixed in no time. Thank you, I will call you again if necessary...",
+              "createTime": "2026-02-17T16:36:21.317641Z",
+              "updateTime": "2026-02-17T19:25:54.741698Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за споделеното мнение:)",
+                "updateTime": "2026-02-17T17:05:25.719695Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlLyS-Ck5n57hkG2WYS6TwlJq_EHfrLJArdhg-0lnF1yW0ravD35WfZ21S0kDLnBEg7wcNrCQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjV8RzsZSKneJK-SE46V3Cfp0vIxizxFy_SKA940XXDbjGghq6f3=s120-c-rp-mo-br100",
+                  "displayName": "Gerasim Goranov"
+                },
+                "starRating": "FIVE",
+                "comment": "Бърза реакция и професионално обгрижване, проблемът с пералнята беше отстранен за нула време. Благодаря, при необходимост ще ви търся отново...\n\n(Translated by Google)\nQuick response and professional care, the problem with the washing machine was fixed in no time. Thank you, I will call you again if necessary...",
+                "createTime": "2026-02-17T16:36:21.317641Z",
+                "updateTime": "2026-02-17T19:25:54.741698Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за споделеното мнение:)",
+                  "updateTime": "2026-02-17T17:05:25.719695Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlLyS-Ck5n57hkG2WYS6TwlJq_EHfrLJArdhg-0lnF1yW0ravD35WfZ21S0kDLnBEg7wcNrCQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnSoPCa3plJgAk5evU3rtm9lXP2IjbOK88czllUVGUwisi-xqPuniE2lSh95syAE6iy3OOY7w",
+              "reviewer": {
+                "displayName": "Todor Damyanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjX3h70YDowJynaDNoLBmhhoRGE8aOPymq3pqouQAwKWw6KKPEq-=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Адекватно обслужване, коментар на възможностите и варианти за ремонт и отстраняване на неизправности, наистина услугите, които се предлагат сама ниво. Старата съдомиялна получи нов шанс за живот. Благодарим ви.\n\n(Translated by Google)\nAdequate service, commentary on the possibilities and options for repair and troubleshooting, truly the services offered are top notch. The old dishwasher has been given a new chance at life. Thank you.",
+              "createTime": "2026-02-17T16:39:48.937953Z",
+              "updateTime": "2026-02-17T16:39:48.937953Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за споделеното мнение :)",
+                "updateTime": "2026-02-17T17:06:01.968613Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnSoPCa3plJgAk5evU3rtm9lXP2IjbOK88czllUVGUwisi-xqPuniE2lSh95syAE6iy3OOY7w",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjX3h70YDowJynaDNoLBmhhoRGE8aOPymq3pqouQAwKWw6KKPEq-=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Todor Damyanov"
+                },
+                "starRating": "FIVE",
+                "comment": "Адекватно обслужване, коментар на възможностите и варианти за ремонт и отстраняване на неизправности, наистина услугите, които се предлагат сама ниво. Старата съдомиялна получи нов шанс за живот. Благодарим ви.\n\n(Translated by Google)\nAdequate service, commentary on the possibilities and options for repair and troubleshooting, truly the services offered are top notch. The old dishwasher has been given a new chance at life. Thank you.",
+                "createTime": "2026-02-17T16:39:48.937953Z",
+                "updateTime": "2026-02-17T16:39:48.937953Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за споделеното мнение :)",
+                  "updateTime": "2026-02-17T17:06:01.968613Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnSoPCa3plJgAk5evU3rtm9lXP2IjbOK88czllUVGUwisi-xqPuniE2lSh95syAE6iy3OOY7w"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmBt3qbgi0gx5UznJhLtGwAUVoF_YtDQmXM7ScqnYXXt9EdrGe8cUJKxykBm3Q17GUgFh9YJg",
+              "reviewer": {
+                "displayName": "Darina Ninova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKDjUVlgtmI9l6lXrz-OroLfJwjGWG_Dt_kgcQCtAPQ5SB7dQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Ползвах услугите на фирмата за смяна на горен нагревател на фурна Бош, ремонта беше извършен бързо и професионално.\n\n(Translated by Google)\nI used the company's services to replace the upper heater of a Bosch oven, the repair was carried out quickly and professionally.",
+              "createTime": "2026-02-06T13:53:20.582984Z",
+              "updateTime": "2026-02-06T13:53:20.582984Z",
+              "reviewReply": {
+                "comment": "За нас е удоволствие да сме в удлуга на клиентите си",
+                "updateTime": "2026-03-12T11:21:07.525884Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqmBt3qbgi0gx5UznJhLtGwAUVoF_YtDQmXM7ScqnYXXt9EdrGe8cUJKxykBm3Q17GUgFh9YJg",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKDjUVlgtmI9l6lXrz-OroLfJwjGWG_Dt_kgcQCtAPQ5SB7dQ=s120-c-rp-mo-br100",
+                  "displayName": "Darina Ninova"
+                },
+                "starRating": "FIVE",
+                "comment": "Ползвах услугите на фирмата за смяна на горен нагревател на фурна Бош, ремонта беше извършен бързо и професионално.\n\n(Translated by Google)\nI used the company's services to replace the upper heater of a Bosch oven, the repair was carried out quickly and professionally.",
+                "createTime": "2026-02-06T13:53:20.582984Z",
+                "updateTime": "2026-02-06T13:53:20.582984Z",
+                "reviewReply": {
+                  "comment": "За нас е удоволствие да сме в удлуга на клиентите си",
+                  "updateTime": "2026-03-12T11:21:07.525884Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmBt3qbgi0gx5UznJhLtGwAUVoF_YtDQmXM7ScqnYXXt9EdrGe8cUJKxykBm3Q17GUgFh9YJg"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlQuRE5EGG2ROxwh-DndNwiYvts3_hQujBc02i89cCxHjEeB2Lejv4adpMEXISgaxMCRNQR4Q",
+              "reviewer": {
+                "displayName": "S. Avramova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKdWvAvwlGGXesf2aFV_ABc3F63Gtj7zNK22ODr53qL3GLj1g=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Точен, бърз и коректен майстор. Пералнята беше ремонтирана за два дни. Отлична услуга – препоръчвам!\n\n(Translated by Google)\nAccurate, fast and correct repairman. The washing machine was repaired in two days. Excellent service - I recommend!",
+              "createTime": "2026-01-27T18:30:56.795467Z",
+              "updateTime": "2026-01-27T18:41:29.760934Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за споделения отзив:)",
+                "updateTime": "2026-01-27T19:02:24.981964Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlQuRE5EGG2ROxwh-DndNwiYvts3_hQujBc02i89cCxHjEeB2Lejv4adpMEXISgaxMCRNQR4Q",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKdWvAvwlGGXesf2aFV_ABc3F63Gtj7zNK22ODr53qL3GLj1g=s120-c-rp-mo-br100",
+                  "displayName": "S. Avramova"
+                },
+                "starRating": "FIVE",
+                "comment": "Точен, бърз и коректен майстор. Пералнята беше ремонтирана за два дни. Отлична услуга – препоръчвам!\n\n(Translated by Google)\nAccurate, fast and correct repairman. The washing machine was repaired in two days. Excellent service - I recommend!",
+                "createTime": "2026-01-27T18:30:56.795467Z",
+                "updateTime": "2026-01-27T18:41:29.760934Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за споделения отзив:)",
+                  "updateTime": "2026-01-27T19:02:24.981964Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlQuRE5EGG2ROxwh-DndNwiYvts3_hQujBc02i89cCxHjEeB2Lejv4adpMEXISgaxMCRNQR4Q"
+              }
+            },
+            {
+              "reviewId": "AbFvOqn5r0pn2p19OvMXMOPTWCdr4ZdOVLqK03aUq5l6aekLzf_OcFcASTuivU96w2HwOjar3CSz1w",
+              "reviewer": {
+                "displayName": "Mikhail Vulchev",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUdLiFMrTBq3Z4TwEdaGDo9qZs2vJTzP5ZtlcUlF5We3djvZA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "He came, solved the problem, had one of those Hollywood superstar actor smiles and the price of service was perfect. 5 stars",
+              "createTime": "2026-01-07T18:30:05.302085Z",
+              "updateTime": "2026-01-19T14:05:32.934908Z",
+              "reviewReply": {
+                "comment": "Благодаря много за споделеното мнение и за дадената от вас оценка!",
+                "updateTime": "2026-01-07T18:34:58.779366Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqn5r0pn2p19OvMXMOPTWCdr4ZdOVLqK03aUq5l6aekLzf_OcFcASTuivU96w2HwOjar3CSz1w",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUdLiFMrTBq3Z4TwEdaGDo9qZs2vJTzP5ZtlcUlF5We3djvZA=s120-c-rp-mo-br100",
+                  "displayName": "Mikhail Vulchev"
+                },
+                "starRating": "FIVE",
+                "comment": "He came, solved the problem, had one of those Hollywood superstar actor smiles and the price of service was perfect. 5 stars",
+                "createTime": "2026-01-07T18:30:05.302085Z",
+                "updateTime": "2026-01-19T14:05:32.934908Z",
+                "reviewReply": {
+                  "comment": "Благодаря много за споделеното мнение и за дадената от вас оценка!",
+                  "updateTime": "2026-01-07T18:34:58.779366Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqn5r0pn2p19OvMXMOPTWCdr4ZdOVLqK03aUq5l6aekLzf_OcFcASTuivU96w2HwOjar3CSz1w"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkP4VPfNEtMzZDkwjO27lvYT1W6ofVK6RCHDbp0pF7bQiWgcv-1W59SGxM2_ER6LdnmsxiOtA",
+              "reviewer": {
+                "displayName": "Maksim Keremedchiev",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocI_0FKl6BUK14569COK-pr59tqLFE0b1RcKsEmsyCLIrvz53Q=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Изключително съм доволна. Супер бърза реакция и вдъхване на още живот за моята сушилня. Препоръчвам\n\n(Translated by Google)\nI am extremely satisfied. Super fast response and breathing more life into my dryer. I recommend",
+              "createTime": "2026-01-14T17:37:50.952866Z",
+              "updateTime": "2026-01-14T17:37:50.952866Z",
+              "reviewReply": {
+                "comment": "Благодаря ви",
+                "updateTime": "2026-04-04T13:27:37.467082Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqkP4VPfNEtMzZDkwjO27lvYT1W6ofVK6RCHDbp0pF7bQiWgcv-1W59SGxM2_ER6LdnmsxiOtA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocI_0FKl6BUK14569COK-pr59tqLFE0b1RcKsEmsyCLIrvz53Q=s120-c-rp-mo-br100",
+                  "displayName": "Maksim Keremedchiev"
+                },
+                "starRating": "FIVE",
+                "comment": "Изключително съм доволна. Супер бърза реакция и вдъхване на още живот за моята сушилня. Препоръчвам\n\n(Translated by Google)\nI am extremely satisfied. Super fast response and breathing more life into my dryer. I recommend",
+                "createTime": "2026-01-14T17:37:50.952866Z",
+                "updateTime": "2026-01-14T17:37:50.952866Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви",
+                  "updateTime": "2026-04-04T13:27:37.467082Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkP4VPfNEtMzZDkwjO27lvYT1W6ofVK6RCHDbp0pF7bQiWgcv-1W59SGxM2_ER6LdnmsxiOtA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlwUhMLA9VPWri_XP80MAvCl2dtOHJXNGEw8iMhAP-_Re-YDbDUhq5eK8qKY81GPQzrf0ZkcA",
+              "reviewer": {
+                "displayName": "ali ali",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVpY9ZVh-dMzLC5PfpPlh8fC9soHn3bbPyImDWZ3YaEQfXWV9U=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Точни и коректни евала\n\n(Translated by Google)\nAccurate and correct evaluations",
+              "createTime": "2026-01-08T10:32:31.571536Z",
+              "updateTime": "2026-01-08T10:32:31.571536Z",
+              "reviewReply": {
+                "comment": "Радваме се,че споделихте вашето мнение,благодаря ви.",
+                "updateTime": "2026-01-08T12:39:46.960298Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlwUhMLA9VPWri_XP80MAvCl2dtOHJXNGEw8iMhAP-_Re-YDbDUhq5eK8qKY81GPQzrf0ZkcA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVpY9ZVh-dMzLC5PfpPlh8fC9soHn3bbPyImDWZ3YaEQfXWV9U=s120-c-rp-mo-br100",
+                  "displayName": "ali ali"
+                },
+                "starRating": "FIVE",
+                "comment": "Точни и коректни евала\n\n(Translated by Google)\nAccurate and correct evaluations",
+                "createTime": "2026-01-08T10:32:31.571536Z",
+                "updateTime": "2026-01-08T10:32:31.571536Z",
+                "reviewReply": {
+                  "comment": "Радваме се,че споделихте вашето мнение,благодаря ви.",
+                  "updateTime": "2026-01-08T12:39:46.960298Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlwUhMLA9VPWri_XP80MAvCl2dtOHJXNGEw8iMhAP-_Re-YDbDUhq5eK8qKY81GPQzrf0ZkcA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmaE3ZAKNWXliDkOta82MAItvcpM6WeUqJoY0xoznW5Q5bK-xhfY-8FMlRmIngjgHsBdzDq5A",
+              "reviewer": {
+                "displayName": "Ivan Trefilov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWxqX4KgVaopI7gbLRPxmuLx-uXWoAgS-7dj8Nm4g4IeTlEe7QD=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много съм доволен от услугата. Пералнята ни не работеше правилно, дренажът беше запушен и водата не се оттичаше. Свързахме се бързо по телефона, лесно се разбрахме за удобен час и техникът дойде навреме. Проблемът беше отстранен бързо, всичко беше почистено и пералнята вече работи отлично. Професионално и коректно отношение. Препоръчвам.\n\n(Translated by Google)\nI am very satisfied with the service. Our washing machine was not working properly, the drain was clogged and the water was not draining. We contacted them quickly by phone, we easily agreed on a convenient time and the technician arrived on time. The problem was fixed quickly, everything was cleaned and the washing machine is now working perfectly. Professional and correct attitude. I recommend.",
+              "createTime": "2025-12-23T13:53:22.857768Z",
+              "updateTime": "2025-12-23T13:53:22.857768Z",
+              "reviewReply": {
+                "comment": "Благодаря за изразеното от  мнения",
+                "updateTime": "2025-12-23T16:39:06.378935Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqmaE3ZAKNWXliDkOta82MAItvcpM6WeUqJoY0xoznW5Q5bK-xhfY-8FMlRmIngjgHsBdzDq5A",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWxqX4KgVaopI7gbLRPxmuLx-uXWoAgS-7dj8Nm4g4IeTlEe7QD=s120-c-rp-mo-br100",
+                  "displayName": "Ivan Trefilov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много съм доволен от услугата. Пералнята ни не работеше правилно, дренажът беше запушен и водата не се оттичаше. Свързахме се бързо по телефона, лесно се разбрахме за удобен час и техникът дойде навреме. Проблемът беше отстранен бързо, всичко беше почистено и пералнята вече работи отлично. Професионално и коректно отношение. Препоръчвам.\n\n(Translated by Google)\nI am very satisfied with the service. Our washing machine was not working properly, the drain was clogged and the water was not draining. We contacted them quickly by phone, we easily agreed on a convenient time and the technician arrived on time. The problem was fixed quickly, everything was cleaned and the washing machine is now working perfectly. Professional and correct attitude. I recommend.",
+                "createTime": "2025-12-23T13:53:22.857768Z",
+                "updateTime": "2025-12-23T13:53:22.857768Z",
+                "reviewReply": {
+                  "comment": "Благодаря за изразеното от  мнения",
+                  "updateTime": "2025-12-23T16:39:06.378935Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmaE3ZAKNWXliDkOta82MAItvcpM6WeUqJoY0xoznW5Q5bK-xhfY-8FMlRmIngjgHsBdzDq5A"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlthY1o2L5-_bm9cbi9Xl0lL0DgfRqjFgRC3X_5y7bJ3E5xjYNSgUmm2B0mEl1xaI8cjh5G",
+              "reviewer": {
+                "displayName": "Веселин Банев",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWpbcvc9_nRP_E7zGReyrHSJGBYfO2nPdJ2zAamNxjTG4BgHr8=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Имах нужда от ремонт на пералня,не загряваше водата.Техникът от РотоРем дойде по-рано от уговореният час и отстрани повредата в рамките на следващия един час.Препоръчвам и нека има повече добри специалисти като тях!\n\n(Translated by Google)\nI needed a washing machine repair, it wouldn't heat the water. The technician from RotoRem came earlier than the agreed time and fixed the problem within the next hour. I recommend it and may there be more good specialists like them!",
+              "createTime": "2025-12-22T14:18:09.072039Z",
+              "updateTime": "2025-12-22T14:18:09.072039Z",
+              "reviewReply": {
+                "comment": "Ценим високо мнението на нашите клиенти,благодаря ви.",
+                "updateTime": "2025-12-23T16:39:51.509746Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqlthY1o2L5-_bm9cbi9Xl0lL0DgfRqjFgRC3X_5y7bJ3E5xjYNSgUmm2B0mEl1xaI8cjh5G",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWpbcvc9_nRP_E7zGReyrHSJGBYfO2nPdJ2zAamNxjTG4BgHr8=s120-c-rp-mo-br100",
+                  "displayName": "Веселин Банев"
+                },
+                "starRating": "FIVE",
+                "comment": "Имах нужда от ремонт на пералня,не загряваше водата.Техникът от РотоРем дойде по-рано от уговореният час и отстрани повредата в рамките на следващия един час.Препоръчвам и нека има повече добри специалисти като тях!\n\n(Translated by Google)\nI needed a washing machine repair, it wouldn't heat the water. The technician from RotoRem came earlier than the agreed time and fixed the problem within the next hour. I recommend it and may there be more good specialists like them!",
+                "createTime": "2025-12-22T14:18:09.072039Z",
+                "updateTime": "2025-12-22T14:18:09.072039Z",
+                "reviewReply": {
+                  "comment": "Ценим високо мнението на нашите клиенти,благодаря ви.",
+                  "updateTime": "2025-12-23T16:39:51.509746Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlthY1o2L5-_bm9cbi9Xl0lL0DgfRqjFgRC3X_5y7bJ3E5xjYNSgUmm2B0mEl1xaI8cjh5G",
+                "reviewMediaItems": [
+                  {
+                    "thumbnailUrl": "https://lh3.googleusercontent.com/grass-cs/ANxoTn3MIQo_13Vh6r2xRdrMn9f8zbWxOZ9nXzWMH4C3lm8ZTNINJBkkb9Csiw2gwLYk1IYql4BlyPOLB8LJUpcD1oGNkxr9mj9TnT24u7FE0xkmWPVTQaj85W6D2GjzyRNOJMvaJ5Rzz6P8HmSn=k-no"
+                  }
+                ]
+              }
+            },
+            {
+              "reviewId": "AbFvOqmU8M73ldPCqSsrd61juPWLfPSko7ZD3ct-7dN4nWbq4akvrC4cFSaJODnOE6zc5n6531sRdQ",
+              "reviewer": {
+                "displayName": "Милена Йорданова",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWW-eys35xKBgLJ1V5aKINDA_4lSb0V7XNXnL-F_zZyzOjWXS6jhw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Ремонт съдомиялна.майстора дойде бързо и отстрани проблема\n\n(Translated by Google)\nDishwasher repair. The technician came quickly and fixed the problem.",
+              "createTime": "2025-12-20T18:00:35.548464Z",
+              "updateTime": "2025-12-20T18:00:35.548464Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqmU8M73ldPCqSsrd61juPWLfPSko7ZD3ct-7dN4nWbq4akvrC4cFSaJODnOE6zc5n6531sRdQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWW-eys35xKBgLJ1V5aKINDA_4lSb0V7XNXnL-F_zZyzOjWXS6jhw=s120-c-rp-mo-br100",
+                  "displayName": "Милена Йорданова"
+                },
+                "starRating": "FIVE",
+                "comment": "Ремонт съдомиялна.майстора дойде бързо и отстрани проблема\n\n(Translated by Google)\nDishwasher repair. The technician came quickly and fixed the problem.",
+                "createTime": "2025-12-20T18:00:35.548464Z",
+                "updateTime": "2025-12-20T18:00:35.548464Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmU8M73ldPCqSsrd61juPWLfPSko7ZD3ct-7dN4nWbq4akvrC4cFSaJODnOE6zc5n6531sRdQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkLzAYoKoLHjlrGzorSu6X8XOa2MT1_M9_Q3o3GW7KrWbC4y-cwMz51x7VTfXSmMdzvGnxbDw",
+              "reviewer": {
+                "displayName": "Tincheto Georgieva",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWj021-SvoH-cH0i6JDrTCAz1nCSuExf7aBZi6zTz01YR9lFeZI=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Ремонт пералня.много съм доволна.препоръчвам!\n\n(Translated by Google)\nWashing machine repair. I am very satisfied. I recommend!",
+              "createTime": "2025-12-20T17:57:50.362591Z",
+              "updateTime": "2025-12-20T17:57:50.362591Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqkLzAYoKoLHjlrGzorSu6X8XOa2MT1_M9_Q3o3GW7KrWbC4y-cwMz51x7VTfXSmMdzvGnxbDw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWj021-SvoH-cH0i6JDrTCAz1nCSuExf7aBZi6zTz01YR9lFeZI=s120-c-rp-mo-br100",
+                  "displayName": "Tincheto Georgieva"
+                },
+                "starRating": "FIVE",
+                "comment": "Ремонт пералня.много съм доволна.препоръчвам!\n\n(Translated by Google)\nWashing machine repair. I am very satisfied. I recommend!",
+                "createTime": "2025-12-20T17:57:50.362591Z",
+                "updateTime": "2025-12-20T17:57:50.362591Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkLzAYoKoLHjlrGzorSu6X8XOa2MT1_M9_Q3o3GW7KrWbC4y-cwMz51x7VTfXSmMdzvGnxbDw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnrahPCPhZCurWKQbXdTGHAd2XaeOkekk145bXgRGiPh2NHxeDWc4qMBVb5Gq3bgVd3h6ZCkw",
+              "reviewer": {
+                "displayName": "Rada Slavova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXuzScIn43GBV6bJoF0tS80uYRge2D70HblyDQGMGvlv5mbXyCD=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-12-19T16:06:41.922500Z",
+              "updateTime": "2025-12-19T16:06:41.922500Z",
+              "reviewReply": {
+                "comment": "Благодаря за оставения отзив.",
+                "updateTime": "2025-12-19T18:09:45.670708Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnrahPCPhZCurWKQbXdTGHAd2XaeOkekk145bXgRGiPh2NHxeDWc4qMBVb5Gq3bgVd3h6ZCkw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXuzScIn43GBV6bJoF0tS80uYRge2D70HblyDQGMGvlv5mbXyCD=s120-c-rp-mo-br100",
+                  "displayName": "Rada Slavova"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-12-19T16:06:41.922500Z",
+                "updateTime": "2025-12-19T16:06:41.922500Z",
+                "reviewReply": {
+                  "comment": "Благодаря за оставения отзив.",
+                  "updateTime": "2025-12-19T18:09:45.670708Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnrahPCPhZCurWKQbXdTGHAd2XaeOkekk145bXgRGiPh2NHxeDWc4qMBVb5Gq3bgVd3h6ZCkw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlCYlGp6zkbCuYgIHAnNEoLfUmzLHXwIXF54EqI2V7gwfrj7MXX2dErOgrjtQDVFkq5drjr9w",
+              "reviewer": {
+                "displayName": "Евтим Емелов",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjU5VgGZaDPUzDIY5lx3uBbl-_ThtFTFwDlOb6xQLZiftc2VdrLn=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-12-15T09:27:33.303635Z",
+              "updateTime": "2025-12-15T09:27:33.303635Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqlCYlGp6zkbCuYgIHAnNEoLfUmzLHXwIXF54EqI2V7gwfrj7MXX2dErOgrjtQDVFkq5drjr9w",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjU5VgGZaDPUzDIY5lx3uBbl-_ThtFTFwDlOb6xQLZiftc2VdrLn=s120-c-rp-mo-br100",
+                  "displayName": "Евтим Емелов"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-12-15T09:27:33.303635Z",
+                "updateTime": "2025-12-15T09:27:33.303635Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlCYlGp6zkbCuYgIHAnNEoLfUmzLHXwIXF54EqI2V7gwfrj7MXX2dErOgrjtQDVFkq5drjr9w"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnTKWi5rR9XqqhgFkT87qZazmj7ZVDgscGm8b67Xz0MBXM84KIowWcx78Arfs_YcaUurBG2xg",
+              "reviewer": {
+                "displayName": "Stela Dinkova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocL1uNqDsMiTZUpTx_vYG-APIEJUG6-TTyCF_ckYA-K_dd3bKA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Техникът дойде на следващия ден дори малко по-рано от уговорения час и реши проблема за 30 мин. Много мил човек, препоръчвам.\n\n(Translated by Google)\nThe technician came the next day, even a little earlier than the agreed time, and fixed the problem in 30 minutes. Very nice guy, I recommend.",
+              "createTime": "2025-12-02T17:16:56.994560Z",
+              "updateTime": "2025-12-02T17:16:56.994560Z",
+              "reviewReply": {
+                "comment": "Благодаря ви за споделеното мнение!",
+                "updateTime": "2026-01-07T14:30:53.851385Z"
+              },
+              "raw": {
+                "reviewId": "AbFvOqnTKWi5rR9XqqhgFkT87qZazmj7ZVDgscGm8b67Xz0MBXM84KIowWcx78Arfs_YcaUurBG2xg",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocL1uNqDsMiTZUpTx_vYG-APIEJUG6-TTyCF_ckYA-K_dd3bKA=s120-c-rp-mo-br100",
+                  "displayName": "Stela Dinkova"
+                },
+                "starRating": "FIVE",
+                "comment": "Техникът дойде на следващия ден дори малко по-рано от уговорения час и реши проблема за 30 мин. Много мил човек, препоръчвам.\n\n(Translated by Google)\nThe technician came the next day, even a little earlier than the agreed time, and fixed the problem in 30 minutes. Very nice guy, I recommend.",
+                "createTime": "2025-12-02T17:16:56.994560Z",
+                "updateTime": "2025-12-02T17:16:56.994560Z",
+                "reviewReply": {
+                  "comment": "Благодаря ви за споделеното мнение!",
+                  "updateTime": "2026-01-07T14:30:53.851385Z",
+                  "reviewReplyState": "APPROVED"
+                },
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnTKWi5rR9XqqhgFkT87qZazmj7ZVDgscGm8b67Xz0MBXM84KIowWcx78Arfs_YcaUurBG2xg"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmsqS8WNeLezWVkOIp-VxE3oCh4ogqnAeTFd0wff9T5JJXk6L3pRJLLqcqrQ7I0djAEQBiAkg",
+              "reviewer": {
+                "displayName": "Marieta Gavanozova",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWrzEzkROlXJn_AVRs7u4wYsKeECKCJedT3_72ZRrhXLWctCzTAQQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Изключително съм доволна и силно препоръчвам!\nИмах много спешна нужда от ремонт на бойлер.\nГ-н Иванов се отзова още на същия ден и проблемът беше отстранен веднага.\nМного благодаря за бързата реакция и качеството на свършената работа!\n\n(Translated by Google)\nI am extremely satisfied and highly recommend!\nI had a very urgent need for boiler repair.\nMr. Ivanov responded the same day and the problem was fixed immediately.\nThank you very much for the quick response and the quality of the work done!",
+              "createTime": "2025-11-14T03:23:26.695096Z",
+              "updateTime": "2025-11-14T03:23:26.695096Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqmsqS8WNeLezWVkOIp-VxE3oCh4ogqnAeTFd0wff9T5JJXk6L3pRJLLqcqrQ7I0djAEQBiAkg",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWrzEzkROlXJn_AVRs7u4wYsKeECKCJedT3_72ZRrhXLWctCzTAQQ=s120-c-rp-mo-br100",
+                  "displayName": "Marieta Gavanozova"
+                },
+                "starRating": "FIVE",
+                "comment": "Изключително съм доволна и силно препоръчвам!\nИмах много спешна нужда от ремонт на бойлер.\nГ-н Иванов се отзова още на същия ден и проблемът беше отстранен веднага.\nМного благодаря за бързата реакция и качеството на свършената работа!\n\n(Translated by Google)\nI am extremely satisfied and highly recommend!\nI had a very urgent need for boiler repair.\nMr. Ivanov responded the same day and the problem was fixed immediately.\nThank you very much for the quick response and the quality of the work done!",
+                "createTime": "2025-11-14T03:23:26.695096Z",
+                "updateTime": "2025-11-14T03:23:26.695096Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmsqS8WNeLezWVkOIp-VxE3oCh4ogqnAeTFd0wff9T5JJXk6L3pRJLLqcqrQ7I0djAEQBiAkg"
+              }
+            },
+            {
+              "reviewId": "AbFvOqk-UNzaoib_S_bzWGCfG3sC4olWTHKcz9UYzhBivNL9GOl0mPiC5aK_hgjWggEPmnqb_Dv4qg",
+              "reviewer": {
+                "displayName": "Атанас Колев",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUuWw4o2YjQUcYM9GY0riPMaM66NXKWnQ0Ra9mpdbdcPUtqX5yD=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много бързо и точно, обслужване на повреденият уред!!Фурна Bosch!!\n\n(Translated by Google)\nVery fast and accurate service of the damaged appliance!! Bosch oven!!",
+              "createTime": "2025-11-13T15:57:59.973417Z",
+              "updateTime": "2025-11-13T15:57:59.973417Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqk-UNzaoib_S_bzWGCfG3sC4olWTHKcz9UYzhBivNL9GOl0mPiC5aK_hgjWggEPmnqb_Dv4qg",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUuWw4o2YjQUcYM9GY0riPMaM66NXKWnQ0Ra9mpdbdcPUtqX5yD=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Атанас Колев"
+                },
+                "starRating": "FIVE",
+                "comment": "Много бързо и точно, обслужване на повреденият уред!!Фурна Bosch!!\n\n(Translated by Google)\nVery fast and accurate service of the damaged appliance!! Bosch oven!!",
+                "createTime": "2025-11-13T15:57:59.973417Z",
+                "updateTime": "2025-11-13T15:57:59.973417Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqk-UNzaoib_S_bzWGCfG3sC4olWTHKcz9UYzhBivNL9GOl0mPiC5aK_hgjWggEPmnqb_Dv4qg"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmkioSFCIcwQswsQI_KIM0KUZn62kLLEp-kiSTAH9s9Kw753O2FDnh477VSy-q_HEm2vMQsFA",
+              "reviewer": {
+                "displayName": "Виктор Кирчев",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXsV5XLKZtdBiVQzjF-iBRwDtMd2aYeMPT5kHItV0vdWolU2c8=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-11-08T07:53:50.788617Z",
+              "updateTime": "2025-11-08T07:53:50.788617Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqmkioSFCIcwQswsQI_KIM0KUZn62kLLEp-kiSTAH9s9Kw753O2FDnh477VSy-q_HEm2vMQsFA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXsV5XLKZtdBiVQzjF-iBRwDtMd2aYeMPT5kHItV0vdWolU2c8=s120-c-rp-mo-br100",
+                  "displayName": "Виктор Кирчев"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-11-08T07:53:50.788617Z",
+                "updateTime": "2025-11-08T07:53:50.788617Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmkioSFCIcwQswsQI_KIM0KUZn62kLLEp-kiSTAH9s9Kw753O2FDnh477VSy-q_HEm2vMQsFA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkGsgiFiNC5UC3rM-z6KFfNyHNG3b7N0OfMWOYGvNoNiC-G1BuAK_0IQXXP5o6ZdnjC_ouw",
+              "reviewer": {
+                "displayName": "Tatiana Staneva-Stroedter",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKuuLLDA_D4v-wGG9mwwuBa_qL-p_vvrE0lACxTybgUjUXqNw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Бързо и точно решаване на проблема! Благодаря!\nОтново бих избрала !\n\n(Translated by Google)\nFast and accurate problem solving! Thank you!\nI would choose again!",
+              "createTime": "2025-11-03T11:50:03.025307Z",
+              "updateTime": "2025-11-03T11:50:03.025307Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqkGsgiFiNC5UC3rM-z6KFfNyHNG3b7N0OfMWOYGvNoNiC-G1BuAK_0IQXXP5o6ZdnjC_ouw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKuuLLDA_D4v-wGG9mwwuBa_qL-p_vvrE0lACxTybgUjUXqNw=s120-c-rp-mo-br100",
+                  "displayName": "Tatiana Staneva-Stroedter"
+                },
+                "starRating": "FIVE",
+                "comment": "Бързо и точно решаване на проблема! Благодаря!\nОтново бих избрала !\n\n(Translated by Google)\nFast and accurate problem solving! Thank you!\nI would choose again!",
+                "createTime": "2025-11-03T11:50:03.025307Z",
+                "updateTime": "2025-11-03T11:50:03.025307Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkGsgiFiNC5UC3rM-z6KFfNyHNG3b7N0OfMWOYGvNoNiC-G1BuAK_0IQXXP5o6ZdnjC_ouw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnkDjX7E12VGkz3CMKEq5iSG83bY3gL3_Mu1cRdSik4gv8tJ14MhRc2xR2ISpJVw7UCeGosgw",
+              "reviewer": {
+                "displayName": "Galina Schuler",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKGTfi5x19ggVVUbSLBtcJUnLB-djNc7UonJrDZkOlVJQHnbg=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Още на следващия ден след нашето обаждане, пералнята ни беше отремонтирана. Бърза реакция и качествена работа\n\n(Translated by Google)\nThe very next day after our call, our washing machine was repaired. Quick response and quality work",
+              "createTime": "2025-11-01T17:38:57.490233Z",
+              "updateTime": "2025-11-01T17:43:41.171227Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqnkDjX7E12VGkz3CMKEq5iSG83bY3gL3_Mu1cRdSik4gv8tJ14MhRc2xR2ISpJVw7UCeGosgw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKGTfi5x19ggVVUbSLBtcJUnLB-djNc7UonJrDZkOlVJQHnbg=s120-c-rp-mo-br100",
+                  "displayName": "Galina Schuler"
+                },
+                "starRating": "FIVE",
+                "comment": "Още на следващия ден след нашето обаждане, пералнята ни беше отремонтирана. Бърза реакция и качествена работа\n\n(Translated by Google)\nThe very next day after our call, our washing machine was repaired. Quick response and quality work",
+                "createTime": "2025-11-01T17:38:57.490233Z",
+                "updateTime": "2025-11-01T17:43:41.171227Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnkDjX7E12VGkz3CMKEq5iSG83bY3gL3_Mu1cRdSik4gv8tJ14MhRc2xR2ISpJVw7UCeGosgw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnXE8YplhXG9jUr3l2zwflWNcCppXH6fmNLFKSWFlxAVBQRMhJm-wce_rDDgtaowLzf7BugUQ",
+              "reviewer": {
+                "displayName": "Nadejda Georgieva",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKkX6OaTqKq1Nwd2ued1VHu7Csg0JSUkhl2UH1ylbujZT7VcQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Имах проблем с пералнята.След като звъннах,още на следващия ден дойде майстор и си свърши работата перфектно.Препоръчвам!\n\n(Translated by Google)\nI had a problem with my washing machine. After I called, a repairman came the next day and did the job perfectly. I recommend!",
+              "createTime": "2025-10-26T06:07:06.969720Z",
+              "updateTime": "2025-10-26T06:07:06.969720Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqnXE8YplhXG9jUr3l2zwflWNcCppXH6fmNLFKSWFlxAVBQRMhJm-wce_rDDgtaowLzf7BugUQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKkX6OaTqKq1Nwd2ued1VHu7Csg0JSUkhl2UH1ylbujZT7VcQ=s120-c-rp-mo-br100",
+                  "displayName": "Nadejda Georgieva"
+                },
+                "starRating": "FIVE",
+                "comment": "Имах проблем с пералнята.След като звъннах,още на следващия ден дойде майстор и си свърши работата перфектно.Препоръчвам!\n\n(Translated by Google)\nI had a problem with my washing machine. After I called, a repairman came the next day and did the job perfectly. I recommend!",
+                "createTime": "2025-10-26T06:07:06.969720Z",
+                "updateTime": "2025-10-26T06:07:06.969720Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnXE8YplhXG9jUr3l2zwflWNcCppXH6fmNLFKSWFlxAVBQRMhJm-wce_rDDgtaowLzf7BugUQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlF6tlJI80HnOuWhVUdn-UtGds3WcL_eMHzwBkk_5I6XfZU7DCbJ13JsThh_lrWIOVCeARt",
+              "reviewer": {
+                "displayName": "йордан йорданов",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVAeKQfl_EeOoWcVw_zHom1wZ0tnh1kndGypSgt_NLC3BV2D5EA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-10-14T14:40:33.031820Z",
+              "updateTime": "2025-10-14T14:40:33.031820Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqlF6tlJI80HnOuWhVUdn-UtGds3WcL_eMHzwBkk_5I6XfZU7DCbJ13JsThh_lrWIOVCeARt",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVAeKQfl_EeOoWcVw_zHom1wZ0tnh1kndGypSgt_NLC3BV2D5EA=s120-c-rp-mo-br100",
+                  "displayName": "йордан йорданов"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-10-14T14:40:33.031820Z",
+                "updateTime": "2025-10-14T14:40:33.031820Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlF6tlJI80HnOuWhVUdn-UtGds3WcL_eMHzwBkk_5I6XfZU7DCbJ13JsThh_lrWIOVCeARt"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkmFqmW4O5eyFYQ_M5MmXeLMDuwaEs0PdyDvINsvId_jeXt06pH4VrPXxB_tQiNgAqUeJ75kg",
+              "reviewer": {
+                "displayName": "SILVIQ TODOROVA",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKO-PMiv081L4r3krKFb0N6sAVSIAChqyLTGZVmLESm6fGMpw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-10-11T06:27:56.298777Z",
+              "updateTime": "2025-10-11T06:27:56.298777Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqkmFqmW4O5eyFYQ_M5MmXeLMDuwaEs0PdyDvINsvId_jeXt06pH4VrPXxB_tQiNgAqUeJ75kg",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKO-PMiv081L4r3krKFb0N6sAVSIAChqyLTGZVmLESm6fGMpw=s120-c-rp-mo-br100",
+                  "displayName": "SILVIQ TODOROVA"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-10-11T06:27:56.298777Z",
+                "updateTime": "2025-10-11T06:27:56.298777Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkmFqmW4O5eyFYQ_M5MmXeLMDuwaEs0PdyDvINsvId_jeXt06pH4VrPXxB_tQiNgAqUeJ75kg"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlagfc4uwNMH1A0FtDE4dd2BWfBMyoPdd4_Mmr6shWII55Fj0rEQ-Jmogxj0y_B_1xlpQG46A",
+              "reviewer": {
+                "displayName": "Dian Raykov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUosOnJaln0WpTAiNMEq6hSKuDQQfTxobnSZuBhtRkHeQ7NRb8=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Коректно и бързо обслужване, препоръчвам.\n\n(Translated by Google)\nCorrect and fast service, I recommend.",
+              "createTime": "2025-10-11T06:19:04.750253Z",
+              "updateTime": "2025-10-11T06:20:35.035562Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqlagfc4uwNMH1A0FtDE4dd2BWfBMyoPdd4_Mmr6shWII55Fj0rEQ-Jmogxj0y_B_1xlpQG46A",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUosOnJaln0WpTAiNMEq6hSKuDQQfTxobnSZuBhtRkHeQ7NRb8=s120-c-rp-mo-br100",
+                  "displayName": "Dian Raykov"
+                },
+                "starRating": "FIVE",
+                "comment": "Коректно и бързо обслужване, препоръчвам.\n\n(Translated by Google)\nCorrect and fast service, I recommend.",
+                "createTime": "2025-10-11T06:19:04.750253Z",
+                "updateTime": "2025-10-11T06:20:35.035562Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlagfc4uwNMH1A0FtDE4dd2BWfBMyoPdd4_Mmr6shWII55Fj0rEQ-Jmogxj0y_B_1xlpQG46A"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkFHAw7O5V2j6kbKfIq6htcbTIUkUBtjv8J1xDkF5LGXIGjgExTZX7ikpVDz1ceQ_txHwYD",
+              "reviewer": {
+                "displayName": "Nikolay Hinov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJUHdANMPVbnGw-a-ZDfirPQOhW3xMc50No2RgTdhfh3PWN5A=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-10-10T21:04:46.130368Z",
+              "updateTime": "2025-10-10T21:04:46.130368Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqkFHAw7O5V2j6kbKfIq6htcbTIUkUBtjv8J1xDkF5LGXIGjgExTZX7ikpVDz1ceQ_txHwYD",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJUHdANMPVbnGw-a-ZDfirPQOhW3xMc50No2RgTdhfh3PWN5A=s120-c-rp-mo-br100",
+                  "displayName": "Nikolay Hinov"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-10-10T21:04:46.130368Z",
+                "updateTime": "2025-10-10T21:04:46.130368Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkFHAw7O5V2j6kbKfIq6htcbTIUkUBtjv8J1xDkF5LGXIGjgExTZX7ikpVDz1ceQ_txHwYD"
+              }
+            },
+            {
+              "reviewId": "AbFvOqly6tPDNnfsWxIRiBThibkzN6Jvu6qy4kAozzwVgGZhD_qxOKDsEqGu6nU9K0cxKAHf0W0PiQ",
+              "reviewer": {
+                "displayName": "Krasimir Elenkov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUKPajw2hMU7fXWMDxKLYUqQhFst9syjGl_SNKs9mnFNSR5Ttc5=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много съм доволен бързо и на достъпни цени!\n\n(Translated by Google)\nI am very satisfied, fast and at affordable prices!",
+              "createTime": "2025-10-10T20:32:51.739037Z",
+              "updateTime": "2025-10-10T20:32:51.739037Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqly6tPDNnfsWxIRiBThibkzN6Jvu6qy4kAozzwVgGZhD_qxOKDsEqGu6nU9K0cxKAHf0W0PiQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUKPajw2hMU7fXWMDxKLYUqQhFst9syjGl_SNKs9mnFNSR5Ttc5=s120-c-rp-mo-br100",
+                  "displayName": "Krasimir Elenkov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много съм доволен бързо и на достъпни цени!\n\n(Translated by Google)\nI am very satisfied, fast and at affordable prices!",
+                "createTime": "2025-10-10T20:32:51.739037Z",
+                "updateTime": "2025-10-10T20:32:51.739037Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqly6tPDNnfsWxIRiBThibkzN6Jvu6qy4kAozzwVgGZhD_qxOKDsEqGu6nU9K0cxKAHf0W0PiQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlWQbjmDofedNxlv0jNJE1q4qsKWNq6fte6C7GIgSLbrBSnOxAZ3mwI76SIHjRA-Bb8kKV_4A",
+              "reviewer": {
+                "displayName": "Angel Atanasov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocL_4m53_zTYO_AMzoqk6gkEn7PkmRr_CyWekvvzld5AMYD1YA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-10-10T20:00:27.762500Z",
+              "updateTime": "2025-10-10T20:00:27.762500Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqlWQbjmDofedNxlv0jNJE1q4qsKWNq6fte6C7GIgSLbrBSnOxAZ3mwI76SIHjRA-Bb8kKV_4A",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocL_4m53_zTYO_AMzoqk6gkEn7PkmRr_CyWekvvzld5AMYD1YA=s120-c-rp-mo-br100",
+                  "displayName": "Angel Atanasov"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-10-10T20:00:27.762500Z",
+                "updateTime": "2025-10-10T20:00:27.762500Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlWQbjmDofedNxlv0jNJE1q4qsKWNq6fte6C7GIgSLbrBSnOxAZ3mwI76SIHjRA-Bb8kKV_4A"
+              }
+            },
+            {
+              "reviewId": "AbFvOqn9UnZQNVBEw9A0BmAZs2bqwgKUZ7vP-aR8jvqsmllw44-ZpxKfakpdxvfOr5mSAC4Ln298kw",
+              "reviewer": {
+                "displayName": "Elena Ortiz",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJQnSKQtiQ4JF3NkfxFLfukkeFQUNl561KdGJWyB3KOsnF4sA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Супер доволна съм от работата на Росен, дойде още на следващия ден след обаждането ми при повреда в миялната машина. Избрах номера му случайно, след търсене на техник в интернет. Направи диагностика на старата миялна машина, откри два проблема, единия в платката и друг в електрониката, и ми обясни какви са плюсовете и минусите за ремонт на старата срещу закупуване на нова машина. В крайна сметка решението ми беше да купя нова, а той направи демонтаж на старата и монтаж на новата миялна. Препоръча ми дори марка и модел, базирайки се на опита си. Много акуратен, обяснява всичко подробно. Новата машина работи прекрасно, няма проблеми в свързването й. Вече препоръчах Росен на приятели и познати. Конкурентни цени. Няма да се поколебая да го потърся отново. Благодаря!\n\n(Translated by Google)\nI am super satisfied with Rosen's work, he came the very next day after I called about a dishwasher problem. I chose his number by chance, after searching for a technician on the internet. He diagnosed the old dishwasher, found two problems, one in the circuit board and the other in the electronics, and explained to me the pros and cons of repairing the old one versus buying a new one. In the end, my decision was to buy a new one, and he dismantled the old one and installed the new dishwasher. He even recommended a brand and model based on his experience. Very thorough, explains everything in detail. The new machine works great, there are no problems connecting it. I have already recommended Rosen to friends and acquaintances. Competitive prices. I will not hesitate to seek him out again. Thank you!",
+              "createTime": "2025-09-24T20:48:33.316977Z",
+              "updateTime": "2025-09-24T20:48:33.316977Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqn9UnZQNVBEw9A0BmAZs2bqwgKUZ7vP-aR8jvqsmllw44-ZpxKfakpdxvfOr5mSAC4Ln298kw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJQnSKQtiQ4JF3NkfxFLfukkeFQUNl561KdGJWyB3KOsnF4sA=s120-c-rp-mo-br100",
+                  "displayName": "Elena Ortiz"
+                },
+                "starRating": "FIVE",
+                "comment": "Супер доволна съм от работата на Росен, дойде още на следващия ден след обаждането ми при повреда в миялната машина. Избрах номера му случайно, след търсене на техник в интернет. Направи диагностика на старата миялна машина, откри два проблема, единия в платката и друг в електрониката, и ми обясни какви са плюсовете и минусите за ремонт на старата срещу закупуване на нова машина. В крайна сметка решението ми беше да купя нова, а той направи демонтаж на старата и монтаж на новата миялна. Препоръча ми дори марка и модел, базирайки се на опита си. Много акуратен, обяснява всичко подробно. Новата машина работи прекрасно, няма проблеми в свързването й. Вече препоръчах Росен на приятели и познати. Конкурентни цени. Няма да се поколебая да го потърся отново. Благодаря!\n\n(Translated by Google)\nI am super satisfied with Rosen's work, he came the very next day after I called about a dishwasher problem. I chose his number by chance, after searching for a technician on the internet. He diagnosed the old dishwasher, found two problems, one in the circuit board and the other in the electronics, and explained to me the pros and cons of repairing the old one versus buying a new one. In the end, my decision was to buy a new one, and he dismantled the old one and installed the new dishwasher. He even recommended a brand and model based on his experience. Very thorough, explains everything in detail. The new machine works great, there are no problems connecting it. I have already recommended Rosen to friends and acquaintances. Competitive prices. I will not hesitate to seek him out again. Thank you!",
+                "createTime": "2025-09-24T20:48:33.316977Z",
+                "updateTime": "2025-09-24T20:48:33.316977Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqn9UnZQNVBEw9A0BmAZs2bqwgKUZ7vP-aR8jvqsmllw44-ZpxKfakpdxvfOr5mSAC4Ln298kw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlsT8I2Uu2O_1yQl11bxKVxrvJsD3Q4iJ2dYKK7SIY1lGbyWirajqaC1V4aA063dSJqLJJa",
+              "reviewer": {
+                "displayName": "Niki Ruseva",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKDFBtfHZZO7I05WTy3KlOJ9ULTaZ-n7cOvYWhUjBGCk4fAFQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-09-05T16:41:30.029753Z",
+              "updateTime": "2025-09-05T16:41:30.029753Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqlsT8I2Uu2O_1yQl11bxKVxrvJsD3Q4iJ2dYKK7SIY1lGbyWirajqaC1V4aA063dSJqLJJa",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKDFBtfHZZO7I05WTy3KlOJ9ULTaZ-n7cOvYWhUjBGCk4fAFQ=s120-c-rp-mo-br100",
+                  "displayName": "Niki Ruseva"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-09-05T16:41:30.029753Z",
+                "updateTime": "2025-09-05T16:41:30.029753Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlsT8I2Uu2O_1yQl11bxKVxrvJsD3Q4iJ2dYKK7SIY1lGbyWirajqaC1V4aA063dSJqLJJa"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmVoqHBHOANQs4MmKeNAWdp3AvmUeoyIUcue3AgoOQSfpUNEhg0eKjN4IZ_DkQuiar9WHGypQ",
+              "reviewer": {
+                "displayName": "Алекс Сотиров",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocL86_zFUw7HNUXi_rG-O_TFzHa3lzMyxy6cpxmYeftMeUl_50s=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-08-22T17:05:55.750228Z",
+              "updateTime": "2025-08-22T17:05:55.750228Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqmVoqHBHOANQs4MmKeNAWdp3AvmUeoyIUcue3AgoOQSfpUNEhg0eKjN4IZ_DkQuiar9WHGypQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocL86_zFUw7HNUXi_rG-O_TFzHa3lzMyxy6cpxmYeftMeUl_50s=s120-c-rp-mo-br100",
+                  "displayName": "Алекс Сотиров"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-08-22T17:05:55.750228Z",
+                "updateTime": "2025-08-22T17:05:55.750228Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmVoqHBHOANQs4MmKeNAWdp3AvmUeoyIUcue3AgoOQSfpUNEhg0eKjN4IZ_DkQuiar9WHGypQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkf5wMCrwHmVBCnYY31_kK3HAegHnVUUWhamJu--hXm_cSw0FSXiwro45fcnFeyu3fkPFoBOA",
+              "reviewer": {
+                "displayName": "viktoria vasileva",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXqhlfcFzP-xXKRieXI7CHC21iYEfbKjvvXiVjGzdFO-C1kwW6Kgw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Коректен 🙂\n\n(Translated by Google)\nCorrect 🙂",
+              "createTime": "2025-07-06T12:06:32.664877Z",
+              "updateTime": "2025-07-06T12:06:32.664877Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqkf5wMCrwHmVBCnYY31_kK3HAegHnVUUWhamJu--hXm_cSw0FSXiwro45fcnFeyu3fkPFoBOA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXqhlfcFzP-xXKRieXI7CHC21iYEfbKjvvXiVjGzdFO-C1kwW6Kgw=s120-c-rp-mo-br100",
+                  "displayName": "viktoria vasileva"
+                },
+                "starRating": "FIVE",
+                "comment": "Коректен 🙂\n\n(Translated by Google)\nCorrect 🙂",
+                "createTime": "2025-07-06T12:06:32.664877Z",
+                "updateTime": "2025-07-06T12:06:32.664877Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkf5wMCrwHmVBCnYY31_kK3HAegHnVUUWhamJu--hXm_cSw0FSXiwro45fcnFeyu3fkPFoBOA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqk0ocvU6_agKftF8Q-E5MU9rzS40MgmohAdbj3lA0phmNonqe6IwcyO7KRSP57AzGy3tbCRYw",
+              "reviewer": {
+                "displayName": "Nikolay Neykov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIbk8kmC5JwqHuGQnsva1VIMyq1eYG7aoTpyeaAozKzNVpkRA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-07-02T05:36:09.503816Z",
+              "updateTime": "2025-07-02T05:36:09.503816Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqk0ocvU6_agKftF8Q-E5MU9rzS40MgmohAdbj3lA0phmNonqe6IwcyO7KRSP57AzGy3tbCRYw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIbk8kmC5JwqHuGQnsva1VIMyq1eYG7aoTpyeaAozKzNVpkRA=s120-c-rp-mo-br100",
+                  "displayName": "Nikolay Neykov"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-07-02T05:36:09.503816Z",
+                "updateTime": "2025-07-02T05:36:09.503816Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqk0ocvU6_agKftF8Q-E5MU9rzS40MgmohAdbj3lA0phmNonqe6IwcyO7KRSP57AzGy3tbCRYw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqn6BoOhlPAaH7yQVZ2G-BQ5XEkdRbdFeXa8uokzDTpAY9kMq2XIkaKvf2Lrl5DLz1FYxZ6rrg",
+              "reviewer": {
+                "displayName": "Valentin Ivanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKGhY2SXtRyb0ztGP-_8V3caJfZ44YEj1tHo2ddipZuq2Vdaw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-06-30T09:30:14.644071Z",
+              "updateTime": "2025-06-30T09:30:14.644071Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqn6BoOhlPAaH7yQVZ2G-BQ5XEkdRbdFeXa8uokzDTpAY9kMq2XIkaKvf2Lrl5DLz1FYxZ6rrg",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKGhY2SXtRyb0ztGP-_8V3caJfZ44YEj1tHo2ddipZuq2Vdaw=s120-c-rp-mo-br100",
+                  "displayName": "Valentin Ivanov"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-06-30T09:30:14.644071Z",
+                "updateTime": "2025-06-30T09:30:14.644071Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqn6BoOhlPAaH7yQVZ2G-BQ5XEkdRbdFeXa8uokzDTpAY9kMq2XIkaKvf2Lrl5DLz1FYxZ6rrg"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnn22lIVeArQRnTHmUIUEFhx_2k_torGQ1oVD-t_3aps63Sop1tc6C4zueDhK3R1GbCZlv3rQ",
+              "reviewer": {
+                "displayName": "Jordan Sotirov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVN_5hodY2mvcTydXA09QMv20Ig4HfF8PazgPfWNveHL4orWGxY9w=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Бързи и коректни!\n\n(Translated by Google)\nFast and correct!",
+              "createTime": "2025-06-24T16:51:00.986614Z",
+              "updateTime": "2025-06-29T16:28:22.813540Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqnn22lIVeArQRnTHmUIUEFhx_2k_torGQ1oVD-t_3aps63Sop1tc6C4zueDhK3R1GbCZlv3rQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVN_5hodY2mvcTydXA09QMv20Ig4HfF8PazgPfWNveHL4orWGxY9w=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Jordan Sotirov"
+                },
+                "starRating": "FIVE",
+                "comment": "Бързи и коректни!\n\n(Translated by Google)\nFast and correct!",
+                "createTime": "2025-06-24T16:51:00.986614Z",
+                "updateTime": "2025-06-29T16:28:22.813540Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnn22lIVeArQRnTHmUIUEFhx_2k_torGQ1oVD-t_3aps63Sop1tc6C4zueDhK3R1GbCZlv3rQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqk0gqI1R1mbxpMRUuT9deeQnoTarv1gZpZoLBJLH5J8NYMceKwKJZ2aEko3XRH1N_vN9k3Y-w",
+              "reviewer": {
+                "displayName": "Just Crew Varna",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXE08x2TuWKyxPOYiI2_0LekmR6Qxfbbo9d1o8juqPrlw1STA8=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-06-29T10:43:46.413549Z",
+              "updateTime": "2025-06-29T10:43:46.413549Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqk0gqI1R1mbxpMRUuT9deeQnoTarv1gZpZoLBJLH5J8NYMceKwKJZ2aEko3XRH1N_vN9k3Y-w",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjXE08x2TuWKyxPOYiI2_0LekmR6Qxfbbo9d1o8juqPrlw1STA8=s120-c-rp-mo-br100",
+                  "displayName": "Just Crew Varna"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-06-29T10:43:46.413549Z",
+                "updateTime": "2025-06-29T10:43:46.413549Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqk0gqI1R1mbxpMRUuT9deeQnoTarv1gZpZoLBJLH5J8NYMceKwKJZ2aEko3XRH1N_vN9k3Y-w"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmz478P67xR4QqKyCb5cHC099de8PNLS1w59AqSKFscvVscUp4tnRJC_fedvm-dSXxf7mrpjw",
+              "reviewer": {
+                "displayName": "Илиян Неделчев",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKLyz866SQ32YjiIcf5GkBT3z7ZYz5OcTm8B5Wb9cHsx-8UMA=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Препоръчвам!\n\n(Translated by Google)\nI recommend!",
+              "createTime": "2025-06-25T18:22:48.661495Z",
+              "updateTime": "2025-06-25T18:22:48.661495Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqmz478P67xR4QqKyCb5cHC099de8PNLS1w59AqSKFscvVscUp4tnRJC_fedvm-dSXxf7mrpjw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKLyz866SQ32YjiIcf5GkBT3z7ZYz5OcTm8B5Wb9cHsx-8UMA=s120-c-rp-mo-br100",
+                  "displayName": "Илиян Неделчев"
+                },
+                "starRating": "FIVE",
+                "comment": "Препоръчвам!\n\n(Translated by Google)\nI recommend!",
+                "createTime": "2025-06-25T18:22:48.661495Z",
+                "updateTime": "2025-06-25T18:22:48.661495Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmz478P67xR4QqKyCb5cHC099de8PNLS1w59AqSKFscvVscUp4tnRJC_fedvm-dSXxf7mrpjw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqljZ8-J9BrgNzPjpnPSEYnQMthaDrLfc52Mjd7bj7jrf8lpi_23ysOf351NSTtr26j5xPSl",
+              "reviewer": {
+                "displayName": "Николай Киряков",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKvEUOdVGWykWxxjjefIjDpRW0zz_xEdPRqLvMWGtd7bO31nQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-06-25T12:29:08.145268Z",
+              "updateTime": "2025-06-25T12:29:08.145268Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqljZ8-J9BrgNzPjpnPSEYnQMthaDrLfc52Mjd7bj7jrf8lpi_23ysOf351NSTtr26j5xPSl",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKvEUOdVGWykWxxjjefIjDpRW0zz_xEdPRqLvMWGtd7bO31nQ=s120-c-rp-mo-br100",
+                  "displayName": "Николай Киряков"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-06-25T12:29:08.145268Z",
+                "updateTime": "2025-06-25T12:29:08.145268Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqljZ8-J9BrgNzPjpnPSEYnQMthaDrLfc52Mjd7bj7jrf8lpi_23ysOf351NSTtr26j5xPSl"
+              }
+            },
+            {
+              "reviewId": "AbFvOqm8zW0du2KnBqHumh5jbpQkGERzIrCig3KfyguwrFeDx0-dGl8Btsm-L30gHjBlMa8WtHpinw",
+              "reviewer": {
+                "displayName": "Velizar Dimov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJa0X9SqyIO7kCtVwZL2G1uJp0N5-6z8Fe5eKEERRubMvmixw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много много доволен ! Реагираха мигновенно,супер компетентни,проблема беше решен със съдомиялната машина.Жената доволна аз спокоен :) огромно БЛАГОДАРЯ НА ЕКИПА !\n\n(Translated by Google)\nVery very satisfied! They responded instantly, super competent, the problem was solved with the dishwasher. The wife is happy and I am calm :) A huge THANK YOU TO THE TEAM!",
+              "createTime": "2025-06-24T17:55:54.945066Z",
+              "updateTime": "2025-06-24T18:10:30.446717Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqm8zW0du2KnBqHumh5jbpQkGERzIrCig3KfyguwrFeDx0-dGl8Btsm-L30gHjBlMa8WtHpinw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJa0X9SqyIO7kCtVwZL2G1uJp0N5-6z8Fe5eKEERRubMvmixw=s120-c-rp-mo-br100",
+                  "displayName": "Velizar Dimov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много много доволен ! Реагираха мигновенно,супер компетентни,проблема беше решен със съдомиялната машина.Жената доволна аз спокоен :) огромно БЛАГОДАРЯ НА ЕКИПА !\n\n(Translated by Google)\nVery very satisfied! They responded instantly, super competent, the problem was solved with the dishwasher. The wife is happy and I am calm :) A huge THANK YOU TO THE TEAM!",
+                "createTime": "2025-06-24T17:55:54.945066Z",
+                "updateTime": "2025-06-24T18:10:30.446717Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqm8zW0du2KnBqHumh5jbpQkGERzIrCig3KfyguwrFeDx0-dGl8Btsm-L30gHjBlMa8WtHpinw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmFwoH_rrMlwhpu-pHcGOJCvhL7jaFmtMiRM9UgfFT05WcHe34BG1Y0ye5aaMwvVH3YvjchzQ",
+              "reviewer": {
+                "displayName": "Stelyana Baeva",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKt750mSg8d9FVrDHKjQ11kK1h6oXFCXdCn8rBOy7_7BP_2Rw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "",
+              "createTime": "2025-06-24T13:08:03.304547Z",
+              "updateTime": "2025-06-24T13:08:03.304547Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqmFwoH_rrMlwhpu-pHcGOJCvhL7jaFmtMiRM9UgfFT05WcHe34BG1Y0ye5aaMwvVH3YvjchzQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKt750mSg8d9FVrDHKjQ11kK1h6oXFCXdCn8rBOy7_7BP_2Rw=s120-c-rp-mo-br100",
+                  "displayName": "Stelyana Baeva"
+                },
+                "starRating": "FIVE",
+                "createTime": "2025-06-24T13:08:03.304547Z",
+                "updateTime": "2025-06-24T13:08:03.304547Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmFwoH_rrMlwhpu-pHcGOJCvhL7jaFmtMiRM9UgfFT05WcHe34BG1Y0ye5aaMwvVH3YvjchzQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqlAQtKC3a_h-nZdgp9_6gmaiolsbB-wtzOzaMYA1muHiFfrC4PBedF9Zkgumnl4fJyq7kNx",
+              "reviewer": {
+                "displayName": "Stoyan Stoyanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUh-y6-edUZy2IDabonEaAPR5axKkLIFfGPneXXhubN3pxmC1vl0g=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Коректен!\n\n(Translated by Google)\nCorrect!",
+              "createTime": "2025-06-24T10:01:28.196557Z",
+              "updateTime": "2025-06-24T10:01:28.196557Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqlAQtKC3a_h-nZdgp9_6gmaiolsbB-wtzOzaMYA1muHiFfrC4PBedF9Zkgumnl4fJyq7kNx",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjUh-y6-edUZy2IDabonEaAPR5axKkLIFfGPneXXhubN3pxmC1vl0g=s120-c-rp-mo-br100",
+                  "displayName": "Stoyan Stoyanov"
+                },
+                "starRating": "FIVE",
+                "comment": "Коректен!\n\n(Translated by Google)\nCorrect!",
+                "createTime": "2025-06-24T10:01:28.196557Z",
+                "updateTime": "2025-06-24T10:01:28.196557Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqlAQtKC3a_h-nZdgp9_6gmaiolsbB-wtzOzaMYA1muHiFfrC4PBedF9Zkgumnl4fJyq7kNx"
+              }
+            },
+            {
+              "reviewId": "AbFvOqmI7vy4ejQe8zu-J4jlU8uMmEB8d3CHPhQ-qFBzcHfmkXLsbHzm9xSqYiawWkulbjpSy-UNVA",
+              "reviewer": {
+                "displayName": "Stanimir Todorov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJCay-8hhMFfAkYLezMVoe_5ww9fTn0LqJQvG0_0Qjfo_UKDw=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Много сам доволен\n\n(Translated by Google)\nI am very satisfied.",
+              "createTime": "2025-06-22T08:20:11.460812Z",
+              "updateTime": "2025-06-22T08:20:11.460812Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqmI7vy4ejQe8zu-J4jlU8uMmEB8d3CHPhQ-qFBzcHfmkXLsbHzm9xSqYiawWkulbjpSy-UNVA",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJCay-8hhMFfAkYLezMVoe_5ww9fTn0LqJQvG0_0Qjfo_UKDw=s120-c-rp-mo-br100",
+                  "displayName": "Stanimir Todorov"
+                },
+                "starRating": "FIVE",
+                "comment": "Много сам доволен\n\n(Translated by Google)\nI am very satisfied.",
+                "createTime": "2025-06-22T08:20:11.460812Z",
+                "updateTime": "2025-06-22T08:20:11.460812Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqmI7vy4ejQe8zu-J4jlU8uMmEB8d3CHPhQ-qFBzcHfmkXLsbHzm9xSqYiawWkulbjpSy-UNVA"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnFP65xbkkkk3_s_Mc0ZwvF_psKp9jwWjvEJTovAJuBA9ifSzRnQ2iOJdDQpq8KQSt563-p",
+              "reviewer": {
+                "displayName": "Десислава Златева",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIS1ho1Ie3ADFRtBmsJ-12EcWHiNYy8rW8txzCo00P0j1TlCg=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Качествено и бързо обслужване! Препоръчвам!\n\n(Translated by Google)\nHigh-quality and fast service! I recommend!",
+              "createTime": "2025-06-21T16:37:47.238439Z",
+              "updateTime": "2025-06-21T16:37:47.238439Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqnFP65xbkkkk3_s_Mc0ZwvF_psKp9jwWjvEJTovAJuBA9ifSzRnQ2iOJdDQpq8KQSt563-p",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIS1ho1Ie3ADFRtBmsJ-12EcWHiNYy8rW8txzCo00P0j1TlCg=s120-c-rp-mo-br100",
+                  "displayName": "Десислава Златева"
+                },
+                "starRating": "FIVE",
+                "comment": "Качествено и бързо обслужване! Препоръчвам!\n\n(Translated by Google)\nHigh-quality and fast service! I recommend!",
+                "createTime": "2025-06-21T16:37:47.238439Z",
+                "updateTime": "2025-06-21T16:37:47.238439Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnFP65xbkkkk3_s_Mc0ZwvF_psKp9jwWjvEJTovAJuBA9ifSzRnQ2iOJdDQpq8KQSt563-p"
+              }
+            },
+            {
+              "reviewId": "AbFvOqkD03TCGuhWyh_9ajsiXiaUn2p2zvv3Ha5-s1CPvNiSztouo_4woPZNkTeFbV4_ya0FvXmlzQ",
+              "reviewer": {
+                "displayName": "Димитър Петров",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKiSP2oCOgL6nIdsDTDnyzbF3HFUwUSwFcM4SfSiFAc2azlAQ=s120-c-rp-mo-ba12-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Коректни и бързо обслужване\n\n(Translated by Google)\nCorrect and fast service",
+              "createTime": "2025-06-21T16:17:06.367531Z",
+              "updateTime": "2025-06-21T16:17:06.367531Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqkD03TCGuhWyh_9ajsiXiaUn2p2zvv3Ha5-s1CPvNiSztouo_4woPZNkTeFbV4_ya0FvXmlzQ",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKiSP2oCOgL6nIdsDTDnyzbF3HFUwUSwFcM4SfSiFAc2azlAQ=s120-c-rp-mo-ba12-br100",
+                  "displayName": "Димитър Петров"
+                },
+                "starRating": "FIVE",
+                "comment": "Коректни и бързо обслужване\n\n(Translated by Google)\nCorrect and fast service",
+                "createTime": "2025-06-21T16:17:06.367531Z",
+                "updateTime": "2025-06-21T16:17:06.367531Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqkD03TCGuhWyh_9ajsiXiaUn2p2zvv3Ha5-s1CPvNiSztouo_4woPZNkTeFbV4_ya0FvXmlzQ"
+              }
+            },
+            {
+              "reviewId": "AbFvOqk7pUQV-kYMuiaU7YzT8ySfu6kX8QbyT7wL4bNG4ptaKF3l9rsvQy_tSqzUZqdIITYi2iCfrw",
+              "reviewer": {
+                "displayName": "Denis Wheeler",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJH6y6g30Xid3Hu59TR0u-IcGQOlPRZ80qBLhuJ1Vsf8NQnOQ=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Качествено и бързо обслужване на достъпни цени !\n\n(Translated by Google)\nQuality and fast service at affordable prices!",
+              "createTime": "2025-06-21T07:02:13.994205Z",
+              "updateTime": "2025-06-21T07:02:13.994205Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqk7pUQV-kYMuiaU7YzT8ySfu6kX8QbyT7wL4bNG4ptaKF3l9rsvQy_tSqzUZqdIITYi2iCfrw",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJH6y6g30Xid3Hu59TR0u-IcGQOlPRZ80qBLhuJ1Vsf8NQnOQ=s120-c-rp-mo-br100",
+                  "displayName": "Denis Wheeler"
+                },
+                "starRating": "FIVE",
+                "comment": "Качествено и бързо обслужване на достъпни цени !\n\n(Translated by Google)\nQuality and fast service at affordable prices!",
+                "createTime": "2025-06-21T07:02:13.994205Z",
+                "updateTime": "2025-06-21T07:02:13.994205Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqk7pUQV-kYMuiaU7YzT8ySfu6kX8QbyT7wL4bNG4ptaKF3l9rsvQy_tSqzUZqdIITYi2iCfrw"
+              }
+            },
+            {
+              "reviewId": "AbFvOqnKHiJgfOewPOehX8tImmIHoM2NkABpwga4_aUGyUkDkAvu63QeQzsuGt7k7FbsH_MuqDNW",
+              "reviewer": {
+                "displayName": "Martin Ivanov",
+                "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIRf_XsH1aoo-P4ke8QdJ7uej0wyuKrs-_hwM4WRzBr7Djo0g=s120-c-rp-mo-br100"
+              },
+              "starRating": "FIVE",
+              "comment": "Имах проблем с бойлера.След като се обадих на другия ден г-н Н.Иванов се отзова и бързо отстрани повредата.Препоръчвам!\n\n(Translated by Google)\nI had a problem with the water heater. After I called the next day, Mr. N. Ivanov responded and quickly fixed the problem. I recommend!",
+              "createTime": "2025-06-19T18:09:23.042005Z",
+              "updateTime": "2025-06-19T18:09:23.042005Z",
+              "reviewReply": null,
+              "raw": {
+                "reviewId": "AbFvOqnKHiJgfOewPOehX8tImmIHoM2NkABpwga4_aUGyUkDkAvu63QeQzsuGt7k7FbsH_MuqDNW",
+                "reviewer": {
+                  "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIRf_XsH1aoo-P4ke8QdJ7uej0wyuKrs-_hwM4WRzBr7Djo0g=s120-c-rp-mo-br100",
+                  "displayName": "Martin Ivanov"
+                },
+                "starRating": "FIVE",
+                "comment": "Имах проблем с бойлера.След като се обадих на другия ден г-н Н.Иванов се отзова и бързо отстрани повредата.Препоръчвам!\n\n(Translated by Google)\nI had a problem with the water heater. After I called the next day, Mr. N. Ivanov responded and quickly fixed the problem. I recommend!",
+                "createTime": "2025-06-19T18:09:23.042005Z",
+                "updateTime": "2025-06-19T18:09:23.042005Z",
+                "name": "accounts/110736349932411984459/locations/12353870598532082839/reviews/AbFvOqnKHiJgfOewPOehX8tImmIHoM2NkABpwga4_aUGyUkDkAvu63QeQzsuGt7k7FbsH_MuqDNW"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
