@@ -127,16 +127,16 @@ const contactText = isEN
   document.addEventListener('DOMContentLoaded', () => {
     const detailsElements = document.querySelectorAll('#faq details');
     
-    detailsElements.forEach(details => {
+    detailsElements.forEach((details) => {
       const summary = details.querySelector('summary');
       
       // Only attach the listener to the summary element
       if (summary) {
-        summary.addEventListener('click', (e) => {
+        summary.addEventListener('click', () => {
           // Don't prevent default behavior - let it toggle naturally
           // Just close other details when opening a new one
-          if (!details.open) {
-            detailsElements.forEach(el => {
+          if (!details.hasAttribute('open')) {
+            detailsElements.forEach((el) => {
               if (el !== details) el.removeAttribute('open');
             });
           }
