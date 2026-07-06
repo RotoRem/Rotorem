@@ -1,0 +1,283 @@
+---
+import reviewsData from '../data/google-reviews.json';
+import { formatReviewDate, getLocalizedReviewComment } from '../utils/googleReviews';
+
+interface Props {
+  isEN?: boolean;
+}
+
+const { isEN = false } = Astro.props;
+
+const reviewLang = isEN ? 'en' : 'bg';
+const locations = reviewsData.accounts.flatMap((account) => account.locations);
+
+function getLocalizedLocationTitle(title: string): string {
+  if (!isEN) {
+    return title;
+  }
+
+  return title.replace('РотоРем', 'RotoRem').replace('Варна', 'Varna');
+}
+
+const labels = isEN
+  ? {
+      heading: 'Google Reviews for RotoRem',
+      totalReviews: 'Total reviews fetched',
+      lastSync: 'Last synced',
+      reviews: 'reviews',
+      writeReview: 'Write a review',
+      googleUser: 'Google user',
+      replyFrom: 'Reply from RotoRem:',
+    }
+  : {
+      heading: 'Google ревюта за РотоРем',
+      totalReviews: 'Общо изтеглени ревюта',
+      lastSync: 'Последна синхронизация',
+      reviews: 'ревюта',
+      writeReview: 'Напиши ревю',
+      googleUser: 'Google потребител',
+      replyFrom: 'Отговор от РотоРем:',
+    };
+
+function ratingToNumber(starRating: string) {
+  const map: Record<string, number> = {
+    ONE: 1,
+    TWO: 2,
+    THREE: 3,
+    FOUR: 4,
+    FIVE: 5,
+  };
+
+  return map[starRating] || 0;
+}
+
+function renderStars(starRating: string) {
+  const rating = ratingToNumber(starRating);
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+}
+
+---
+
+<section class="page">
+  <header class="page-header">
+    <h1>{labels.heading}</h1>
+    <p>
+      {labels.totalReviews}: <strong>{reviewsData.totalReviews}</strong>.
+      {labels.lastSync}: {formatReviewDate(reviewsData.syncedAt, reviewLang)}.
+    </p>
+  </header>
+
+  {
+    locations.map((location) => (
+      <section class="location">
+        <div class="location-head">
+          <div>
+            <h2>{getLocalizedLocationTitle(location.title)}</h2>
+            <div class="location-meta">
+              {location.totalReviews} {labels.reviews}
+              {location.phone ? ` · ${location.phone}` : ''}
+            </div>
+          </div>
+
+          {
+            location.newReviewUri && (
+              <a class="review-button" href={location.newReviewUri} target="_blank" rel="noopener noreferrer">
+                {labels.writeReview}
+              </a>
+            )
+          }
+        </div>
+
+        <div class="reviews-grid">
+          {
+            location.reviews.map((review) => (
+              <article class="review-card">
+                <div class="review-top">
+                  {
+                    review.reviewer.profilePhotoUrl ? (
+                      <img
+                        class="avatar"
+                        src={review.reviewer.profilePhotoUrl}
+                        alt={review.reviewer.displayName || 'Google reviewer'}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div class="avatar"></div>
+                    )
+                  }
+
+                  <div>
+                    <div class="reviewer">{review.reviewer.displayName || labels.googleUser}</div>
+                    <div class="date">{formatReviewDate(review.createTime, reviewLang)}</div>
+                  </div>
+                </div>
+
+                <div class="stars">{renderStars(review.starRating)}</div>
+
+                {
+                  review.comment && (
+                    <div class="comment">{getLocalizedReviewComment(review.comment, reviewLang)}</div>
+                  )
+                }
+
+                {
+                  review.reviewReply && (
+                    <div class="reply">
+                      <strong>{labels.replyFrom}</strong>
+                      {review.reviewReply.comment}
+                    </div>
+                  )
+                }
+              </article>
+            ))
+          }
+        </div>
+      </section>
+    ))
+  }
+</section>
+
+<style>
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 20px;
+  }
+
+  .page-header {
+    margin-bottom: 32px;
+  }
+
+  .page-header h1 {
+    margin: 0 0 12px;
+    font-size: 38px;
+    line-height: 1.15;
+    color: #172033;
+  }
+
+  .page-header p {
+    margin: 0;
+    color: #5f6b7a;
+    font-size: 17px;
+  }
+
+  .location {
+    margin-top: 40px;
+  }
+
+  .location-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .location h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    color: #172033;
+  }
+
+  .location-meta {
+    color: #5f6b7a;
+    font-size: 15px;
+  }
+
+  .review-button {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: #172033;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .review-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .review-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    object-fit: cover;
+    background: #e5e7eb;
+  }
+
+  .reviewer {
+    font-weight: 700;
+  }
+
+  .date {
+    font-size: 13px;
+    color: #7a8492;
+    margin-top: 3px;
+  }
+
+  .stars {
+    color: #f5a400;
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .comment {
+    color: #2d3748;
+    font-size: 15px;
+    line-height: 1.55;
+    white-space: pre-line;
+  }
+
+  .reply {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    font-size: 14px;
+    color: #334155;
+  }
+
+  .reply strong {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 900px) {
+    .reviews-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page-header h1 {
+      font-size: 30px;
+    }
+
+    .location-head {
+      flex-direction: column;
+    }
+
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
