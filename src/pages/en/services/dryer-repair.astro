@@ -1,6 +1,9 @@
 ---
 import Layout from '../../../layouts/Base.astro';
+import ServicePricing from '../../../components/ServicePricing.astro';
+import { getServicePricing } from '../../../data/service-prices';
 
+const pricing = getServicePricing('dryer', 'varna', 'en');
 const title = 'Dryer Repair in Varna | In-Home Service by RotoRem';
 const description = 'Fast dryer repair in Varna for all major brands. We fix heating problems, drum faults, electronics issues, and unusual noise with warranty.';
 ---
@@ -133,6 +136,8 @@ const description = 'Fast dryer repair in Varna for all major brands. We fix hea
           </div>
         </div>
       </section>
+
+      {pricing && <ServicePricing pricing={pricing} accent="indigo" />}
 
       <section class="mb-16">
         <div class="text-center mb-8">

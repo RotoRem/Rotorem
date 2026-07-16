@@ -1,9 +1,12 @@
 ---
 import Layout from '../../../layouts/Base.astro';
+import ServicePricing from '../../../components/ServicePricing.astro';
+import { getServicePricing } from '../../../data/service-prices';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const pricing = getServicePricing('boiler', 'sofia', lang);
 
 const title = 'Ремонт и монтаж на бойлери в София | Сервиз РотоРем';
 const description = 'Сервиз за ремонт на бойлери в София с бързо обслужване на адрес ✓ Професионален монтаж и демонтаж ✓ Гаранция за качество ✓ Свържете се с нас на ☎ 089 834 0982!';
@@ -110,6 +113,8 @@ const description = 'Сервиз за ремонт на бойлери в Со�
           </div>
         </div>
       </section>
+
+      {pricing && <ServicePricing pricing={pricing} accent="teal" />}
 
       <!-- Process -->
       <section class="mb-16">

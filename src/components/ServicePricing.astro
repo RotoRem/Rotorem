@@ -1,0 +1,176 @@
+---
+import type { ServicePricingContent } from '../data/service-prices';
+
+type Accent = 'blue' | 'emerald' | 'indigo' | 'orange' | 'teal';
+
+interface Props {
+  pricing: ServicePricingContent;
+  accent?: Accent;
+}
+
+const { pricing, accent = 'blue' } = Astro.props;
+
+const accentClasses: Record<
+  Accent,
+  {
+    bar: string;
+    shell: string;
+    border: string;
+    header: string;
+    featured: string;
+    featuredText: string;
+    price: string;
+  }
+> = {
+  blue: {
+    bar: 'bg-blue-500',
+    shell: 'from-blue-50 via-white to-blue-50 border-blue-100',
+    border: 'border-blue-100',
+    header: 'bg-blue-600',
+    featured: 'bg-amber-50/80',
+    featuredText: 'text-amber-900',
+    price: 'text-blue-700',
+  },
+  emerald: {
+    bar: 'bg-emerald-500',
+    shell: 'from-emerald-50 via-white to-emerald-50 border-emerald-100',
+    border: 'border-emerald-100',
+    header: 'bg-emerald-600',
+    featured: 'bg-amber-50/80',
+    featuredText: 'text-amber-900',
+    price: 'text-emerald-700',
+  },
+  indigo: {
+    bar: 'bg-indigo-500',
+    shell: 'from-indigo-50 via-white to-indigo-50 border-indigo-100',
+    border: 'border-indigo-100',
+    header: 'bg-indigo-600',
+    featured: 'bg-amber-50/80',
+    featuredText: 'text-amber-900',
+    price: 'text-indigo-700',
+  },
+  orange: {
+    bar: 'bg-orange-500',
+    shell: 'from-orange-50 via-white to-orange-50 border-orange-100',
+    border: 'border-orange-100',
+    header: 'bg-orange-600',
+    featured: 'bg-amber-50/80',
+    featuredText: 'text-amber-900',
+    price: 'text-orange-700',
+  },
+  teal: {
+    bar: 'bg-teal-500',
+    shell: 'from-teal-50 via-white to-teal-50 border-teal-100',
+    border: 'border-teal-100',
+    header: 'bg-teal-600',
+    featured: 'bg-amber-50/80',
+    featuredText: 'text-amber-900',
+    price: 'text-teal-700',
+  },
+};
+
+const theme = accentClasses[accent];
+---
+
+<section class="mb-16" aria-labelledby="service-pricing-heading">
+  <div class="text-center mb-8">
+    <h2 id="service-pricing-heading" class="text-3xl font-bold text-gray-900 mb-4">
+      {pricing.title}
+    </h2>
+    <div class={`w-20 h-1 ${theme.bar} mx-auto mb-6`}></div>
+    <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      {pricing.description}
+    </p>
+  </div>
+
+  <div class={`bg-gradient-to-r ${theme.shell} p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border`}>
+    <!-- Mobile cards -->
+    <div class="md:hidden space-y-3">
+      {
+        pricing.rows.map((row) => (
+          <div
+            class:list={[
+              'rounded-xl border bg-white p-4 shadow-sm',
+              row.featured ? `${theme.featured} border-amber-200` : theme.border,
+            ]}
+          >
+            <p
+              class:list={[
+                'font-medium mb-3 leading-snug',
+                row.featured ? theme.featuredText : 'text-gray-900',
+              ]}
+            >
+              {row.service}
+            </p>
+            <div class="flex items-end justify-between gap-3">
+              <div>
+                <p class={`text-xl font-bold ${theme.price}`}>{row.eur}</p>
+                <p class="text-sm text-gray-500">{row.bgn}</p>
+              </div>
+              {row.featured && (
+                <span class="inline-flex items-center rounded-md bg-amber-500 px-2 py-1 text-xs font-semibold text-white">
+                  {pricing.visitBadge}
+                </span>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Desktop table -->
+    <div class="hidden md:block overflow-hidden rounded-xl border border-white/60 bg-white shadow-md">
+      <table class="w-full text-left">
+        <thead>
+          <tr class={`${theme.header} text-white`}>
+            <th scope="col" class="px-5 py-4 text-sm font-semibold tracking-wide">
+              {pricing.serviceLabel}
+            </th>
+            <th scope="col" class="px-5 py-4 text-sm font-semibold tracking-wide whitespace-nowrap text-right">
+              {pricing.eurLabel}
+            </th>
+            <th scope="col" class="px-5 py-4 text-sm font-semibold tracking-wide whitespace-nowrap text-right">
+              {pricing.bgnLabel}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            pricing.rows.map((row, index) => (
+              <tr
+                class:list={[
+                  'border-t border-gray-100',
+                  row.featured ? theme.featured : index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white',
+                ]}
+              >
+                <td
+                  class:list={[
+                    'px-5 py-4 text-sm leading-snug',
+                    row.featured ? `font-semibold ${theme.featuredText}` : 'text-gray-800',
+                  ]}
+                >
+                  {row.service}
+                </td>
+                <td
+                  class:list={[
+                    'px-5 py-4 text-sm font-bold whitespace-nowrap text-right',
+                    theme.price,
+                  ]}
+                >
+                  {row.eur}
+                </td>
+                <td class="px-5 py-4 text-sm text-gray-600 whitespace-nowrap text-right">
+                  {row.bgn}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-5 text-sm text-gray-500 text-center leading-relaxed">
+      {pricing.note}
+    </p>
+  </div>
+</section>

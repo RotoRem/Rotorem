@@ -1,9 +1,12 @@
 ---
 import Layout from '../../../layouts/Base.astro';
+import ServicePricing from '../../../components/ServicePricing.astro';
+import { getServicePricing } from '../../../data/service-prices';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const pricing = getServicePricing('oven', 'sofia', lang);
 
 const title = 'Ремонт на готварски печки и фурни в София | РотоРем';
 const description = 'Професионален ремонт на готварски печки и фурни в София ✓ Бърз ремонт на място още същия ден ✓ Гаранция за качество ✓ Свържете се с нас на ☎ 089 834 0982!';
@@ -132,6 +135,8 @@ const description = 'Професионален ремонт на готварс
           </div>
         </div>
       </section>
+
+      {pricing && <ServicePricing pricing={pricing} accent="blue" />}
 
       <!-- Repair Process Section -->
       <section class="mb-16">

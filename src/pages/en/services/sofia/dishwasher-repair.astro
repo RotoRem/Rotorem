@@ -1,9 +1,12 @@
 ---
 import Layout from '../../../../layouts/Base.astro';
+import ServicePricing from '../../../../components/ServicePricing.astro';
+import { getServicePricing } from '../../../../data/service-prices';
 import { getLangFromUrl, useTranslations } from '../../../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const pricing = getServicePricing('dishwasher', 'sofia', lang);
 
 const title = 'Dishwasher Repair & Installation in Sofia | RotoRem';
 const description = 'In-home dishwasher repair and installation service in Sofia - Quality guarantee - All brands - Same-day repair - Call 089 834 0982!';
@@ -133,6 +136,8 @@ const description = 'In-home dishwasher repair and installation service in Sofia
           </div>
         </div>
       </section>
+
+      {pricing && <ServicePricing pricing={pricing} accent="blue" />}
 
       <!-- Repair Process Section -->
       <section class="mb-16">

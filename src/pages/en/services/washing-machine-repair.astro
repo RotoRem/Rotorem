@@ -1,9 +1,12 @@
 ---
 import Layout from '../../../layouts/Base.astro';
+import ServicePricing from '../../../components/ServicePricing.astro';
+import { getServicePricing } from '../../../data/service-prices';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const pricing = getServicePricing('washing-machine', 'varna', lang);
 
 const title = 'In-Home Washing Machine Repair in Varna | RotoRem Service';
 const description = 'Professional in-home washing machine repair and installation in Varna - Quality guarantee - All washing machine brands - Call now at 089 834 0982!';
@@ -155,6 +158,8 @@ const description = 'Professional in-home washing machine repair and installatio
           </div>
         </div>
       </section>
+
+      {pricing && <ServicePricing pricing={pricing} accent="blue" />}
 
       <!-- Process Section -->
       <section class="mb-16">

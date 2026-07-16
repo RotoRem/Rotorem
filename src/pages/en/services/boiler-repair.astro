@@ -1,6 +1,9 @@
 ---
 import Layout from '../../../layouts/Base.astro';
+import ServicePricing from '../../../components/ServicePricing.astro';
+import { getServicePricing } from '../../../data/service-prices';
 
+const pricing = getServicePricing('boiler', 'varna', 'en');
 const title = 'Boiler Repair in Varna | Fast In-Home Service by RotoRem';
 const description = 'Professional electric boiler repair in Varna. Heating element replacement, thermostat fixes, leak diagnostics, descaling, and warranty-backed service.';
 ---
@@ -133,6 +136,8 @@ const description = 'Professional electric boiler repair in Varna. Heating eleme
           </div>
         </div>
       </section>
+
+      {pricing && <ServicePricing pricing={pricing} accent="teal" />}
 
       <section class="mb-16">
         <div class="text-center mb-8">

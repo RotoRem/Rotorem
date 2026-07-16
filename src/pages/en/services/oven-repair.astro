@@ -1,9 +1,12 @@
 ---
 import Layout from '../../../layouts/Base.astro';
+import ServicePricing from '../../../components/ServicePricing.astro';
+import { getServicePricing } from '../../../data/service-prices';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const pricing = getServicePricing('oven', 'varna', lang);
 
 const title = 'Cooker and Oven Repair in Varna | RotoRem';
 const description = 'Professional cooker and oven repair in Varna - Fast in-home repair the same day - Quality guarantee - Contact us at 089 834 0982!';
@@ -156,6 +159,8 @@ const description = 'Professional cooker and oven repair in Varna - Fast in-home
         </div>
       </section>
 
+      {pricing && <ServicePricing pricing={pricing} accent="orange" />}
+
       <!-- Oven Types Section -->
       <section class="mb-16">
         <div class="text-center mb-12">
@@ -210,7 +215,7 @@ const description = 'Professional cooker and oven repair in Varna - Fast in-home
         </div>
       </section>
 
-      <!-- Brands Section - Clean text-focused approach -->
+<!-- Brands Section - Clean text-focused approach -->
       <section class="mb-16">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold text-gray-900 mb-4">Oven brands we repair in Varna</h2>
