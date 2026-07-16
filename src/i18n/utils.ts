@@ -85,6 +85,14 @@ export function getLocalizedPath(path: string, lang: keyof typeof ui) {
         bg: '/blog/peralnyata-ne-tsentrofugira-prichini',
         en: '/blog/washing-machine-wont-spin-causes',
       },
+      washingMachineCleaningGuide: {
+        bg: '/blog/kak-da-pochistim-peralnyata-profesionalno',
+        en: '/blog/how-to-clean-a-washing-machine-professionally',
+      },
+      gorenjeOvenGuide: {
+        bg: '/blog/chesto-sreshtani-problemi-s-furni-gorenje',
+        en: '/blog/the-most-common-gorenje-oven-problems',
+      },
     };
 
     for (const route of Object.values(routeMap)) {
