@@ -1,9 +1,9 @@
 [build]
-  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm run build"
   publish = "dist"
   
   # Build environment variables
-  environment = { NODE_VERSION = "22", PNPM_VERSION = "10.11.0" }
+  environment = { NODE_VERSION = "22", PNPM_VERSION = "10.11.0", NODE_ENV = "development" }
 
 [functions]
   directory = "netlify/functions"
@@ -560,13 +560,14 @@
   
 # FIXED: Environment-specific settings
 [context.production]
-  command = "pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm run build"
   
   [context.production.environment]
-    NODE_ENV = "production"
+    NODE_VERSION = "22"
+    PNPM_VERSION = "10.11.0"
 
 [context.deploy-preview]
-  command = "pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm run build"
   
 [context.branch-deploy]
   command = "pnpm run build"
