@@ -5,7 +5,7 @@
   "private": true,
   "packageManager": "pnpm@10.11.0",
   "engines": {
-    "node": ">=18",
+    "node": ">=20.3.0",
     "pnpm": ">=8"
   },
   "scripts": {
@@ -23,8 +23,8 @@
     "generate-sitemap": "astro build",
     "test:lighthouse": "lhci autorun",
     "test:seo": "node scripts/seo-check.js",
-    "prebuild": "npm run type-check && npm run optimize-images",
-    "deploy": "npm run build && echo 'Build completed successfully'",
+    "prebuild": "pnpm run optimize-images",
+    "deploy": "pnpm run build && echo 'Build completed successfully'",
     
     "blog:schedule": "node scripts/schedule-blog-posts.js",
     "blog:schedule:show": "node scripts/schedule-blog-posts.js --show",

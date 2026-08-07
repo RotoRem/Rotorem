@@ -3,7 +3,7 @@
   publish = "dist"
   
   # Build environment variables
-  environment = { NODE_VERSION = "18", PNPM_VERSION = "8.15.5" }
+  environment = { NODE_VERSION = "22", PNPM_VERSION = "10.11.0" }
 
 [functions]
   directory = "netlify/functions"
