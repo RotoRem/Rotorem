@@ -91,7 +91,7 @@ const bgHomeGraph = {
           "Friday"
         ],
         "opens": "08:00",
-        "closes": "18:00"
+        "closes": "17:00"
       },
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -328,7 +328,7 @@ const enHomeGraph = {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "08:00",
-        "closes": "18:00"
+        "closes": "17:00"
       },
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -487,7 +487,7 @@ const bgContactGraph = {
         { "@type": "PostalAddress", "addressLocality": "Sofia", "postalCode": "1000", "addressCountry": "BG", "description": "Обслужване на град София и прилежащите райони" }
       ],
       "openingHoursSpecification": [
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00" }
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:00" }
       ],
       "sameAs": ["https://www.facebook.com/profile.php?id=61583413912114"]
     }
@@ -537,7 +537,7 @@ const enContactGraph = {
         { "@type": "PostalAddress", "addressLocality": "Sofia", "postalCode": "1000", "addressCountry": "BG", "description": "Serving Sofia City and surrounding areas" }
       ],
       "openingHoursSpecification": [
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00" }
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:00" }
       ],
       "sameAs": ["https://www.facebook.com/profile.php?id=61583413912114"]
     }
@@ -905,7 +905,7 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
           "opens": "08:00",
-          "closes": "18:00"
+          "closes": "17:00"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
