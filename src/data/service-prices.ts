@@ -50,7 +50,7 @@ const labels = {
 const visitVarna = {
   bg: 'Посещение и диагностика във Варна в радиус до 10 км (при адрес извън този радиус цената се уточнява допълнително)',
   en: 'Visit and diagnostics in Varna within a 10 km radius (for addresses outside this radius the price is confirmed separately)',
-  eur: '20,46 €',
+  eur: '20 €',
   featured: true as const,
 };
 
