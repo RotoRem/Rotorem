@@ -145,7 +145,7 @@ ${data.directions ? `Инструкции: ${data.directions}` : ''}
 ${data.details ? `Описание: ${data.details}` : ''}
 
 Статус: Изчаква потвърждение
-Диагностика: 30 лв (15,32 €)
+Диагностика: ${/соф|sofia/i.test(data.city || '') ? '30 €' : '20,46 €'}
 
 Това събитие е създадено автоматично от системата за запазване на rotorem.bg
     `.trim();
@@ -598,7 +598,7 @@ function sendCustomerConfirmationEmail(data) {
             <!-- Important notice -->
             <div style="background: #fef3c7; border: 1px solid #f59e0b; padding: 20px; border-radius: 8px; margin: 30px 0;">
               <p style="margin: 0; color: #92400e; font-weight: bold;">
-                &#9888; ВАЖНО: Такса за диагностика Варна - 20,46 € (40лв) | София - 25,57 € (50лв)
+                &#9888; ВАЖНО: Такса за диагностика Варна - 20,46 € | София - 30 €
               </p>
               <p style="margin: 10px 0 0 0; color: #92400e; font-size: 14px;">
                 Таксата покрива посещението на място, инспекцията и диагностиката на проблема с вашия уред.
@@ -643,7 +643,7 @@ function sendCustomerConfirmationEmail(data) {
 Уред: ${data.appliance}
 ${data.details ? 'Описание: ' + data.details : ''}
 
-ВАЖНО: Такса за диагностика Варна - 20,46 € (40лв) | София - 25,57 € (50лв)
+ВАЖНО: Такса за диагностика Варна - 20,46 € | София - 30 €
 Таксата покрива посещението на място, инспекцията и диагностиката на проблема с вашия уред.
 
 При въпроси или промяна на часа, моля свържете се с нас:
@@ -1161,7 +1161,7 @@ ${bookingData.email ? `Имейл: ${bookingData.email}` : ''}
 Уред: ${bookingData.appliance}
 
 Статус: ПОТВЪРДЕНА
-Диагностика: 30 лв.
+Диагностика: ${/соф|sofia/i.test(bookingData.city || '') ? '30 €' : '20,46 €'}
 
 Това събитие е обновено автоматично от системата за запазване на rotorem.bg
           `.trim();

@@ -1,4 +1,4 @@
-export const languages = {
+﻿export const languages = {
   bg: 'Български',
   en: 'English',
 };
@@ -26,7 +26,7 @@ export const ui = {
     'hero.cta': 'Запазете час',
     'hero.phone': 'Обадете се',
     'hero.weComeToYou': 'Идваме при вас',
-    'hero.diagnosticFee': 'Посещение и диагностика: Варна - 20,46 € (40лв) | София - 25,57 € (50лв)',
+    'hero.diagnosticFee': 'Посещение и диагностика: Варна - 20,46 € | София - 30 €',
     'hero.sameDayService': 'Ремонт още същия ден!',
     
     // Services Section
@@ -133,7 +133,7 @@ export const ui = {
     'hero.cta': 'Book a Service',
     'hero.phone': 'Call us',
     'hero.weComeToYou': 'We come to you',
-    'hero.diagnosticFee': 'Diagnostic fee: 30 BGN (15,32 €)',
+    'hero.diagnosticFee': 'Visit and diagnostics: Varna - 20.46 EUR | Sofia - 30 EUR',
     'hero.sameDayService': 'Same-day repairs in most cases!',
     
     // Services Section
@@ -169,7 +169,7 @@ export const ui = {
     'howitworks.step3': 'Same-Day Repair',
     'howitworks.step3Description': 'In most cases, we diagnose and fix the problem on the same day, getting your appliance working perfectly again.',
     'howitworks.pricing': 'Transparent Pricing',
-    'howitworks.pricingDescription': 'Our diagnostic fee is only 30 BGN (15,32 €). This covers the home visit, inspection, and diagnosis of your appliance issue. You\'ll know the full repair cost before we start any work.',
+    'howitworks.pricingDescription': 'Our diagnostic fee is Varna - 20.46 EUR | Sofia - 30 EUR. This covers the home visit, inspection, and diagnosis of your appliance issue. You\'ll know the full repair cost before we start any work.',
     
     // FAQ Section
     'faq.title': 'Frequently Asked Questions',

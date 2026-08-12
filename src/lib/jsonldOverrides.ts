@@ -108,13 +108,8 @@ const bgHomeGraph = {
             "@type": "City",
             "name": "Varna"
           },
-          "price": "40",
-          "priceCurrency": "BGN",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "20.46",
-            "priceCurrency": "EUR"
-          }
+          "price": "20.46",
+          "priceCurrency": "EUR"
         },
         {
           "@type": "Offer",
@@ -123,13 +118,8 @@ const bgHomeGraph = {
             "@type": "City",
             "name": "Sofia"
           },
-          "price": "50",
-          "priceCurrency": "BGN",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "25.57",
-            "priceCurrency": "EUR"
-          }
+          "price": "30",
+          "priceCurrency": "EUR"
         }
       ],
       "hasOfferCatalog": {
@@ -211,7 +201,7 @@ const bgHomeGraph = {
           "name": "Колко струва диагностиката?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Таксата за диагностика за Варна е 40 лв. (20,46 Euro), а за София - 50 лв. (25,57 Euro). Тя включва посещение на място, инспекция и диагностициране на проблема."
+            "text": "Таксата за диагностика за Варна е 20,46 EUR, а за София - 30 EUR. Тя включва посещение на място, инспекция и диагностициране на проблема."
           }
         },
         {
@@ -345,13 +335,8 @@ const enHomeGraph = {
             "@type": "City",
             "name": "Varna"
           },
-          "price": "40",
-          "priceCurrency": "BGN",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "20.46",
-            "priceCurrency": "EUR"
-          }
+          "price": "20.46",
+          "priceCurrency": "EUR"
         },
         {
           "@type": "Offer",
@@ -360,13 +345,8 @@ const enHomeGraph = {
             "@type": "City",
             "name": "Sofia"
           },
-          "price": "50",
-          "priceCurrency": "BGN",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "25.57",
-            "priceCurrency": "EUR"
-          }
+          "price": "30",
+          "priceCurrency": "EUR"
         }
       ],
       "hasOfferCatalog": {
@@ -412,7 +392,7 @@ const enHomeGraph = {
           "name": "How much does the diagnostics cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The diagnostic fee for Varna is 40 BGN (20.46 Euro), and for Sofia - 50 BGN (25.57 Euro). It includes an on-site visit, inspection, and problem diagnostics."
+            "text": "The diagnostic fee for Varna is 20.46 EUR, and for Sofia - 30 EUR. It includes an on-site visit, inspection, and problem diagnostics."
           }
         },
         {
@@ -794,7 +774,6 @@ type ServiceConfig = {
   lat: number;
   lng: number;
   offerName: string;
-  bgnPrice: string;
   eurPrice: string;
   localBusinessName: string;
   addressLocality: string;
@@ -866,13 +845,8 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
         "offers": {
           "@type": "Offer",
           "name": cfg.offerName,
-          "price": cfg.bgnPrice,
-          "priceCurrency": "BGN",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": cfg.eurPrice,
-            "priceCurrency": "EUR"
-          }
+          "price": cfg.eurPrice,
+          "priceCurrency": "EUR"
         }
       },
       {
@@ -959,7 +933,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Диагностика на пералня - Варна",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
@@ -985,7 +958,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Диагностика на сушилни - Варна",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
@@ -1011,7 +983,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Диагностика на съдомиялна - Варна",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
@@ -1037,7 +1008,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Диагностика на фурна - Варна",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
@@ -1063,7 +1033,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Диагностика на бойлер - Варна",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
@@ -1089,7 +1058,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Посещение и диагностика от електротехник - Варна",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
@@ -1115,8 +1083,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Диагностика на перални - София",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1141,8 +1108,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Диагностика на сушилни - София",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1167,8 +1133,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Диагностика на съдомиялна - София",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1193,8 +1158,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Диагностика на фурна - София",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1219,8 +1183,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Диагностика на бойлер - София",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1245,7 +1208,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Washing Machine Diagnostics - Varna",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
@@ -1271,7 +1233,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Dryer Diagnostics - Varna",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
@@ -1297,7 +1258,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Dishwasher Diagnostics - Varna",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
@@ -1323,7 +1283,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Oven Diagnostics - Varna",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
@@ -1349,7 +1308,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Water Heater Diagnostics - Varna",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
@@ -1375,7 +1333,6 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 43.2141,
     lng: 27.9147,
     offerName: "Electrician Visit and Diagnostics - Varna",
-    bgnPrice: "40",
     eurPrice: "20.46",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
@@ -1401,8 +1358,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Washing Machine Diagnostics - Sofia",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1427,8 +1383,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Dryer Diagnostics - Sofia",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1453,8 +1408,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Dishwasher Diagnostics - Sofia",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1479,8 +1433,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Oven Diagnostics - Sofia",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1505,8 +1458,7 @@ const serviceConfigs: ServiceConfig[] = [
     lat: 42.6975,
     lng: 23.3221,
     offerName: "Water Heater Diagnostics - Sofia",
-    bgnPrice: "50",
-    eurPrice: "25.57",
+    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
