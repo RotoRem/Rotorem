@@ -21,7 +21,7 @@ const bgHomeGraph = {
       "logo": "https://www.rotorem.bg/favicon.svg",
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+359898340982",
+        "telephone": "089 834 0982",
         "contactType": "customer service",
         "areaServed": "BG"
       },
@@ -39,7 +39,7 @@ const bgHomeGraph = {
       "url": "https://www.rotorem.bg",
       "image": "https://www.rotorem.bg/img/hero.webp",
       "description": "Професионален ремонт на битова техника по домовете във Варна и София.",
-      "telephone": "+359898340982",
+      "telephone": "089 834 0982",
       "email": "n.ivanov.ivanov@abv.bg",
       "priceRange": "$$",
       "address": {
@@ -254,7 +254,7 @@ const enHomeGraph = {
       "logo": "https://www.rotorem.bg/favicon.svg",
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+359898340982",
+        "telephone": "089 834 0982",
         "contactType": "customer service",
         "areaServed": "BG"
       },
@@ -272,7 +272,7 @@ const enHomeGraph = {
       "url": "https://www.rotorem.bg/en/",
       "image": "https://www.rotorem.bg/img/hero.webp",
       "description": "Professional home appliance repair services at your home in Varna and Sofia.",
-      "telephone": "+359898340982",
+      "telephone": "089 834 0982",
       "email": "n.ivanov.ivanov@abv.bg",
       "priceRange": "$$",
       "address": {
@@ -450,13 +450,13 @@ const bgContactGraph = {
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
       "logo": "https://www.rotorem.bg/favicon.svg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "email": "n.ivanov.ivanov@abv.bg",
       "priceRange": "20EUR - 30EUR",
       "contactPoint": [
         {
           "@type": "ContactPoint",
-          "telephone": "+359 89 834 0982",
+          "telephone": "089 834 0982",
           "contactType": "customer service",
           "areaServed": ["Varna", "Sofia"],
           "availableLanguage": ["Bulgarian", "English"]
@@ -500,13 +500,13 @@ const enContactGraph = {
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
       "logo": "https://www.rotorem.bg/favicon.svg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "email": "n.ivanov.ivanov@abv.bg",
       "priceRange": "20EUR - 30EUR",
       "contactPoint": [
         {
           "@type": "ContactPoint",
-          "telephone": "+359 89 834 0982",
+          "telephone": "089 834 0982",
           "contactType": "customer service",
           "areaServed": ["Varna", "Sofia"],
           "availableLanguage": ["Bulgarian", "English"]
@@ -565,7 +565,7 @@ const bgServicesIndexGraph = {
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "priceRange": "20EUR - 30EUR",
       "image": "https://www.rotorem.bg/img/hero.webp",
       "address": { "@type": "PostalAddress", "addressLocality": "Varna", "postalCode": "9000", "addressCountry": "BG" },
@@ -625,7 +625,7 @@ const enServicesIndexGraph = {
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "priceRange": "20EUR - 30EUR",
       "image": "https://www.rotorem.bg/img/hero.webp",
       "address": { "@type": "PostalAddress", "addressLocality": "Varna", "postalCode": "9000", "addressCountry": "BG" },
@@ -684,7 +684,7 @@ const bgSofiaIndexGraph = {
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем София",
       "url": "https://www.rotorem.bg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "priceRange": "20EUR - 30EUR",
       "address": { "@type": "PostalAddress", "addressLocality": "Sofia", "postalCode": "1000", "addressCountry": "BG" },
       "geo": { "@type": "GeoCoordinates", "latitude": 42.6975, "longitude": 23.3221 },
@@ -742,7 +742,7 @@ const enSofiaIndexGraph = {
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem Sofia",
       "url": "https://www.rotorem.bg/en/",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "priceRange": "20EUR - 30EUR",
       "address": { "@type": "PostalAddress", "addressLocality": "Sofia", "postalCode": "1000", "addressCountry": "BG" },
       "geo": { "@type": "GeoCoordinates", "latitude": 42.6975, "longitude": 23.3221 },
@@ -861,7 +861,7 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
         "@id": `${baseRoot}/#localbusiness`,
         "name": cfg.localBusinessName,
         "url": `${baseRoot}/`,
-        "telephone": "+359898340982",
+        "telephone": "089 834 0982",
         "email": "n.ivanov.ivanov@abv.bg",
         "priceRange": "$$",
         "address": {
@@ -1050,7 +1050,7 @@ const serviceConfigs: ServiceConfig[] = [
     path: "/services/electrical-services/",
     lang: "bg",
     breadcrumbSecond: "Услуги за Варна",
-    breadcrumbThird: "Комплексни ел услуги във Варна",
+    breadcrumbThird: "Електроуслуги и аварийни ел. ремонти във Варна",
     serviceName: "Електроуслуги във Варна",
     serviceType: "Електроуслуги",
     description: "Професионални електротехнически услуги по домовете във Варна. Ремонт и изграждане на ел. инсталации, монтаж на табла, ключове, контакти и диагностика на ел. повреди.",
@@ -1343,7 +1343,7 @@ const serviceConfigs: ServiceConfig[] = [
     faq: [
       { q: "What should I do if my appliances stop working?", a: "Please contact us for a prompt diagnosis and repair. Our specialists will identify the root cause and resolve the issue." },
       { q: "Do you have certifications for electrical work?", a: "Yes, all electrical services are performed by certified electrical engineers in accordance with current safety standards." },
-      { q: "Do you provide emergency electrical repairs?", a: "Yes, we provide emergency electrical services for situations like short circuits or power outages. Call +359898340982 for immediate assistance." }
+      { q: "Do you provide emergency electrical repairs?", a: "Yes, we provide emergency electrical services for situations like short circuits or power outages. Call 089 834 0982 for immediate assistance." }
     ]
   },
   {
@@ -1639,7 +1639,7 @@ const bgNikolayProfileGraph = {
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
       "logo": "https://www.rotorem.bg/favicon.svg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Varna",
@@ -1720,7 +1720,7 @@ const bgGeorgiProfileGraph = {
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
       "logo": "https://www.rotorem.bg/favicon.svg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Varna",
@@ -1816,7 +1816,7 @@ const bgLyubomirProfileGraph = {
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
       "logo": "https://www.rotorem.bg/favicon.svg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Sofia",
@@ -1921,7 +1921,7 @@ const enNikolayProfileGraph = {
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
       "logo": "https://www.rotorem.bg/favicon.svg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Varna",
@@ -2002,7 +2002,7 @@ const enGeorgiProfileGraph = {
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
       "logo": "https://www.rotorem.bg/favicon.svg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Varna",
@@ -2098,7 +2098,7 @@ const enLyubomirProfileGraph = {
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
       "logo": "https://www.rotorem.bg/favicon.svg",
-      "telephone": "+359 89 834 0982",
+      "telephone": "089 834 0982",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Sofia",

@@ -1,4 +1,4 @@
-﻿import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -190,7 +190,7 @@ const blogImage = '${postData.blogImage}';
       <p class="text-xl mb-8 opacity-90">Свържете се с нас за експертни услуги във Варна!</p>
       
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="tel:+359 89 834 0982" class="bg-white text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+        <a href="tel:0898340982" class="bg-white text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
           📞 089 834 0982
         </a>
         <a href="/contact" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
