@@ -2,6 +2,10 @@
 import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations, getRouteFromUrl, getLocalizedPath } from '../i18n/utils';
 import { getJsonLdOverride } from '../lib/jsonldOverrides';
+import {
+  buildAggregateRating,
+  buildSchemaReviews,
+} from '../utils/schemaReviews';
 // import ReviewsModal from '../components/ReviewsModal.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ServiceFAQ from '../components/ServiceFAQ.astro';
@@ -163,6 +167,10 @@ const enPath = getLocalizedPath(route, 'en');
 const bgURL = new URL(bgPath, Astro.site);
 const enURL = new URL(enPath, Astro.site);
 
+const AGGREGATE_RATING = buildAggregateRating();
+const BG_SCHEMA_REVIEWS = buildSchemaReviews('bg');
+const EN_SCHEMA_REVIEWS = buildSchemaReviews('en');
+
 // Enhanced JSON-LD for current page
 const getPageSpecificSchema = () => {
   const baseSchema = {
@@ -302,13 +310,8 @@ const getPageSpecificSchema = () => {
         }
       ]
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "15",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
+    "aggregateRating": AGGREGATE_RATING,
+    "review": isEN ? EN_SCHEMA_REVIEWS : BG_SCHEMA_REVIEWS,
     "sameAs": [
       "https://www.facebook.com/rotorem"
     ]

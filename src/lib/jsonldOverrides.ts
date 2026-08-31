@@ -1,4 +1,67 @@
-﻿type JsonLd = Record<string, unknown> | Array<Record<string, unknown>>;
+﻿import {
+  getSchemaOffers,
+  type ServiceCity,
+  type ServicePriceKey,
+} from '../data/service-prices';
+import {
+  buildAggregateRating,
+  buildSchemaReviews,
+} from '../utils/schemaReviews';
+
+type JsonLd = Record<string, unknown> | Array<Record<string, unknown>>;
+
+const AGGREGATE_RATING = buildAggregateRating();
+const BG_SCHEMA_REVIEWS = buildSchemaReviews('bg');
+const EN_SCHEMA_REVIEWS = buildSchemaReviews('en');
+
+const LOCAL_BUSINESS_TYPES = {
+  varna: ['LocalBusiness', 'HomeAndConstructionBusiness', 'Electrician'],
+  sofia: ['LocalBusiness', 'HomeAndConstructionBusiness'],
+} as const;
+
+function getLocalBusinessTypes(city: ServiceCity): readonly string[] {
+  return LOCAL_BUSINESS_TYPES[city];
+}
+
+function getCityFromServicePath(path: string): ServiceCity {
+  return path.includes('/sofia/') ? 'sofia' : 'varna';
+}
+
+function getServiceKeyFromPath(path: string): ServicePriceKey | null {
+  if (path.includes('electrical-services')) return null;
+  if (path.includes('washing-machine-repair')) return 'washing-machine';
+  if (path.includes('dryer-repair')) return 'dryer';
+  if (path.includes('dishwasher-repair')) return 'dishwasher';
+  if (path.includes('oven-repair')) return 'oven';
+  if (path.includes('boiler-repair')) return 'boiler';
+  return null;
+}
+
+function buildServiceOffers(cfg: ServiceConfig): Array<Record<string, unknown>> {
+  const city = getCityFromServicePath(cfg.path);
+  const serviceKey = getServiceKeyFromPath(cfg.path);
+
+  if (!serviceKey) {
+    return [
+      {
+        '@type': 'Offer',
+        name:
+          cfg.lang === 'en'
+            ? `Electrician visit and diagnostics - ${city === 'sofia' ? 'Sofia' : 'Varna'}`
+            : `Посещение и диагностика от електротехник - ${city === 'sofia' ? 'София' : 'Варна'}`,
+        price: city === 'sofia' ? '30' : '20',
+        priceCurrency: 'EUR',
+      },
+    ];
+  }
+
+  return getSchemaOffers(serviceKey, city, cfg.lang).map((offer) => ({
+    '@type': 'Offer',
+    name: offer.name,
+    price: offer.price,
+    priceCurrency: 'EUR',
+  }));
+}
 
 const bgHomeGraph = {
   "@context": "https://schema.org",
@@ -30,10 +93,7 @@ const bgHomeGraph = {
       ]
     },
     {
-      "@type": [
-        "LocalBusiness",
-        "Electrician"
-      ],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
@@ -93,13 +153,8 @@ const bgHomeGraph = {
         "opens": "08:00",
         "closes": "17:00"
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "60",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
+      "aggregateRating": AGGREGATE_RATING,
+      "review": BG_SCHEMA_REVIEWS,
       "makesOffer": [
         {
           "@type": "Offer",
@@ -263,10 +318,7 @@ const enHomeGraph = {
       ]
     },
     {
-      "@type": [
-        "LocalBusiness",
-        "Electrician"
-      ],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
@@ -320,13 +372,8 @@ const enHomeGraph = {
         "opens": "08:00",
         "closes": "17:00"
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "60",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
+      "aggregateRating": AGGREGATE_RATING,
+      "review": EN_SCHEMA_REVIEWS,
       "makesOffer": [
         {
           "@type": "Offer",
@@ -445,7 +492,7 @@ const bgContactGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
@@ -495,7 +542,7 @@ const enContactGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
@@ -561,7 +608,7 @@ const bgServicesIndexGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
@@ -570,7 +617,8 @@ const bgServicesIndexGraph = {
       "image": "https://www.rotorem.bg/img/hero.webp",
       "address": { "@type": "PostalAddress", "addressLocality": "Varna", "postalCode": "9000", "addressCountry": "BG" },
       "geo": { "@type": "GeoCoordinates", "latitude": 43.2141, "longitude": 27.9147 },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "60" },
+      "aggregateRating": AGGREGATE_RATING,
+      "review": BG_SCHEMA_REVIEWS,
       "founder": { "@id": "https://www.rotorem.bg/#person" }
     },
     {
@@ -621,7 +669,7 @@ const enServicesIndexGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
@@ -630,7 +678,8 @@ const enServicesIndexGraph = {
       "image": "https://www.rotorem.bg/img/hero.webp",
       "address": { "@type": "PostalAddress", "addressLocality": "Varna", "postalCode": "9000", "addressCountry": "BG" },
       "geo": { "@type": "GeoCoordinates", "latitude": 43.2141, "longitude": 27.9147 },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "60" },
+      "aggregateRating": AGGREGATE_RATING,
+      "review": EN_SCHEMA_REVIEWS,
       "founder": { "@id": "https://www.rotorem.bg/en/#person" }
     },
     {
@@ -680,7 +729,7 @@ const bgSofiaIndexGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.sofia],
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем София",
       "url": "https://www.rotorem.bg",
@@ -688,7 +737,8 @@ const bgSofiaIndexGraph = {
       "priceRange": "20EUR - 30EUR",
       "address": { "@type": "PostalAddress", "addressLocality": "Sofia", "postalCode": "1000", "addressCountry": "BG" },
       "geo": { "@type": "GeoCoordinates", "latitude": 42.6975, "longitude": 23.3221 },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "60" },
+      "aggregateRating": AGGREGATE_RATING,
+      "review": BG_SCHEMA_REVIEWS,
       "founder": { "@id": "https://www.rotorem.bg/#person" }
     },
     {
@@ -738,7 +788,7 @@ const enSofiaIndexGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.sofia],
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem Sofia",
       "url": "https://www.rotorem.bg/en/",
@@ -746,7 +796,8 @@ const enSofiaIndexGraph = {
       "priceRange": "20EUR - 30EUR",
       "address": { "@type": "PostalAddress", "addressLocality": "Sofia", "postalCode": "1000", "addressCountry": "BG" },
       "geo": { "@type": "GeoCoordinates", "latitude": 42.6975, "longitude": 23.3221 },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "60" },
+      "aggregateRating": AGGREGATE_RATING,
+      "review": EN_SCHEMA_REVIEWS,
       "founder": { "@id": "https://www.rotorem.bg/en/#person" }
     },
     {
@@ -773,8 +824,6 @@ type ServiceConfig = {
   cityName: string;
   lat: number;
   lng: number;
-  offerName: string;
-  eurPrice: string;
   localBusinessName: string;
   addressLocality: string;
   postalCode: string;
@@ -842,12 +891,7 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
             "geoRadius": "20000"
           }
         ],
-        "offers": {
-          "@type": "Offer",
-          "name": cfg.offerName,
-          "price": cfg.eurPrice,
-          "priceCurrency": "EUR"
-        }
+        "offers": buildServiceOffers(cfg),
       },
       {
         "@type": "Organization",
@@ -857,7 +901,7 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
         "logo": "https://www.rotorem.bg/favicon.svg"
       },
       {
-        "@type": ["LocalBusiness", "Electrician"],
+        "@type": [...getLocalBusinessTypes(getCityFromServicePath(cfg.path))],
         "@id": `${baseRoot}/#localbusiness`,
         "name": cfg.localBusinessName,
         "url": `${baseRoot}/`,
@@ -881,13 +925,8 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
           "opens": "08:00",
           "closes": "17:00"
         },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "60",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
+        "aggregateRating": AGGREGATE_RATING,
+        "review": cfg.lang === "en" ? EN_SCHEMA_REVIEWS : BG_SCHEMA_REVIEWS,
         "sameAs": ["https://www.facebook.com/profile.php?id=61583413912114"],
         "founder": {
           "@id": `${baseRoot}/#person`
@@ -932,8 +971,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Варна",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Диагностика на пералня - Варна",
-    eurPrice: "20",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -957,8 +994,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Варна",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Диагностика на сушилни - Варна",
-    eurPrice: "20",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -982,8 +1017,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Варна",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Диагностика на съдомиялна - Варна",
-    eurPrice: "20",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1007,8 +1040,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Варна",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Диагностика на фурна - Варна",
-    eurPrice: "20",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1032,8 +1063,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Варна",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Диагностика на бойлер - Варна",
-    eurPrice: "20",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1057,8 +1086,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Варна",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Посещение и диагностика от електротехник - Варна",
-    eurPrice: "20",
     localBusinessName: "РотоРем",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1082,8 +1109,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "София",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Диагностика на перални - София",
-    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1107,8 +1132,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "София",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Диагностика на сушилни - София",
-    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1132,8 +1155,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "София",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Диагностика на съдомиялна - София",
-    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1157,8 +1178,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "София",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Диагностика на фурна - София",
-    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1182,8 +1201,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "София",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Диагностика на бойлер - София",
-    eurPrice: "30",
     localBusinessName: "РотоРем София",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1207,8 +1224,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Varna",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Washing Machine Diagnostics - Varna",
-    eurPrice: "20",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1232,8 +1247,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Varna",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Dryer Diagnostics - Varna",
-    eurPrice: "20",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1257,8 +1270,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Varna",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Dishwasher Diagnostics - Varna",
-    eurPrice: "20",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1282,8 +1293,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Varna",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Oven Diagnostics - Varna",
-    eurPrice: "20",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1307,8 +1316,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Varna",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Water Heater Diagnostics - Varna",
-    eurPrice: "20",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1332,8 +1339,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Varna",
     lat: 43.2141,
     lng: 27.9147,
-    offerName: "Electrician Visit and Diagnostics - Varna",
-    eurPrice: "20",
     localBusinessName: "RotoRem",
     addressLocality: "Varna",
     postalCode: "9000",
@@ -1357,8 +1362,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Sofia",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Washing Machine Diagnostics - Sofia",
-    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1382,8 +1385,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Sofia",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Dryer Diagnostics - Sofia",
-    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1407,8 +1408,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Sofia",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Dishwasher Diagnostics - Sofia",
-    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1432,8 +1431,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Sofia",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Oven Diagnostics - Sofia",
-    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1457,8 +1454,6 @@ const serviceConfigs: ServiceConfig[] = [
     cityName: "Sofia",
     lat: 42.6975,
     lng: 23.3221,
-    offerName: "Water Heater Diagnostics - Sofia",
-    eurPrice: "30",
     localBusinessName: "RotoRem Sofia",
     addressLocality: "Sofia",
     postalCode: "1000",
@@ -1507,7 +1502,7 @@ const bgTeamGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
@@ -1536,7 +1531,7 @@ const enTeamGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
@@ -1634,7 +1629,7 @@ const bgNikolayProfileGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
@@ -1715,7 +1710,7 @@ const bgGeorgiProfileGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
@@ -1811,7 +1806,7 @@ const bgLyubomirProfileGraph = {
       }
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.sofia],
       "@id": "https://www.rotorem.bg/#localbusiness",
       "name": "РотоРем",
       "url": "https://www.rotorem.bg",
@@ -1916,7 +1911,7 @@ const enNikolayProfileGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
@@ -1997,7 +1992,7 @@ const enGeorgiProfileGraph = {
       ]
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.varna],
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",
@@ -2093,7 +2088,7 @@ const enLyubomirProfileGraph = {
       }
     },
     {
-      "@type": ["Electrician", "LocalBusiness"],
+      "@type": [...LOCAL_BUSINESS_TYPES.sofia],
       "@id": "https://www.rotorem.bg/en/#localbusiness",
       "name": "RotoRem",
       "url": "https://www.rotorem.bg/en/",

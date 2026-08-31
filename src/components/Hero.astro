@@ -83,6 +83,12 @@ const initialReviewText = isEN
   ? 'Loading latest Google reviews...'
   : 'Зареждане на най-новите Google отзиви...';
 
+const heroTitle = isEN
+  ? 'Electrical Appliance Repair in Sofia & Varna'
+  : 'Ремонт на електроуреди в София и Варна';
+
+const reviewsSectionTitle = isEN ? 'What Our Customers Say' : 'Какво казват нашите клиенти';
+
 // Focus on core services for a cleaner look
 const allServices = [
   {
@@ -151,38 +157,55 @@ const allServices = [
   </div>
   
   <div class="container relative z-10 py-12 md:py-20">
-    <!-- Mobile hero content - maximum simplicity -->
-    <div class="md:hidden text-center mb-4">
-      <!-- Diagnostic fee badge with dual currency -->
-      <div class="inline-block px-4 py-1 bg-amber-500 text-white text-sm font-semibold rounded-full shadow-sm mb-6 font-heading min-h-[2rem]">
+    <div class="text-center max-w-2xl mx-auto mb-4 md:mb-10">
+      <div class="md:hidden inline-block px-4 py-1 bg-amber-500 text-white text-sm font-semibold rounded-full shadow-sm mb-6 font-heading min-h-[2rem]">
         {isEN ? 'Visit and diagnostics: Varna - 20 EUR | Sofia - 30 EUR' : 'Посещение и диагностика: Варна - 20 € | София - 30 €'}
       </div>
 
-      <h1 class="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm font-heading text-shadow-md leading-tight">
-        {isEN ? 'Electrical Appliance Repair in Sofia & Varna' : 'Ремонт на електроуреди в София и Варна'}
+      <div class="hidden md:flex flex-wrap gap-2 justify-center mb-4">
+        <div class="inline-block px-4 py-1 bg-primary text-white text-sm font-semibold rounded-full shadow-sm font-heading">
+          {isEN ? 'In-home repairs in Varna & Sofia' : 'Ремонт на уреди във Варна и София'}
+        </div>
+        <div class="inline-block px-4 py-1 bg-amber-500 text-white text-sm font-semibold rounded-full shadow-sm font-heading">
+          {isEN ? 'Visit and diagnostics: Varna – 20 EUR | Sofia – 30 EUR' : 'Посещение и диагностика: Варна - 20 € | София - 30 €'}
+        </div>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 drop-shadow-sm font-heading text-shadow-md leading-tight">
+        {heroTitle}
       </h1>
-      
-      <!-- Super simplified subtitle -->
-      <p class="text-lg text-white mb-6 font-heading text-shadow">
-        {isEN 
-          ? 'Fast repairs at your home, same-day service.' 
+
+      <p class="md:hidden text-lg text-white mb-6 font-heading text-shadow">
+        {isEN
+          ? 'Fast repairs at your home, same-day service.'
           : 'Бързи ремонти още същия ден във вашия дом.'}
       </p>
-      
-      <!-- Mobile-optimized CTA buttons - PHONE ONLY NOW -->
-      <div class="flex flex-col gap-3 mb-6">        
-        <a 
-          href="tel:0898340982" 
+
+      <p class="hidden md:block text-xl text-white mb-4 drop-shadow-sm font-heading text-shadow">
+        {isEN
+          ? 'Fast and reliable repairs for washing machines, dishwashers, ovens, and electrical systems. We come to you.'
+          : 'Бързи и надеждни ремонти на перални, съдомиялни, фурни и електрически системи. Идваме на място.'}
+      </p>
+
+      <p class="hidden md:flex text-lg text-white font-medium mb-8 items-center justify-center drop-shadow-sm font-heading text-shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/>
+        </svg>
+        {isEN ? 'Same-day repairs!' : 'Ремонт още същия ден!'}
+      </p>
+
+      <div class="md:hidden flex flex-col gap-3 mb-6">
+        <a
+          href="tel:0898340982"
           class="btn-primary inline-flex items-center justify-center shadow-lg py-3 min-h-[3rem] touch-manipulation"
           aria-label={isEN ? 'Call RotoRem Varna & Sofia now' : 'Обадете се на РотоРем Варна и София'}
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           {isEN ? 'Call Now' : 'Обадете се'}
         </a>
-        
-        <!-- Alternative contact method - Email -->
-        <a 
-          href="mailto:n.ivanov.ivanov@abv.bg" 
+
+        <a
+          href="mailto:n.ivanov.ivanov@abv.bg"
           class="btn-cta inline-flex items-center justify-center shadow-lg py-3 min-h-[3rem] touch-manipulation"
           aria-label={isEN ? 'Send email to RotoRem Varna & Sofia' : 'Изпратете имейл до РотоРем Варна и София'}
         >
@@ -193,60 +216,19 @@ const allServices = [
           {isEN ? 'Send Email' : 'Изпратете имейл'}
         </a>
       </div>
-      
-      <!-- Same-day service badge moved below buttons on mobile -->
-      <div class="text-center">
-        <p class="inline-flex items-center text-white text-sm px-3 py-2 bg-primary/30 rounded-full mb-4 font-heading backdrop-blur-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-          </svg>
-          {isEN ? 'Same-day repairs!' : 'Ремонт още същия ден!'}
-        </p>
-      </div>
-    </div>
-    
-    <!-- Desktop hero content - keep original layout but with added consistency -->
-    <div class="hidden md:block text-center max-w-2xl mx-auto mb-10">
-      <div class="flex flex-wrap gap-2 justify-center mb-4">
-        <div class="inline-block px-4 py-1 bg-primary text-white text-sm font-semibold rounded-full shadow-sm font-heading">
-          {isEN ? 'In-home repairs in Varna & Sofia' : 'Ремонт на уреди във Варна и София'}
-        </div>
-        <div class="inline-block px-4 py-1 bg-amber-500 text-white text-sm font-semibold rounded-full shadow-sm font-heading">
-          {isEN ? 'Visit and diagnostics: Varna – 20 EUR | Sofia – 30 EUR' : 'Посещение и диагностика: Варна - 20 € | София - 30 €'}
-        </div>
-      </div>
-      
-      <h1 class="text-5xl font-bold text-white mb-6 drop-shadow-sm font-heading text-shadow-md">
-        {isEN ? 'Electrical Appliance Repair in Sofia & Varna' : 'Ремонт на електроуреди в София и Варна'}
-      </h1>
-      
-      <p class="text-xl text-white mb-4 drop-shadow-sm font-heading text-shadow">
-        {isEN 
-          ? 'Fast and reliable repairs for washing machines, dishwashers, ovens, and electrical systems. We come to you.' 
-          : 'Бързи и надеждни ремонти на перални, съдомиялни, фурни и електрически системи. Идваме на място.'}
-      </p>
-      
-      <p class="text-lg text-white font-medium mb-8 flex items-center justify-center drop-shadow-sm font-heading text-shadow">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/>
-        </svg>
-        {isEN ? 'Same-day repairs!' : 'Ремонт още същия ден!'}
-      </p>
-      
-      <!-- PHONE ONLY BUTTONS for desktop -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">        
-        <a 
-          href="tel:0898340982" 
+
+      <div class="hidden md:flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="tel:0898340982"
           class="btn-primary inline-flex items-center justify-center shadow-lg touch-manipulation"
           aria-label={isEN ? 'Call RotoRem Varna & Sofia now' : 'Обадете се на РотоРем Варна и София'}
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           {t('hero.phone')}
         </a>
-        
-        <!-- Alternative contact method - Email -->
-        <a 
-          href="mailto:n.ivanov.ivanov@abv.bg" 
+
+        <a
+          href="mailto:n.ivanov.ivanov@abv.bg"
           class="btn-cta inline-flex items-center justify-center shadow-lg touch-manipulation"
           aria-label={isEN ? 'Send email to RotoRem Varna & Sofia' : 'Изпратете имейл до РотоРем Варна и София'}
         >
@@ -256,8 +238,7 @@ const allServices = [
           </svg>
           {isEN ? 'Send Email' : 'Изпратете имейл'}
         </a>
-        
-        <!-- Additional info text for phone booking -->
+
         <div class="flex items-center text-white/90 text-sm">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/>
@@ -265,8 +246,17 @@ const allServices = [
           <span>{isEN ? 'Call to schedule' : 'Обадете се за час'}</span>
         </div>
       </div>
+
+      <div class="md:hidden text-center">
+        <p class="inline-flex items-center text-white text-sm px-3 py-2 bg-primary/30 rounded-full mb-4 font-heading backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          {isEN ? 'Same-day repairs!' : 'Ремонт още същия ден!'}
+        </p>
+      </div>
     </div>
-    
+
     <!-- Service icons/badges improved for both desktop and mobile -->
     <div class="max-w-3xl mx-auto mb-3">
       <!-- Desktop view - show all service categories with white cards -->
@@ -281,7 +271,7 @@ const allServices = [
             <div class={`${service.color} w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2`}>
               <Fragment set:html={service.icon} />
             </div>
-            <h2 class="font-medium text-sm text-gray-900 font-heading">{service.title}</h2>
+            <p class="font-medium text-sm text-gray-900 font-heading">{service.title}</p>
           </a>
         </div>
         ))}
@@ -301,7 +291,7 @@ const allServices = [
                 <div class="bg-white/20 w-12 h-12 rounded-full flex items-center justify-center m-auto mb-2">
                   <Fragment set:html={service.icon} />
                 </div>
-                <h2 class="font-medium text-sm text-center font-heading">{service.title}</h2>
+                <p class="font-medium text-sm text-center font-heading">{service.title}</p>
               </a>
             </div>
             ))}
@@ -335,27 +325,26 @@ const allServices = [
     
     <!-- Reviews section - improved for both desktop and mobile -->
     <div class="max-w-4xl mx-auto mt-12 mb-8">
+      <div class="flex items-center justify-between mb-4 px-4 md:px-0">
+        <h2 class="text-lg font-semibold text-white md:text-gray-900 font-heading">
+          {reviewsSectionTitle}
+        </h2>
+
+        <div class="flex">
+          <div class="flex">
+            {Array.from({ length: 5 }).map(() => (
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+            ))}
+          </div>
+          <span class="ml-2 text-yellow-600 font-semibold font-heading">5.0</span>
+        </div>
+      </div>
+
       <!-- Desktop reviews (kept as-is with better spacing) -->
       <div class="hidden md:block">
         <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-semibold text-gray-900 font-heading">
-              {isEN ? 'What Our Customers Say' : 'Какво казват нашите клиенти'}
-            </h2>
-            
-            <div class="flex">
-              <!-- Star rating -->
-              <div class="flex">
-                {Array.from({ length: 5 }).map(() => (
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-500" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
-                ))}
-              </div>
-              <span class="ml-2 text-yellow-600 font-semibold font-heading">5.0</span>
-            </div>
-          </div>
-          
           <div id="desktop-reviews-grid" class="grid md:grid-cols-3 gap-4 items-start">
           {
             desktopReviews.map((review) => (
@@ -470,23 +459,6 @@ const allServices = [
       <!-- Mobile reviews with improved padding and visibility -->
       <div class="md:hidden">
         <div class="px-4">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-semibold text-white font-heading">
-              {isEN ? 'What Our Customers Say' : 'Какво казват нашите клиенти'}
-            </h2>
-            
-            <div class="flex">
-              <div class="flex">
-                {Array.from({ length: 5 }).map(() => (
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-500" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
-                ))}
-              </div>
-              <span class="ml-2 text-yellow-600 font-semibold">5.0</span>
-            </div>
-          </div>
-          
           <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-md border-l-4 border-amber-500 h-[220px] flex flex-col">
             <!-- First review only for initial display -->
             <div class="flex justify-between items-start p-5 pb-0">

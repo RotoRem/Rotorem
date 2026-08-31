@@ -524,6 +524,27 @@ const pricingData: Record<ServiceCity, Partial<Record<ServicePriceKey, PricingBu
   },
 };
 
+/** Extracts numeric EUR value from display strings like "20 €" or "от 30,68 €". */
+export function parseEurPriceValue(eur: string): string {
+  const match = eur.match(/([\d]+(?:,\d+)?)/);
+  if (!match) return '0';
+  return match[1].replace(',', '.');
+}
+
+export function getSchemaOffers(
+  service: ServicePriceKey,
+  city: ServiceCity,
+  lang: ServiceLang
+): Array<{ name: string; price: string }> {
+  const pricing = getServicePricing(service, city, lang);
+  if (!pricing) return [];
+
+  return pricing.rows.map((row) => ({
+    name: row.service,
+    price: parseEurPriceValue(row.eur),
+  }));
+}
+
 export function getServicePricing(
   service: ServicePriceKey,
   city: ServiceCity,
