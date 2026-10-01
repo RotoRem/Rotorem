@@ -1,238 +1,608 @@
-﻿---
+---
 import Layout from '../../layouts/Base.astro';
 import ServicePricing from '../../components/ServicePricing.astro';
+import Reviews from '../../components/Reviews.astro';
 import { getServicePricing } from '../../data/service-prices';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getServiceFaqItems } from '../../lib/jsonldOverrides';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 const pricing = getServicePricing('dishwasher', 'varna', lang);
 
-const title = 'Ремонт и монтаж на съдомиялни машини във Варна | РотоРем';
-const description = 'Сервиз за ремонт и монтаж на съдомиялни машини по домовете във Варна ✓ Гаранция за качество ✓ Всички марки ✓ Ремонт в същия ден ✓ Позвънете на ☎ 089 834 0982!';
+const title = 'Ремонт на съдомиялни във Варна | Сервиз на адрес | РотоРем';
+const description =
+  'Ремонт и диагностика на съдомиялни по домовете във Варна. Проблеми с източване, пълнене, нагряване, течове, помпи, врата и електроника. РотоРем.';
+
+const heroImage = '/img/services/ремонт-на-съдомиялна-варна-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-съдомиялна-варна-диагностика.webp';
+const builtInImage = '/img/services/ремонт-на-съдомиялна-варна-вградена.webp';
+const freestandingImage = '/img/services/ремонт-на-съдомиялна-варна-свободностояща.webp';
+
+const accentBar = 'bg-emerald-500';
+const accentLink = 'text-emerald-700';
+const accentShell = 'from-emerald-50 via-white to-teal-50 border-emerald-100';
+const accentBorder = 'border-emerald-100';
+const tableHeader = 'bg-emerald-600';
+
+const problems = [
+  {
+    title: 'Съдомиялната не източва водата',
+    text: 'Ако след края на програмата на дъното на съдомиялната остава вода, причината може да бъде запушен филтър, проблем по дренажния път, прегънат или запушен маркуч или неизправност на помпата за източване. При диагностиката първо се установява откъде идва проблемът, вместо директно да се пристъпва към смяна на помпа.',
+    border: 'border-emerald-500',
+  },
+  {
+    title: 'Съдомиялната не пълни вода',
+    text: 'Когато програмата стартира, но в машината не постъпва достатъчно вода, се проверяват водоподаването и компонентите, които контролират пълненето. Причината може да бъде свързана с входящия маркуч, филтър, входящ клапан, датчик или друга част от системата.',
+    border: 'border-teal-500',
+  },
+  {
+    title: 'Съдомиялната не загрява водата',
+    text: 'Ако съдовете остават студени или мокри след програмата, трябва да бъде проверена нагревателната система. В зависимост от модела проблемът може да бъде свързан с нагревателя, температурен датчик, електронното управление или друг компонент, участващ в контрола на температурата. Диагностиката показва дали действително е необходима подмяна на нагревател или причината е друга.',
+    border: 'border-green-500',
+  },
+  {
+    title: 'Съдомиялната не мие добре',
+    text: 'Остатъци от храна, петна или недобре измити съдове невинаги означават сериозна повреда. Проверяват се филтрите, разпръскващите рамена и дюзите, циркулацията на водата и други компоненти, които влияят върху измиването. Натрупванията от мазнини и варовик също могат да повлияят на работата на машината.',
+    border: 'border-lime-600',
+  },
+  {
+    title: 'Съдомиялната тече',
+    text: 'Водата може да се появи под машината, около вратата или при определен етап от програмата. Причината може да бъде свързана с уплътнението на вратата, маркуч, връзка, помпа или друг компонент от водната система. При видим теч е добре използването на машината да бъде прекратено до установяване на причината.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'Съдомиялната не стартира',
+    text: 'Когато машината има захранване, но програмата не започва, се проверяват компонентите, които участват в стартирането и управлението на цикъла. Проблемът може да бъде свързан със заключването на вратата, електронното управление, захранването или друг електрически компонент.',
+    border: 'border-cyan-500',
+  },
+  {
+    title: 'Програмата спира преди да завърши',
+    text: 'Прекъсването по средата на програмата може да бъде свързано с проблем при пълненето, източването, нагряването, датчик или електронното управление. Важно е да се установи в кой момент от цикъла машината спира, защото това помага при диагностиката.',
+    border: 'border-indigo-500',
+  },
+  {
+    title: 'Съдомиялната издава необичаен шум',
+    text: 'Шумът може да идва от циркулационната или дренажната помпа, разпръскващо рамо, чужд предмет или друг движещ се компонент. Видът и моментът на появата на шума помагат да се определи коя система трябва да бъде проверена.',
+    border: 'border-violet-500',
+  },
+  {
+    title: 'Вратата не се затваря или заключва',
+    text: 'Проблем със затварянето може да попречи на машината изобщо да стартира. Проверяват се механизмът на вратата, заключването, пантите и правилното позициониране на уреда. При вградените съдомиялни трябва да се провери и дали монтажът и мебелната фасада не пречат на правилното затваряне.',
+    border: 'border-orange-500',
+  },
+  {
+    title: 'Съдомиялната показва код за грешка',
+    text: 'Кодът за грешка дава важна насока при диагностиката, но не означава автоматично, че определена част трябва да бъде сменена. Техникът съпоставя кода със симптомите на машината и проверява съответната система, преди да се определи необходимият ремонт.',
+    border: 'border-slate-500',
+  },
+];
+
+const partsTable = [
+  { part: 'Помпа за източване', problem: 'В машината остава вода' },
+  { part: 'Циркулационна помпа', problem: 'Слаба или липсваща циркулация' },
+  { part: 'Филтър', problem: 'Лошо измиване или проблем с източването' },
+  { part: 'Дренажен маркуч', problem: 'Машината не източва правилно' },
+  { part: 'Входящ клапан', problem: 'Съдомиялната не пълни вода' },
+  { part: 'Нагревателна система', problem: 'Водата не загрява' },
+  { part: 'Температурен датчик', problem: 'Неправилно нагряване' },
+  { part: 'Разпръскващи рамена', problem: 'Съдовете не се измиват равномерно' },
+  { part: 'Дюзи', problem: 'Намалена циркулация на водата' },
+  { part: 'Уплътнение на вратата', problem: 'Теч около вратата' },
+  { part: 'Заключване на вратата', problem: 'Машината не стартира' },
+  { part: 'Електронен модул', problem: 'Програмата прекъсва или не стартира' },
+  { part: 'Управляваща платка', problem: 'Различни проблеми при управлението' },
+];
+
+const realCases = [
+  {
+    brand: 'Miele',
+    problem: 'Съдомиялната не се включваше',
+    area: 'Левски',
+    diagnosis: 'Установихме проблем с основната платка на машината.',
+    repair: 'След смяна на платката машината работи нормално.',
+    image: builtInImage,
+    alt: 'Ремонт на съдомиялна Miele, която не се включва поради повреда в основната платка, с подмяна на платката в кв. Левски, Варна.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'Съдомиялната не измиваше съдовете',
+    area: 'Христо Ботев',
+    diagnosis: 'Проблем със захранването на циркулационната помпа на машината.',
+    repair: 'Ново захранване беше монтирано.',
+    image: diagnosticImage,
+    alt: 'Ремонт на съдомиялна Bosch, която не измива съдовете поради проблем със захранването на циркулационната помпа, в кв. Христо Ботев, Варна.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'Съдомиялната показваше грешка „Communication Error“',
+    area: 'Христо Ботев',
+    diagnosis: 'Проблем в една от платките на машината.',
+    repair: 'Платката беше отремонтирана успешно и сега машината работи нормално.',
+    image: '/img/services/ремонт-на-съдомиялна-варна-случай-3.webp',
+    alt: 'Ремонт на съдомиялна Bosch с грешка „Communication Error“, причинена от проблем в електронна платка, в кв. Христо Ботев, Варна.',
+  },
+];
+
+const processSteps = [
+  {
+    step: 1,
+    title: 'Свързвате се с РотоРем',
+    text: 'Опишете как се проявява проблемът. Ако машината показва код за грешка, кажете и него.',
+    circleClass: 'bg-gradient-to-r from-emerald-500 to-emerald-600',
+  },
+  {
+    step: 2,
+    title: 'Уговаряме посещение',
+    text: 'Техник посещава адреса във Варна според уговорката.',
+    circleClass: 'bg-gradient-to-r from-teal-500 to-teal-600',
+  },
+  {
+    step: 3,
+    title: 'Диагностика',
+    text: 'Проверяват се системите и компонентите, които могат да причинят конкретния симптом.',
+    circleClass: 'bg-gradient-to-r from-green-500 to-green-600',
+  },
+  {
+    step: 4,
+    title: 'Получавате информация за ремонта',
+    text: 'Обясняваме какво е установено и какво трябва да бъде ремонтирано или подменено.',
+    circleClass: 'bg-gradient-to-r from-cyan-500 to-cyan-600',
+  },
+  {
+    step: 5,
+    title: 'Ремонт и тест',
+    text: 'При възможност ремонтът се извършва на място. След приключване машината се тества.',
+    circleClass: 'bg-gradient-to-r from-emerald-600 to-teal-700',
+  },
+];
+
+const brands = ['Bosch', 'Siemens', 'Electrolux', 'Whirlpool', 'Indesit', 'Candy', 'Miele'];
+
+const faqs = getServiceFaqItems('/services/dishwasher-repair/');
+const sectionClass = 'mb-28 pt-4';
 ---
 
-<Layout title={title} description={description}>
-  <article class="">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-emerald-600 to-emerald-800 text-white py-16 mb-16">
-      <div class="container max-w-4xl text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          Ремонт и монтаж на съдомиялни машини във Варна
-        </h1>
-        <p class="text-xl md:text-2xl text-emerald-100 max-w-3xl mx-auto mb-8">
-          Професионален ремонт на съдомиялни машини във Варна и околността. Бърз сервиз на място с гаранция за качество.
-        </p>
-        <p class="text-base md:text-lg text-emerald-100 max-w-2xl mx-auto mb-8">
-          Диагностика във Варна - 20 €
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-emerald-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпратете имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
+<Layout title={title} description={description} hideServiceFaq={true}>
+  <article class="dishwasher-service-page">
+    <!-- Hero -->
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Ремонт на съдомиялна на адрес във Варна"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-emerald-950/85 via-emerald-900/75 to-emerald-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-block mb-5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+            Сервиз на адрес във Варна
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Ремонт на съдомиялни по домовете във Варна
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            Съдомиялната не източва, не загрява водата, не стартира или съдовете остават мръсни след програмата?
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            РотоРем извършва диагностика и ремонт на съдомиялни по домовете във Варна. Техник посещава адреса, проверява уреда и установява причината за проблема, преди да бъде предприет ремонт или подмяна на част.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Диагностика във Варна</p>
+              <p class="text-xl font-bold text-white">20,46 € / 40 лв.</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Телефон</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Обадете се за посещение
           </a>
         </div>
       </div>
     </section>
 
-    <div class="container max-w-4xl">
-
-      <!-- Why Choose Us Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Защо да изберете нашия сервиз за съдомиялни машини във Варна?</h2>
-          <div class="w-20 h-1 bg-emerald-500 mx-auto"></div>
+    <div class="container max-w-5xl">
+      <!-- Intro -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт и диагностика на съдомиялни на адрес</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-emerald-200">
-            <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-emerald-900 mb-3">Бърз ремонт на място</h3>
-            <p class="text-emerald-800">Нашият техник идва директно във вашия дом във Варна, за да ремонтира съдомиялната машина. Не е нужно да демонтирате уреда.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-green-200">
-            <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-green-900 mb-3">Ремонт в същия ден</h3>
-            <p class="text-green-800">В повечето случаи ремонтираме съдомиялни машини в същия ден във Варна. Бърза диагностика и ефективно решаване на проблема.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-3">Гаранция за качество</h3>
-            <p class="text-amber-800">Всички ремонти на съдомиялни машини във Варна се извършват с гаранция за качеството на работата.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-teal-200">
-            <div class="w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-teal-900 mb-3">Обслужваме цяла Варна</h3>
-            <p class="text-teal-800">Ремонтираме съдомиялни машини в кварталите: Чайка, Младост, Аспарухово, Левски, Владислав Варненчик и центъра на Варна.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-cyan-200">
-            <div class="w-12 h-12 bg-cyan-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M8 16v-4"/><path d="M16 16v-4"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-cyan-900 mb-3">Всички марки съдомиялни</h3>
-            <p class="text-cyan-800">Ремонтираме съдомиялни машини от всички марки: Bosch, Siemens, Electrolux, Whirlpool, Indesit, Candy и други.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
-            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-lime-900 mb-3">Справедливи цени</h3>
-            <p class="text-lime-800">Диагностика във Варна - 20 €. <br> Ясни цени без скрити такси за ремонт на съдомиялни машини във Варна.</p>
-          </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+          <p>
+            При съдомиялните един и същ симптом може да има повече от една причина. Машина, която не източва например, може да има запушване, проблем с филтъра, дренажния маркуч или помпата. При липса на нагряване причината също не е задължително само в нагревателя. Затова ремонтът започва с проверка на конкретния проблем.
+          </p>
+          <p>
+            В зависимост от симптома техникът може да провери системата за подаване и източване на вода, филтрите, помпите, нагревателната система, разпръскващите рамена, уплътненията, вратата, датчиците и електронното управление.
+          </p>
+          <p>
+            Когато повредата позволява, ремонтът се извършва на адрес. Ако е необходима специфична резервна част, клиентът получава информация какво е установено и какво трябва да бъде подменено.
+          </p>
         </div>
       </section>
+    </div>
 
-      <!-- Common Problems Section -->
-      <section class="mb-16">
+    <Reviews title="Отзиви от клиенти на РотоРем" prioritizeAppliance="Съдомиялна" />
+
+    <div class="container max-w-5xl">
+      <!-- Problems -->
+      <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Най-чести проблеми със съдомиялни машини във Варна</h2>
-          <div class="w-20 h-1 bg-emerald-500 mx-auto"></div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какви повреди на съдомиялни ремонтираме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-        
-        <div class="bg-gradient-to-r from-emerald-50 via-white to-emerald-50 p-8 rounded-2xl shadow-xl border border-emerald-100">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-emerald-500">
-              <h3 class="text-lg font-semibold text-emerald-900 mb-3">Теч от съдомиялната</h3>
-              <p class="text-emerald-800">Течове отдолу, от вратата или от маркучите. Нашият техник ще намери и отстрани теча бързо.</p>
-            </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
-              <h3 class="text-lg font-semibold text-blue-900 mb-3">Съдомиялната не източва вода</h3>
-              <p class="text-blue-800">Проблем с помпата за източване или запушване на филтъра. Професионално почистване и ремонт.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
-              <h3 class="text-lg font-semibold text-red-900 mb-3">Съдомиялната не загрява вода</h3>
-              <p class="text-red-800">Повреден нагревател или термостат. Смяна с оригинални или съвместими резервни части.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
-              <h3 class="text-lg font-semibold text-amber-900 mb-3">Съдомиялната не се включва</h3>
-              <p class="text-amber-800">Електрически проблеми, повредени контакти или управляваща платка. Диагностика и ремонт във Варна.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-500">
-              <h3 class="text-lg font-semibold text-purple-900 mb-3">Съдомиялната не мие добре</h3>
-              <p class="text-purple-800">Запушени дюзи, износени части или проблеми с налягането на водата. Възстановяваме пълната функционалност.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
-              <h3 class="text-lg font-semibold text-indigo-900 mb-3">Чува се шум от машината</h3>
-              <p class="text-indigo-800">Износени помпи, разхлабени части или чужди предмети. Отстраняваме всички причини за шум.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {pricing && <ServicePricing pricing={pricing} accent="emerald" />}
-
-      <!-- Brands Section - Clean text-focused approach -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки съдомиялни, които ремонтираме във Варна</h2>
-          <div class="w-20 h-1 bg-emerald-500 mx-auto"></div>
-        </div>
-        
-        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              'Bosch', 'Siemens', 'Electrolux', 'Whirlpool', 
-              'Indesit', 'Candy', 'Miele', 'Други марки'
-            ].map((brand) => (
-              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200 group hover:border-emerald-300">
-                <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
-                  {brand}
-                </h3>
-                <p class="text-xs text-gray-600">
-                  {brand === 'Други марки' ? 'Всички други марки' : `Ремонт на ${brand}`}
-                </p>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-xl border`}>
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- Final CTA -->
-      <section class="text-center bg-gradient-to-r from-emerald-600 to-emerald-800 text-white p-12 rounded-2xl shadow-2xl">
-        <h2 class="text-3xl font-bold mb-4">Нужен ви е ремонт на съдомиялна машина във Варна?</h2>
-        <p class="text-xl mb-8 text-emerald-100">Обадете се сега за бърз ремонт на място!</p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-emerald-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпрати имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
-          </a>
+      {pricing && <div class={sectionClass}><ServicePricing pricing={pricing} accent="emerald" /></div>}
+
+      <!-- Diagnostics -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Диагностика на съдомиялни във Варна</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-        
-        <div class="text-emerald-100">
-          <p class="text-sm">
-            Посещение и диагностика: Варна - 20 € • Гаранция за качество • Сервиз във Варна
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-gray-800 leading-relaxed">
+            <p>
+              Диагностиката има за цел да установи причината за проблема преди подмяната на части.
+            </p>
+            <p class="font-medium text-gray-900">Според симптома могат да бъдат проверени:</p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>филтри;</li>
+              <li>дренажна система;</li>
+              <li>помпа за източване;</li>
+              <li>циркулационна помпа;</li>
+              <li>входящ клапан;</li>
+              <li>входящ и дренажен маркуч;</li>
+              <li>нагревателна система;</li>
+              <li>температурни датчици;</li>
+              <li>разпръскващи рамена;</li>
+              <li>дюзи;</li>
+              <li>уплътнения;</li>
+              <li>механизъм и заключване на вратата;</li>
+              <li>електронен модул;</li>
+              <li>управляваща платка;</li>
+              <li>видими кодове за грешки.</li>
+            </ul>
+            <p>
+              След проверката клиентът получава информация каква повреда е установена и какъв ремонт е необходим.
+            </p>
+            <p class="font-semibold text-gray-900">Посещение и диагностика във Варна: 20,46 € / 40 лв.</p>
+          </div>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Диагностика на съдомиялна във Варна"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Parts table -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Части и системи на съдомиялната, които проверяваме и ремонтираме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class={`bg-white rounded-xl border ${accentBorder} p-5 shadow-sm`}>
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class={`hidden md:block overflow-hidden rounded-xl border ${accentBorder} bg-white shadow-lg`}>
+          <table class="w-full text-left">
+            <thead>
+              <tr class={`${tableHeader} text-white`}>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Част или система</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Често свързан проблем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Не е необходимо всеки симптом да означава повредена част. Запушване, неправилна връзка или проблем в друга система може да доведе до сходно поведение, затова конкретният ремонт се определя след диагностика.
+        </p>
+      </section>
+
+      <!-- Pumps -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Помпи и проблеми с циркулацията на водата</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>
+            Съдомиялната използва различни системи за движение и отвеждане на водата по време на програмата. Затова проблем с помпа може да се прояви по различен начин – машината да не източва, да мие слабо, да издава необичаен шум или да прекъсва програмата.
           </p>
+          <p>
+            При диагностиката се проверява дали проблемът идва от помпата, запушване, чужд предмет или друг компонент от системата. Подмяна на помпа се извършва, когато проверката покаже, че това действително е причината за неизправността.
+          </p>
+        </div>
+      </section>
+
+      <!-- Installation -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Монтаж и демонтаж на съдомиялни</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="space-y-8 text-gray-800 leading-relaxed">
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Монтаж на свободностояща съдомиялна</h3>
+            <p class="mb-3 font-medium text-gray-900">При монтажа може да бъдат извършени:</p>
+            <ul class="list-disc pl-5 space-y-2 mb-4">
+              <li>позициониране на уреда;</li>
+              <li>нивелиране;</li>
+              <li>свързване към водопровода;</li>
+              <li>свързване към канализацията;</li>
+              <li>проверка на маркучите и връзките;</li>
+              <li>тест за теч;</li>
+              <li>тест на машината.</li>
+            </ul>
+            <p>Правилното свързване и нивелиране са важни за нормалната работа на съдомиялната.</p>
+          </div>
+
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Монтаж на съдомиялна за вграждане</h3>
+            <p class="mb-4">
+              Вградената съдомиялна изисква правилно позициониране спрямо кухненския модул и съществуващите връзки. При монтажа се проверяват нивелацията, водоподаването, дренажът и свободното движение на вратата. Когато моделът изисква мебелна фасада, монтажът трябва да бъде съобразен с конкретната система на производителя.
+            </p>
+          </div>
+
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Демонтаж на стара съдомиялна</h3>
+            <p>
+              При подмяна на стар уред РотоРем може да извърши демонтаж и разкачване от съществуващите водни и дренажни връзки. При вграден модел демонтажът трябва да бъде извършен внимателно, за да не бъдат повредени кухненските мебели и съществуващите връзки.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Freestanding and built-in -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Свободностоящи и вградени съдомиялни</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="space-y-8 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>
+            РотоРем обслужва както свободностоящи, така и вградени съдомиялни. При вградените модели достъпът до някои компоненти може да изисква частичен демонтаж на уреда от кухненския модул. При диагностиката се вземат предвид начинът на монтаж, водните връзки, дренажът и позиционирането на машината.
+          </p>
+          <p>
+            При обаждане е полезно клиентът да уточни дали съдомиялната е свободностояща или вградена, както и марката и модела, ако са известни.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <img
+              src={builtInImage}
+              alt="Ремонт на вградена съдомиялна във Варна"
+              class="w-full rounded-2xl shadow-lg object-cover min-h-[220px]"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+            <img
+              src={freestandingImage}
+              alt="Свободностояща съдомиялна – монтаж и ремонт във Варна"
+              class="w-full rounded-2xl shadow-lg object-cover min-h-[220px]"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Brands -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки съдомиялни, които обслужваме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+            РотоРем извършва диагностика и ремонт на съдомиялни от различни производители, включително:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+            {brands.map((brand) => (
+              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                <h3 class="font-semibold text-gray-900">{brand}</h3>
+              </div>
+            ))}
+          </div>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            Конструкцията, електрониката, програмите и кодовете за грешка могат да се различават според производителя и конкретния модел. Затова при заявка е полезно да бъдат предоставени марката, моделът и кодът за грешка, ако такъв се показва.
+          </p>
+        </div>
+      </section>
+
+      <!-- Real cases -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Реални ремонти на съдомиялни във Варна</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 object-cover min-h-[220px] md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">{item.brand} – Съдомиялна</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Район:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 object-cover min-h-[240px] lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand} – Съдомиялна</h3>
+              <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Район:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Как протича ремонтът</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Service areas -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на съдомиялни в различни райони на Варна</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto`}>
+          <p>
+            РотоРем извършва посещения на адрес в различни части на Варна, включително Младост, Левски, Чайка, Аспарухово, Владислав Варненчик, Галата, централната част на града и други обслужвани райони.
+          </p>
+          <p>
+            При адрес извън стандартната зона за посещение условията се уточняват предварително. Не е необходимо клиентът да транспортира съдомиялната до физически сервиз – диагностиката и ремонтът се извършват на адрес, когато естеството на повредата позволява.
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Често задавани въпроси</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
         </div>
       </section>
     </div>
   </article>
 
-  <!-- SEO Content Section -->
-  <div class="rotorem-seo-text">
-    <div class="container max-w-4xl">
-      <p>Съдомиялната не източва, не стартира или оставя съдовете мръсни? Това са проблеми, които изискват бърза реакция. Предлагаме ремонт на съдомиялни машини във Варна директно във вашия дом, без излишно чакане и транспортиране на уреда. Работим на място в града и околността, като осигуряваме диагностика, поправка на съдомиялни машини и монтаж на съдомиялна с внимание към детайла.</p>
-      <h2>Какви повреди на съдомиялни ремонтираме във Варна</h2>
-      <p>Най-често клиентите търсят ремонт на съдомиялни машини, когато уредът спре да работи както трябва. Често срещаме проблеми като например: съдомиялната не източва водата, не загрява, не стартира програмата или оставя съдовете мръсни и с остатъци. Често има и шум по време на работа, течове или грешки на дисплея. В такива ситуации е важно да се намеси опитен техник, който да открие причината бързо и точно.</p>
-      <p>Освен стандартен сервиз за съдомиялни, извършваме и монтаж на съдомиялна за вграждане, включително монтаж на врата на съдомиялна за вграждане и настройка на уреда спрямо кухнята. Независимо дали става дума за нов уред или проблем със съществуващ, можете да разчитате на майстори с реален опит.</p>
-      <p>Ако имате нужда и от други ремонти, можете да разгледате услугите за <a href="https://www.rotorem.bg/services/washing-machine-repair/">ремонт на перални</a>, <a href="https://www.rotorem.bg/services/oven-repair/">ремонт на фурни</a>, както и всички услуги в <a href="https://www.rotorem.bg/services/">сервизния ни каталог за Варна</a>.</p>
-      <h2>Какви марки съдомиялни обслужваме във Варна</h2>
-      <p>Работим с всички популярни производители. Извършваме ремонт на марки съдомиялни като Bosch, Whirlpool, Samsung, Indesit, Miele, Electrolux и други. Познаваме особеностите на различните модели, включително при монтаж на съдомиялна за вграждане Bosch и сходни системи. Това позволява бърза диагностика и ефективна поправка на съдомиялни машини, без излишни експерименти.</p>
-      <h2>Райони във Варна, които обслужваме</h2>
-      <p>РотоРем сервиз за съдомиялни машини покрива всички квартали във Варна и околни райони до около 20 км. Работим в Чайка, Левски, Владислав Варненчик, Младост, Аспарухово, Галата и централната част. Приемаме заявки и за близките населени места, като се стремим да реагираме възможно най-бързо.</p>
-      <h2>Как протича ремонтът</h2>
-      <p>Процесът започва с посещение на техник за съдомиялна на адрес. Извършва се диагностика, за да се установи точният проблем. След това получавате ясна оферта с цена, съобразена със ситуацията. При одобрение се преминава към работа с подмяна на части, настройка или монтаж на съдомиялната машина.</p>
-      <p>След приключване на ремонта се прави тест, за да се уверим, че уредът функционира правилно. При монтаж на вградена съдомиялна се обръща внимание на нивелацията, връзките и правилното поставяне на фасадата.</p>
-      <h2>Защо да изберете сервиз за съдомиялни РотоРем</h2>
-      <p>Клиентите търсят надежден сервиз за съдомиялни, когато искат сигурно решение без излишно губене на време. РотоРем предлага над 15 години опит в ремонта на битовата техника. Работим директно на адрес, което спестява транспорт и усложнения.</p>
-      <p>Получавате ясни условия още в началото, без скрити такси. Всеки ремонт на съдомиялни машини е съобразен с конкретния случай, а използваните части са проверени, така че уредът да работи безпроблемно в дългосрочен план. <a href="https://www.rotorem.bg/contact/">Свържете се с нас</a> още сега и заявeте посещение в удобен за вас час.</p>
-    </div>
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-emerald-600 to-emerald-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Проблем със съдомиялната?</h2>
+      <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        Ако съдомиялната не източва, не пълни вода, не загрява, тече, не стартира или не измива съдовете добре, свържете се с РотоРем за диагностика и ремонт на адрес във Варна.
+      </p>
+      <p class="text-lg mb-8">Телефон: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        Обадете се за посещение
+      </a>
+    </section>
   </div>
 </Layout>
 
+<style>
+  .dishwasher-service-page :global(#service-pricing-heading + div + p),
+  .dishwasher-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-600),
+  .dishwasher-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-500) {
+    color: rgb(31 41 55) !important;
+  }
+</style>

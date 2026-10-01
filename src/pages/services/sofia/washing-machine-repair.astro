@@ -1,265 +1,765 @@
 ---
 import Layout from '../../../layouts/Base.astro';
-import ServicePricing from '../../../components/ServicePricing.astro';
-import { getServicePricing } from '../../../data/service-prices';
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import Reviews from '../../../components/Reviews.astro';
+import { getServiceFaqItems } from '../../../lib/jsonldOverrides';
+import { getLangFromUrl } from '../../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const pricing = getServicePricing('washing-machine', 'sofia', lang);
 
-const title = 'Ремонт на перални в София | Сервиз по домовете РотоРем';
-const description = 'Експертен сервиз за ремонт и монтаж на перални по домовете в София ✓ Гаранция за качество ✓ Всички марки перални ✓ Обадете се сега на ☎ 089 834 0982!';
+const title = 'Ремонт на перални в София | На адрес | РотоРем';
+const description =
+  'Ремонт и диагностика на перални по домовете в София. Ремонт при проблем с източване, центрофуга, нагряване, теч, барабан и други повреди. Диагностика 30 €.';
+
+const heroImage = '/img/services/ремонт-на-пералня-софия-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-пералня-софия-диагностика.webp';
+const diagnosticPrice = '30 €';
+
+const accentBar = 'bg-blue-500';
+const accentLink = 'text-blue-700';
+const accentShell = 'from-blue-50 via-white to-blue-50 border-blue-100';
+const accentBorder = 'border-blue-100';
+const tableHeader = 'bg-blue-600';
+
+const problems = [
+  {
+    "title": "Пералнята не източва водата",
+    "text": "Ако след програмата в барабана остава вода, се проверяват филтърът, помпата, маркучите и пътят за отвеждане на водата.",
+    "border": "border-blue-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Пералнята не центрофугира",
+    "text": "Когато пералнята пере, но не преминава нормално към центрофуга, причината може да бъде свързана с отвеждането на водата, двигателя, ремъка, управлението или друг компонент.",
+    "border": "border-green-500",
+    "centrifugeLink": true
+  },
+  {
+    "title": "Пералнята не загрява водата",
+    "text": "Ако програмата работи, но водата не достига необходимата температура, се проверяват нагревателят, температурният датчик, електрическите връзки и управлението.",
+    "border": "border-amber-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Пералнята не се включва",
+    "text": "Проверяват се захранването и компонентите, свързани със стартирането и управлението на машината.",
+    "border": "border-violet-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Пералнята не стартира програмата",
+    "text": "Причината може да бъде свързана с вратата, заключващия механизъм, управлението или друг компонент, необходим за стартиране.",
+    "border": "border-teal-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Барабанът не се върти",
+    "text": "Проверяват се ремъкът, двигателят, барабанът и свързаните механични части.",
+    "border": "border-indigo-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Пералнята тече",
+    "text": "При наличие на вода около машината се проверяват маркучите, връзките, уплътненията, помпата и други места, от които може да идва течът.",
+    "border": "border-red-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Пералнята издава силен шум",
+    "text": "Тропане, стържене, виене или друг необичаен шум може да бъде свързан с лагерите, барабана, амортисьорите, двигателя или друг механичен компонент.",
+    "border": "border-purple-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Пералнята вибрира или се мести",
+    "text": "Проверяват се нивелирането, амортисьорите, барабанът и други компоненти, които влияят върху стабилността на машината.",
+    "border": "border-orange-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Вратата не се отваря",
+    "text": "Проверяват се заключващият механизъм, отвеждането на водата и управлението на пералнята.",
+    "border": "border-pink-500",
+    "centrifugeLink": false
+  },
+  {
+    "title": "Пералнята показва код за грешка",
+    "text": "Кодът се използва като част от диагностиката и се разглежда заедно със симптомите и действителното поведение на машината.",
+    "border": "border-slate-500",
+    "centrifugeLink": false
+  }
+];
+
+const partsTable = [
+  {
+    "part": "Помпа",
+    "problem": "Пералнята не източва"
+  },
+  {
+    "part": "Филтър",
+    "problem": "Затруднено източване"
+  },
+  {
+    "part": "Маркучи",
+    "problem": "Теч или проблем с водата"
+  },
+  {
+    "part": "Нагревател",
+    "problem": "Пералнята не загрява"
+  },
+  {
+    "part": "Температурен датчик",
+    "problem": "Проблем с температурата"
+  },
+  {
+    "part": "Ремък",
+    "problem": "Барабанът не се върти"
+  },
+  {
+    "part": "Двигател",
+    "problem": "Проблем с въртенето"
+  },
+  {
+    "part": "Лагери",
+    "problem": "Шум при въртене"
+  },
+  {
+    "part": "Амортисьори",
+    "problem": "Вибрации и движение"
+  },
+  {
+    "part": "Уплътнение",
+    "problem": "Теч"
+  },
+  {
+    "part": "Заключване на вратата",
+    "problem": "Машината не стартира"
+  },
+  {
+    "part": "Електронно управление",
+    "problem": "Проблем с програмите"
+  }
+];
+
+const pricingRows = [
+  {
+    "service": "Посещение и диагностика",
+    "price": "30 €"
+  },
+  {
+    "service": "Пералнята не източва",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Пералнята не центрофугира",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Пералнята не загрява",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Проблем с помпата",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Проблем с ремъка",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Проблем с лагерите",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Теч от пералня",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Проблем с вратата",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Ремонт на електроника",
+    "price": "След диагностика"
+  },
+  {
+    "service": "Монтаж",
+    "price": "След уточняване"
+  },
+  {
+    "service": "Демонтаж",
+    "price": "След уточняване"
+  }
+];
+
+const realCases = [
+  {
+    "brand": "AEG",
+    "problem": "Нямаше никакви светлинни индикации.",
+    "area": "Красно село",
+    "diagnosis": "Оказа се проблем с основната платка.",
+    "repair": "След ремонта на платката пералнята отново работи нормално.",
+    "image": "/img/services/ремонт-на-пералня-софия-случай-1.webp",
+    "alt": "Ремонт на АЕГ пералня в Красно село, София"
+  },
+  {
+    "brand": "CANDY",
+    "problem": "Пералнята не завърташе барабана.",
+    "area": "Лозенец",
+    "diagnosis": "Оказа се, че платката, която отговаря за управлението на мотора, завъртащ барабана, е дефектирала.",
+    "repair": "Поправена е и сега пералнята работи нормално.",
+    "image": "/img/services/ремонт-на-пералня-софия-случай-2.webp",
+    "alt": "Ремонт на CANDY пералня в Лозенец, София"
+  },
+  {
+    "brand": "Samsung",
+    "problem": "Пералнята имаше теч.",
+    "area": "Витоша",
+    "diagnosis": "Оказа се, че течът е от уплътнението на вратата.",
+    "repair": "След подмяната му течът е ликвидиран.",
+    "image": "/img/services/ремонт-на-пералня-софия-случай-3.webp",
+    "alt": "Ремонт на Samsung пералня във Витоша, София"
+  }
+];
+
+const processSteps = [
+  {
+    "step": 1,
+    "title": "Свързвате се с РотоРем",
+    "text": "Описвате проблема, марката и модела на пералнята.",
+    "circleClass": "bg-gradient-to-r from-blue-500 to-blue-600"
+  },
+  {
+    "step": 2,
+    "title": "Уговаряме посещение",
+    "text": "Техник посещава посочения адрес.",
+    "circleClass": "bg-gradient-to-r from-green-500 to-green-600"
+  },
+  {
+    "step": 3,
+    "title": "Проверяваме пералнята",
+    "text": "Проверяват се системите и компонентите, свързани с конкретния симптом.",
+    "circleClass": "bg-gradient-to-r from-amber-500 to-amber-600"
+  },
+  {
+    "step": 4,
+    "title": "Получавате информация за ремонта",
+    "text": "Обясняваме какво е установено и какъв ремонт е необходим.",
+    "circleClass": "bg-gradient-to-r from-violet-500 to-violet-600"
+  },
+  {
+    "step": 5,
+    "title": "Ремонт и тест",
+    "text": "След ремонта работата на пералнята се проверява.",
+    "circleClass": "bg-gradient-to-r from-indigo-500 to-indigo-600"
+  }
+];
+
+const brands = ["Bosch","Siemens","AEG","Electrolux","Gorenje","Samsung","LG","Beko","Whirlpool"];
+
+const faqs = getServiceFaqItems('/services/sofia/washing-machine-repair/');
+const sectionClass = 'mb-28 pt-4';
 ---
 
-<Layout title={title} description={description}>
-  <article class="">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 mb-16">
-      <div class="container max-w-4xl text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          Ремонт и монтаж на перални по домовете в София
-        </h1>
-        <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">
-          Професионален ремонт на перални машини в София и околните квартали. Бърз сервиз на място с гаранция за качеството.
-        </p>
-        <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto mb-8">
-          Диагностика в София - 30 €
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпратете имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
+<Layout title={title} description={description} hideServiceFaq={true}>
+  <article class="wm-service-page">
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Ремонт на пералня на адрес в София"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-950/85 via-blue-900/75 to-blue-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-block mb-5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+            Сервиз на адрес в София
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Ремонт на перални в София
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            Пералнята не източва водата, не центрофугира, не загрява, тече, не стартира или издава необичаен шум?
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            РотоРем извършва диагностика и ремонт на перални по домовете в София и населени места около града. Техник посещава адреса, проверява уреда и установява причината за проблема. Ремонтираме различни видове и марки перални и извършваме ремонт, монтаж и демонтаж на адрес.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Посещение и диагностика</p>
+              <p class="text-xl font-bold text-white">{diagnosticPrice}</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Телефон</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Обадете се за посещение
           </a>
         </div>
       </div>
     </section>
 
-    <div class="container max-w-4xl">
-
-      <!-- Benefits Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Защо да изберете нашия сервиз за перални машини в София?</h2>
-          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Диагностика и ремонт на перални на адрес</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-blue-200">
-            <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-blue-900 mb-3">Посещение в рамките на деня</h3>
-            <p class="text-blue-800">Техник се изпраща в рамките на деня в кварталите на София, за да извърши диагностика и ремонт на място.</p>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+            <p>Когато пералнята спре да работи нормално, един и същ симптом може да бъде причинен от различни компоненти.</p>
+            <p>Ако пералнята не източва например, проблемът може да бъде свързан с филтъра, помпата, маркуча, запушване или друг компонент от системата за отвеждане на водата. Ако барабанът не се върти, се проверяват задвижването, ремъкът, двигателят и свързаните компоненти.</p>
+            <p>Техникът започва от конкретния симптом и проверява системите, които могат да го причинят. След диагностиката клиентът получава информация какво е установено и какъв ремонт е необходим.</p>
+            <p>Ремонтът на перални е част от услугите на РотоРем за <a href="/services/sofia/" class="text-blue-700 font-medium hover:underline">ремонт на битова техника в София</a>, които се извършват по домовете на клиентите.</p>
           </div>
-
-          <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-green-200">
-            <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-green-900 mb-3">Ремонт в същия ден</h3>
-            <p class="text-green-800">В 80% от случаите ремонтът се извършва още при първото посещение. Разполагаме с части за най-популярните марки перални.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-3">Гаранция за извършения ремонт</h3>
-            <p class="text-amber-800">Получи писмена гаранция и подробен протокол след приключване на ремонта на пералнята.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
-            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-lime-900 mb-3">Справедливи цени</h3>
-            <p class="text-lime-800">Диагностика в София - 30 €. Ясни цени без скрити такси за ремонт на перални.</p>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Диагностика и ремонт на пералня в София"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
           </div>
         </div>
       </section>
+    </div>
 
-      <!-- Common Issues Section -->
-      <section class="mb-16">
-        <div class="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-          <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Чести повреди на перални машини в София</h2>
+    <Reviews title="Отзиви от клиенти на РотоРем" prioritizeAppliance="Пералня" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какви проблеми с перални ремонтираме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-xl border`}>
           <div class="grid md:grid-cols-2 gap-8">
-            <div class="space-y-4">
-              <div class="flex items-start gap-4">
-                <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">1</span>
-                <div>
-                  <h3 class="text-xl font-semibold text-gray-900">Пералнята не източва вода</h3>
-                  <p class="text-gray-600">Причините често са запушен филтър, повредена помпа или блокирани маркучи. Техникът проверява всички елементи на място.</p>
-                </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята не източва водата</h3>
+                <p class="text-gray-800 leading-relaxed">Ако след програмата в барабана остава вода, се проверяват филтърът, помпата, маркучите и пътят за отвеждане на водата.</p>
               </div>
-              <div class="flex items-start gap-4">
-                <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">2</span>
-                <div>
-                  <h3 class="text-xl font-semibold text-gray-900">Машината не се включва</h3>
-                  <p class="text-gray-600">Възможни са проблеми в ел. таблото, блокирал ключ на вратата или изгоряла платка. Извършваме диагностика с професионална апаратура.</p>
-                </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята не центрофугира</h3>
+                <p class="text-gray-800 leading-relaxed">Когато пералнята пере, но <a href="/blog/peralnyata-ne-tsentrofugira-prichini/" class="text-blue-700 font-medium hover:underline">не преминава нормално към центрофуга</a>, причината може да бъде свързана с отвеждането на водата, двигателя, ремъка, управлението или друг компонент.</p>
               </div>
-            </div>
-            <div class="space-y-4">
-              <div class="flex items-start gap-4">
-                <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">3</span>
-                <div>
-                  <h3 class="text-xl font-semibold text-gray-900">Силни вибрации и шум</h3>
-                  <p class="text-gray-600">Неправилно нивелиране, износени лагери или повреден амортисьор могат да причинят силно тресене. Предлагаме подмяна на износените части.</p>
-                </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята не загрява водата</h3>
+                <p class="text-gray-800 leading-relaxed">Ако програмата работи, но водата не достига необходимата температура, се проверяват нагревателят, температурният датчик, електрическите връзки и управлението.</p>
               </div>
-              <div class="flex items-start gap-4">
-                <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">4</span>
-                <div>
-                  <h3 class="text-xl font-semibold text-gray-900">Пералнята не загрява вода</h3>
-                  <p class="text-gray-600">Повреден нагревател или температурен датчик водят до студена вода. Извършваме смяна на нагревател и проверка на всички датчици.</p>
-                </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-violet-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята не се включва</h3>
+                <p class="text-gray-800 leading-relaxed">Проверяват се захранването и компонентите, свързани със стартирането и управлението на машината.</p>
               </div>
-            </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-teal-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята не стартира програмата</h3>
+                <p class="text-gray-800 leading-relaxed">Причината може да бъде свързана с вратата, заключващия механизъм, управлението или друг компонент, необходим за стартиране.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Барабанът не се върти</h3>
+                <p class="text-gray-800 leading-relaxed">Проверяват се ремъкът, двигателят, барабанът и свързаните механични части.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята тече</h3>
+                <p class="text-gray-800 leading-relaxed">При наличие на вода около машината се проверяват маркучите, връзките, уплътненията, помпата и други места, от които може да идва течът.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята издава силен шум</h3>
+                <p class="text-gray-800 leading-relaxed">Тропане, стържене, виене или друг необичаен шум може да бъде свързан с лагерите, барабана, амортисьорите, двигателя или друг механичен компонент.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-orange-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята вибрира или се мести</h3>
+                <p class="text-gray-800 leading-relaxed">Проверяват се нивелирането, амортисьорите, барабанът и други компоненти, които влияят върху стабилността на машината.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-pink-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Вратата не се отваря</h3>
+                <p class="text-gray-800 leading-relaxed">Проверяват се заключващият механизъм, отвеждането на водата и управлението на пералнята.</p>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-slate-500">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Пералнята показва код за грешка</h3>
+                <p class="text-gray-800 leading-relaxed">Кодът се използва като част от диагностиката и се разглежда заедно със симптомите и действителното поведение на машината.</p>
+              </div>
           </div>
         </div>
       </section>
 
-      {pricing && <ServicePricing pricing={pricing} accent="blue" />}
-
-      <!-- Repair Process Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Процес на ремонт на перални в София</h2>
-          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какво проверяваме при диагностиката</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">1</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Вие ни звъните</h3>
-              <p class="text-gray-700">Обадете се на 089 834 0982 за ремонт на пералня в София.</p>
-            </div>
-          </div>
-
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">2</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Ние идваме при вас</h3>
-              <p class="text-gray-700">Нашият техник пристига в уговореното време с всички необходими инструменти и части.</p>
-            </div>
-          </div>
-
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">3</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Ремонтираме</h3>
-              <p class="text-gray-700">Диагностицираме проблема и ремонтираме пералнята ви още същия ден в дома ви в София.</p>
-            </div>
-          </div>
+        <div class={`max-w-4xl mx-auto bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed`}>
+          <p class="font-medium text-gray-900">В зависимост от проблема могат да бъдат проверени:</p>
+          <ul class="list-disc pl-5 space-y-2 columns-1 md:columns-2 gap-x-8">
+            <li>захранването</li>
+            <li>входящата вода</li>
+            <li>системата за източване</li>
+            <li>филтърът</li>
+            <li>помпата</li>
+            <li>маркучите</li>
+            <li>нагревателят</li>
+            <li>температурният датчик</li>
+            <li>барабанът</li>
+            <li>лагерите</li>
+            <li>ремъкът</li>
+            <li>двигателят</li>
+            <li>амортисьорите</li>
+            <li>уплътненията</li>
+            <li>вратата и заключването</li>
+            <li>електрическите връзки</li>
+            <li>електронното управление</li>
+            <li>кодовете за грешка</li>
+          </ul>
+          <p>Първо се установява причината за конкретната неизправност и след това се определя необходимият ремонт.</p>
+          <p class="font-semibold text-gray-900">Посещение и диагностика: {diagnosticPrice}</p>
         </div>
       </section>
 
-      <!-- Service Areas Section -->
-      <section class="mb-16 bg-gray-50 border border-gray-200 rounded-2xl p-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Обслужваме всички райони на София</h2>
-        <p class="text-gray-700 text-center max-w-3xl mx-auto mb-8">
-          Независимо дали се намирате в центъра на София или в квартали като Лозенец, Манастирски ливади, Красно село, Овча купел, Надежда или Дружба – техник идва на място в удобен за вас час.
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Части на пералнята, които проверяваме и ремонтираме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class={`bg-white rounded-xl border ${accentBorder} p-5 shadow-sm`}>
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class={`hidden md:block overflow-hidden rounded-xl border ${accentBorder} bg-white shadow-lg`}>
+          <table class="w-full text-left">
+            <thead>
+              <tr class={`${tableHeader} text-white`}>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Част или система</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Свързан проблем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Не е необходимо всяка повреда да води до смяна на част. В много случаи диагностиката показва друг проблем в системата, затова конкретният ремонт се определя след проверка.
         </p>
-        <div class="grid md:grid-cols-3 gap-6 text-gray-700">
-          <ul class="space-y-2">
-            <li>Център</li>
-            <li>Лозенец</li>
-            <li>Студентски град</li>
-            <li>Изток</li>
-          </ul>
-          <ul class="space-y-2">
-            <li>Младост</li>
-            <li>Дружба</li>
-            <li>Дианабад</li>
-            <li>Витоша</li>
-          </ul>
-          <ul class="space-y-2">
-            <li>Люлин</li>
-            <li>Надежда</li>
-            <li>Овча купел</li>
-            <li>Красно село</li>
-          </ul>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Пералнята не източва водата</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>Ако програмата приключва с вода в барабана или машината спира преди центрофуга, първо се проверява дали водата може да бъде отведена нормално.</p>
+          <p>В зависимост от проблема могат да бъдат проверени филтърът, помпата, маркучът за източване, връзките, пътят на водата и управлението на помпата.</p>
+          <p>Проблемът с източването може да повлияе и върху следващите етапи от програмата, включително центрофугата.</p>
         </div>
       </section>
 
-      <!-- Final CTA -->
-      <section class="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white p-12 rounded-2xl shadow-2xl">
-        <h2 class="text-3xl font-bold mb-4">Нужен ви е ремонт на пералня в София?</h2>
-        <p class="text-xl mb-8 text-blue-100">Обадете се сега за бърз ремонт на място!</p>
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Пералнята не центрофугира</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>Когато пералнята изпира дрехите, но не преминава нормално към центрофуга, не трябва автоматично да се приема, че проблемът е в двигателя.</p>
+          <p>Причината може да бъде свързана с неизточена вода, помпата, ремъка, двигателя, барабана, управлението или друг компонент според конкретния модел.</p>
+          <p>Поведението на машината преди момента на центрофугиране помага при откриването на причината.</p>
+        </div>
+      </section>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпрати имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
-          </a>
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Пералнята не загрява водата</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>Когато пералнята изпълнява програмата, но водата не достига зададената температура, се проверяват компонентите, които участват в нагряването и контрола на температурата.</p>
+          <p>Могат да бъдат проверени нагревателят, температурният датчик, електрическите връзки, окабеляването и електронното управление.</p>
+          <p>Преди подмяна на нагревател се установява дали той действително е причината за проблема.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Проблеми с барабана и задвижването</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>Силен шум при въртене, проблем с движението на барабана или необичайни вибрации могат да бъдат свързани с механичната система на пералнята.</p>
+          <p>Проверяват се барабанът, лagerите, ремъкът, двигателят, амортисьорите и свързаните механични части.</p>
+          <p>При проблем с лагерите може да се появи силно виене или стържене, което става по-осезаемо при по-високи обороти.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Пералнята тече</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>Водата около пералнята може да идва от различни места и причината трябва да бъде установена преди ремонт.</p>
+          <p>Проверяват се входящите маркучи, маркучът за източване, връзките, помпата, уплътнението на вратата, вътрешните водни връзки и други компоненти според мястото на теча.</p>
+          <p>Преди използване на машината отново трябва да се установи откъде идва водата и какво причинява теча.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Поддръжка и почистване на пералнята</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>Редовното <a href="/blog/kak-da-pochistim-peralnyata-profesionalno/" class="text-blue-700 font-medium hover:underline">почистване на пералнята</a>, включително филтъра, дозатора и достъпните части на машината, може да помогне за нормалната работа и да ограничи натрупването на замърсявания.</p>
+          <p>При поддръжката е добре да се обръща внимание на филтъра, чекмеджето за препарат, уплътнението на вратата, барабана и достъпните места, в които се натрупват остатъци.</p>
+          <p>Почистването не отстранява механична или електрическа повреда. Ако машината показва конкретен проблем, трябва да бъде извършена диагностика.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Монтаж и демонтаж на перални в София</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="space-y-8 text-gray-800 leading-relaxed">
+          <p>РотоРем извършва монтаж и демонтаж на перални в София.</p>
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Монтаж на пералня</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>позициониране;</li>
+              <li>нивелиране;</li>
+              <li>свързване към водата;</li>
+              <li>свързване към канализацията;</li>
+              <li>проверка на връзките;</li>
+              <li>тест на машината.</li>
+            </ul>
+          </div>
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Пералня и сушилня</h3>
+            <p>
+              Когато пералнята се използва заедно със сушилня и двата уреда трябва да бъдат разположени вертикално, трябва да се провери дали конкретните модели позволяват{' '}
+              <a href="/services/sofia/dryer-repair/" class={`${accentLink} font-medium hover:underline`}>монтаж на сушилня върху пералня</a> и какъв свързващ комплект е необходим.
+            </p>
+          </div>
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Демонтаж на пералня</h3>
+            <p>При необходимост пералнята може да бъде разкачена и подготвена за преместване или подмяна.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass} aria-labelledby="sofia-wm-pricing">
+        <div class="text-center mb-10">
+          <h2 id="sofia-wm-pricing" class="text-3xl font-bold text-gray-900 mb-4">Цени за ремонт на перални в София</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`overflow-hidden rounded-xl border ${accentBorder} bg-white shadow-lg max-w-3xl mx-auto`}>
+          <table class="w-full text-left">
+            <thead>
+              <tr class={`${tableHeader} text-white`}>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Услуга</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Цена</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pricingRows.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.service}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-6 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Крайната цена зависи от установената повреда, необходимата работа и използваните резервни части.
+        </p>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки перални, които обслужваме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
 
-        <div class="text-blue-100">
-          <p class="text-sm">
-            Посещение и диагностика: София - 30 € • Гаранция за качество • Сервиз в София
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">РотоРем извършва диагностика и ремонт на перални от различни производители, включително:</p>
+          <p class="text-gray-800 leading-relaxed mb-6 text-center font-medium">Bosch, Siemens, AEG, Electrolux, Gorenje, Samsung, LG, Beko, Whirlpool и други обслужвани марки.</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            {brands.map((brand) => (
+              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                <h3 class="font-semibold text-gray-900">{brand}</h3>
+              </div>
+            ))}
+          </div>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            При обаждане е добре да бъдат посочени марката, моделът и начинът, по който се проявява проблемът.
           </p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Реални ремонти на перални в София</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 object-cover min-h-[220px] md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">{item.brand} – Пералня</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Район:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Установена причина:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Извършен ремонт:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 object-cover min-h-[240px] lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand} – Пералня</h3>
+              <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Район:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Установена причина:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Извършен ремонт:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Как протича ремонтът на пералня</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на перални в София и около София</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto`}>
+          <p>РотоРем извършва ремонт на перални по домовете в София и населени места около града. Обслужваме различни райони на столицата, включително Младост, Люлин, Дружба, Лозенец, Овча купел, Красно село, Борово, Манастирски ливади, Надежда, Студентски град и други части на София.</p>
+          <p>Не е необходимо пералнята да бъде транспортирана до физически сервиз. Техник посещава посочения адрес.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Често задавани въпроси</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
         </div>
       </section>
     </div>
   </article>
 
-  <!-- SEO Content Section -->
-  <div class="rotorem-seo-text">
-    <div class="container max-w-4xl">
-<p dir="ltr">Когато пералнята не стартира или започне да работи нестабилно, това веднага създава неудобство у дома. Ние предлагаме бърз и надежден ремонт на перални по домовете в град София и околността, директно на адрес, без излишно пренасяне на уреда. Екипът ни реагира в кратки срокове, диагностицира проблема на място и извършва необходимата поправка или монтаж на пералнята в рамките на едно посещение.</p>
-      <h2 dir="ltr">Какви проблеми с перални ремонтираме в София</h2>
-      <p dir="ltr">Най-честите проблеми с пералните могат да се отстранят бързо, когато се установят правилно. При нас можете да разчитате на ефективна поправка на перални при всякакви ситуации когато пералнята не работи нормално и пречи на качественото изпиране на дрехите.&nbsp;</p>
-      <p dir="ltr">Освен стандартни ремонти, извършваме и по-специфични дейности като смяна на лагери, ремонт на барабан и отстраняване на проблеми в управлението. При нужда поемаме и монтаж на перални, включително правилно нивелиране и свързване към инсталациите, за да се гарантира дългосрочна работа без повреди.</p>
-      <p dir="ltr">Ако имате проблем и с други електроуреди, можете да разчитате на цялостно обслужване. Предлагаме и&nbsp;<a href="https://www.rotorem.bg/services/sofia/dryer-repair/" style="text-decoration:none;">ремонт на сушилни</a>, както и&nbsp;<a href="https://www.rotorem.bg/services/sofia/dishwasher-repair/" style="text-decoration:none;">ремонт на съдомиялни</a>&nbsp;за София. Можете да разгледате всички ремонтни дейности, които извършваме в страницата ни за&nbsp;<a href="https://www.rotorem.bg/services/sofia/" style="text-decoration:none;">сервизни услуги в София</a>, където ще откриете пълния обхват на дейностите ни.</p>
-      <h2 dir="ltr">Какви марки перални обслужваме</h2>
-      <p dir="ltr">Работим с всички популярни производители на пазара и познаваме техните специфики. Извършваме ремонт на перални Bosch, Whirlpool, Samsung, LG, AEG, Beko и други марки, независимо дали става въпрос за нов модел или по-стар уред. Натрупаният опит ни позволява бързо да открием причината за повредата и да предложим адекватно решение, съобразено с конкретния модел.</p>
-      <h2 dir="ltr">Райони в София, които обслужваме</h2>
-      <p dir="ltr">Обслужваме всички квартали на София и околността до около 20 км. Посещаваме адреси в Младост, Люлин, Надежда, Дружба, Студентски град, Лозенец, Център, Манастирски ливади и други райони, като можем да реагираме бързо и да организираме посещение в удобен за вас час.</p>
-      <h2 dir="ltr">Как протича ремонтът на перални</h2>
-      <p dir="ltr">Процесът е създаден така, че да бъде максимално ясен и удобен. След като заявите посещение, уточняваме удобен час на адрес. На място извършваме диагностика, за да установим точната причина за проблема. След това получавате конкретна оферта с крайна цена.</p>
-      <p dir="ltr">При одобрение започваме ремонта веднага, като използваме качествени части и инструменти. След приключване тестваме уреда в реални условия, за да сме сигурни, че работи нормално. Така гарантираме, че услугата се изпълнява бързо, прозрачно и без излишно забавяне.</p>
-      <h2 dir="ltr">Защо да изберете сервиз за перални РотоРем в София</h2>
-      <p dir="ltr">Клиентите ни търсят, когато имат нужда от сигурно решение без губене на време. Разполагаме с над 15 години опит в ремонта на домакинска техника и предлагаме сервиз на място, което спестява усилия и транспорт.</p>
-      <p dir="ltr">Всеки ремонт се извършва с внимание към детайла и спрямо конкретния модел. Работим с ясни цени и без скрити такси, като даваме гаранция за извършената услуга. Комбинацията от опит, бърза реакция и коректно отношение прави избора ни логичен, когато търсите надежден сервиз за перални.</p>
-
-
-    </div>
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Проблем с пералнята?</h2>
+      <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        Ако пералнята не източва, не центрофугира, не загрява водата, тече, барабанът не се върти, машината издава необичаен шум или показва грешка, свържете се с РотоРем за диагностика и ремонт на адрес в София.
+      </p>
+      <p class="text-lg mb-2 text-white/90">Диагностика на адрес: {diagnosticPrice}</p>
+      <p class="text-lg mb-8">Телефон: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        Обадете се за посещение
+      </a>
+    </section>
   </div>
 </Layout>
+
+<style>
+  .wm-service-page :global(#service-pricing-heading + div + p),
+  .wm-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-600),
+  .wm-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-500) {
+    color: rgb(31 41 55) !important;
+  }
+</style>

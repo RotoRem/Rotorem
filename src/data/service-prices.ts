@@ -34,6 +34,7 @@ type LocalizedRow = {
 type PricingBundle = {
   title: { bg: string; en: string };
   description: { bg: string; en: string };
+  note?: { bg: string; en: string };
   rows: LocalizedRow[];
 };
 
@@ -71,71 +72,39 @@ const pricingData: Record<ServiceCity, Partial<Record<ServicePriceKey, PricingBu
   varna: {
     'washing-machine': {
       title: {
-        bg: 'Цени за ремонт на перални в сервиз РотоРем',
-        en: 'Washing machine repair prices at RotoRem service',
+        bg: 'Цени за ремонт на перални във Варна',
+        en: 'Washing machine repair prices in Varna',
       },
       description: {
-        bg: 'Посочените цени са ориентировъчни за труд при отстраняване на съответния технически проблем. Крайната стойност на ремонта се определя след извършване на диагностика на място, в зависимост от сложността на повредата и необходимите резервни части.',
-        en: 'The listed prices are indicative labour rates for resolving the corresponding technical issue. The final repair cost is determined after on-site diagnostics, depending on the complexity of the fault and the spare parts required.',
+        bg: 'Посочените цени са ориентировъчни за труд при отстраняване на съответния технически проблем.',
+        en: 'The listed prices are indicative labour rates for resolving the corresponding technical issue.',
+      },
+      note: {
+        bg: 'Важно: Крайната цена на ремонта зависи от установената повреда, необходимата работа и използваните резервни части. Клиентът получава информация за необходимия ремонт след диагностика.',
+        en: 'Important: The final repair cost depends on the diagnosed fault, the work required, and the spare parts used. The customer receives repair details after diagnostics.',
       },
       rows: [
-        visitVarna,
-        {
-          bg: 'Монтаж на пералня',
-          en: 'Washing machine installation',
-          eur: 'от 40 €',
-        },
-        {
-          bg: 'Монтаж на пералня + сушилня (колона)',
-          en: 'Washing machine + dryer installation (stacked)',
-          eur: 'от 65 €',
-        },
-        demount,
-        {
-          bg: 'Теч от пералнята',
-          en: 'Washing machine leak',
-          eur: 'от 30,68 €',
-        },
-        {
-          bg: 'Блокирала врата (ключалка)',
-          en: 'Blocked door (door lock)',
-          eur: 'от 30,68 €',
-        },
-        {
-          bg: 'Проблем с източване на водата или центрофугиране',
-          en: 'Draining or spinning problem',
-          eur: 'от 35,79 €',
-        },
-        {
-          bg: 'Пералнята не се включва',
-          en: 'Washing machine not turning on',
-          eur: 'от 35,79 €',
-        },
-        {
-          bg: 'Пералнята не загрява водата',
-          en: 'Washing machine not heating water',
-          eur: 'от 46,02 €',
-        },
-        {
-          bg: 'Проблем с въртенето (амортисьори, ремък, мотор)',
-          en: 'Spinning problem (shock absorbers, belt, motor)',
-          eur: 'от 46,02 €',
-        },
-        {
-          bg: 'Смяна на лагери на пералня',
-          en: 'Washing machine bearing replacement',
-          eur: 'от 86,92 €',
-        },
+        { bg: 'Диагностика', en: 'Diagnostics', eur: '20 €', featured: true },
+        { bg: 'Монтаж на пералня', en: 'Washing machine installation', eur: 'от 40 €' },
+        { bg: 'Монтаж на пералня + сушилня (колона)', en: 'Washing machine + dryer installation (stacked)', eur: 'от 65 €' },
+        { bg: 'Демонтаж на пералня', en: 'Washing machine removal', eur: 'от 15 €' },
+        { bg: 'Отстраняване на теч', en: 'Leak repair', eur: 'от 30,68 €' },
+        { bg: 'Ремонт при блокирала врата', en: 'Blocked door repair', eur: 'от 30,68 €' },
+        { bg: 'Проблем с източването', en: 'Draining problem', eur: 'от 35,79 €' },
+        { bg: 'Проблем с центрофугата', en: 'Spin cycle problem', eur: 'от 35,79 €' },
+        { bg: 'Проблем с нагряването', en: 'Heating problem', eur: 'от 46,02 €' },
+        { bg: 'Проблем с въртенето на барабана', en: 'Drum rotation problem', eur: 'от 46,02 €' },
+        { bg: 'Смяна на лагери', en: 'Bearing replacement', eur: 'от 86,92 €' },
       ],
     },
     dishwasher: {
       title: {
-        bg: 'Цени за ремонт на съдомиялни машини в сервиз РотоРем',
+        bg: 'Цени за ремонт на съдомиялни във Варна',
         en: 'Dishwasher repair prices at RotoRem service',
       },
       description: {
-        bg: 'Посочените цени са ориентировъчни за труд при отстраняване на съответния технически проблем. Крайната стойност на ремонта се определя след извършване на диагностика на място, в зависимост от сложността на повредата и необходимите резервни части за вашата съдомиялна машина.',
-        en: 'The listed prices are indicative labour rates for resolving the corresponding technical issue. The final repair cost is determined after on-site diagnostics, depending on the complexity of the fault and the spare parts required for your dishwasher.',
+        bg: 'Посочените цени за ремонт са ориентировъчни за труда. Крайната стойност зависи от установената повреда, необходимата работа и използваните резервни части. Клиентът получава информация за ремонта след диагностика.',
+        en: 'The listed repair prices are indicative labour rates. The final cost depends on the fault found, the work required, and any spare parts used. You receive repair details after on-site diagnostics.',
       },
       rows: [
         visitVarna,
@@ -174,7 +143,7 @@ const pricingData: Record<ServiceCity, Partial<Record<ServicePriceKey, PricingBu
     },
     dryer: {
       title: {
-        bg: 'Цени за ремонт на сушилни в сервиз РотоРем',
+        bg: 'Цени за ремонт на сушилни във Варна',
         en: 'Dryer repair prices at RotoRem service',
       },
       description: {
@@ -213,7 +182,7 @@ const pricingData: Record<ServiceCity, Partial<Record<ServicePriceKey, PricingBu
     },
     oven: {
       title: {
-        bg: 'Цени за ремонт на фурни и котлони в сервиз РотоРем',
+        bg: 'Цени за ремонт на фурни във Варна',
         en: 'Oven and hob repair prices at RotoRem service',
       },
       description: {
@@ -257,7 +226,7 @@ const pricingData: Record<ServiceCity, Partial<Record<ServicePriceKey, PricingBu
     },
     boiler: {
       title: {
-        bg: 'Цени за ремонт на бойлери в сервиз РотоРем',
+        bg: 'Цени за ремонт на бойлери във Варна',
         en: 'Boiler repair prices at RotoRem service',
       },
       description: {
@@ -361,8 +330,8 @@ const pricingData: Record<ServiceCity, Partial<Record<ServicePriceKey, PricingBu
         en: 'Dishwasher repair prices at RotoRem service',
       },
       description: {
-        bg: 'Посочените цени са ориентировъчни за труд при отстраняване на съответния технически проблем. Крайната стойност на ремонта се определя след извършване на диагностика на място, в зависимост от сложността на повредата и необходимите резервни части за вашата съдомиялна машина.',
-        en: 'The listed prices are indicative labour rates for resolving the corresponding technical issue. The final repair cost is determined after on-site diagnostics, depending on the complexity of the fault and the spare parts required for your dishwasher.',
+        bg: 'Посочените цени за ремонт са ориентировъчни за труда. Крайната стойност зависи от установената повреда, необходимата работа и използваните резервни части. Клиентът получава информация за ремонта след диагностика.',
+        en: 'The listed repair prices are indicative labour rates. The final cost depends on the fault found, the work required, and any spare parts used. You receive repair details after on-site diagnostics.',
       },
       rows: [
         visitSofia,
@@ -559,7 +528,7 @@ export function getServicePricing(
     description: bundle.description[locale],
     serviceLabel: labels.service[locale],
     eurLabel: labels.eur[locale],
-    note: labels.note[locale],
+    note: bundle.note?.[locale] ?? labels.note[locale],
     visitBadge: labels.visitBadge[locale],
     rows: bundle.rows.map((row) => ({
       service: row[locale],

@@ -1,5 +1,5 @@
-const STATIC_CACHE = 'rotorem-static-v3';
-const DYNAMIC_CACHE = 'rotorem-dynamic-v3';
+const STATIC_CACHE = 'rotorem-static-v4';
+const DYNAMIC_CACHE = 'rotorem-dynamic-v4';
 
 // Files to cache on install
 const STATIC_ASSETS = [
@@ -48,14 +48,25 @@ self.addEventListener('fetch', (event) => {
   // VERY IMPORTANT: Only handle same-origin requests
   if (url.origin !== location.origin) return;
 
-  // Static assets → Cache First
+  // Vite dev server assets must never be cached (breaks HMR and page navigation)
   if (
-    request.destination === 'image' ||
-    request.destination === 'style' ||
-    request.destination === 'script' ||
-    request.destination === 'font'
+    url.pathname.startsWith('/@') ||
+    url.pathname.startsWith('/src/') ||
+    url.pathname.includes('node_modules')
   ) {
+    event.respondWith(fetch(request));
+    return;
+  }
+
+  // Images and fonts → Cache First
+  if (request.destination === 'image' || request.destination === 'font') {
     event.respondWith(cacheFirst(request));
+    return;
+  }
+
+  // CSS and JS → Network First (cache-first caused stale styles on navigation)
+  if (request.destination === 'style' || request.destination === 'script') {
+    event.respondWith(networkFirst(request));
     return;
   }
 

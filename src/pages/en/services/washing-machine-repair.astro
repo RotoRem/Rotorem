@@ -1,307 +1,544 @@
-﻿---
+---
 import Layout from '../../../layouts/Base.astro';
 import ServicePricing from '../../../components/ServicePricing.astro';
+import Reviews from '../../../components/Reviews.astro';
 import { getServicePricing } from '../../../data/service-prices';
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+import { getServiceFaqItems } from '../../../lib/jsonldOverrides';
+const lang = 'en';
 const pricing = getServicePricing('washing-machine', 'varna', lang);
 
-const title = 'In-Home Washing Machine Repair in Varna | RotoRem Service';
-const description = 'Professional in-home washing machine repair and installation in Varna - Quality guarantee - All washing machine brands - Call now at 089 834 0982!';
+const title = 'Washing Machine Repair in Varna | In-Home Service | RotoRem';
+const description = 'In-home washing machine repair and diagnostics in Varna. Leaks, spin cycle problems, drainage, heating, bearings, pumps and electronics. Call RotoRem.';
+
+const heroImage = '/img/services/ремонт-на-пералня-варна-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-пералня-варна-диагностика.webp';
+
+const problems = [
+  {
+    title: 'Washing machine does not drain',
+    text: 'If water remains in the drum after the cycle ends, the cause may be a clogged filter, the drain hose, the drain pump or another part of the drainage system. During diagnostics we check for a mechanical blockage and confirm whether the pump is working properly before any component is replaced.',
+    border: 'border-blue-500',
+  },
+  {
+    title: 'Washing machine does not spin',
+    text: 'When the machine washes but does not move on to the spin cycle properly, the cause may be the motor, drive belt, carbon brushes, electronic control, drainage or drum movement. Before repairing, the technician checks whether the problem is mechanical, electrical or related to another system in the machine.',
+    border: 'border-green-500',
+    link: { href: '/en/blog/washing-machine-wont-spin-causes/', label: 'What can cause a spin cycle problem' },
+  },
+  {
+    title: 'Washing machine does not heat the water',
+    text: 'Cold washes do not automatically mean a burnt-out heating element. The cause may be the heater itself, the temperature sensor, the electronic module or the program control. Diagnostics identify the specific cause first, and only then do we decide whether a repair or a part replacement is needed.',
+    border: 'border-amber-500',
+  },
+  {
+    title: 'Washing machine leaks',
+    text: 'A leak can appear around the door, under the machine or at a particular stage of the program. We check the door gasket, inlet and outlet hoses, the pump, the connections and any other place where water could escape. If there is a leak, it is best not to use the machine until the cause has been found.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'Washing machine is noisy or vibrates heavily',
+    text: 'Loud noise during spinning, metallic grinding, banging or excessive vibration can be related to the bearings, shock absorbers, drum, belt, a foreign object or incorrect leveling. The nature of the noise often gives a first clue, but the final cause is determined only after inspecting the machine.',
+    border: 'border-purple-500',
+  },
+  {
+    title: 'Drum does not rotate',
+    text: 'When the machine starts but the drum does not turn normally, the belt, motor, carbon brushes, electronic control and the mechanical part of the drum need to be checked. The cause may be a relatively minor fault, but it can also point to a more serious problem, so it is important to have the machine diagnosed.',
+    border: 'border-indigo-500',
+  },
+  {
+    title: 'Washing machine does not start',
+    text: 'If the machine does not respond or the program will not start, the inspection may cover the power supply, the door lock, the control board, the program selector and the other electronic components. Not every washing machine that "won\'t start" has a faulty board. Diagnostics should begin with the specific symptom.',
+    border: 'border-teal-500',
+    extra: 'If the problem is related to the power supply or wiring, an inspection of the electrical installation may also be needed.',
+    link: { href: '/en/services/electrical-services/', label: 'In-home electrical services' },
+  },
+  {
+    title: 'Washing machine door will not open',
+    text: 'A locked door may be caused by a fault in the locking mechanism, water remaining in the machine, or a problem with the program and electronics. We do not recommend forcing the door open, as this can damage the handle, the mechanism or the door itself.',
+    border: 'border-orange-500',
+  },
+  {
+    title: 'Washing machine shows an error code',
+    text: 'Error codes help with diagnostics, but a code does not always mean that a specific part must be replaced right away. The technician combines the information on the display with the machine\'s actual behavior and checks the relevant components to find the cause of the problem.',
+    border: 'border-slate-500',
+  },
+];
+
+const partsTable = [
+  { part: 'Drain pump', problem: 'Washing machine does not drain' },
+  { part: 'Filter and drainage', problem: 'Water is left behind or the cycle is interrupted' },
+  { part: 'Heating element', problem: 'Water does not heat' },
+  { part: 'Temperature sensor', problem: 'Incorrect heating' },
+  { part: 'Bearings', problem: 'Loud noise during spinning' },
+  { part: 'Shaft seal', problem: 'Problems around the bearings and water ingress' },
+  { part: 'Drive belt', problem: 'Drum does not rotate' },
+  { part: 'Motor', problem: 'No rotation or rotation problems' },
+  { part: 'Motor brushes', problem: 'Rotation and spin problems' },
+  { part: 'Shock absorbers', problem: 'Strong vibrations' },
+  { part: 'Door gasket', problem: 'Leak around the door' },
+  { part: 'Inlet valve', problem: 'Washing machine does not fill with water' },
+  { part: 'Door lock', problem: 'Machine does not start or the door stays locked' },
+  { part: 'Program selector', problem: 'Program does not run properly' },
+  { part: 'Electronic module', problem: 'Machine stops mid-cycle, does not start or shows errors' },
+];
+
+const realCases = [
+  {
+    brand: 'Bosch',
+    problem: 'Water was leaking from the washing machine',
+    area: 'Hristo Botev',
+    diagnosis: 'The leak was traced to the front door gasket of the washing machine.',
+    repair: 'After the gasket was replaced, the leak stopped and the washing machine works normally.',
+    image: '/img/services/ремонт-на-пералня-варна-случай-1.webp',
+    alt: 'Bosch washing machine repair: water leak from the front door gasket, damaged gasket replaced in the Hristo Botev district, Varna.',
+  },
+  {
+    brand: 'LG',
+    problem: 'Washing machine would not drain',
+    area: 'City Center',
+    diagnosis: 'The drain pump turned out to be burnt out.',
+    repair: 'After the pump was replaced, the machine drains properly again and works normally.',
+    image: diagnosticImage,
+    alt: 'LG washing machine repair: machine not draining, burnt-out drain pump replaced in the city center of Varna.',
+  },
+  {
+    brand: 'Candy',
+    problem: 'Washing machine was very loud during spinning',
+    area: 'Vladislav Varnenchik',
+    diagnosis: 'The problem turned out to be worn shock absorbers.',
+    repair: 'After the shock absorbers were replaced and the machine was leveled, the noise disappeared and the washing machine works normally.',
+    image: '/img/services/ремонт-на-пералня-варна-случай-2.webp',
+    alt: 'Candy washing machine repair: loud noise during spinning, worn shock absorbers replaced and machine leveled in the Vladislav Varnenchik district, Varna.',
+  },
+];
+
+const processSteps = [
+  { step: 1, title: 'Contact RotoRem', text: 'Tell us what is wrong with the washing machine and how the problem shows up.', circleClass: 'bg-gradient-to-r from-blue-500 to-blue-600' },
+  { step: 2, title: 'We schedule a visit', text: 'A technician visits your address in Varna at the agreed time.', circleClass: 'bg-gradient-to-r from-green-500 to-green-600' },
+  { step: 3, title: 'We run diagnostics', text: 'The components and systems related to the specific symptom are inspected.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 4, title: 'You get repair information', text: 'We explain what fault was found and what needs to be done.', circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600' },
+  { step: 5, title: 'Repair and test', text: 'Where possible, the repair is carried out on site and the washing machine is tested before the visit ends.', circleClass: 'bg-gradient-to-r from-indigo-500 to-indigo-600' },
+];
+
+const brands = ['Bosch', 'Siemens', 'AEG', 'Electrolux', 'Gorenje', 'Samsung', 'LG', 'Beko', 'Indesit', 'Whirlpool'];
+
+const faqs = getServiceFaqItems('/en/services/washing-machine-repair/');
+const sectionClass = 'mb-28 pt-4';
 ---
 
-<Layout title={title} description={description}>
-  <article class="">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 mb-16">
-      <div class="container max-w-4xl text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          In-Home Washing Machine Repair and Installation in Varna
-        </h1>
-        <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">
-          Professional washing machine repair in Varna and surrounding areas. Fast on-site service with quality guarantee.
-        </p>
-        <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto mb-8">
-          Visit and diagnostics in Varna - 20 EUR
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Send Email
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Call 089 834 0982
+<Layout title={title} description={description} hideServiceFaq={true}>
+  <article class="wm-service-page">
+    <!-- Hero -->
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="In-home washing machine repair in Varna"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-950/85 via-blue-900/75 to-blue-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-block mb-5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+            In-home service in Varna
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            In-Home Washing Machine Repair in Varna
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            Problem with your washing machine? RotoRem provides in-home diagnostics and repair of washing machines in Varna. We handle drainage, spin cycle, heating, leaks, noise, drum, pump, bearing, motor and electronics issues.
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            A technician visits your address, finds the cause of the fault and tells you what repair is needed before any work is carried out.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Diagnostics in Varna</p>
+              <p class="text-xl font-bold text-white">20 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Phone</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Call to book a visit
           </a>
         </div>
       </div>
     </section>
 
-    <div class="container max-w-4xl">
+    <div class="container max-w-5xl">
 
-      <!-- Why Choose Us Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Why choose our washing machine repair service in Varna?</h2>
+      <!-- Intro -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">In-Home Washing Machine Repair and Diagnostics</h2>
           <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-blue-200">
-            <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-blue-900 mb-3">Fast on-site repair</h3>
-            <p class="text-blue-800">Our technician comes directly to your home in Varna to repair your washing machine. No need to transport the heavy appliance to a service center.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-green-200">
-            <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-green-900 mb-3">Same-day repair</h3>
-            <p class="text-green-800">In most cases we repair washing machines the same day in Varna. Quick diagnosis and efficient problem resolution.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-3">Quality guarantee</h3>
-            <p class="text-amber-800">All washing machine repairs in Varna are performed with a guarantee for work quality and parts used.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-purple-200">
-            <div class="w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-purple-900 mb-3">Service throughout Varna</h3>
-            <p class="text-purple-800">We repair washing machines in neighborhoods: Chayka, Mladost, Asparuhovo, Levski, Vladislav Varnenchik, Center and other areas of Varna.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-indigo-200">
-            <div class="w-12 h-12 bg-indigo-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-indigo-900 mb-3">All washing machine brands</h3>
-            <p class="text-indigo-800">We repair washing machines from all brands: Bosch, Samsung, LG, Whirlpool, Indesit, Hotpoint, Candy and others.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-emerald-200">
-            <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-emerald-900 mb-3">Fair prices</h3>
-            <p class="text-emerald-800">Visit and diagnostics: Varna - 20 EUR. Clear prices with no hidden fees for washing machine repair in Varna.</p>
-          </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+          <p>
+            When a washing machine breaks down, the first task is to find out where the problem really comes from. The same symptom can be caused by different components, which is why we do not recommend replacing parts before running diagnostics.
+          </p>
+          <p>
+            During the visit, the technician inspects the machine according to the specific problem – the water inlet and drainage system, the heating element, the pump, the motor, the drum, the electronics and any other components related to the symptom.
+          </p>
+          <p>
+            When the repair can be done on site, it is carried out during the visit. If a specific spare part is needed, you are told in advance what has to be replaced. You can also read <a href="/en/reviews/" class="text-blue-700 font-medium hover:underline">RotoRem customer reviews</a> that confirm the quality of our service.
+          </p>
         </div>
       </section>
 
-      <!-- Common Problems Section -->
-      <section class="mb-16">
+    </div>
+
+    <Reviews title="RotoRem customer reviews" prioritizeAppliance="Пералня" />
+
+    <div class="container max-w-5xl">
+
+      <!-- Problems -->
+      <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Most common washing machine problems in Varna</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing Machine Faults We Repair</h2>
           <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
         </div>
-        
-        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-8 rounded-2xl shadow-xl border border-blue-100">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
-              <h3 class="text-lg font-semibold text-blue-900 mb-3">Washing machine leaking water</h3>
-              <p class="text-blue-800">Leaks from the bottom, door or detergent dispenser. Our technician will quickly find and fix the leak.</p>
-            </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500">
-              <h3 class="text-lg font-semibold text-green-900 mb-3">Washing machine not spinning</h3>
-              <p class="text-green-800">Drum not spinning due to motor, belt or electronic problems. We repair on-site in Varna.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
-              <h3 class="text-lg font-semibold text-amber-900 mb-3">Washing machine not draining water</h3>
-              <p class="text-amber-800">Problem with the drain pump or filter blockage. Professional cleaning and repair.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
-              <h3 class="text-lg font-semibold text-red-900 mb-3">Washing machine not turning on</h3>
-              <p class="text-red-800">Electrical problems, damaged contacts or circuit board. Diagnosis and repair by certified technician in Varna.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-500">
-              <h3 class="text-lg font-semibold text-purple-900 mb-3">Washing machine not cleaning well</h3>
-              <p class="text-purple-800">Problems with detergent dosing, clogged filters or worn parts. We restore full functionality.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
-              <h3 class="text-lg font-semibold text-indigo-900 mb-3">Washing machine making noise</h3>
-              <p class="text-indigo-800">Worn bearings, loose bolts or foreign objects in drum. We eliminate all causes of noise.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {pricing && <ServicePricing pricing={pricing} accent="blue" />}
-
-      <!-- Process Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing machine repair process in Varna</h2>
-          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">1</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">You call us</h3>
-              <p class="text-gray-700">Call 089 834 0982 or book online for washing machine repair in Varna.</p>
-            </div>
-          </div>
-          
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">2</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">We come to you</h3>
-              <p class="text-gray-700">Our technician arrives at the agreed time with all necessary tools and parts.</p>
-            </div>
-          </div>
-          
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">3</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">We repair</h3>
-              <p class="text-gray-700">We diagnose the problem and repair your washing machine the same day in your home in Varna.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Brands Section - Clean text-focused approach -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing machine brands we repair in Varna</h2>
-          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
-        </div>
-        
-        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              'Bosch', 'Samsung', 'LG', 'Whirlpool', 
-              'Indesit', 'Hotpoint', 'Candy', 'Other brands'
-            ].map((brand) => (
-              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200 group hover:border-blue-300">
-                <h4 class="font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                  {brand}
-                </h4>
-                <p class="text-xs text-gray-600">
-                  {brand === 'Other brands' ? 'All other brands' : `${brand} repair service`}
-                </p>
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-xl border border-blue-100">
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+                {item.extra && item.link && (
+                  <p class="mt-3 text-gray-800 leading-relaxed">
+                    {item.extra}{' '}
+                    <a href={item.link.href} class="font-semibold text-blue-700 hover:underline">{item.link.label}</a>.
+                  </p>
+                )}
+                {item.link && !item.extra && (
+                  <p class="mt-3">
+                    <a href={item.link.href} class="font-bold text-blue-700 hover:underline">{item.link.label}</a>
+                  </p>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- Service Areas -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Varna areas we serve</h2>
+      <!-- Diagnostics -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing Machine Diagnostics in Varna</h2>
           <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
         </div>
-        
-        <div class="grid md:grid-cols-3 gap-6">
-          {[
-            { area: 'Varna Center', desc: 'Washing machine repair in city center' },
-            { area: 'Chayka', desc: 'Washing machine service in Chayka' },
-            { area: 'Mladost', desc: 'Washing machine repair in Mladost' },
-            { area: 'Asparuhovo', desc: 'Washing machine technician in Asparuhovo' },
-            { area: 'Levski', desc: 'Washing machine repair in Levski' },
-            { area: 'Vladislav Varnenchik', desc: 'Washing machine repair in V. Varnenchik' }
-          ].map((item, index) => (
-            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-blue-200">
-              <h4 class="font-semibold text-blue-900 mb-2">{item.area}</h4>
-              <p class="text-sm text-blue-800">{item.desc}</p>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-gray-800 leading-relaxed">
+            <p>
+              Diagnostics are a separate part of the repair and aim to establish the cause of the fault before any parts are replaced.
+            </p>
+            <p class="font-medium text-gray-900">Depending on the symptom, we may check:</p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>the water inlet system;</li>
+              <li>the pump and drainage;</li>
+              <li>the filter and drain hose;</li>
+              <li>the heating element;</li>
+              <li>the temperature sensors;</li>
+              <li>the motor and carbon brushes;</li>
+              <li>the drive belt;</li>
+              <li>the drum;</li>
+              <li>the bearings and shock absorbers;</li>
+              <li>the door locking mechanism;</li>
+              <li>the program selector;</li>
+              <li>the electronic module and control board.</li>
+            </ul>
+            <p>
+              After the inspection, you receive information about what was found and what repair is needed.
+            </p>
+            <p class="font-semibold text-gray-900">Diagnostics price in Varna: 20 €</p>
+          </div>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Washing machine diagnostics in Varna"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Parts table -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing Machine Parts and Systems We Inspect and Repair</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="hidden md:block overflow-hidden rounded-xl border border-blue-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-blue-600 text-white">
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Part or system</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Commonly related problem</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Not every fault means a part has to be replaced. In many cases, diagnostics reveal a different problem elsewhere in the system, so the exact repair is determined only after the inspection.
+        </p>
+      </section>
+
+      <!-- Bearings -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Bearing Replacement and Drum Problems</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>A loud rumble or metallic noise during spinning often points to a bearing problem, but the entire mechanical system should be checked before any repair.</p>
+          <p>During the inspection, we may examine the bearings, the shaft seal, the drum and the condition of the other related components.</p>
+          <p>For older washing machines, it is also important to judge whether the cost of the repair is reasonable compared with the condition of the machine.</p>
+          <p>RotoRem tells you what was found and what repair is recommended before any work begins.</p>
+        </div>
+      </section>
+
+      <!-- Installation -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing Machine Installation and Removal</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="space-y-8 text-gray-800 leading-relaxed">
+          <p>In addition to repairs, RotoRem installs and removes washing machines in Varna.</p>
+
+          <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Washing machine installation</h3>
+            <p class="mb-3 font-medium text-gray-900">Installation may include:</p>
+            <ul class="list-disc pl-5 space-y-2 mb-4">
+              <li>positioning the machine;</li>
+              <li>leveling;</li>
+              <li>connecting to the water supply;</li>
+              <li>connecting to the drain;</li>
+              <li>checking the inlet and outlet connections;</li>
+              <li>a test run to confirm correct operation.</li>
+            </ul>
+            <p>Proper leveling is especially important, because a machine that is not set up correctly can vibrate and walk across the floor during spinning.</p>
+          </div>
+
+          <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Washing machine removal</h3>
+            <p>When needed, an old or faulty machine can be safely disconnected from the water supply and the drain. The goal is to remove it without leaks and without damaging the existing connections.</p>
+          </div>
+
+          <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Washing machine and dryer</h3>
+            <p>When a dryer is installed together with the washing machine, an additional check of how the two appliances are positioned and connected may be needed. RotoRem also provides <a href="/en/services/dryer-repair/" class="text-blue-700 font-medium hover:underline">dryer repair and installation in Varna</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      {pricing && <div class={sectionClass}><ServicePricing pricing={pricing} accent="blue" /></div>}
+
+      <!-- Brands -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing Machine Brands We Service</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">
+            RotoRem repairs washing machines from many manufacturers, including:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {brands.map((brand) => (
+              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                <h3 class="font-semibold text-gray-900">{brand}</h3>
+              </div>
+            ))}
+          </div>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            Construction, electronics and error codes can differ between brands, so diagnostics are carried out according to the specific model and symptom.
+          </p>
+        </div>
+      </section>
+
+      <!-- Real cases -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Real Washing Machine Repairs in Varna</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 object-cover min-h-[220px] md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">{item.brand} – Washing Machine</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Problem:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Area:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Cause identified:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair performed:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 object-cover min-h-[240px] lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand} – Washing Machine</h3>
+              <p class="text-gray-800"><span class="font-semibold">Problem:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Area:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Cause identified:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair performed:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Process: 3 + 2 grid -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">How the Repair Works</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <!-- Final CTA -->
-      <section class="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white p-12 rounded-2xl shadow-2xl">
-        <h2 class="text-3xl font-bold mb-4">Need washing machine repair in Varna?</h2>
-        <p class="text-xl mb-8 text-blue-100">Call now for fast on-site repair!</p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Send Email
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Call 089 834 0982
-          </a>
+      <!-- Service areas -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing Machine Repair Across Varna</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
         </div>
-        
-        <div class="text-blue-100">
-          <p class="text-sm">
-            Visit and diagnostics: Varna - 20 EUR | Quality guarantee | Service in Varna
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>
+            RotoRem makes home visits throughout Varna and serves many parts of the city, including neighborhoods such as Mladost, Levski, Chaika, Asparuhovo, Vladislav Varnenchik and other service areas.
+          </p>
+          <p>
+            You do not need to transport the washing machine to a workshop – the technician comes to your address.
           </p>
         </div>
       </section>
 
-<!-- SEO helper text -->
-      <div class="rotorem-seo-text">
-        <p>When your washing machine stops working or starts causing problems, daily life is affected immediately. We provide fast and practical in-home washing machine repair in Varna, without transporting the appliance to a workshop. We respond quickly, diagnose on-site, and fix the issue directly at your address.</p>
-        <h2>What washing machine faults we repair in Varna</h2>
-        <p>Every problem has a solution if diagnosed correctly. We handle common issues such as no spin cycle, no drainage, no water heating, and similar faults.</p>
-        <p>We perform both standard repairs and specific services such as washing machine drum repair and bearing replacement. When needed, we also provide washing machine installation, including correct plumbing and electrical connection to prevent future problems.</p>
-        <p>Besides washing machine repairs, you can also rely on us for other appliances. If you need support, see our <a href="https://www.rotorem.bg/services/dishwasher-repair/">dishwasher repair</a> and <a href="https://www.rotorem.bg/services/dryer-repair/">dryer repair</a> services, as well as the full list of <a href="https://www.rotorem.bg/services/">appliance repair services in Varna</a>.</p>
-        <h2>Which washing machine brands we service in Varna</h2>
-        <p>We work with all popular brands and know their specifics well. We repair Bosch, Whirlpool, AEG, Samsung, LG, Beko, Indesit, and other widely used models. Whether the appliance is new or older, we can provide an appropriate solution with reliable results.</p>
-        <h2>Areas in Varna we cover</h2>
-        <p>We cover the entire city area, including Chaika, Levski, Vladislav Varnenchik, Mladost, Asparuhovo, Galata, and central Varna. We also provide in-home service within about 20 km around the city for fast response.</p>
-        <h2>How the repair process works</h2>
-        <p>The process is kept simple to save your time. After your request, we arrange a convenient visit. On-site, we perform diagnostics and provide a clear final quote. After approval, we start the repair right away using proper parts and tools.</p>
-        <p>After the repair, we test the appliance to ensure proper operation. This way, your in-home washing machine repair is fast, transparent, and hassle-free.</p>
-        <h2>Why choose RotoRem for washing machine service</h2>
-        <p>Clients choose us for dependable solutions without wasted time. We have long practical experience in household appliance repair and provide service directly at your address. Every repair and installation is tailored to the specific issue and model. We offer clear terms, no hidden fees, and service warranty. <a href="https://www.rotorem.bg/contact/">Contact us</a> now and book a convenient visit.</p>
-      </div>
+      <!-- FAQ -->
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
 
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   </article>
+
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Problem with your washing machine?</h2>
+      <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        If your washing machine does not drain, does not spin, does not heat, leaks, is noisy or will not start, contact RotoRem for in-home diagnostics and repair in Varna.
+      </p>
+      <p class="text-lg mb-8">Phone: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        Call to book a visit
+      </a>
+    </section>
+  </div>
 </Layout>
 
-
+<style>
+  .wm-service-page :global(#service-pricing-heading + div + p),
+  .wm-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-600),
+  .wm-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-500) {
+    color: rgb(31 41 55) !important;
+  }
+</style>

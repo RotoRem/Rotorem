@@ -14,6 +14,7 @@ interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  hideServiceFaq?: boolean;
 }
 
 const lang = getLangFromUrl(Astro.url);
@@ -153,6 +154,7 @@ const {
     : 'Професионален ремонт на битова техника във Варна и София. Бързи ремонти на място за перални, съдомиялни, фурни, бойлери и други.',
   image = '/img/hero.webp',
   noindex: noindexProp = false,
+  hideServiceFaq = false,
 } = Astro.props;
 
 const route = getRouteFromUrl(Astro.url);
@@ -621,33 +623,45 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
       });
 
       // Service Worker and Network Error Tracking
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('/sw.js')
-          .then(() => {
-            console.log('✅ Service Worker registered successfully');
-          })
-          .catch(() => {
-            trackEvent({
-              event: 'error',
-              category: 'Errors',
-              action: 'service_worker_registration_failed',
-              label: 'Service Worker Registration',
-            });
-          });
+      const isLocalDev =
+        location.hostname === 'localhost' ||
+        location.hostname === '127.0.0.1' ||
+        location.hostname === '[::1]';
 
-        navigator.serviceWorker.addEventListener('message', (event) => {
-          if (event.data?.type === 'NETWORK_ERROR') {
-            trackEvent({
-              event: 'error',
-              category: 'Errors',
-              action: 'network_error',
-              label: event.data.url,
-              error_message: event.data.url,
-              error_type: 'network_error',
+      if ('serviceWorker' in navigator) {
+        if (isLocalDev) {
+          // SW cache-first for CSS/JS breaks Vite dev navigation; remove any stale registration
+          navigator.serviceWorker.getRegistrations().then((registrations) => {
+            registrations.forEach((registration) => registration.unregister());
+          });
+        } else {
+          navigator.serviceWorker
+            .register('/sw.js')
+            .then(() => {
+              console.log('✅ Service Worker registered successfully');
+            })
+            .catch(() => {
+              trackEvent({
+                event: 'error',
+                category: 'Errors',
+                action: 'service_worker_registration_failed',
+                label: 'Service Worker Registration',
+              });
             });
-          }
-        });
+
+          navigator.serviceWorker.addEventListener('message', (event) => {
+            if (event.data?.type === 'NETWORK_ERROR') {
+              trackEvent({
+                event: 'error',
+                category: 'Errors',
+                action: 'network_error',
+                label: event.data.url,
+                error_message: event.data.url,
+                error_type: 'network_error',
+              });
+            }
+          });
+        }
       }
     </script>
 
@@ -1327,9 +1341,11 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
     
     <main>
       <slot />
-      <div class="container max-w-4xl">
-        <ServiceFAQ />
-      </div>
+      {!hideServiceFaq && (
+        <div class="container max-w-4xl">
+          <ServiceFAQ />
+        </div>
+      )}
     </main>
     
     <!-- Floating phone button -->

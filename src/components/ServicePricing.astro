@@ -1,7 +1,7 @@
 ---
 import type { ServicePricingContent } from '../data/service-prices';
 
-type Accent = 'blue' | 'emerald' | 'indigo' | 'orange' | 'teal';
+type Accent = 'blue' | 'emerald' | 'indigo' | 'orange' | 'purple' | 'teal';
 
 interface Props {
   pricing: ServicePricingContent;
@@ -66,6 +66,15 @@ const accentClasses: Record<
     featured: 'bg-amber-50/80',
     featuredText: 'text-amber-900',
     price: 'text-teal-700',
+  },
+  purple: {
+    bar: 'bg-fuchsia-500',
+    shell: 'from-fuchsia-50 via-white to-purple-50 border-fuchsia-100',
+    border: 'border-fuchsia-100',
+    header: 'bg-fuchsia-600',
+    featured: 'bg-amber-50/80',
+    featuredText: 'text-amber-900',
+    price: 'text-fuchsia-700',
   },
 };
 

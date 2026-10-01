@@ -1,206 +1,606 @@
-﻿---
+---
 import Layout from '../../../layouts/Base.astro';
 import ServicePricing from '../../../components/ServicePricing.astro';
+import Reviews from '../../../components/Reviews.astro';
 import { getServicePricing } from '../../../data/service-prices';
+import { getServiceFaqItems } from '../../../lib/jsonldOverrides';
+const lang = 'en';
+const pricing = getServicePricing('dryer', 'varna', lang);
 
-const pricing = getServicePricing('dryer', 'varna', 'en');
-const title = 'Dryer Repair in Varna | In-Home Service by RotoRem';
-const description = 'Fast dryer repair in Varna for all major brands. We fix heating problems, drum faults, electronics issues, and unusual noise with warranty.';
+const title = 'Dryer Repair in Varna | In-Home Service | RotoRem';
+const description =
+  'In-home dryer repair and diagnostics in Varna. Heating, drum, belt, heat pump, drainage and electronics problems. Call RotoRem.';
+
+const heroImage = '/img/services/ремонт-на-сушилня-варна-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-сушилня-варна-диагностика.webp';
+
+const accentBar = 'bg-fuchsia-500';
+const accentLink = 'text-fuchsia-700';
+const accentShell = 'from-fuchsia-50 via-white to-purple-50 border-fuchsia-100';
+const accentBorder = 'border-fuchsia-100';
+const tableHeader = 'bg-fuchsia-600';
+
+const problems = [
+  {
+    title: 'Dryer does not heat',
+    text: 'When the program finishes and the clothes are still cold, the cause may be the heating element, thermostat, sensors, electronic module or another part of the heating system. In heat pump dryers the problem is not always the classic heating element, so diagnostics start from the way the appliance actually behaves.',
+    border: 'border-fuchsia-500',
+  },
+  {
+    title: 'Clothes do not dry well',
+    text: 'Damp or partially dry clothes can point to a problem with the airflow, the filter, the condensing system, the humidity sensors or the electronic control. Load conditions are checked as well, but if the problem keeps coming back, technical diagnostics are needed.',
+    border: 'border-purple-500',
+  },
+  {
+    title: 'Drum does not rotate',
+    text: 'If the dryer starts but the drum does not move, we can check the belt, motor, rollers, electronics and the mechanical part of the drum. The cause may be relatively minor, but it is important not to force the appliance until the fault has been found.',
+    border: 'border-pink-500',
+  },
+  {
+    title: 'Dryer does not start',
+    text: 'When the appliance does not respond or the program will not start, the inspection may cover the power supply, the door lock, the control board and the other electronic components. Not every dryer that "won\'t start" has a faulty board – diagnostics begin with the specific symptom.',
+    border: 'border-violet-500',
+  },
+  {
+    title: 'Dryer stops mid-cycle',
+    text: 'An interrupted program may be related to overheating, sensors, a problem in the condensate drainage system, electronics or a mechanical part. The technician checks what the display shows and how the appliance behaves before repairing.',
+    border: 'border-rose-500',
+  },
+  {
+    title: 'Dryer is noisy or vibrates',
+    text: 'Loud noise, banging or unusual vibration can come from worn rollers, bearings, a belt, a foreign object in the drum or incorrect positioning. The nature of the noise gives a first clue, but the final cause is established after inspection.',
+    border: 'border-indigo-500',
+  },
+  {
+    title: 'Dryer does not drain water',
+    text: 'In condenser models and some heat pump dryers, water may remain in the container or the drainage system. We check the hoses, pump, filter and related components according to the construction of the machine.',
+    border: 'border-teal-500',
+  },
+  {
+    title: 'Burning smell or overheating',
+    text: 'This symptom needs attention – we recommend not using the dryer until it has been inspected. Possible causes include a problem with the heating element, airflow, an electrical component or a build-up of lint that restricts cooling.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'Door does not open',
+    text: 'A locked door may be related to the locking mechanism, residual heat, the program or electronics. We do not recommend forcing the door open, as this can damage the mechanism.',
+    border: 'border-orange-500',
+  },
+  {
+    title: 'Dryer shows an error code',
+    text: 'Error codes help with diagnostics, but a code does not always mean that a specific part must be replaced right away. The technician compares the information on the display with the appliance\'s actual behavior and checks the relevant systems.',
+    border: 'border-slate-500',
+  },
+];
+
+const partsTable = [
+  { part: 'Heating element', problem: 'Dryer does not heat' },
+  { part: 'Thermostat and sensors', problem: 'Incorrect heating or interrupted cycle' },
+  { part: 'Motor and belt', problem: 'Drum does not rotate' },
+  { part: 'Rollers and bearings', problem: 'Noise and rotation problems' },
+  { part: 'Filter and airflow', problem: 'Poor drying' },
+  { part: 'Pump and drainage', problem: 'Water remains in condenser models' },
+  { part: 'Condenser / heat exchanger', problem: 'Problems with condenser drying' },
+  { part: 'Heat pump system', problem: 'Weak or no heating in heat pump models' },
+  { part: 'Door lock', problem: 'Machine does not start or the door stays locked' },
+  { part: 'Electronic module', problem: 'Interruptions, errors or an incorrect program' },
+  { part: 'Temperature and humidity sensor', problem: 'Under-drying or over-drying' },
+  { part: 'Ventilation and hoses', problem: 'Problems in vented models' },
+];
+
+const realCases = [
+  {
+    brand: 'AEG',
+    problem: 'Clothes were not drying well',
+    area: 'Mladost',
+    diagnosis: 'We found that the dryer was heavily contaminated.',
+    repair: 'After maintenance and cleaning of the compressor unit, the dryer works like new.',
+    image: '/img/services/ремонт-на-сушилня-варна-случай-1.webp',
+    alt: 'Maintenance and cleaning of an AEG dryer that was not drying clothes well because of a heavily contaminated compressor unit in the Mladost district, Varna.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'Drum was not turning',
+    area: 'Levski',
+    diagnosis: 'We found a broken belt on the motor that drives the drum.',
+    repair: 'After the belt was replaced, the dryer works normally.',
+    image: '/img/services/ремонт-на-сушилня-варна-случай-2.webp',
+    alt: 'Bosch dryer repair: drum not turning, broken drive belt replaced in the Levski district, Varna.',
+  },
+  {
+    brand: 'BEKO',
+    problem: 'Overheating protection kept activating',
+    area: 'City Center',
+    diagnosis: 'We found that there was no air circulation because of contamination.',
+    repair: 'After cleaning, the dryer started working normally and no longer showed any error.',
+    image: '/img/services/ремонт-на-сушилня-варна-случай-3.webp',
+    alt: 'BEKO dryer repair: overheating protection triggered by lack of air circulation, resolved in the city center of Varna.',
+  },
+];
+
+const processSteps = [
+  {
+    step: 1,
+    title: 'Contact RotoRem',
+    text: 'Tell us what is wrong with the dryer and how the problem shows up.',
+    circleClass: 'bg-gradient-to-r from-fuchsia-500 to-fuchsia-600',
+  },
+  {
+    step: 2,
+    title: 'We schedule a visit',
+    text: 'A technician visits your address in Varna at the agreed time.',
+    circleClass: 'bg-gradient-to-r from-purple-500 to-purple-600',
+  },
+  {
+    step: 3,
+    title: 'We run diagnostics',
+    text: 'The components and systems related to the specific symptom are inspected.',
+    circleClass: 'bg-gradient-to-r from-pink-500 to-pink-600',
+  },
+  {
+    step: 4,
+    title: 'You get repair information',
+    text: 'We explain what fault was found and what needs to be done.',
+    circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600',
+  },
+  {
+    step: 5,
+    title: 'Repair and test',
+    text: 'Where possible, the repair is carried out on site and the dryer is tested before the visit ends.',
+    circleClass: 'bg-gradient-to-r from-indigo-500 to-indigo-600',
+  },
+];
+
+const brands = ['Bosch', 'Siemens', 'AEG', 'Electrolux', 'Gorenje', 'Samsung', 'LG', 'Beko', 'Indesit', 'Whirlpool', 'Candy', 'Miele'];
+
+const faqs = getServiceFaqItems('/en/services/dryer-repair/');
+const sectionClass = 'mb-28 pt-4';
 ---
 
-<Layout title={title} description={description}>
-  <article>
-    <section class="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-16 mb-16">
-      <div class="container max-w-4xl text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">In-Home Dryer Repair and Installation in Varna</h1>
-        <p class="text-xl md:text-2xl text-indigo-100 max-w-3xl mx-auto mb-8">
-          Professional in-home dryer diagnostics and repair in Varna with fast response and guaranteed workmanship.
-        </p>
-        <p class="text-base md:text-lg text-indigo-100 max-w-2xl mx-auto mb-8">
-          Visit and diagnostics in Varna - 20 EUR
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-indigo-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Send Email
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Call 089 834 0982
+<Layout title={title} description={description} hideServiceFaq={true}>
+  <article class="dryer-service-page">
+    <!-- Hero -->
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="In-home dryer repair in Varna"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-purple-950/85 via-fuchsia-900/75 to-purple-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-block mb-5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+            In-home service in Varna
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            In-Home Dryer Repair in Varna
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            Problem with your dryer? RotoRem provides in-home diagnostics and repair of dryers in Varna. We handle heating, drum, belt, heat pump, drainage, noise and electronics issues.
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            A technician visits your address, finds the cause of the fault and tells you what repair is needed before any work is carried out.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Diagnostics in Varna</p>
+              <p class="text-xl font-bold text-white">20 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Phone</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Call to book a visit
           </a>
         </div>
       </div>
     </section>
 
-    <div class="container max-w-4xl">
-      <section class="mb-16">
+    <div class="container max-w-5xl">
+      <!-- Intro -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">In-Home Dryer Repair and Diagnostics</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+          <p>
+            When a dryer breaks down, the first task is to find out where the problem really comes from. The same symptom can be caused by different components – the heating element, sensors, belt, electronics or a heat pump system – which is why we do not recommend replacing parts before diagnostics.
+          </p>
+          <p>
+            During the visit, the technician inspects the dryer according to the specific problem: heating, airflow, drum, drainage, filters, electronics and any other systems related to the symptom.
+          </p>
+          <p>
+            When the repair can be done on site, it is carried out during the visit. If a specific spare part is needed, you are told in advance what has to be replaced. You can also read <a href="/en/reviews/" class={`${accentLink} font-medium hover:underline`}>RotoRem customer reviews</a>.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <Reviews title="RotoRem customer reviews" prioritizeAppliance="Сушилня" />
+
+    <div class="container max-w-5xl">
+      <!-- Problems -->
+      <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Why choose our dryer repair service in Varna?</h2>
-          <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Faults We Repair</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-indigo-200">
-            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-indigo-900 mb-3">On-site service</h3>
-            <p class="text-indigo-800">We come directly to your address in Varna, so there is no need to move the appliance.</p>
-          </div>
-          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-emerald-200">
-            <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-emerald-900 mb-3">Same-day repair</h3>
-            <p class="text-emerald-800">In most cases we complete the repair during the first visit.</p>
-          </div>
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-3">Warranty</h3>
-            <p class="text-amber-800">We provide warranty on both labour and installed parts.</p>
-          </div>
-          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
-            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-lime-900 mb-3">Fair prices</h3>
-            <p class="text-lime-800">Visit and diagnostics in Varna - 20 EUR. Clear pricing without hidden fees.</p>
+
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-xl border`}>
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer repair process in Varna</h2>
-          <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8 mb-10">
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">1</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">You call us</h3>
-              <p class="text-gray-700">Call 089 834 0982 to book dryer repair in Varna.</p>
-            </div>
-          </div>
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">2</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">We come to you</h3>
-              <p class="text-gray-700">Our technician arrives on time with the required tools and parts.</p>
-            </div>
-          </div>
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">3</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">We repair</h3>
-              <p class="text-gray-700">We diagnose the issue and complete the repair the same day whenever possible.</p>
-            </div>
-          </div>
-        </div>
+      {pricing && <div class={sectionClass}><ServicePricing pricing={pricing} accent="purple" /></div>}
 
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Common dryer problems we resolve</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Dryer not heating</h3>
-            <p class="text-gray-700">Heater, thermostat, sensor, and relay diagnostics with professional component replacement.</p>
+      <!-- Diagnostics -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Diagnostics in Varna</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-gray-800 leading-relaxed">
+            <p>
+              Diagnostics are a separate part of the repair and aim to establish the cause of the fault before any parts are replaced.
+            </p>
+            <p class="font-medium text-gray-900">Depending on the symptom and the type of dryer, we may check:</p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>the heating element and thermostat;</li>
+              <li>the temperature and humidity sensors;</li>
+              <li>the motor, belt and rollers;</li>
+              <li>the drum and its mechanical movement;</li>
+              <li>the filter and airflow;</li>
+              <li>the condensate drainage system;</li>
+              <li>heat pump components (accessible during diagnostics);</li>
+              <li>the door lock;</li>
+              <li>the electronic module and controls.</li>
+            </ul>
+            <p>
+              After the inspection, you receive information about what was found and what repair is needed.
+            </p>
+            <p class="font-semibold text-gray-900">Diagnostics price in Varna: 20 €</p>
           </div>
-          <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-emerald-500">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Drum not spinning</h3>
-            <p class="text-gray-700">Repair of belts, rollers, motors, and drive systems to restore stable operation.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Cycle stops unexpectedly</h3>
-            <p class="text-gray-700">Full electronics and overheating checks to identify and remove root causes.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Noise and vibration</h3>
-            <p class="text-gray-700">Bearing and mechanical inspection to eliminate friction, vibration, and abnormal sounds.</p>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Dryer diagnostics in Varna"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
           </div>
         </div>
       </section>
 
-      {pricing && <ServicePricing pricing={pricing} accent="indigo" />}
+      <!-- Parts table -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Parts and Systems We Inspect and Repair</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
 
-      <section class="mb-16">
-        <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Dryer brands we service</h2>
-          <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class={`bg-white rounded-xl border ${accentBorder} p-5 shadow-sm`}>
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-gray-700 text-center">
-          <h3>AEG</h3>
-          <h3>Bosch</h3>
-          <h3>Whirlpool</h3>
-          <h3>Beko</h3>
-          <h3>Indesit</h3>
-          <h3>Samsung</h3>
-          <h3>LG</h3>
-          <h3>Electrolux</h3>
+
+        <div class={`hidden md:block overflow-hidden rounded-xl border ${accentBorder} bg-white shadow-lg`}>
+          <table class="w-full text-left">
+            <thead>
+              <tr class={`${tableHeader} text-white`}>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Part or system</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Commonly related problem</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Not every fault means a part has to be replaced. In many cases, diagnostics reveal a different problem elsewhere in the system, so the exact repair is determined only after the inspection.
+        </p>
       </section>
 
-      <!-- Final CTA -->
-      <section class="text-center bg-gradient-to-r from-indigo-600 to-indigo-800 text-white p-12 rounded-2xl shadow-2xl">
-        <h2 class="text-3xl font-bold mb-4">Need dryer repair in Varna?</h2>
-        <p class="text-xl mb-8 text-indigo-100">Call now for professional dryer repair service!</p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-indigo-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Send Email
-          </a>
-          <a href="tel:0898340982" class="bg-indigo-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-600 transition-colors shadow-lg">
-            Call 089 834 0982
-          </a>
+      <!-- Heat pump -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Heat Pump Dryer Repair</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-        
-        <div class="text-indigo-100">
-          <p class="text-sm">
-            Visit and diagnostics: Varna - 20 EUR | Certified engineers | Service in Varna
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>
+            Heat pump dryers are built differently from classic models with direct heating. During diagnostics we can check sensors, electronics, filters, airflow and other accessible components of the system.
+          </p>
+          <p>
+            RotoRem does not promise to repair a hermetically sealed compressor. After the inspection, the technician tells you what was found and whether the repair is technically and economically justified for your specific model.
+          </p>
+          <p>
+            For recurring heating problems or interrupted programs, it is important that the appliance is diagnosed according to its type, and not only by a symptom that is common to different kinds of dryers.
           </p>
         </div>
       </section>
 
-<!-- SEO helper text -->
-      <div class="rotorem-seo-text">
-        <p>Does your dryer stop drying, fail to heat, or make unusual noise? This is a problem that requires quick action, especially when you rely on the appliance every day. At RotoRem, we provide in-home dryer repair in Varna with on-site diagnostics and a practical solution, often on the first visit. We work across all neighborhoods in the city and nearby areas, so you do not need to transport the appliance to a workshop.</p>
-        <h2>What dryer faults we repair in Varna</h2>
-        <p>Most clients look for dryer repair in Varna when a specific symptom disrupts normal operation. In daily practice, we handle problems such as a dryer that does not heat, does not dry clothes properly, or stops mid-cycle. We also see cases where the unit does not start at all or makes loud noise during operation. The cause is often related to the heating element, sensors, belt, or electronics.</p>
-        <p>As a dryer service team, we work with all appliance types, including condenser and heat pump models. Besides in-home dryer repair, we also provide dryer installation when you buy a new unit or replace an old one. If needed, we can install a dryer on top of a washing machine with stable and safe positioning adapted to your space.</p>
-        <p>If you also have issues with other appliances, you can check our services for <a href="https://www.rotorem.bg/services/washing-machine-repair/">washing machine repair</a> and <a href="https://www.rotorem.bg/services/dishwasher-repair/">dishwasher repair</a>, as well as all city services on our <a href="https://www.rotorem.bg/services/">home appliance repair in Varna</a> page.</p>
-        <h2>Which dryer brands we service in Varna</h2>
-        <p>We repair dryers from all popular brands on the market. We work with Bosch, Whirlpool, Samsung, LG, Beko, AEG, and other manufacturers, including newer heat pump models. We understand the specifics of different systems and use suitable parts and methods for each brand. This allows repairs to be accurate and durable, without unnecessary trial and error.</p>
-        <h2>Areas in Varna we cover</h2>
-        <p>We provide in-home dryer repair in all districts of Varna. We serve Chaika, Levski, Vladislav Varnenchik, Mladost, Asparuhovo, Galata, and the central city area. We also accept requests up to about 20 km outside Varna, with the goal of fast response regardless of location.</p>
-        <h2>How the repair process works</h2>
-        <p>The process begins with an on-site inspection and diagnostics to identify the exact cause of the problem. Then we provide a clear quote for the dryer repair before any work starts. Once approved, we proceed with the repair during the same visit whenever possible. After the repair, we run a full test to ensure the appliance works properly and safely.</p>
-        <p>For new appliances, we also offer heat pump dryer installation and standard dryer installation depending on your home setup. If space is limited, we can install the dryer on top of a washing machine with secure mounting and correct leveling.</p>
-        <h2>Why choose RotoRem for dryer service</h2>
-        <p>Clients choose us because they get a real solution, not a temporary fix. We work at your address, which saves time and effort. Every dryer repair in Varna is carried out with attention to detail and service warranty. Our experience with many brands and models helps us diagnose quickly and provide the right solution. <a href="https://www.rotorem.bg/contact/">Contact us</a> now and book a visit at a convenient time.</p>
-      </div>
+      <!-- Belt and drum -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Belt, Drum and Dryer Mechanics</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>
+            When the drum does not turn or an unusual noise is heard, the inspection covers the belt, rollers, motor and the condition of the drum.
+          </p>
+          <p>
+            A worn belt is a common cause, but before replacing it we also check whether there is an additional mechanical problem that could damage the new part again.
+          </p>
+          <p>
+            After the repair, the dryer is tested with a program to confirm normal rotation and operation without excessive noise.
+          </p>
+        </div>
+      </section>
 
+      <!-- Installation -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Installation and Removal</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="space-y-8 text-gray-800 leading-relaxed">
+          <p>In addition to repairs, RotoRem installs and removes dryers in Varna.</p>
+
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Dryer installation</h3>
+            <p class="mb-3 font-medium text-gray-900">Installation may include:</p>
+            <ul class="list-disc pl-5 space-y-2 mb-4">
+              <li>positioning and leveling the appliance;</li>
+              <li>connection according to the dryer type (condenser, heat pump or vented);</li>
+              <li>checking ventilation or drainage where necessary;</li>
+              <li>a test run to confirm correct operation.</li>
+            </ul>
+          </div>
+
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Dryer removal</h3>
+            <p>
+              When needed, an old or faulty dryer can be safely disconnected and removed from its place without damaging the surrounding connections and installation.
+            </p>
+          </div>
+
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Dryer on top of a washing machine</h3>
+            <p>
+              For stacked installations, secure fastening and correct positioning of both appliances are essential. For installing a washing machine and dryer as a stacked column, see also our page on{' '}
+              <a href="/en/services/washing-machine-repair/" class={`${accentLink} font-medium hover:underline`}>washing machine repair and installation in Varna</a>, which also describes the washing machine + dryer installation service.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dryer types -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Condenser and Heat Pump Dryers</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder} space-y-4 text-gray-800 leading-relaxed`}>
+            <h3 class="text-xl font-semibold text-gray-900">Condenser dryers</h3>
+            <p>
+              In condenser models, moisture is collected in a container or drained through a hose. Common problems include a clogged filter, drainage, sensors and electronics. Diagnostics follow the construction of the specific model.
+            </p>
+          </div>
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder} space-y-4 text-gray-800 leading-relaxed`}>
+            <h3 class="text-xl font-semibold text-gray-900">Heat pump dryers</h3>
+            <p>
+              These models work at a lower temperature and use a different heat transfer system. For symptoms such as weak drying or interruptions, we check the accessible components, filters, sensors and controls – without promising to repair a hermetically sealed compressor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Brands -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Brands We Service</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">
+            RotoRem repairs dryers from many manufacturers, including:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {brands.map((brand) => (
+              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                <h3 class="font-semibold text-gray-900">{brand}</h3>
+              </div>
+            ))}
+          </div>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            Construction, electronics and error codes can differ between brands, so diagnostics are carried out according to the specific model and type of dryer.
+          </p>
+        </div>
+      </section>
+
+      <!-- Real cases -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Real Dryer Repairs in Varna</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 object-cover min-h-[220px] md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">{item.brand} – Dryer</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Problem:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Area:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Cause identified:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair performed:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 object-cover min-h-[240px] lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand} – Dryer</h3>
+              <p class="text-gray-800"><span class="font-semibold">Problem:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Area:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Cause identified:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair performed:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">How the Repair Works</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Service areas -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Repair Across Varna</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto`}>
+          <p>
+            RotoRem makes home visits throughout Varna and serves many parts of the city, including neighborhoods such as Mladost, Levski, Chaika, Asparuhovo, Vladislav Varnenchik and other service areas.
+          </p>
+          <p>
+            You do not need to transport the dryer to a workshop – the technician comes to your address.
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   </article>
+
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-fuchsia-600 to-purple-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Problem with your dryer?</h2>
+      <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        If your dryer does not heat, does not dry well, the drum does not rotate, it is noisy or shows an error, contact RotoRem for in-home diagnostics and repair in Varna.
+      </p>
+      <p class="text-lg mb-8">Phone: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        Call to book a visit
+      </a>
+    </section>
+  </div>
 </Layout>
 
-
+<style>
+  .dryer-service-page :global(#service-pricing-heading + div + p),
+  .dryer-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-600),
+  .dryer-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-500) {
+    color: rgb(31 41 55) !important;
+  }
+</style>

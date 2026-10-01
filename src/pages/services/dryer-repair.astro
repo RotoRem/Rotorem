@@ -1,225 +1,608 @@
-﻿---
+---
 import Layout from '../../layouts/Base.astro';
 import ServicePricing from '../../components/ServicePricing.astro';
+import Reviews from '../../components/Reviews.astro';
 import { getServicePricing } from '../../data/service-prices';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getServiceFaqItems } from '../../lib/jsonldOverrides';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 const pricing = getServicePricing('dryer', 'varna', lang);
 
-const title = 'Ремонт на сушилни във Варна | Професионален сервиз РотоРем';
-const description = 'Сервиз за ремонт и монтаж на сушилни във Варна по домовете ✓ Бърза диагностика и ремонт в същия ден за всички марки ✓ Обадете се сега на ☎ 089 834 0982!';
+const title = 'Ремонт на сушилни във Варна | Сервиз на адрес | РотоРем';
+const description =
+  'Ремонт и диагностика на сушилни по домовете във Варна. Проблеми с нагряване, барабан, ремък, термопомпа, източване и електроника. Обадете се на РотоРем.';
+
+const heroImage = '/img/services/ремонт-на-сушилня-варна-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-сушилня-варна-диагностика.webp';
+
+const accentBar = 'bg-fuchsia-500';
+const accentLink = 'text-fuchsia-700';
+const accentShell = 'from-fuchsia-50 via-white to-purple-50 border-fuchsia-100';
+const accentBorder = 'border-fuchsia-100';
+const tableHeader = 'bg-fuchsia-600';
+
+const problems = [
+  {
+    title: 'Сушилнята не загрява',
+    text: 'Когато програмата завърши, а дрехите остават студени, причината може да бъде нагревател, термостат, сензори, електронен модул или друга част от системата за нагряване. При сушилни с термопомпа проблемът не винаги е в класическия нагревател, затова диагностиката започва от реалното поведение на уреда.',
+    border: 'border-fuchsia-500',
+  },
+  {
+    title: 'Дрехите не се изсушават добре',
+    text: 'Влажни или частично сухи дрехи могат да означат проблем с въздушния поток, филтъра, системата за кондензиране, сензорите за влажност или електронното управление. Проверяват се и условията на натоварване, но ако проблемът се повтаря, е нужна техническа диагностика.',
+    border: 'border-purple-500',
+  },
+  {
+    title: 'Барабанът не се върти',
+    text: 'Ако сушилнята стартира, но барабанът не се движи, могат да бъдат проверени ремъкът, моторът, ролките, електрониката и механичната част на барабана. Причината може да е сравнително малка, но е важно уредът да не се форсира, докато не се установи повредата.',
+    border: 'border-pink-500',
+  },
+  {
+    title: 'Сушилнята не стартира',
+    text: 'Когато уредът не реагира или програмата не тръгва, проверката може да включва захранването, заключването на люка, управляващата платка и останалите електронни компоненти. Не всяка сушилня, която „не тръгва“, има повредена платка – диагностиката започва от конкретния симптом.',
+    border: 'border-violet-500',
+  },
+  {
+    title: 'Сушилнята спира по време на цикъл',
+    text: 'Прекъсване на програмата може да бъде свързано с прегряване, сензори, проблем в системата за източване на конденз, електроника или механична част. Техникът проверява какво показва дисплеят и как се държи уредът преди ремонт.',
+    border: 'border-rose-500',
+  },
+  {
+    title: 'Сушилнята шуми или вибрира',
+    text: 'Силен шум, удари или необичайни вибрации могат да идват от износени ролки, лагери, ремък, чужд предмет в барабана или неправилно позициониране. Характерът на шума дава първа насока, но окончателната причина се установява след проверка.',
+    border: 'border-indigo-500',
+  },
+  {
+    title: 'Сушилнята не източва водата',
+    text: 'При кондензни модели и част от сушилните с термопомпа може да остане вода в резервоара или системата за източване. Проверяват се маркучи, помпа, филтър и свързаните компоненти според конструкцията на машината.',
+    border: 'border-teal-500',
+  },
+  {
+    title: 'Мирише на изгоряло или прегряване',
+    text: 'Такъв симптом изисква внимание – препоръчително е сушилнята да не се използва до преглед. Възможни причини са проблем с нагревател, въздушен поток, електрически компонент или натрупване на fluff, което ограничава охлаждането.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'Лукът или вратата не се отварят',
+    text: 'Блокираният люк може да е свързан с заключващ механизъм, остатъчна топлина, програмата или електроника. Не е препоръчително вратата да се отваря със сила, защото това може да повреди механизма.',
+    border: 'border-orange-500',
+  },
+  {
+    title: 'Сушилнята показва код за грешка',
+    text: 'Кодовете за грешка помагат при диагностиката, но един код невинаги означава, че конкретна част трябва директно да бъде сменена. Техникът съпоставя информацията от дисплея с реалното поведение на уреда и проверките на съответните системи.',
+    border: 'border-slate-500',
+  },
+];
+
+const partsTable = [
+  { part: 'Нагревател', problem: 'Сушилнята не загрява' },
+  { part: 'Термостат и сензори', problem: 'Неправилно нагряване или прекъсване' },
+  { part: 'Мотор и ремък', problem: 'Барабанът не се върти' },
+  { part: 'Ролки и лагери', problem: 'Шум и проблем с въртенето' },
+  { part: 'Филтър и въздушен поток', problem: 'Лошо изсушаване' },
+  { part: 'Помпа и източване', problem: 'Остава вода при кондензни модели' },
+  { part: 'Кондензатор / теплообменник', problem: 'Проблеми при кондензно изсушаване' },
+  { part: 'Система с термопомпа', problem: 'Слабо или липсващо нагряване при heat pump модели' },
+  { part: 'Заключване на люка', problem: 'Машината не стартира или люкът остава блокиран' },
+  { part: 'Електронен модул', problem: 'Прекъсване, грешки или неправилна програма' },
+  { part: 'Температурен и влажностен датчик', problem: 'Непълно или прекалено сушене' },
+  { part: 'Вентилация и маркучи', problem: 'Проблеми при отвеждащи модели' },
+];
+
+const realCases = [
+  {
+    brand: 'AEG',
+    problem: 'Не изсушаваше добре дрехите',
+    area: 'Младост',
+    diagnosis: 'Установихме, че сушилнята е много замърсена.',
+    repair: 'След извършена профилактика и почистване на компресорен блок сушилнята работи като нова.',
+    image: '/img/services/ремонт-на-сушилня-варна-случай-1.webp',
+    alt: 'Профилактика и почистване на сушилня AEG, която не изсушава добре дрехите поради силно замърсен компресорен блок в кв. Младост, Варна.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'Не се завърташе барабанът',
+    area: 'Левски',
+    diagnosis: 'Установихме, че има скъсан ремък на мотора, който задвижва барабана.',
+    repair: 'След подмяната му сушилнята работи нормално.',
+    image: '/img/services/ремонт-на-сушилня-варна-случай-2.webp',
+    alt: 'Ремонт на сушилня Bosch с незавъртащ се барабан и подмяна на скъсан задвижващ ремък в кв. Левски, Варна.',
+  },
+  {
+    brand: 'BEKO',
+    problem: 'Активираше се защитата от прегряване',
+    area: 'Център',
+    diagnosis: 'Установихме, че няма циркулация на въздух поради замърсяване.',
+    repair: 'След почистването заработи нормално и вече не показваше никаква грешка.',
+    image: '/img/services/ремонт-на-сушилня-варна-случай-3.webp',
+    alt: 'Ремонт на сушилня BEKO със задействана защита от прегряване поради липса на въздушна циркулация в Център, Варна.',
+  },
+];
+
+const processSteps = [
+  {
+    step: 1,
+    title: 'Свързвате се с РотоРем',
+    text: 'Опишете какъв проблем има сушилнята и как се проявява.',
+    circleClass: 'bg-gradient-to-r from-fuchsia-500 to-fuchsia-600',
+  },
+  {
+    step: 2,
+    title: 'Уговаряме посещение',
+    text: 'Техник посещава адреса във Варна според уговорката.',
+    circleClass: 'bg-gradient-to-r from-purple-500 to-purple-600',
+  },
+  {
+    step: 3,
+    title: 'Извършваме диагностика',
+    text: 'Проверяват се компонентите и системите, свързани с конкретния симптом.',
+    circleClass: 'bg-gradient-to-r from-pink-500 to-pink-600',
+  },
+  {
+    step: 4,
+    title: 'Получавате информация за ремонта',
+    text: 'Обясняваме каква повреда е установена и какво трябва да бъде направено.',
+    circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600',
+  },
+  {
+    step: 5,
+    title: 'Ремонт и тест',
+    text: 'При възможност ремонтът се извършва на място и сушилнята се тества преди приключване на посещението.',
+    circleClass: 'bg-gradient-to-r from-indigo-500 to-indigo-600',
+  },
+];
+
+const brands = ['Bosch', 'Siemens', 'AEG', 'Electrolux', 'Gorenje', 'Samsung', 'LG', 'Beko', 'Indesit', 'Whirlpool', 'Candy', 'Miele'];
+
+const faqs = getServiceFaqItems('/services/dryer-repair/');
+const sectionClass = 'mb-28 pt-4';
 ---
 
-<Layout title={title} description={description}>
-  <article class="">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-16 mb-16">
-      <div class="container max-w-4xl text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          Ремонт и монтаж на сушилни по домовете във Варна
-        </h1>
-        <p class="text-xl md:text-2xl text-indigo-100 max-w-3xl mx-auto mb-8">
-          Професионален ремонт на сушилни във Варна и околността. Бърз сервиз на място с гаранция за качество.
-        </p>
-        <p class="text-base md:text-lg text-indigo-100 max-w-2xl mx-auto mb-8">
-          Диагностика във Варна - 20 €
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпратете имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
+<Layout title={title} description={description} hideServiceFaq={true}>
+  <article class="dryer-service-page">
+    <!-- Hero -->
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Ремонт на сушилня на адрес във Варна"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-purple-950/85 via-fuchsia-900/75 to-purple-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-block mb-5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+            Сервиз на адрес във Варна
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Ремонт на сушилни по домовете във Варна
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            Проблем със сушилнята? РотоРем извършва диагностика и ремонт на сушилни по домовете във Варна. Работим при проблеми с нагряване, барабан, ремък, термопомпа, източване, шум и електроника.
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            Техник посещава адреса, установява причината за повредата и ви информира какъв ремонт е необходим преди извършването му.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Диагностика във Варна</p>
+              <p class="text-xl font-bold text-white">20 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Телефон</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Обадете се за посещение
           </a>
         </div>
       </div>
     </section>
 
-    <div class="container max-w-4xl">
+    <div class="container max-w-5xl">
+      <!-- Intro -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт и диагностика на сушилни на адрес</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+          <p>
+            При повреда на сушилнята първата задача е да се установи откъде действително идва проблемът. Един и същ симптом може да бъде причинен от различни компоненти – нагревател, сензори, ремък, електроника или система с термопомпа – затова не препоръчваме подмяна на части преди диагностика.
+          </p>
+          <p>
+            При посещението техникът проверява състоянието на сушилнята според конкретния проблем: нагряване, въздушен поток, барабан, източване, филтри, електроника и останалите системи, свързани със симптома.
+          </p>
+          <p>
+            Когато ремонтът може да бъде извършен на място, той се прави по време на посещението. При необходимост от специфична резервна част клиентът предварително получава информация какво трябва да бъде подменено. Можете да видите и <a href="/reviews/" class={`${accentLink} font-medium hover:underline`}>отзиви от клиенти на РотоРем</a>.
+          </p>
+        </div>
+      </section>
+    </div>
 
-      <!-- Why Choose Us -->
-      <section class="mb-16">
+    <Reviews title="Отзиви от клиенти на РотоРем" prioritizeAppliance="Сушилня" />
+
+    <div class="container max-w-5xl">
+      <!-- Problems -->
+      <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Защо да изберете нашия сервиз за сушилни във Варна?</h2>
-          <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какви повреди на сушилни ремонтираме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-indigo-200">
-            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-indigo-900 mb-3">Сервиз на място</h3>
-            <p class="text-indigo-800">Идваме директно при вас във Варна. Без нужда от транспортиране на уреда.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-emerald-200">
-            <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-emerald-900 mb-3">Ремонт в същия ден</h3>
-            <p class="text-emerald-800">Когато е възможно, завършваме ремонта още при първото посещение.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-3">Гаранция</h3>
-            <p class="text-amber-800">Даваме гаранция за извършения ремонт и използваните части.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
-            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-lime-900 mb-3">Справедливи цени</h3>
-            <p class="text-lime-800">Диагностика във Варна - 20 €. Ясни цени без скрити такси за ремонт на сушилни.</p>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-xl border`}>
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <!-- Common Problems -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Чести проблеми със сушилни</h2>
-          <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
-        </div>
+      {pricing && <div class={sectionClass}><ServicePricing pricing={pricing} accent="purple" /></div>}
 
-        <div class="bg-gradient-to-r from-indigo-50 via-white to-indigo-50 p-8 rounded-2xl shadow-xl border border-indigo-100">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
-              <h3 class="text-lg font-semibold text-indigo-900 mb-3">Сушилнята не загрява</h3>
-              <p class="text-indigo-800">Проблем с нагревател, термостат или релета. Тестваме и подменяме дефектиралите компоненти.</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-emerald-500">
-              <h3 class="text-lg font-semibold text-emerald-900 mb-3">Не върти барабана</h3>
-              <p class="text-emerald-800">Повреден ремък, мотор или ролки. Извършваме ремонт и настройка на механиката.</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
-              <h3 class="text-lg font-semibold text-amber-900 mb-3">Сушилнята спира по време на цикъл</h3>
-              <p class="text-amber-800">Възможен проблем с електрониката, датчици или прегряване. Пълна диагностика на място.</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
-              <h3 class="text-lg font-semibold text-red-900 mb-3">Шум и вибрации</h3>
-              <p class="text-red-800">Износени лагери, ролки или чужди предмети. Отстраняваме причината и тестваме работата.</p>
-            </div>
+      <!-- Diagnostics -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Диагностика на сушилни във Варна</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-gray-800 leading-relaxed">
+            <p>
+              Диагностиката е отделна част от ремонта и има за цел да установи причината за повредата, преди да се подменят части.
+            </p>
+            <p class="font-medium text-gray-900">В зависимост от симптома и типа сушилня могат да бъдат проверени:</p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>нагревателят и термостатът;</li>
+              <li>сензорите за температура и влажност;</li>
+              <li>моторът, ремъкът и ролките;</li>
+              <li>барабанът и механичното движение;</li>
+              <li>филтърът и въздушният поток;</li>
+              <li>системата за източване на конденз;</li>
+              <li>компоненти на термопомпата (достъпни при диагностика);</li>
+              <li>заключването на люка;</li>
+              <li>електронният модул и управлението.</li>
+            </ul>
+            <p>
+              След проверката клиентът получава информация какво е установено и какъв ремонт е необходим.
+            </p>
+            <p class="font-semibold text-gray-900">Цена за диагностика във Варна: 20 €</p>
+          </div>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Диагностика на сушилня във Варна"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
           </div>
         </div>
       </section>
 
-      {pricing && <ServicePricing pricing={pricing} accent="indigo" />}
-
-      <!-- Process -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Процес на ремонт на сушилни във Варна</h2>
-          <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+      <!-- Parts table -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Части и системи на сушилнята, които проверяваме и ремонтираме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">1</span>
-              </div>
+
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class={`bg-white rounded-xl border ${accentBorder} p-5 shadow-sm`}>
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Вие ни звъните</h3>
-              <p class="text-gray-700">Обадете се на 089 834 0982 за ремонт на сушилня във Варна.</p>
-            </div>
+          ))}
+        </div>
+
+        <div class={`hidden md:block overflow-hidden rounded-xl border ${accentBorder} bg-white shadow-lg`}>
+          <table class="w-full text-left">
+            <thead>
+              <tr class={`${tableHeader} text-white`}>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Част или система</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Често свързан проблем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Не е необходимо всяка повреда да води до смяна на част. В много случаи диагностиката показва друг проблем в системата, затова конкретният ремонт се определя след проверка.
+        </p>
+      </section>
+
+      <!-- Heat pump -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на сушилни с термопомпа</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>
+            Сушилните с термопомпа имат различна конструкция от класическите модели с директно нагряване. При диагностика могат да бъдат проверени сензори, електроника, филтри, въздушен поток и други достъпни компоненти на системата.
+          </p>
+          <p>
+            РотоРем не обещава ремонт на херметично запечатан компресор. След преглед техникът информира какво е установено и дали ремонтът е технически и икономически оправдан за конкретния модел.
+          </p>
+          <p>
+            При повтарящи се проблеми с нагряване или прекъсване на програмата е важно уредът да бъде диагностициран според типа му, а не само по симптом, общ за различни видове сушилни.
+          </p>
+        </div>
+      </section>
+
+      <!-- Belt and drum -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремък, барабан и механика на сушилнята</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>
+            Когато барабанът не се върти или се чува необичаен шум, проверката включва ремъка, ролките, мотора и състоянието на барабана.
+          </p>
+          <p>
+            Износеният ремък е честа причина, но преди подмяна се преглежда и дали няма допълнителен механичен проблем, който може отново да повреди новата част.
+          </p>
+          <p>
+            След ремонт сушилнята се тества с програма, за да се потвърди нормалното въртене и работа без прекален шум.
+          </p>
+        </div>
+      </section>
+
+      <!-- Installation -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Монтаж и демонтаж на сушилни</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="space-y-8 text-gray-800 leading-relaxed">
+          <p>Освен ремонт, РотоРем извършва монтаж и демонтаж на сушилни във Варна.</p>
+
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Монтаж на сушилня</h3>
+            <p class="mb-3 font-medium text-gray-900">При монтажа може да бъдат извършени:</p>
+            <ul class="list-disc pl-5 space-y-2 mb-4">
+              <li>позициониране и нивелиране на уреда;</li>
+              <li>свързване според типа сушилня (кондензна, термопомпа или отвеждаща);</li>
+              <li>проверка на вентилация или източване, когато е необходимо;</li>
+              <li>тест за правилна работа.</li>
+            </ul>
           </div>
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">2</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Ние идваме при вас</h3>
-              <p class="text-gray-700">Нашият техник пристига в уговореното време с необходимите инструменти и части.</p>
-            </div>
+
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Демонтаж на сушилня</h3>
+            <p>
+              При необходимост стара или повредена сушилня може да бъде безопасно разкачена и премахната от мястото си, без повреждане на околните връзки и инсталация.
+            </p>
           </div>
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">3</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Ремонтираме</h3>
-              <p class="text-gray-700">Диагностицираме проблема и ремонтираме сушилнята ви още същия ден, когато е възможно.</p>
-            </div>
+
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Сушилня върху пералня</h3>
+            <p>
+              При колонно разположение е важно стабилното закрепване и правилното позициониране на двата уреда. За монтаж на пералня и сушилня като колона вижте и страницата за{' '}
+              <a href="/services/washing-machine-repair/" class={`${accentLink} font-medium hover:underline`}>ремонт и монтаж на перални във Варна</a>, където е описана и услугата за монтаж на пералня + сушилня.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dryer types -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Кондензни сушилни и сушилни с термопомпа</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder} space-y-4 text-gray-800 leading-relaxed`}>
+            <h3 class="text-xl font-semibold text-gray-900">Кондензни сушилни</h3>
+            <p>
+              При кондензните модели влагата се отделя в резервоар или се източва чрез маркуч. Чести проблеми са запушен филтър, източване, сензори и електроника. Диагностиката следва конструкцията на конкретния модел.
+            </p>
+          </div>
+          <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder} space-y-4 text-gray-800 leading-relaxed`}>
+            <h3 class="text-xl font-semibold text-gray-900">Сушилни с термопомпа</h3>
+            <p>
+              Тези модели работят с по-ниска температура и различна система за предаване на топлина. При симптоми като слабо сушене или прекъсване се проверяват достъпните компоненти, филтри, сензори и управление – без обещание за ремонт на херметичен компресор.
+            </p>
           </div>
         </div>
       </section>
 
       <!-- Brands -->
-      <section class="mb-16">
-        <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Марки сушилни, които обслужваме</h2>
-          <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки сушилни, които обслужваме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-gray-700 text-center">
-          <h3>AEG</h3>
-          <h3>Bosch</h3>
-          <h3>Whirlpool</h3>
-          <h3>Beko</h3>
-          <h3>Indesit</h3>
-          <h3>Samsung</h3>
-          <h3>LG</h3>
-          <h3>Electrolux</h3>
-        </div>
-      </section>
 
-      <!-- Final CTA -->
-      <section class="text-center bg-gradient-to-r from-indigo-600 to-indigo-800 text-white p-12 rounded-2xl shadow-2xl mb-6">
-        <h2 class="text-3xl font-bold mb-4">Нужен ви е ремонт на сушилня във Варна?</h2>
-        <p class="text-xl mb-8 text-indigo-100">Обадете се сега за бърз ремонт на място!</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпрати имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
-          </a>
-        </div>
-        <div class="text-indigo-100">
-          <p class="text-sm">
-            Посещение и диагностика: Варна - 20 € • Гаранция за качество • Сервиз във Варна
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">
+            РотоРем ремонтира сушилни на различни производители, включително:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {brands.map((brand) => (
+              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                <h3 class="font-semibold text-gray-900">{brand}</h3>
+              </div>
+            ))}
+          </div>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            При различните марки конструкцията, електрониката и кодовете за грешка могат да се различават, затова диагностиката се извършва според конкретния модел и тип сушилня.
           </p>
         </div>
       </section>
 
-      <!-- SEO helper text -->
-      <div class="rotorem-seo-text">
-        <p>Сушилнята спира да суши, не загрява или издава необичаен шум? Това е проблем, който изисква бърза реакция, особено когато разчитате на уреда ежедневно. От РотоРем предлагаме ремонт на сушилни по домовете във Варна с диагностика на място и реално решение още при първото посещение. Работим във всички квартали на града и околността, без да се налага да транспортирате уреда до сервизи.</p>
-        <h2>Какви повреди на сушилни ремонтираме във Варна</h2>
-        <p>Най-често клиентите търсят ремонт на сушилни варна за конкретен симптом, който пречи на нормалната работа на уреда. В практиката си ежедневно отстраняваме проблеми като сушилня, която не загрява, не изсушава добре дрехите или прекъсва програмата. Срещат се и случаи, при които уредът не стартира изобщо или се чува силен шум по време на работа. Често причината е в нагревател, датчици, ремък или електроника.</p>
-        <p>Като сервиз за сушилни работим с всички типове уреди, включително кондензни модели и такива с термопомпа. Освен ремонт на сушилни по домовете, извършваме и монтаж на сушилня, когато закупите нов уред или сменяте стария. При нужда от монтаж на сушилня върху пералня, настройваме стабилно и безопасно позициониране, съобразено с пространството.</p>
-        <p>Ако имате проблем и с други уреди, можете да разгледате услугите ни за <a href="https://www.rotorem.bg/services/washing-machine-repair/">ремонт на перални</a> или <a href="https://www.rotorem.bg/services/dishwasher-repair/">ремонт на съдомиялни</a>, както и всички услуги за града на страницата ни за <a href="https://www.rotorem.bg/services/">ремонт на битова техника във Варна</a>.</p>
-        <h2>Какви марки сушилни обслужваме във Варна</h2>
-        <p>Извършваме ремонт на сушилни на всички популярни марки на пазара. Работим с Bosch, Whirlpool, Samsung, LG, Beko, AEG и други производители, включително по-нови модели с термопомпа. Познаваме спецификите на различните системи и използваме подходящи части и решения за всяка марка. Това позволява ремонтът да бъде точен и дълготраен, без излишни проби и грешки.</p>
-        <h2>Райони във Варна, които обслужваме</h2>
-        <p>Предлагаме ремонт на сушилни по домовете във всички квартали на Варна. Обслужваме Чайка, Левски, Владислав Варненчик, Младост, Аспарухово, Галата и централната част на града. Приемаме заявки и за адреси до около 20 км извън Варна, като целта е да получите бърза реакция без значение от локацията.</p>
-        <h2>Как протича ремонтът</h2>
-        <p>Процесът започва с оглед и диагностика на място, за да се установи точната причина за проблема. След това даваме ясна оферта за ремонт на сушилнята, преди да започнем работа. При съгласие пристъпваме към отстраняване на повредата още при посещението, когато това е възможно. След ремонта се извършва тест на уреда, за да се уверим, че работи нормално и безопасно.</p>
-        <p>При нов уред предлагаме и монтаж на сушилня с термопомпа, както и стандартен монтаж на сушилня според условията в дома. Ако пространството е ограничено, извършваме монтаж на сушилня върху пералня със стабилно закрепване и правилно нивелиране.</p>
-        <h2>Защо да изберете сервиз за сушилни РотоРем</h2>
-        <p>Клиентите ни избират, защото получават реално решение, а не временно оправяне на проблема. Работим на адрес, което спестява време и усилия. Всеки ремонт на сушилни варна се извършва с внимание към детайла и с гаранция за извършената услуга. Натрупаният опит с различни марки и модели ни позволява да диагностицираме бързо и да предложим адекватно решение. <a href="https://www.rotorem.bg/contact/">Свържете се с нас</a> още сега и заявeте посещение в удобен за вас час.</p>
-      </div>
+      <!-- Real cases -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Реални ремонти на сушилни във Варна</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 object-cover min-h-[220px] md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">{item.brand} – Сушилня</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Район:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 object-cover min-h-[240px] lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand} – Сушилня</h3>
+              <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Район:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Как протича ремонтът</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Service areas -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на сушилни в различни райони на Варна</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto`}>
+          <p>
+            РотоРем извършва посещения по домовете във Варна и обслужва различни части на града, включително райони като Младост, Левски, Чайка, Аспарухово, Владислав Варненчик и други обслужвани зони.
+          </p>
+          <p>
+            Не е необходимо клиентът да транспортира сушилнята до физически сервиз – техникът идва на посочения адрес.
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Често задавани въпроси</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   </article>
+
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-fuchsia-600 to-purple-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Проблем със сушилнята?</h2>
+      <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        Ако сушилнята не загрява, не изсушава добре, барабанът не се върти, шуми или показва грешка, свържете се с РотоРем за диагностика и ремонт на адрес във Варна.
+      </p>
+      <p class="text-lg mb-8">Телефон: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        Обадете се за посещение
+      </a>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  .dryer-service-page :global(#service-pricing-heading + div + p),
+  .dryer-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-600),
+  .dryer-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-500) {
+    color: rgb(31 41 55) !important;
+  }
+</style>

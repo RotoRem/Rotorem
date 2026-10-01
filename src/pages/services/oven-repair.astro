@@ -1,292 +1,600 @@
-﻿---
+---
 import Layout from '../../layouts/Base.astro';
 import ServicePricing from '../../components/ServicePricing.astro';
+import Reviews from '../../components/Reviews.astro';
 import { getServicePricing } from '../../data/service-prices';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getServiceFaqItems } from '../../lib/jsonldOverrides';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 const pricing = getServicePricing('oven', 'varna', lang);
 
-const title = 'Ремонт на готварски печки и фурни във Варна | РотоРем';
-const description = 'Професионален ремонт на готварски печки и фурни във Варна ✓ Бърз ремонт на място още същия ден ✓ Гаранция за качество ✓ Свържете се с нас на ☎ 089 834 0982!';
+const title = 'Ремонт на фурни във Варна | Сервиз на адрес | РотоРем';
+const description =
+  'Ремонт и диагностика на фурни по домовете във Варна. Проблеми с нагреватели, температура, вентилатор, врата, програматор и електроника. РотоРем.';
+
+const heroImage = '/img/services/ремонт-на-фурна-варна-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-фурна-варна-диагностика.webp';
+
+const problems = [
+  {
+    title: 'Фурната не загрява',
+    text: 'Когато фурната се включва, но остава студена, трябва да се проверят нагревателната система и компонентите, които управляват температурата. Според модела причината може да бъде свързана с долен или горен нагревател, грил нагревател, кръгов нагревател при конвекционните модели, термостат, температурен датчик или електронно управление. Преди смяна на част се установява кой компонент действително причинява проблема.',
+    border: 'border-orange-500',
+  },
+  {
+    title: 'Фурната не достига зададената температура',
+    text: 'Ако уредът загрява, но температурата остава по-ниска от зададената или достигането ѝ отнема необичайно дълго време, трябва да бъдат проверени нагревателите и системата за температурен контрол. Важно е да се установи и дали проблемът се появява при всички режими или само при определена функция.',
+    border: 'border-amber-500',
+  },
+  {
+    title: 'Фурната пече неравномерно',
+    text: 'Когато храната прегаря отгоре, остава недопечена отдолу или различните части на камерата се нагряват неравномерно, причината може да бъде свързана с нагревател, вентилатор или температурен контрол. При конвекционните модели се проверява и правилното движение на нагретия въздух.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'Фурната прегрява',
+    text: 'Когато температурата се покачва значително над зададената стойност, трябва да бъде проверена системата, която измерва и контролира нагряването. Възможните причини включват термостат, температурен датчик, електронно управление или друг свързан компонент. При неконтролирано прегряване уредът не трябва да продължава да се използва преди проверка.',
+    border: 'border-rose-500',
+  },
+  {
+    title: 'Фурната не се включва',
+    text: 'Когато дисплеят не реагира или фурната изобщо не стартира, проблемът може да бъде свързан със захранването, електрическите връзки, програматора, селектора за функции, термозащитата или електронния модул. Диагностиката се извършва според конкретното поведение на уреда.',
+    border: 'border-yellow-500',
+  },
+  {
+    title: 'Фурната изключва предпазителя',
+    text: 'Ако при включване на фурната или определен режим автоматичният предпазител изключва, уредът трябва да бъде проверен преди повторна употреба. Причината може да бъде свързана с нагревател, електрическа връзка, изолация на компонент или друга електрическа неизправност. РотоРем има реален случай във Варна с Whirlpool фурна, при който такъв симптом е бил причинен от долния нагревател.',
+    border: 'border-red-600',
+    extra: 'При проблем с електрическата инсталация или предпазителя може да е необходима и проверка на ',
+    link: { href: '/services/electrical-services/', label: 'електроуслуги на адрес' },
+  },
+  {
+    title: 'Вентилаторът на фурната не работи',
+    text: 'При конвекционните фурни вентилаторът участва в разпределението на нагретия въздух. Ако той не се върти, работи прекъснато или издава необичаен шум, могат да бъдат проверени перката, моторът, захранването и свързаните управляващи компоненти.',
+    border: 'border-indigo-500',
+  },
+  {
+    title: 'Фурната издава необичаен шум',
+    text: 'Шумът може да се появява само при работа на вентилатора, при определен режим или след достигане на температура. Това помага да се установи коя система трябва да бъде проверена. При конвекционните модели причината може да бъде свързана с вентилатора, мотора или механичен проблем около перката.',
+    border: 'border-purple-500',
+  },
+  {
+    title: 'Фурната изключва по време на работа',
+    text: 'Когато фурната стартира нормално, но прекъсва след определено време, могат да бъдат проверени температурният контрол, термозащитата, електрониката и останалите системи, свързани с конкретния симптом. Полезно е клиентът да обясни след колко време се появява проблемът и дали фурната може да бъде включена отново след охлаждане.',
+    border: 'border-teal-500',
+  },
+  {
+    title: 'Вратата на фурната не се затваря правилно',
+    text: 'Неправилното затваряне може да доведе до загуба на топлина и проблем с поддържането на температурата. Проверяват се пантите, механизмът на вратата, уплътнението и позиционирането спрямо корпуса.',
+    border: 'border-orange-600',
+  },
+  {
+    title: 'Осветлението на фурната не работи',
+    text: 'Причината може да бъде изгоряла лампа, фасунга, електрическа връзка или друг компонент от осветителната система. Проблемът се проверява заедно с останалите симптоми на уреда, за да се установи дали е изолиран или е част от по-широка неизправност.',
+    border: 'border-amber-600',
+  },
+  {
+    title: 'Таймерът или програматорът не работи',
+    text: 'При електронно управляваните фурни проблем с таймера, дисплея или програматора може да попречи на определени функции или на стартирането на уреда. Проверява се дали проблемът е в самото управление или е резултат от друга неизправност.',
+    border: 'border-slate-500',
+  },
+  {
+    title: 'Фурната показва код за грешка',
+    text: 'Кодът за грешка може да насочи диагностиката към определена система, но не доказва автоматично коя част трябва да бъде сменена. Техникът съпоставя кода с поведението на фурната и проверява съответните компоненти.',
+    border: 'border-gray-500',
+  },
+];
+
+const partsTable = [
+  { part: 'Долен нагревател', problem: 'Не пече добре отдолу / не загрява' },
+  { part: 'Горен нагревател', problem: 'Недостатъчно нагряване отгоре' },
+  { part: 'Грил нагревател', problem: 'Грил функцията не работи' },
+  { part: 'Кръгов нагревател', problem: 'Проблем при режим с вентилатор' },
+  { part: 'Термостат', problem: 'Неправилна температура' },
+  { part: 'Температурен датчик', problem: 'Прегряване или недостатъчно нагряване' },
+  { part: 'Термозащита', problem: 'Фурната прекъсва или не стартира' },
+  { part: 'Вентилатор', problem: 'Неравномерно печене' },
+  { part: 'Мотор на вентилатора', problem: 'Вентилаторът не работи / шуми' },
+  { part: 'Селектор за функции', problem: 'Определен режим не работи' },
+  { part: 'Програматор', problem: 'Проблем със стартирането или програмите' },
+  { part: 'Таймер / дисплей', problem: 'Проблем с управлението' },
+  { part: 'Електронен модул', problem: 'Уредът не реагира или прекъсва' },
+  { part: 'Панти', problem: 'Вратата не се затваря' },
+  { part: 'Уплътнение', problem: 'Загуба на топлина' },
+  { part: 'Осветление', problem: 'Лампата не работи' },
+];
+
+const realCases = [
+  {
+    brand: 'Whirlpool',
+    problem: 'Фурната не изпичаше отдолу',
+    area: 'Чайка',
+    diagnosis: 'Установихме проблем с долния нагревател на машината.',
+    repair: 'След смяна на нагревателя фурната работи нормално.',
+    image: '/img/services/ремонт-на-фурна-варна-случай-1.webp',
+    alt: 'Ремонт на фурна Whirlpool, която не изпича отдолу, с подмяна на повреден долен нагревател в кв. Чайка, Варна.',
+  },
+  {
+    brand: 'Samsung',
+    problem: 'Фурната не се включваше и изключваше предпазителя',
+    area: 'Възраждане',
+    diagnosis: 'Установихме проблем с основната платка.',
+    repair: 'Клиентът предпочете да не извърши ремонта след получената оферта; при подобни повреди смяната на платката може да възстанови нормалната работа на фурната.',
+    image: '/img/services/ремонт-на-фурна-варна-случай-2.webp',
+    alt: 'Ремонт на фурна Samsung, която не се включва и изключва предпазителя, с диагностициран проблем в основната платка в кв. Възраждане, Варна.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'Фурната не загряваше отгоре',
+    area: 'Младост',
+    diagnosis: 'Установихме проблем с горен нагревателен елемент.',
+    repair: 'След подмяната на елемента фурната работи нормално.',
+    image: '/img/services/ремонт-на-фурна-варна-случай-3.webp',
+    alt: 'Ремонт на фурна Bosch, която не загрява отгоре, с подмяна на повреден горен нагревател в кв. Младост, Варна.',
+  },
+];
+
+const processSteps = [
+  {
+    step: 1,
+    title: 'Свързвате се с РотоРем',
+    text: 'Опишете как се проявява проблемът с фурната. Ако определена функция не работи или дисплеят показва код за грешка, кажете това при заявката.',
+    circleClass: 'bg-gradient-to-r from-orange-500 to-orange-600',
+  },
+  {
+    step: 2,
+    title: 'Уговаряме посещение',
+    text: 'Техник посещава посочения адрес във Варна според уговорката.',
+    circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600',
+  },
+  {
+    step: 3,
+    title: 'Извършваме диагностика',
+    text: 'Проверяват се компонентите и системите, свързани с конкретния симптом.',
+    circleClass: 'bg-gradient-to-r from-red-500 to-red-600',
+  },
+  {
+    step: 4,
+    title: 'Получавате информация за ремонта',
+    text: 'Обясняваме какво е установено и какъв ремонт се препоръчва.',
+    circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600',
+  },
+  {
+    step: 5,
+    title: 'Ремонт и тест',
+    text: 'Когато е възможно, ремонтът се извършва на място и работата на фурната се проверява преди приключване на посещението.',
+    circleClass: 'bg-gradient-to-r from-orange-600 to-orange-800',
+  },
+];
+
+const brands = ['Bosch', 'Siemens', 'Electrolux', 'Whirlpool', 'Beko', 'Indesit', 'Gorenje'];
+
+const faqs = getServiceFaqItems('/services/oven-repair/');
+const sectionClass = 'mb-28 pt-4';
 ---
 
-<Layout title={title} description={description}>
-  <article class="">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-orange-600 to-orange-800 text-white py-16 mb-16">
-      <div class="container max-w-4xl text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          Ремонт на готварски печки и фурни във Варна
-        </h1>
-        <p class="text-xl md:text-2xl text-orange-100 max-w-3xl mx-auto mb-8">
-          Професионален ремонт на електрически фурни и плотове във Варна и околността. Бърз сервиз на място с гаранция за качество.
-        </p>
-        <p class="text-base md:text-lg text-orange-100 max-w-2xl mx-auto mb-8">
-          Диагностика във Варна - 20 €
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпратете имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
+<Layout title={title} description={description} hideServiceFaq={true}>
+  <article class="oven-service-page">
+    <!-- Hero -->
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Ремонт на фурна на адрес във Варна"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-orange-950/85 via-orange-900/75 to-orange-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.2),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-block mb-5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+            Сервиз на адрес във Варна
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Ремонт на фурни по домовете във Варна
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            Фурната не загрява, не достига зададената температура, пече неравномерно или изключва по време на работа? РотоРем извършва диагностика и ремонт на фурни по домовете във Варна. Проверяваме причината за конкретния проблем, преди да бъде предприета подмяна на нагревател, термостат, датчик, вентилатор, електронен компонент или друга част.
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            Работим с вградени и свободностоящи електрически фурни и извършваме ремонта на адрес, когато повредата позволява.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Диагностика във Варна</p>
+              <p class="text-xl font-bold text-white">20 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Телефон</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Обадете се за посещение
           </a>
         </div>
       </div>
     </section>
 
-    <div class="container max-w-4xl">
-
-      <!-- Why Choose Us Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Защо да изберете нашия сервиз за фурни във Варна?</h2>
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт и диагностика на фурни на адрес</h2>
           <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-orange-200">
-            <div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-orange-900 mb-3">Бърз ремонт на място</h3>
-            <p class="text-orange-800">Нашият техник идва директно във вашия дом във Варна, за да ремонтира фурната. Ремонтираме вградени и свободностоящи фурни.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-red-200">
-            <div class="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-red-900 mb-3">Ремонт в същия ден</h3>
-            <p class="text-red-800">В повечето случаи ремонтираме фурни в същия ден във Варна. Бърза диагностика и ефективно решаване на проблема.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-3">Гаранция за качество</h3>
-            <p class="text-amber-800">Всички ремонти на фурни във Варна се извършват с гаранция за качеството на работата и използваните части.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-yellow-200">
-            <div class="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-yellow-900 mb-3">Обслужваме цяла Варна</h3>
-            <p class="text-yellow-800">Ремонтираме фурни в кварталите: Чайка, Младост, Аспарухово, Левски, Владислав Варненчик и центъра на Варна.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-rose-50 to-rose-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-rose-200">
-            <div class="w-12 h-12 bg-rose-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="16" height="20" x="4" y="2" rx="2"/><path d="M7 16h10"/><path d="M7 8h10"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-rose-900 mb-3">Всички марки фурни</h3>
-            <p class="text-rose-800">Ремонтираме електрически фурни от всички марки: Bosch, Siemens, Electrolux, Whirlpool, Indesit, Beko и други.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-pink-200">
-            <div class="w-12 h-12 bg-pink-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-pink-900 mb-3">Справедливи цени</h3>
-            <p class="text-pink-800">Диагностика във Варна - 20 €. <br> Ясни цени без скрити такси за ремонт на фурни във Варна.</p>
-          </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+          <p>
+            При фурните един и същ симптом може да бъде причинен от различни компоненти. Фурна, която не загрява например, може да има повреден нагревател, но причината може да бъде и в термостата, температурния датчик, термозащитата, електронното управление или друга част от системата.
+          </p>
+          <p>
+            При неравномерно печене проблемът може да бъде свързан с отделен нагревател, вентилатора или контрола на температурата. Затова ремонтът започва с диагностика. Според конкретния симптом техникът проверява компонентите и системите, които могат да го причинят.
+          </p>
+          <p>
+            След проверката клиентът получава информация какво е установено и какъв ремонт се препоръчва. Когато естеството на повредата позволява, ремонтът се извършва на адрес във Варна. Можете да видите и <a href="/reviews/" class="text-orange-700 font-medium hover:underline">отзиви от клиенти на РотоРем</a>, включително за ремонти на фурни във Варна.
+          </p>
         </div>
       </section>
+    </div>
 
-      <!-- Common Problems Section -->
-      <section class="mb-16">
+    <Reviews title="Отзиви от клиенти на РотоРем" prioritizeAppliance="Фурна" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Най-чести проблеми с фурни във Варна</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какви повреди на фурни ремонтираме</h2>
           <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
         </div>
-        
-        <div class="bg-gradient-to-r from-orange-50 via-white to-orange-50 p-8 rounded-2xl shadow-xl border border-orange-100">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-orange-500">
-              <h3 class="text-lg font-semibold text-orange-900 mb-3">Фурната не загрява</h3>
-              <p class="text-orange-800">Повредени нагревателни елементи, термостат или управляваща платка. Диагностика и смяна на части.</p>
-            </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
-              <h3 class="text-lg font-semibold text-red-900 mb-3">Фурната не поддържа температура</h3>
-              <p class="text-red-800">Проблем с термостата, сензорите или изолацията. Професионален ремонт във Варна.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
-              <h3 class="text-lg font-semibold text-amber-900 mb-3">Не работи осветлението</h3>
-              <p class="text-amber-800">Изгоряла крушка или повредена осветителна система. Смяна с оригинални части.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-yellow-500">
-              <h3 class="text-lg font-semibold text-yellow-900 mb-3">Фурната не се включва</h3>
-              <p class="text-yellow-800">Електрически проблеми, повредени контакти или управляваща платка. Диагностика и ремонт.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-rose-500">
-              <h3 class="text-lg font-semibold text-rose-900 mb-3">Вратата не се затваря правилно</h3>
-              <p class="text-rose-800">Повредени панти, уплътнения или заключваща система. Възстановяваме пълната функционалност.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-pink-500">
-              <h3 class="text-lg font-semibold text-pink-900 mb-3">Таймерът не работи</h3>
-              <p class="text-pink-800">Проблеми с електронното управление или дисплея. Ремонт на електронни компоненти.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {pricing && <ServicePricing pricing={pricing} accent="orange" />}
-
-      <!-- Oven Types Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Видове фурни, които ремонтираме във Варна</h2>
-          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
-        </div>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-orange-200">
-            <div class="w-16 h-16 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="16" height="20" x="4" y="2" rx="2"/>
-                <path d="M7 16h10"/>
-                <path d="M7 8h10"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-orange-900 mb-4 text-center">Вградени фурни</h3>
-            <p class="text-orange-800 text-center">Ремонт на вградени електрически фурни всички марки. Работим с конвекция, грил и други функции.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-red-200">
-            <div class="w-16 h-16 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="18" height="18" x="3" y="3" rx="2"/>
-                <path d="M3 9h18"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-red-900 mb-4 text-center">Свободностоящи фурни</h3>
-            <p class="text-red-800 text-center">Ремонт на свободностоящи фурни и комбинирани плотове с фурна. Всички размери и марки.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-16 h-16 bg-amber-500 text-white rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="m12 1 3 6 6 3-6 3-3 6-3-6-6-3 6-3z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-4 text-center">Конвекционни фурни</h3>
-            <p class="text-amber-800 text-center">Специализиран ремонт на конвекционни фурни. Ремонт на вентилатори и управляващи системи.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-yellow-200">
-            <div class="w-16 h-16 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-yellow-900 mb-4 text-center">Фурни с грил</h3>
-            <p class="text-yellow-800 text-center">Ремонт на грил елементи и функции за печене. Възстановяване на всички програми.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Brands Section - Clean text-focused approach -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки фурни, които ремонтираме във Варна</h2>
-          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
-        </div>
-        
-        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              'Bosch', 'Siemens', 'Electrolux', 'Whirlpool', 
-              'Beko', 'Indesit', 'Gorenje', 'Други марки'
-            ].map((brand) => (
-              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200 group hover:border-orange-300">
-                <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
-                  {brand}
-                </h3>
-                <p class="text-xs text-gray-600">
-                  {brand === 'Други марки' ? 'Всички други марки' : `Ремонт на ${brand}`}
-                </p>
+        <div class="bg-gradient-to-r from-orange-50 via-white to-orange-50 p-6 md:p-8 rounded-2xl shadow-xl border border-orange-100">
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+                {item.extra && item.link && (
+                  <p class="mt-3 text-gray-800 leading-relaxed">
+                    {item.extra}
+                    <a href={item.link.href} class="font-semibold text-orange-700 hover:underline">{item.link.label}</a>.
+                  </p>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- Final CTA -->
-      <section class="text-center bg-gradient-to-r from-orange-600 to-orange-800 text-white p-12 rounded-2xl shadow-2xl">
-        <h2 class="text-3xl font-bold mb-4">Нужен ви е ремонт на фурна във Варна?</h2>
-        <p class="text-xl mb-8 text-orange-100">Обадете се сега за бърз ремонт на място!</p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпрати имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
-          </a>
+      {pricing && <div class={sectionClass}><ServicePricing pricing={pricing} accent="orange" /></div>}
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Диагностика на фурни във Варна</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
         </div>
-        
-        <div class="text-orange-100">
-          <p class="text-sm">
-            Посещение и диагностика: Варна - 20 € • Гаранция за качество • Сервиз във Варна
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-gray-800 leading-relaxed">
+            <p>
+              Диагностиката има за цел да установи конкретната причина за проблема преди подмяна на части.
+            </p>
+            <p class="font-medium text-gray-900">В зависимост от симптома могат да бъдат проверени:</p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>долен, горен, грил и кръгов нагревател;</li>
+              <li>термостат, температурен датчик и термозащита;</li>
+              <li>вентилатор и мотор на вентилатора;</li>
+              <li>селектор за функции, програматор, таймер и дисплей;</li>
+              <li>електронен модул и управляваща платка;</li>
+              <li>електрически връзки, врата, панти, уплътнение и осветление;</li>
+              <li>кодове за грешка.</li>
+            </ul>
+            <p>След проверката клиентът получава информация какво е установено и какъв ремонт е необходим.</p>
+            <p class="font-semibold text-gray-900">Посещение и диагностика във Варна: 20 €</p>
+          </div>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Диагностика на фурна във Варна"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Части и системи на фурната, които проверяваме и ремонтираме</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class="bg-white rounded-xl border border-orange-100 p-5 shadow-sm">
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="hidden md:block overflow-hidden rounded-xl border border-orange-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-orange-600 text-white">
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Част или система</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Често свързан симптом</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Не всеки симптом означава повредена част. Един и същ проблем може да бъде причинен от различни компоненти, затова конкретният ремонт се определя след диагностика.
+        </p>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Нагреватели и проблеми с нагряването</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-orange-50 via-white to-orange-50 p-6 md:p-8 rounded-2xl shadow-lg border border-orange-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Една електрическа фурна може да използва няколко нагревателни елемента, които изпълняват различни функции.</p>
+          <p><strong class="text-gray-900">Долен нагревател</strong> — участва в нагряването от долната част на камерата. При повреда храната може да остава недопечена отдолу, въпреки че други функции продължават да работят.</p>
+          <p><strong class="text-gray-900">Горен нагревател</strong> — осигурява нагряване в горната част и участва в различни режими според модела.</p>
+          <p><strong class="text-gray-900">Грил нагревател</strong> — използва се за силно нагряване отгоре и грил функция.</p>
+          <p><strong class="text-gray-900">Кръгов нагревател</strong> — при много конвекционни фурни се намира около вентилатора и участва в нагряването при режим с циркулация на въздуха.</p>
+          <p>Ако определен режим не работи правилно, не е необходимо автоматично да се сменят всички нагреватели. Проверява се кой компонент е свързан с конкретния проблем.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Термостат, датчици и контрол на температурата</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-orange-50 via-white to-orange-50 p-6 md:p-8 rounded-2xl shadow-lg border border-orange-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>За правилното печене фурната трябва не само да създава топлина, но и да измерва и контролира температурата.</p>
+          <p>Според модела в този процес могат да участват механичен термостат, температурен датчик, електронен модул и термозащита.</p>
+          <p>При проблем фурната може да загрява недостатъчно, да прегрява, да прекъсва или да поддържа температурата неправилно. Затова проблем с температурата не означава автоматично повреден нагревател.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Вентилатор и конвекция</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-orange-50 via-white to-orange-50 p-6 md:p-8 rounded-2xl shadow-lg border border-orange-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Конвекционните фурни използват вентилатор за циркулация на нагретия въздух.</p>
+          <p>При проблем могат да се появят неравномерно печене, необичаен шум, липса на работа при определен режим или неправилно разпределение на температурата.</p>
+          <p>При диагностиката могат да бъдат проверени вентилаторът, моторът, перката, кръговият нагревател и електронното управление.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Врата, панти и уплътнение</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-orange-50 via-white to-orange-50 p-6 md:p-8 rounded-2xl shadow-lg border border-orange-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Вратата трябва да прилепва правилно към корпуса, за да се задържа температурата в камерата.</p>
+          <p>При проблем могат да бъдат проверени пантите, механизмът за затваряне, уплътнението, позицията на вратата и закрепването.</p>
+          <p>Износени панти могат да попречат на правилното затваряне, а повредено уплътнение може да позволи загуба на топлина.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="kotloni">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Вградени и свободностоящи фурни</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        <div class="space-y-8 text-gray-800 leading-relaxed">
+          <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-orange-100">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Вградени фурни</h3>
+            <p>
+              При определени ремонти може да бъде необходимо уредът да бъде частично изваден от кухненския модул, за да се достигне до компонентите. Проверяват се начинът на монтаж, електрическите връзки и достъпът до необходимите части.
+            </p>
+          </div>
+          <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-orange-100">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Свободностоящи фурни</h3>
+            <p>
+              При свободностоящите модели конструкцията и достъпът до компонентите могат да се различават. Диагностиката отново се извършва според конкретния симптом и модел.
+            </p>
+          </div>
+          <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-orange-100">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Конвекционни фурни и фурни с грил</h3>
+            <p class="mb-4">
+              При конвекционните модели специално внимание се обръща на вентилатора, мотора, кръговия нагревател и системата за разпределение на топлината. При проблем с грил функцията се проверяват съответният нагревател и управляващите компоненти.
+            </p>
+            <p>
+              Ако проблемът е в нагревателните зони или управлението на кухненския плот, вижте <a href="/services/oven-repair/#kotloni" class="text-orange-700 font-medium hover:underline">ремонт на котлони във Варна</a> — контекстуална информация на тази страница, докато няма отделна услуга за котлони.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки фурни, които обслужваме</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">
+            РотоРем извършва диагностика и ремонт на фурни от различни производители, включително:
           </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {brands.map((brand) => (
+              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                <h3 class="font-semibold text-gray-900">{brand}</h3>
+              </div>
+            ))}
+          </div>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            Конструкцията, нагревателните системи, електрониката и кодовете за грешка могат да се различават според производителя и модела. При обаждане е полезно клиентът да посочи марката и модела на фурната, както и код за грешка, ако такъв се показва.
+          </p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Реални ремонти на фурни във Варна</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 object-cover min-h-[220px] md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">{item.brand} – Фурна</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Район:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 object-cover min-h-[240px] lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand} – Фурна</h3>
+              <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Район:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Как протича ремонтът</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на фурни в различни райони на Варна</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-orange-50 via-white to-orange-50 p-6 md:p-8 rounded-2xl shadow-lg border border-orange-100 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>
+            РотоРем извършва посещения по домовете в различни части на Варна, включително Чайка, Младост, Левски, Аспарухово, Владислав Варненчик, Галата, Възраждане, централната част на града и други обслужвани райони.
+          </p>
+          <p>
+            Не е необходимо клиентът да транспортира вградената фурна до физически сервиз – техникът посещава посочения адрес.
+          </p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Често задавани въпроси</h2>
+          <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
         </div>
       </section>
     </div>
   </article>
 
-  <!-- SEO Content Section -->
-  <div class="rotorem-seo-text">
-    <div class="container max-w-4xl">
-      <p>Фурната не загрява, печката не включва или храната остава недопечена? Това са чести проблеми, които изискват бърза реакция. Предлагаме професионален ремонт на готварски печки, котлони и фурни във Варна директно във вашия дом. Работим в целия град и околностите, като целта ни е да върнем уреда ви в изправност още при първото посещение.</p>
-      <h2>Какви повреди на печки и фурни ремонтираме във Варна</h2>
-      <p>При ежедневна употреба кухненските уреди се натоварват сериозно и това води до различни неизправности. Най-често се налага ремонт на фурни при проблеми с нагряването, когато уредът не достига нужната температура или пече неравномерно. Срещат се и случаи, при които печката изобщо не стартира или изключва по време на работа.</p>
-      <p>Честа причина за повреда е дефектирал термостат или изгорял нагревател. Нерядко извършваме ремонт на вентилатори на фурни, когато топлият въздух не се разпределя правилно. При електрическите печки се наблюдават проблеми с котлоните, превключвателите или електрониката.</p>
-      <p>Извършваме и ремонт на фурни за вграждане, включително при проблеми с дисплея, програматора или вратата. Ако уредът е спрял внезапно, ще открием причината и ще предложим решение. Предлагаме и монтаж на фурна за вграждане при нова покупка или подмяна.</p>
-      <p>При нужда може да се обърнете към нас и за ремонт на микровълнови печки, както и за други домакински уреди. Ако имате проблем със съдомиялната, можете да разгледате услугата ни за <a href="https://www.rotorem.bg/services/dishwasher-repair/">ремонт на съдомиялни</a>, а при нужда от <a href="https://www.rotorem.bg/services/electrical-services/">електроуслуги</a> също предлагаме съдействие. Всички услуги за региона ще откриете на страницата за <a href="https://www.rotorem.bg/services/">сервизни услуги във Варна</a>.</p>
-      <h2>Какви марки печки и фурни обслужваме във Варна</h2>
-      <p>Работим с всички популярни марки на пазара, включително Gorenje, Bosch, Whirlpool, Beko, Indesit и други. Независимо дали става дума за стандартна печка или модерна фурна за вграждане, разполагаме с опит и познания за различните модели. Често извършваме ремонт на фурни Gorenje, като познаваме спецификите на марката и типичните ѝ повреди. Това позволява по-бърза диагностика и по-точно решение.</p>
-      <h2>Райони във Варна, които обслужваме</h2>
-      <p>Предлагаме ремонт на готварски печки Варна във всички квартали на града, както и в близките населени места. Обслужваме Чайка, Левски, Владислав Варненчик, Младост, Аспарухово, Галата и централната част. Посещения се извършват и в радиус до около 20 км, за да получите помощ без значение къде се намирате.</p>
-      <h2>Как протича ремонтът</h2>
-      <p>Процесът започва с оглед и диагностика на място. Техникът проверява състоянието на уреда и установява точната причина за повредата. След това ще получите ясна оферта за ремонта, без скрити условия. При съгласие се преминава към отстраняване на проблема, като в много случаи повредата се отстранява веднага.</p>
-      <p>След приключване се прави тест на уреда, за да се уверим, че всичко работи коректно. Целта е да получите напълно изправен уред още при първото посещение, без повторни посещения и излишни разходи.</p>
-      <h2>Защо да изберете сервиз за фурни и печки РотоРем</h2>
-      <p>Клиентите ни избират заради практичния подход и ясната комуникация. Работим на място, което спестява време и транспорт. Разполагаме с опит в ремонтите на готварски печки и фурни от различни поколения. Предлагаме гаранция за извършения ремонт и използваме проверени части. Цените са прозрачни, а сроковете - реалистични. Фокусът е върху бързо и надеждно решение, което да върне нормалния ритъм у дома. <a href="https://www.rotorem.bg/contact/">Свържете се с нас</a> още сега и заявeте посещение в удобен за вас час.</p>
-    </div>
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-orange-600 to-orange-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Проблем с фурната?</h2>
+      <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        Ако фурната не загрява, не достига температура, пече неравномерно, изключва предпазителя, вентилаторът не работи или уредът изобщо не стартира, свържете се с РотоРем за диагностика и ремонт на адрес във Варна.
+      </p>
+      <p class="text-lg mb-8">Телефон: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        Обадете се за посещение
+      </a>
+    </section>
   </div>
 </Layout>
 
+<style>
+  .oven-service-page :global(#service-pricing-heading + div + p),
+  .oven-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-600),
+  .oven-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-500) {
+    color: rgb(31 41 55) !important;
+  }
+</style>

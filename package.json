@@ -49,6 +49,7 @@
     "@lhci/cli": "^0.13.0",
     "biome": "^0.3.3",
     "cheerio": "^1.0.0-rc.12",
+    "google-translate-api-x": "^10.7.3",
     "lighthouse": "^11.4.0",
     "node-fetch": "^3.3.2",
     "sharp": "^0.33.5",

@@ -1,375 +1,456 @@
-﻿---
+---
 import Layout from '../../layouts/Base.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import Reviews from '../../components/Reviews.astro';
+import { getServiceFaqItems } from '../../lib/jsonldOverrides';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 
-const title = 'Електроуслуги и аварийни ел. ремонти във Варна';
-const description = 'Ел услуги във Варна от опитни техници ✓ Ремонт на ел инсталация ✓ Монтаж на контакти и осветителни тела ✓ Гаранция за сигурност ✓ Позвънете на ☎ 089 834 0982!';
+const title = 'Електро услуги във Варна | Електротехник на адрес | РотоРем';
+const description = 'Електро услуги във Варна на адрес – диагностика, контакти, ключове, осветление, ел. табла, кабели и отстраняване на електрически повреди. РотоРем.';
+
+const heroImage = '/img/services/ремонт-на-ел-услуги-варна-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-ел-услуги-варна-диагностика.webp';
+
+const serviceCategories = [
+  {
+    title: 'Контакти и прекъсвачи',
+    text: 'Монтаж на нови прекъсвачи и контакти, смяна на стари или повредени механизми и ремонт при разхлабен, искрящ или неработещ контакт. Преди подмяна се проверяват връзките и проводниците.',
+    items: ['монтаж на нови прекъсвачи', 'смяна на стари прекъсвачи', 'поставяне на контакти', 'ремонт на контакти и прекъсвачи'],
+    border: 'border-amber-500',
+  },
+  {
+    title: 'Осветление',
+    text: 'Монтаж на полилеи и LED осветление, външно и аварийно осветление. При проблем се проверяват връзката, драйверът при LED система и ключът.',
+    items: ['монтаж на полилеи', 'LED осветление', 'външно осветление', 'аварийно осветление'],
+    border: 'border-yellow-500',
+  },
+  {
+    title: 'Домашни инсталации',
+    text: 'Изграждане на нови електрически инсталации, ремонт на съществуващи, смяна на кабели и работа по електрическото табло.',
+    items: ['нови електрически инсталации', 'ремонт на инсталации', 'смяна на кабели', 'електрически табла'],
+    border: 'border-orange-500',
+  },
+  {
+    title: 'Малки уреди',
+    text: 'Ремонт на малки електроуреди, смяна на захранващи кабели и щепсели и диагностика преди ремонт или подмяна на компонент.',
+    items: ['ремонт на малки уреди', 'смяна на кабели', 'ремонт на щепсели', 'диагностика на устройства'],
+    border: 'border-lime-600',
+  },
+  {
+    title: 'Аварийни ремонти',
+    text: 'Спешни електрически ремонти при късо съединение, липса на ток или проблем с таблото. Засегнатата верига остава изключена до проверката, когато това може да бъде направено безопасно.',
+    items: ['спешни електрически ремонти', 'отстраняване на къси съединения', 'възстановяване на тока', 'аварийни ремонти на табла'],
+    border: 'border-red-500',
+  },
+];
+
+const pricingRows = [
+  { service: 'Посещение и диагностика във Варна', eur: '20 €', featured: true },
+  { service: 'Смяна на контакт', eur: 'По договаряне' },
+  { service: 'Монтаж на контакт', eur: 'По договаряне' },
+  { service: 'Смяна на ключ', eur: 'По договаряне' },
+  { service: 'Монтаж на ключ', eur: 'По договаряне' },
+  { service: 'Монтаж на осветително тяло', eur: 'По договаряне' },
+  { service: 'Смяна на автоматичен прекъсвач', eur: 'По договаряне' },
+  { service: 'Диагностика на електрическо табло', eur: 'По договаряне' },
+  { service: 'Откриване на късо съединение', eur: 'По договаряне' },
+  { service: 'Частична подмяна на кабел', eur: 'По договаряне' },
+];
+
+const partsTable = [
+  { part: 'Контакт', problem: 'Няма ток, загрява или искри' },
+  { part: 'Ключ', problem: 'Осветлението не работи' },
+  { part: 'Автоматичен прекъсвач', problem: 'Изключва или не подава ток' },
+  { part: 'ДТЗ', problem: 'Изключва при утечка' },
+  { part: 'Електрическо табло', problem: 'Прекъсване, нагряване или повредена връзка' },
+  { part: 'Кабел / проводник', problem: 'Прекъсване или прегряване' },
+  { part: 'Клема / връзка', problem: 'Лош контакт или нагряване' },
+  { part: 'Разклонителна кутия', problem: 'Проблем с връзките' },
+  { part: 'Осветителна верига', problem: 'Лампите не работят или мигат' },
+  { part: 'LED драйвер', problem: 'LED осветлението работи неправилно' },
+];
+
+const realCases = [
+  {
+    title: 'Контакт без ток',
+    problem: 'Контактът няма ток / пада предпазителят',
+    area: 'Център',
+    diagnosis: 'Контактът няма ток / пада предпазителят',
+    repair: undefined as string | undefined,
+    image: '/img/services/ремонт-на-ел-услуги-варна-случай-1.webp',
+    alt: 'Контактът няма ток в Център, Варна',
+  },
+  {
+    title: 'Напрежение на контакт и ключове',
+    problem: 'Липса на напрежение на контакт, ключ за бойлер и ключ за осветление',
+    area: 'Чайка',
+    diagnosis: 'Оказаха се нагорели кабели вследствие на лоша/разхлабена връзка.',
+    repair: 'Подменени са контактът, ключът за бойлер и ключът за осветление.',
+    image: '/img/services/ремонт-на-ел-услуги-варна-случай-2.webp',
+    alt: 'Проблем с липса на напрежение на контакт, ключ за бойлер и ключ за осветление в Чайка, Варна',
+  },
+  {
+    title: 'Липса на електрозахранване',
+    problem: 'Липса на електрозахранване към контакт, бойлерен ключ и ключ за осветление',
+    area: 'Левски',
+    diagnosis: 'При проверката бяха установени прегорели проводници, причинени от разхлабени електрически връзки.',
+    repair: 'Подменени са повредените контакт, бойлерен ключ и ключ за осветление и са възстановени електрическите връзки.',
+    image: '/img/services/ремонт-на-ел-услуги-варна-случай-3.webp',
+    alt: 'Ремонт на контакт, бойлерен ключ и ключ за осветление при липса на електрозахранване в кв. Левски, Варна.',
+  },
+];
+
+const processSteps = [
+  { step: 1, title: 'Свързвате се с РотоРем', text: 'Опишете проблема по телефона.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 2, title: 'Уговаряме посещение', text: 'Техник посещава посочения адрес във Варна според уговорката.', circleClass: 'bg-gradient-to-r from-yellow-500 to-yellow-600' },
+  { step: 3, title: 'Диагностика и измерване', text: 'Проверява се съответната електрическа верига и се локализира причината.', circleClass: 'bg-gradient-to-r from-orange-500 to-orange-600' },
+  { step: 4, title: 'Получавате информация', text: 'Обясняваме какъв проблем е установен и каква работа е необходима.', circleClass: 'bg-gradient-to-r from-amber-600 to-amber-700' },
+  { step: 5, title: 'Ремонт или монтаж', text: 'Извършва се необходимата работа и системата се проверява след ремонта.', circleClass: 'bg-gradient-to-r from-yellow-600 to-yellow-700' },
+];
+
+const faqs = getServiceFaqItems('/services/electrical-services/');
+const sectionClass = 'mb-28 pt-4';
 ---
 
-<Layout title={title} description={description}>
-  <article class="">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-yellow-600 to-amber-700 text-white py-16 mb-16">
-      <div class="container max-w-4xl text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          Електроуслуги Варна
-        </h1>
-        <p class="text-xl md:text-2xl text-yellow-100 max-w-3xl mx-auto mb-8">
-          Професионални електроуслуги във Варна от сертифицирани инженери. Монтаж, ремонт и поддръжка на електрически инсталации.
-        </p>
-        <p class="text-base md:text-lg text-yellow-100 max-w-2xl mx-auto mb-8">
-          Диагностика във Варна - 20 €
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-yellow-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпратете имейл
-          </a>
-          <a href="tel:0898340982" class="bg-orange-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
+<Layout title={title} description={description} hideServiceFaq={true}>
+  <article class="el-service-page">
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Електротехник на адрес във Варна"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-amber-950/85 via-amber-900/75 to-yellow-900/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-block mb-5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+            Електро услуги на адрес във Варна
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Електро услуги по домовете във Варна
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            Нямате ток в част от жилището, контактът искри, осветлението прекъсва или предпазителят изключва? РотоРем предлага електро услуги във Варна за диагностика, ремонт и монтаж по домашни електрически инсталации.
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            Проверяваме причината за проблема преди смяна на контакт, ключ, автоматичен прекъсвач, кабел или друг компонент.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Диагностика във Варна</p>
+              <p class="text-xl font-bold text-white">20 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Телефон</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Обадете се за посещение
           </a>
         </div>
       </div>
     </section>
 
-    <div class="container max-w-4xl">
-
-      <!-- Why Choose Us Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Защо да изберете нашите електроуслуги във Варна?</h2>
-          <div class="w-20 h-1 bg-yellow-500 mx-auto"></div>
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Диагностика и електро услуги на адрес</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-yellow-200">
-            <div class="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-                <line x1="3" x2="21" y1="9" y2="9"/>
-                <line x1="9" x2="9" y1="21" y2="9"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-yellow-900 mb-3">Сертифицирани инженери</h3>
-            <p class="text-yellow-800">Всички електроуслуги се извършват от сертифицирани електроинженери с многогодишен опит във Варна.</p>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-gray-800 leading-relaxed">
+            <p>Преди ремонт трябва да бъде установено къде действително се намира проблемът. Диагностиката може да включва проверка за наличие на напрежение, измерване, проверка на контакти, ключове, осветителни вериги, автоматични прекъсвачи, табло, токови кръгове, връзки, късо съединение и кабели.</p>
+            <p class="font-semibold text-gray-900">Посещение и диагностика във Варна: 20 €</p>
           </div>
-
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-3">Бързо обслужване</h3>
-            <p class="text-amber-800">В повечето случаи извършваме електроуслугите в същия ден във Варна. Бързо и качествено изпълнение.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-orange-200">
-            <div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-orange-900 mb-3">Безопасност и гаранция</h3>
-            <p class="text-orange-800">Всички електроуслуги във Варна се извършват по стандартите за безопасност с гаранция за качество.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
-            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-lime-900 mb-3">Обслужваме цяла Варна</h3>
-            <p class="text-lime-800">Предоставяме електроуслуги в кварталите: Чайка, Младост, Аспарухово, Левски, Владислав Варненчик и центъра.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-emerald-200">
-            <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14.5 4h-5L7 12h4l-1 8 6-11h-4l2-5z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-emerald-900 mb-3">Всички видове работи</h3>
-            <p class="text-emerald-800">Извършваме всички видове електроуслуги - от смяна на контакт до цялостни инсталации.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-teal-200">
-            <div class="w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-teal-900 mb-3">Справедливи цени</h3>
-            <p class="text-teal-800">Диагностика във Варна - 20 €. <br> Ясни цени без скрити такси за електроуслуги във Варна.</p>
+          <div>
+            <img src={diagnosticImage} alt="Диагностика на електрическа инсталация във Варна" class="w-full rounded-2xl shadow-lg object-cover" loading="lazy" width="600" height="450" />
           </div>
         </div>
       </section>
+    </div>
 
-      <!-- Services Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Електроуслуги, които предлагаме във Варна</h2>
-          <div class="w-20 h-1 bg-yellow-500 mx-auto"></div>
+    <Reviews title="Отзиви от клиенти на РотоРем" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какви ел услуги извършваме</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-yellow-200">
-            <div class="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-              </svg>
+        <div class="grid md:grid-cols-2 gap-6">
+          {serviceCategories.map((cat) => (
+            <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${cat.border}`}>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">{cat.title}</h3>
+              <p class="text-gray-800 leading-relaxed mb-3">{cat.text}</p>
+              <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                {cat.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
             </div>
-            <h3 class="text-lg font-semibold text-yellow-900 mb-3">Контакти и прекъсвачи</h3>
-            <ul class="text-sm text-yellow-800 space-y-1">
-              <li>• Монтаж на нови прекъсвачи</li>
-              <li>• Смяна на стари прекъсвачи</li>
-              <li>• Поставяне на контакти</li>
-              <li>• Ремонт на контакти и прекъсвачи</li>
-            </ul>
-          </div>
-          
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="5"/>
-                <line x1="12" y1="1" x2="12" y2="3"/>
-                <line x1="12" y1="21" x2="12" y2="23"/>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                <line x1="1" y1="12" x2="3" y2="12"/>
-                <line x1="21" y1="12" x2="23" y2="12"/>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-amber-900 mb-3">Осветление</h3>
-            <ul class="text-sm text-amber-800 space-y-1">
-              <li>• Монтаж на полилеи</li>
-              <li>• LED осветление</li>
-              <li>• Външно осветление</li>
-              <li>• Аварийно осветление</li>
-            </ul>
-          </div>
+          ))}
+        </div>
+      </section>
+      <section class={sectionClass} aria-labelledby="el-pricing-heading">
+        <div class="text-center mb-10">
+          <h2 id="el-pricing-heading" class="text-3xl font-bold text-gray-900 mb-4">Цени за електро услуги във Варна</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+        </div>
 
-          <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-orange-200">
-            <div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22"/>
-              </svg>
+        <div class="md:hidden space-y-4">
+          {pricingRows.map((row) => (
+            <div class:list={['rounded-xl border p-5 shadow-sm', row.featured ? 'border-amber-300 bg-amber-50/50' : 'border-gray-200 bg-white']}>
+              <p class="font-semibold text-gray-900 mb-1">{row.service}</p>
+              <p class="text-gray-800">{row.eur}</p>
             </div>
-            <h3 class="text-lg font-semibold text-orange-900 mb-3">Домашни инсталации</h3>
-            <ul class="text-sm text-orange-800 space-y-1">
-              <li>• Нови електрически инсталации</li>
-              <li>• Ремонт на инсталации</li>
-              <li>• Смяна на кабели</li>
-              <li>• Електрически табла</li>
-            </ul>
-          </div>
+          ))}
+        </div>
 
-          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
-            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="16" height="10" x="4" y="7" rx="1" ry="1"/>
-                <line x1="7" y1="19" x2="7" y2="21"/>
-                <line x1="17" y1="19" x2="17" y2="21"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-lime-900 mb-3">Малки уреди</h3>
-            <ul class="text-sm text-lime-800 space-y-1">
-              <li>• Ремонт на малки уреди</li>
-              <li>• Смяна на кабели</li>
-              <li>• Ремонт на щепсели</li>
-              <li>• Диагностика на устройства</li>
-            </ul>
-          </div>
+        <div class="hidden md:block overflow-hidden rounded-xl border border-amber-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-amber-600 text-white">
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Услуга</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Цена</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pricingRows.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', row.featured ? 'bg-amber-50/80' : index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.service}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.eur}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-          <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-red-200">
-            <div class="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                <line x1="12" y1="9" x2="12" y2="13"/>
-                <line x1="12" y1="17" x2="12.01" y2="17"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-red-900 mb-3">Аварийни ремонти</h3>
-            <ul class="text-sm text-red-800 space-y-1">
-              <li>• Спешни електрически ремонти</li>
-              <li>• Отстраняване на къси съединения</li>
-              <li>• Възстановяване на тока</li>
-              <li>• Аварийни ремонти на табла</li>
-            </ul>
-          </div>
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Важно: Крайната цена зависи от конкретната повреда, необходимата работа, достъпа до инсталацията и използваните материали. След проверката клиентът получава информация за необходимата работа и цената.
+        </p>
+      </section>
 
-          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-emerald-200">
-            <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"/>
-                <path d="m21 21-4.35-4.35"/>
-              </svg>
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Части и системи на електрическата инсталация</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+        </div>
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class="bg-white rounded-xl border border-amber-100 p-5 shadow-sm">
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
             </div>
-            <h3 class="text-lg font-semibold text-emerald-900 mb-3">Диагностика</h3>
-            <ul class="text-sm text-emerald-800 space-y-1">
-              <li>• Търсене на повреди</li>
-              <li>• Проверка на инсталации</li>
-              <li>• Измерване на напрежения</li>
-              <li>• Електрически тестове</li>
-            </ul>
-          </div>
+          ))}
+        </div>
+        <div class="hidden md:block overflow-hidden rounded-xl border border-amber-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-amber-600 text-white">
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Част / система</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Често свързан проблем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          При електрическите повреди видимият симптом невинаги показва директно кой компонент е проблемен. Причината се определя чрез проверка и измерване.
+        </p>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Монтаж и ремонт на контакти</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-amber-50 via-white to-amber-50 p-6 md:p-8 rounded-2xl shadow-lg border border-amber-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>РотоРем извършва диагностика, монтаж и подмяна на домашни контакти. При физическа повреда, разхлабен механизъм или следи от прегряване се проверяват и проводниците зад контакта преди поставяне на нов.</p>
+          <p>При монтаж на нов контакт първо се преценява съществуващата инсталация и откъде може правилно да бъде захранена новата точка. При контакти с проблем при голям товар загряването не трябва да се приема като нормално.</p>
         </div>
       </section>
 
-      <!-- Common Problems Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Най-чести електрически проблеми във Варна</h2>
-          <div class="w-20 h-1 bg-yellow-500 mx-auto"></div>
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ключове и осветление</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
         </div>
-        
-        <div class="bg-gradient-to-r from-red-50 via-white to-red-50 p-8 rounded-2xl shadow-xl border border-red-100">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
-              <h3 class="text-lg font-semibold text-red-900 mb-3">Няма ток в стаята</h3>
-              <p class="text-red-800">Изгорели предпазители, прекъснати автомати или повреди в инсталацията. Бърза диагностика и решаване.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-yellow-500">
-              <h3 class="text-lg font-semibold text-yellow-900 mb-3">Не работят прекъсвачи</h3>
-              <p class="text-yellow-800">Повредени прекъсвачи, контакти или окабеляване. Смяна и ремонт с качествени материали.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
-              <h3 class="text-lg font-semibold text-amber-900 mb-3">Светлините мигат или не работят</h3>
-              <p class="text-amber-800">Проблеми с електрическата мрежа, лоши контакти или повредени крушки. Професионален ремонт.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-orange-500">
-              <h3 class="text-lg font-semibold text-orange-900 mb-3">Късо съединение</h3>
-              <p class="text-orange-800">Опасна ситуация, изискваща незабавна намеса. Аварийни ремонти и възстановяване на безопасността.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-lime-500 md:col-span-2">
-              <h3 class="text-lg font-semibold text-lime-900 mb-3">Стара електрическа инсталация</h3>
-              <p class="text-lime-800">Остарели инсталации, които се нуждаят от обновяване. Модернизация според актуалните стандарти.</p>
-            </div>
-          </div>
+        <div class="bg-gradient-to-r from-amber-50 via-white to-amber-50 p-6 md:p-8 rounded-2xl shadow-lg border border-amber-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>При повреден ключ за осветление могат да бъдат проверени механизмът, връзките, проводниците и осветителната линия. При монтаж на осветителни тела се проверяват електрическите връзки, механичното закрепване и работата след монтажа.</p>
+          <p>При LED осветление проблемът невинаги е в самата лампа – проверяват се LED модулът, драйверът, захранването, връзките и ключът.</p>
         </div>
       </section>
 
-      <!-- Process Section -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Процес на работа за електроуслуги</h2>
-          <div class="w-20 h-1 bg-yellow-500 mx-auto"></div>
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Електрически табла и защитни устройства</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
         </div>
-        
-        <div class="grid md:grid-cols-4 gap-6">
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">1</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Обаждане</h3>
-              <p class="text-sm text-gray-700">Обаждане за електроуслуги във Варна</p>
-            </div>
-          </div>
-          
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">2</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Оглед</h3>
-              <p class="text-sm text-gray-700">Безплатен оглед и диагностика на проблема</p>
-            </div>
-          </div>
-          
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">3</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Оферта</h3>
-              <p class="text-sm text-gray-700">Подробна оферта с ясни цени</p>
-            </div>
-          </div>
-          
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">4</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Изпълнение</h3>
-              <p class="text-sm text-gray-700">Качествено изпълнение с гаранция</p>
-            </div>
-          </div>
+        <div class="bg-gradient-to-r from-amber-50 via-white to-amber-50 p-6 md:p-8 rounded-2xl shadow-lg border border-amber-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Електрическото табло разпределя и защитава различните токови кръгове. При проблем могат да бъдат проверени автоматичните прекъсвачи, ДТЗ, връзки, клеми, проводници и отделни кръгове.</p>
+          <p>Автоматичен прекъсвач не се сменя с по-голям само защото изключва – първо се установява защо защитата се задейства. При многократно изключване на защита се локализира причината преди подмяна.</p>
         </div>
       </section>
 
-      <!-- Final CTA -->
-      <section class="text-center bg-gradient-to-r from-yellow-600 to-amber-700 text-white p-12 rounded-2xl shadow-2xl">
-        <h2 class="text-3xl font-bold mb-4">Нуждаете се от електроуслуги във Варна?</h2>
-        <p class="text-xl mb-8 text-yellow-100">Обадете се сега за професионални електроуслуги!</p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-yellow-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпрати имейл
-          </a>
-          <a href="tel:0898340982" class="bg-orange-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
-          </a>
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Късо съединение, кабели и аварийни проблеми</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
         </div>
-        
-        <div class="text-yellow-100">
-          <p class="text-sm">
-            Оглед: Варна - 20 € • Сертифицирани инженери • Сервиз във Варна
+        <div class="bg-gradient-to-r from-amber-50 via-white to-amber-50 p-6 md:p-8 rounded-2xl shadow-lg border border-amber-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>При съмнение за късо съединение се проверява съответната верига, докато бъде локализирано мястото или компонентът, който причинява проблема. Когато няма ток, но предпазителите са включени, причината може да бъде в прекъсната връзка, проводник, защитно устройство или точка в таблото.</p>
+          <p>При миризма на изгоряло, видимо искрене, силно загряващ контакт или многократно изключващ предпазител, засегнатата верига трябва да остане изключена до проверката, когато това може да бъде направено безопасно.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Реални електрически ремонти във Варна</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+        </div>
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <img src={item.image} alt={item.alt} class="w-full md:w-2/5 object-cover min-h-[220px]" loading="lazy" width="480" height="360" />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">{item.title}</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Район:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {item.diagnosis}</p>
+                  {item.repair && (
+                    <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {item.repair}</p>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden max-w-5xl mx-auto">
+            <img src={realCases[2].image} alt={realCases[2].alt} class="w-full lg:w-2/5 object-cover min-h-[240px]" loading="lazy" width="560" height="400" />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].title}</h3>
+              <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Район:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {realCases[2].diagnosis}</p>
+              {realCases[2].repair && (
+                <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {realCases[2].repair}</p>
+              )}
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Електро услуги и ремонт на електроуреди</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-amber-50 via-white to-amber-50 p-6 md:p-8 rounded-2xl shadow-lg border border-amber-100 space-y-4 text-gray-800 leading-relaxed max-w-3xl mx-auto text-center">
+          <p>
+            Ако предпазителят изключва само когато се включи бойлерът, проблемът може да бъде вътре в самия уред – вижте <a href="/services/boiler-repair/" class="text-amber-800 font-medium hover:underline">ремонт на бойлери във Варна</a>.
           </p>
+          <p>
+            Ако инсталацията работи нормално, но фурната не загрява или изключва предпазителя, вижте <a href="/services/oven-repair/" class="text-amber-800 font-medium hover:underline">ремонт на фурни във Варна</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Как протича работата</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ел услуги в различни райони на Варна</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-amber-50 via-white to-amber-50 p-6 md:p-8 rounded-2xl shadow-lg border border-amber-100 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>РотоРем извършва ел услуги по домовете във Варна, включително в Младост, Левски, Чайка, Възраждане, Аспарухово, Владислав Варненчик, Галата, централната част на Варна и други обслужвани райони.</p>
+          <p>За адрес извън стандартната зона условията за посещение се уточняват предварително.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Често задавани въпроси</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+        </div>
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
         </div>
       </section>
     </div>
   </article>
 
-  <!-- SEO Content Section -->
-  <div class="rotorem-seo-text">
-    <div class="container max-w-4xl">
-      <p>Проблем с електричеството у дома може да създаде неудобство или дори риск. Независимо дали става дума за дефектен контакт, неизправно осветление или нужда от нова инсталация, реагираме бързо и работим прецизно. Предлагаме електроуслуги във Варна и околността, като извършваме диагностика, ремонт и монтаж на място, без излишно чакане и с ясно решение още при първото посещение.</p>
-      <h2>Какви ел услуги по домовете извършваме във Варна</h2>
-      <p>Често клиентите ни търсят при липса на ток в отделни помещения, поява на искри от контакта или нестабилна работа на уредите. Извършваме ремонт на електроуреди и окабеляване, както и пълна подмяна на ел инсталация на къщи и жилища. Работим както по малки корекции, така и по цялостно изграждане на ел инсталация в нови обекти.</p>
-      <p>Монтажът на контакти и ключове е една от най-честите заявки. Поставяме нови точки, включително монтаж на двоен контакт, външен контакт или конзоли за контакти, когато има нужда от разширение на системата. Ако ключът за осветление не работи или осветлението премигва, извършваме монтаж на ключ за осветление и проверка на връзките.</p>
-      <p>Осветлението също е ключова част от всяко жилище. Предлагаме монтаж на осветителни тела, включително монтаж на полилеи и релсово осветление при модерни интериори. При нужда от обновяване на визията или по-добра функционалност, можем да съдействаме с монтаж на ЛЕД осветление във вашия дом.</p>
-      <p>Освен електроуслуги, предлагаме и други видове ремонти на битова техника. Ако имате проблем с бойлер, може да разгледате нашата услуга за <a href="https://www.rotorem.bg/services/boiler-repair/">ремонт и монтаж на бойлери</a>, както и решения за <a href="https://www.rotorem.bg/services/oven-repair/">ремонт на фурни</a> или пълния списък със <a href="https://www.rotorem.bg/services/">сервизни услуги във Варна</a>, където ще откриете всички възможности на едно място.</p>
-      <h2>Какви марки електроуреди обслужваме във Варна</h2>
-      <p>Работим с всички популярни марки и утвърдени производители домакинска техника и електрооборудване. Независимо дали става дума за ремонт на електроуреди или свързване към нова инсталация, подхождаме с внимание към спецификите на всяка марка и модел, за да осигурим безопасна и дълготрайна работа.</p>
-      <h2>Райони във Варна, които обслужваме</h2>
-      <p>Покриваме всички квартали на града, както и близките населени места. Работим в Чайка, Левски, Владислав Варненчик, Младост, Аспарухово, Галата и Централна градска част. Поемаме заявки и в радиус до около 20 км, което позволява бърза реакция при спешни случаи.</p>
-      <h2>Как протича услугата</h2>
-      <p>След като се свържете с нас, уточняваме проблема и насрочваме посещение в удобно време. На място извършваме диагностика, за да установим причината за проблема. Даваме ясна оферта преди започване на работа, без скрити условия. След одобрение пристъпваме към ремонт или монтаж, като използваме подходящи материали и инструменти. В края тестваме системата, за да сме сигурни, че всичко функционира безопасно и стабилно.</p>
-      <h2>Защо да изберете професионален сервиз РотоРем</h2>
-      <p>Клиентите ни търсят заради комбинацията от опит и практичен подход. Работим повече от 15 години в сферата на ремонт на битовата техника и ел услугите. Предлагаме гаранция за извършената работа и ясни цени още преди старта. Работим както по малки задачи като монтаж на контакт, така и по по-сложни проекти, свързани с изграждане на ел инсталация. <a href="https://www.rotorem.bg/contact/">Свържете се с нас</a> още сега и заявeте посещение в удобен за вас час.</p>
-    </div>
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-amber-600 to-yellow-700 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Нуждаете се от електро услуги във Варна?</h2>
+      <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        Ако нямате ток в част от жилището, предпазителят изключва, контактът загрява или искри, осветлението не работи или имате нужда от електрически монтаж, свържете се с РотоРем.
+      </p>
+      <p class="text-lg mb-8">Телефон: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
+      <a href="tel:0898340982" class="inline-block bg-white text-amber-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+        Обадете се за посещение
+      </a>
+    </section>
   </div>
 </Layout>
-

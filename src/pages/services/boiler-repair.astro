@@ -1,221 +1,603 @@
-﻿---
+---
 import Layout from '../../layouts/Base.astro';
 import ServicePricing from '../../components/ServicePricing.astro';
+import Reviews from '../../components/Reviews.astro';
 import { getServicePricing } from '../../data/service-prices';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getServiceFaqItems } from '../../lib/jsonldOverrides';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 const pricing = getServicePricing('boiler', 'varna', lang);
 
-const title = 'Ремонт и монтаж на бойлери във Варна | Сервиз РотоРем';
-const description = 'Ремонт на бойлери Варна с бърз сервиз на адрес ✓ Професионален монтаж и демонтаж ✓ Гаранция за качество ✓ Свържете се с нас на ☎ 089 834 0982!';
+const title = 'Ремонт на бойлери във Варна | Сервиз на адрес | РотоРем';
+const description = 'Ремонт, диагностика и монтаж на бойлери във Варна. Проблеми с нагревател, термостат, течове, предпазител и котлен камък. РотоРем.';
+
+const heroImage = '/img/services/ремонт-на-бойлер-варна-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-бойлер-варна-диагностика.webp';
+
+const problems = [
+  {
+    title: 'Бойлерът не загрява водата',
+    text: 'Когато бойлерът има захранване, но водата остава студена, могат да бъдат проверени нагревателят, термостатът, термозащитата и електрическите връзки. Изгорелият нагревател е една от възможните причини, но не трябва автоматично да се приема, че той трябва да бъде сменен.',
+    border: 'border-teal-500',
+  },
+  {
+    title: 'Бойлерът загрява водата слабо',
+    text: 'Ако водата се затопля, но не достига нормалната температура или загряването отнема значително повече време, причината може да бъде свързана с нагревателя, температурния контрол или натрупвания около нагревателния елемент. Преди ремонт се проверява конкретното състояние на уреда.',
+    border: 'border-emerald-500',
+  },
+  {
+    title: 'Бойлерът изключва предпазителя',
+    text: 'Ако автоматичният предпазител или защитата изключва при включване или по време на загряване, бойлерът трябва да бъде проверен преди повторна употреба. Причината може да бъде свързана с нагревателя, електрическа утечка, кабелна връзка или друг електрически компонент.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'Бойлерът тече',
+    text: 'Първо трябва да се установи откъде идва водата. Течът може да бъде около фланеца, уплътнението, предпазния клапан, водните връзки или друга част на бойлера. Ако проблемът е свързан със самия водосъдържател, техникът трябва да прецени дали ремонтът е технически и икономически оправдан.',
+    border: 'border-amber-500',
+  },
+  {
+    title: 'Теч около фланеца',
+    text: 'Фланецът осигурява достъп до нагревателя и други вътрешни компоненти. При теч около него трябва да бъдат проверени уплътнението, закрепването, състоянието на фланеца и контактната повърхност. Не е достатъчно просто да бъде затегнат, без да се установи причината.',
+    border: 'border-orange-500',
+  },
+  {
+    title: 'Предпазният клапан изпуска вода',
+    text: 'Определено количество вода от предпазния клапан при загряване може да бъде свързано с нормалното повишаване на налягането, но постоянно или необичайно изпускане трябва да бъде проверено. Не трябва автоматично да се приема, че клапанът е повреден – необходимо е да се разгледат условията, при които се появява течът.',
+    border: 'border-cyan-500',
+  },
+  {
+    title: 'Бойлерът прегрява водата',
+    text: 'Ако водата става необичайно гореща или бойлерът не прекратява нормално нагряването, трябва да бъде проверена системата за температурен контрол. Възможните причини включват термостат, термозащита или друг управляващ компонент.',
+    border: 'border-rose-500',
+  },
+  {
+    title: 'Бойлерът изключва преди водата да е загряла',
+    text: 'Прекалено ранното прекъсване може да бъде свързано с температурния контрол, термозащитата, нагревателя или друга неизправност. Диагностиката трябва да установи в кой момент прекъсва нагряването и как реагира уредът след това.',
+    border: 'border-indigo-500',
+  },
+  {
+    title: 'Бойлерът загрява много бавно',
+    text: 'По-дългото време за загряване може да бъде свързано с нагревателния елемент, неговата мощност, натрупвания около него или друг проблем в системата. При по-стари бойлери състоянието на вътрешните компоненти също трябва да бъде оценено.',
+    border: 'border-violet-500',
+  },
+  {
+    title: 'Бойлерът не се включва',
+    text: 'Когато няма индикация и нагряването изобщо не започва, могат да бъдат проверени захранването, електрическите връзки, термозащитата, термостатът и другите компоненти по веригата.',
+    border: 'border-slate-500',
+  },
+  {
+    title: 'Бойлерът издава необичаен шум',
+    text: 'Шум при загряване може да бъде свързан с натрупвания около нагревателния елемент или с други условия във вътрешността на бойлера. Самият шум не е достатъчен за определяне на причината и трябва да бъде разгледан заедно с останалите симптоми.',
+    border: 'border-lime-600',
+  },
+];
+
+const partsTable = [
+  { part: 'Нагревател', problem: 'Водата не загрява / загрява бавно' },
+  { part: 'Термостат', problem: 'Неправилна температура' },
+  { part: 'Термозащита', problem: 'Бойлерът прекъсва или не стартира' },
+  { part: 'Фланец', problem: 'Теч в долната част' },
+  { part: 'Уплътнение', problem: 'Теч около фланеца' },
+  { part: 'Предпазен клапан', problem: 'Изпускане на вода' },
+  { part: 'Електрически връзки', problem: 'Не стартира / изключва' },
+  { part: 'Водни връзки', problem: 'Теч' },
+  { part: 'Анодна защита', problem: 'Защита на водосъдържателя от корозия' },
+  { part: 'Котлен камък', problem: 'Натрупвания около вътрешните компоненти' },
+];
+
+const realCases = [
+  {
+    brand: 'Бойлер',
+    problem: 'Имаше проблем с ключа за вкл/изкл на бойлера',
+    area: 'Чайка',
+    diagnosis: 'Оказаха се изгорели кабели.',
+    repair: 'Подменени са и сега работи нормално.',
+    image: diagnosticImage,
+    alt: 'Ремонт на ключ за включване и изключване на бойлер и подмяна на изгорели кабели в кв. Чайка, Варна.',
+  },
+  {
+    brand: 'Бойлер',
+    problem: 'Стар бойлер за подмяна и неизправност в ключа, придружена от прегорели кабели',
+    area: 'Младост',
+    diagnosis: 'При проверката бяха установени повредени кабели и дефект в ключа за управление на бойлера.',
+    repair: 'Демонтиран е старият бойлер и е монтиран нов. Подменени са повредените кабели и ключът. След ремонта бойлерът е тестван и работи нормално.',
+    image: '/img/services/ремонт-на-бойлер-варна-случай-2.webp',
+    alt: 'Демонтаж на стар и монтаж на нов бойлер с подмяна на изгорели кабели и ключ за включване и изключване в Младост, Варна.',
+  },
+  {
+    brand: 'Бойлер',
+    problem: 'Бойлерът изключва предпазителя и не загрява водата нормално',
+    area: 'Аспарухово',
+    diagnosis: 'Установен е дефектирал нагревател със сериозни натрупвания от варовик.',
+    repair: 'Демонтиран е повреденият нагревател и е монтиран нов. След подмяната бойлерът е проверен и работи нормално.',
+    image: '/img/services/ремонт-на-бойлер-варна-случай-3.webp',
+    alt: 'Смяна на изгорял нагревател на бойлер с натрупан варовик и проблем с изключване на предпазителя в Аспарухово, Варна.',
+  },
+];
+
+const processSteps = [
+  { step: 1, title: 'Свързвате се с РотоРем', text: 'Опишете как се проявява проблемът – няма топла вода, има теч, бойлерът изключва предпазителя или друг симптом.', circleClass: 'bg-gradient-to-r from-teal-500 to-teal-600' },
+  { step: 2, title: 'Уговаряме посещение', text: 'Техник посещава посочения адрес във Варна според уговорката.', circleClass: 'bg-gradient-to-r from-emerald-500 to-emerald-600' },
+  { step: 3, title: 'Извършваме диагностика', text: 'Проверяват се компонентите и системите, които могат да причинят конкретния проблем.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 4, title: 'Получавате информация за ремонта', text: 'Обясняваме какво е установено и какво трябва да бъде ремонтирано или подменено.', circleClass: 'bg-gradient-to-r from-cyan-500 to-cyan-600' },
+  { step: 5, title: 'Ремонт и тест', text: 'Когато е възможно, ремонтът се извършва на адрес. След това бойлерът се проверява за нормална и безопасна работа.', circleClass: 'bg-gradient-to-r from-teal-600 to-teal-700' },
+];
+
+const brands = ['TESY', 'Ariston', 'Atlantic', 'Eldom', 'Diplomat', 'Gorenje', 'AEG', 'Beko'];
+
+const faqs = getServiceFaqItems('/services/boiler-repair/');
+const sectionClass = 'mb-28 pt-4';
 ---
 
-<Layout title={title} description={description}>
-  <article class="">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-teal-600 to-teal-800 text-white py-16 mb-16">
-      <div class="container max-w-4xl text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">
-          Ремонт и монтаж на бойлери във Варна
-        </h1>
-        <p class="text-xl md:text-2xl text-teal-100 max-w-3xl mx-auto mb-8">
-          Професионален ремонт и поддръжка на електрически бойлери във Варна. Бърз сервиз на място с гаранция.
-        </p>
-        <p class="text-base md:text-lg text-teal-100 max-w-2xl mx-auto mb-8">
-          Диагностика във Варна - 20 €
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-teal-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпратете имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
+<Layout title={title} description={description} hideServiceFaq={true}>
+  <article class="boiler-service-page">
+    <!-- Hero -->
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Ремонт на бойлер на адрес във Варна"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-teal-950/85 via-teal-900/75 to-teal-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="inline-block mb-5 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+            Сервиз на адрес във Варна
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Ремонт на бойлери по домовете във Варна
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            Бойлерът не загрява водата, загрява твърде бавно, изключва предпазителя или има теч? РотоРем извършва диагностика и ремонт на електрически бойлери по домовете във Варна. Проверяваме причината преди смяна на нагревател, термостат, термозащита, уплътнение или друг компонент.
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            Извършваме също монтаж и демонтаж на бойлери, когато услугата е необходима. Техник посещава адреса, установява повредата и ви информира какъв ремонт е нужен преди извършването му.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Диагностика във Варна</p>
+              <p class="text-xl font-bold text-white">20,46 € / 40 лв.</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Телефон</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Обадете се за посещение
           </a>
         </div>
       </div>
     </section>
 
-    <div class="container max-w-4xl">
+    <div class="container max-w-5xl">
 
-      <!-- Why Choose Us -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Защо да изберете нашия сервиз за бойлери във Варна?</h2>
+      <!-- Intro -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт и диагностика на бойлери на адрес</h2>
           <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-teal-200">
-            <div class="w-12 h-12 bg-teal-600 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-teal-900 mb-3">Сервиз на място</h3>
-            <p class="text-teal-800">Посещение във Варна в удобен за вас час. Без излишно чакане.</p>
-          </div>
-          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-emerald-200">
-            <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-emerald-900 mb-3">Бърза реакция</h3>
-            <p class="text-emerald-800">В повечето случаи завършваме ремонта в същия ден.</p>
-          </div>
-          <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-amber-200">
-            <div class="w-12 h-12 bg-amber-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3 class="text-xl font-semibold text-amber-900 mb-3">Гаранция</h3>
-            <p class="text-amber-800">Гаранция за извършения ремонт и използваните части.</p>
-          </div>
-
-          <div class="bg-gradient-to-br from-lime-50 to-lime-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-lime-200">
-            <div class="w-12 h-12 bg-lime-500 text-white rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-lime-900 mb-3">Справедливи цени</h3>
-            <p class="text-lime-800">Диагностика във Варна - 20 €. Ясни цени без скрити такси за ремонт на бойлери.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Common Problems -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Чести проблеми с бойлери</h2>
-          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
-        </div>
-        <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-8 rounded-2xl shadow-xl border border-teal-100">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-teal-500">
-              <h3 class="text-lg font-semibold text-teal-900 mb-3">Не загрява водата</h3>
-              <p class="text-teal-800">Повреден нагревател, термостат или платка. Подмяна на елементи след тест.</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
-              <h3 class="text-lg font-semibold text-amber-900 mb-3">Тече вода</h3>
-              <p class="text-amber-800">Проблеми с фланец, уплътнения или съд. Оценка на ремонтопригодност и безопасност.</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
-              <h3 class="text-lg font-semibold text-red-900 mb-3">Изгорял предпазител</h3>
-              <p class="text-red-800">Късо съединение в нагревател или окабеляване. Безопасна диагностика и ремонт.</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-500">
-              <h3 class="text-lg font-semibold text-indigo-900 mb-3">Лоша миризма и утайки във водата</h3>
-              <p class="text-indigo-800">Почистване на котлен камък, подмяна на анод и профилактика за по-дълъг живот.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {pricing && <ServicePricing pricing={pricing} accent="teal" />}
-
-      <!-- Process -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Процес на ремонт на бойлери във Варна</h2>
-          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">1</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Вие ни звъните</h3>
-              <p class="text-gray-700">Обадете се на 089 834 0982 за ремонт на бойлер във Варна.</p>
-            </div>
-          </div>
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">2</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Ние идваме при вас</h3>
-              <p class="text-gray-700">Нашият техник пристига в уговореното време и извършва пълна диагностика на място.</p>
-            </div>
-          </div>
-          <div class="text-center group">
-            <div class="relative mb-6">
-              <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform">
-                <span class="text-2xl font-bold">3</span>
-              </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Ремонтираме</h3>
-              <p class="text-gray-700">Отстраняваме повредата безопасно, тестваме бойлера и даваме гаранция за ремонта.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Brands -->
-      <section class="mb-16">
-        <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Марки бойлери, които обслужваме</h2>
-          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-gray-700 text-center">
-          <h3>TESY</h3>
-          <h3>Ariston</h3>
-          <h3>Atlantic</h3>
-          <h3>Eldom</h3>
-          <h3>Diplomat</h3>
-          <h3>Gorenje</h3>
-          <h3>AEG</h3>
-          <h3>Beko</h3>
-        </div>
-      </section>
-
-      <!-- Final CTA -->
-      <section class="text-center bg-gradient-to-r from-teal-600 to-teal-800 text-white p-12 rounded-2xl shadow-2xl mb-6">
-        <h2 class="text-3xl font-bold mb-4">Нужен ви е ремонт на бойлер във Варна?</h2>
-        <p class="text-xl mb-8 text-teal-100">Обадете се сега за бърз ремонт на място!</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-teal-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Изпрати имейл
-          </a>
-          <a href="tel:0898340982" class="bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-            Обади се на 089 834 0982
-          </a>
-        </div>
-        <div class="text-teal-100">
-          <p class="text-sm">
-            Посещение и диагностика: Варна - 20 € • Гаранция за качество • Сервиз във Варна
+        <div class="max-w-4xl mx-auto space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+          <p>
+            При бойлерите един и същ симптом може да има различни причини. Липсата на топла вода може да бъде свързана с нагревателя, термостата, термозащитата, електрическото захранване или друга част от системата.
+          </p>
+          <p>
+            При теч е важно първо да се установи откъде идва водата. Теч около фланеца или връзките е различен проблем от теч, свързан със самия водосъдържател. Затова ремонтът започва с диагностика.
+          </p>
+          <p>
+            Техникът проверява компонентите, свързани с конкретния симптом, и клиентът получава информация за установената повреда и препоръчания ремонт. Когато повредата позволява, ремонтът се извършва на адрес. Можете да видите и <a href="/reviews/" class="text-teal-700 font-medium hover:underline">отзиви от клиенти на РотоРем</a>.
           </p>
         </div>
       </section>
 
-      <!-- SEO helper text -->
-      <div class="rotorem-seo-text">
-        <p>Когато бойлерът спре да загрява, протече или се изключва сам, това създава сериозен дискомфорт у дома. Нашият екип предлага бърз и надежден ремонт на бойлери по домовете, както и професионален монтаж на нов уред. Работим на територията на Варна и околността, като реагираме в кратки срокове и решаваме проблема още при посещението, когато е възможно.</p>
-        <h2>Какви проблеми при бойлерите ремонтираме във Варна</h2>
-        <p>Извършваме ремонт на бойлери при всички често срещани проблеми &ndash; липса на топла вода, слабо загряване или внезапно изключване. Ако бойлерът има теч от фланеца или предпазния клапан, реагираме бързо, за да се избегнат по-сериозни щети. Често причината е изгорял нагревател, повреден термостат или натрупан котлен камък, което налага почистване или подмяна на компоненти.</p>
-        <p>Извършваме поправка и монтаж на бойлери от различни типове - вертикални, хоризонтални и компактни модели за монтаж под мивка.</p>
-        <p>Освен ремонт на бойлери, можете да разчитате на нас и при други домашни проблеми. Ако имате нужда от <a href="https://www.rotorem.bg/services/electrical-services/">електроуслуги</a>, <a href="https://www.rotorem.bg/services/oven-repair/">ремонт на фурни</a> или друга <a href="https://www.rotorem.bg/services/">битова техника</a>, ще получите съдействие от нашия експертен екип.</p>
-        <h2>Какви марки бойлери поправяме във Варна</h2>
-        <p>Извършваме ремонт на бойлери Елдом, Аристон, TESY, Diplomat, Bosch, Алпа и други популярни марки. Познаваме конструкцията и типичните им слабости, което позволява бърза диагностика и точен ремонт. Независимо дали става въпрос за по-стар или нов модел, подхождаме с правилните части и решение, съобразено с конкретния уред.</p>
-        <h2>Райони във Варна, които обслужваме</h2>
-        <p>Работим във всички квартали на града и околността до 20 км. Обслужваме Чайка, Левски, Владислав Варненчик, Младост, Аспарухово, Галата и централната част. При заявка за ремонт, изпращаме техник на адрес, за да не се налага демонтаж и пренасяне на уреда.</p>
-        <h2>Как протича ремонтът</h2>
-        <p>Процесът започва с диагностика на място, при която установяваме точната причина за проблема. След това даваме ясна оферта за ремонта или монтажа на бойлера. При съгласие преминаваме към отстраняване на повредата или монтаж на новия уред.</p>
-        <p>След поправката тестваме работата на системата, за да сме сигурни, че всичко функционира нормално. При монтаж и демонтаж се съобразяваме с особеностите на помещението и изискванията за безопасност. Оставяме работното място чисто и даваме указания за правилна експлоатация.</p>
-        <h2>Защо да изберете РотоРем</h2>
-        <p>Клиентите ни търсят, когато искат бързо решение без усложнения. Работим на място във вашия дом, което спестява време и транспорт. Разполагаме с професионален опит с всички утвърдени марки, както и при различни видове монтаж и демонтаж. Предлагаме ясни условия, гаранция за извършената работа и коректно отношение към всеки случай. <a href="https://www.rotorem.bg/contact/">Свържете се с нас</a> още сега и заявeте посещение в удобен за вас час.</p>
-      </div>
+    </div>
+
+    <Reviews title="Отзиви от клиенти на РотоРем" prioritizeAppliance="Бойлер" />
+
+    <div class="container max-w-5xl">
+
+      <!-- Problems -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какви повреди на бойлери ремонтираме</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-6 md:p-8 rounded-2xl shadow-xl border border-teal-100">
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+                {item.extra && item.link && (
+                  <p class="mt-3 text-gray-800 leading-relaxed">
+                    {item.extra}{' '}
+                    <a href={item.link.href} class="font-semibold text-blue-700 hover:underline">{item.link.label}</a>.
+                  </p>
+                )}
+                {item.link && !item.extra && (
+                  <p class="mt-3">
+                    <a href={item.link.href} class="font-bold text-blue-700 hover:underline">{item.link.label}</a>
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Diagnostics -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Диагностика на бойлери във Варна</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-gray-800 leading-relaxed">
+            <p>
+              Диагностиката има за цел да установи причината за проблема преди подмяна на компоненти.
+            </p>
+            <p class="font-medium text-gray-900">В зависимост от симптома могат да бъдат проверени:</p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>нагревател;</li>
+              <li>термостат;</li>
+              <li>термозащита;</li>
+              <li>електрически връзки;</li>
+              <li>захранващ кабел;</li>
+              <li>фланец;</li>
+              <li>уплътнение;</li>
+              <li>предпазен клапан;</li>
+              <li>входяща и изходяща водна връзка;</li>
+              <li>наличие на теч;</li>
+              <li>състояние около нагревателя;</li>
+              <li>натрупвания от котлен камък;</li>
+              <li>анодна защита, когато конструкцията го позволява;</li>
+              <li>общото състояние на бойлера.</li>
+            </ul>
+            <p>
+              След проверката клиентът получава информация какво е установено и какъв ремонт се препоръчва.
+            </p>
+            <p class="font-semibold text-gray-900">Посещение и диагностика във Варна: 20,46 € / 40 лв.</p>
+          </div>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Диагностика на бойлер във Варна"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Parts table -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Части и системи на бойлера, които проверяваме и ремонтираме</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class="bg-white rounded-xl border border-teal-100 p-5 shadow-sm">
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="hidden md:block overflow-hidden rounded-xl border border-teal-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-teal-600 text-white">
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Част или система</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Често свързан проблем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Важно: Един и същ симптом може да бъде причинен от различни компоненти. Конкретният ремонт и необходимите части се определят след диагностика.
+        </p>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Смяна на нагревател на бойлер</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-6 md:p-8 rounded-2xl shadow-lg border border-teal-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Нагревателят преобразува електрическата енергия в топлина и е един от основните компоненти на електрическия бойлер.</p>
+          <p>При повреда могат да се появят симптоми като студена вода, недостатъчно загряване, изключване на защитата или прекъсване на цикъла на нагряване.</p>
+          <p>Преди смяна нагревателят трябва да бъде проверен, защото сходни симптоми могат да бъдат причинени и от термостат, термозащита или електрическа неизправност. При необходимост от подмяна се използва компонент, подходящ за конкретния модел.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Термостат и термозащита</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-6 md:p-8 rounded-2xl shadow-lg border border-teal-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Термостатът участва в контрола на температурата на водата, а защитните компоненти имат важна роля за безопасната работа на уреда.</p>
+          <p>При проблем бойлерът може да не загрява, да прекъсва твърде рано, да прегрява или да не стартира след изключване на защитата. Преди подмяна се проверява кой компонент причинява конкретното поведение.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Течове от бойлера</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-6 md:p-8 rounded-2xl shadow-lg border border-teal-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Не всички течове имат една и съща причина или еднакъв ремонт. Важно е да се установи дали водата идва от връзка, клапан, фланец, уплътнение или самия водосъдържател.</p>
+          <p>При теч около фланеца може да бъде необходимо да се провери уплътнението и състоянието на свързаните компоненти. При съмнение за проблем със самия водосъдържател трябва да се оцени дали ремонтът е разумен.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Почистване на бойлер от котлен камък</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-6 md:p-8 rounded-2xl shadow-lg border border-teal-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>С течение на времето минерални отлагания могат да се натрупват върху нагревателния елемент и други вътрешни части. Количеството зависи от условията на експлоатация, водата и периода на използване.</p>
+          <p>При отваряне на бойлера техникът може да оцени състоянието на нагревателя и наличието на натрупвания. Почистване се извършва, когато е необходимо и подходящо за конкретния уред.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Анодна защита на бойлера</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-6 md:p-8 rounded-2xl shadow-lg border border-teal-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>При бойлери с магнезиев анод той има защитна функция спрямо корозията на водосъдържателя. Състоянието му може да бъде проверено при подходяща профилактика или когато бойлерът е отворен за друг ремонт.</p>
+          <p>Не се определя универсален интервал за смяна без да се вземат предвид моделът, указанията на производителя и условията на експлоатация.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Монтаж и демонтаж на бойлери</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="space-y-8 text-gray-800 leading-relaxed">
+          <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-teal-100">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Монтаж на бойлер</h3>
+            <p class="mb-3 font-medium text-gray-900">При монтаж на нов електрически бойлер могат да бъдат извършени:</p>
+            <ul class="list-disc pl-5 space-y-2 mb-4">
+              <li>позициониране и подходящо закрепване;</li>
+              <li>проверка на водните връзки;</li>
+              <li>монтаж или проверка на предпазния клапан;</li>
+              <li>свързване според конкретната инсталация;</li>
+              <li>пълнене и проверка за теч;</li>
+              <li>тест на уреда.</li>
+            </ul>
+          </div>
+          <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-teal-100">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Демонтаж на стар бойлер</h3>
+            <p>При подмяна на уред старият бойлер може да бъде изключен, източен, разкачен от водните връзки и безопасно свален.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Видове бойлери, които обслужваме</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div class="bg-white p-6 rounded-2xl shadow-lg border border-teal-100">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Вертикални бойлери</h3>
+            <p class="text-gray-800 leading-relaxed">Един от най-разпространените типове за дома. Ремонтът се определя според конструкцията, обема и конкретната повреда.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl shadow-lg border border-teal-100">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Хоризонтални бойлери</h3>
+            <p class="text-gray-800 leading-relaxed">Разположението на компонентите и начинът на монтаж могат да се различават от вертикалните модели.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl shadow-lg border border-teal-100">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Компактни бойлери</h3>
+            <p class="text-gray-800 leading-relaxed">Модели за монтаж под мивка. Диагностиката се извършва според конкретния модел и достъпа до компонентите.</p>
+          </div>
+        </div>
+      </section>
+
+      {pricing && <div class={sectionClass}><ServicePricing pricing={pricing} accent="teal" /></div>}
+
+      <!-- Brands -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки бойлери, които обслужваме</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">
+            РотоРем извършва диагностика и ремонт на електрически бойлери от различни производители, включително:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {brands.map((brand) => (
+              <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+                <h3 class="font-semibold text-gray-900">{brand}</h3>
+              </div>
+            ))}
+          </div>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            Конструкцията, нагревателите, термостатите, фланците и останалите компоненти могат да се различават според марката и модела. При обаждане е полезно да посочите производителя, модела и приблизителния обем на бойлера.
+          </p>
+        </div>
+      </section>
+
+      <!-- Real cases -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Реални ремонти на бойлери във Варна</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 object-cover min-h-[220px] md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">{item.brand}</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Район:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 object-cover min-h-[240px] lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand}</h3>
+              <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Район:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Process: 3 + 2 grid -->
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Как протича ремонтът</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="text-base font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Service areas -->
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на бойлери в различни райони на Варна</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-teal-50 via-white to-teal-50 p-6 md:p-8 rounded-2xl shadow-lg border border-teal-100 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>
+            РотоРем извършва посещения по домовете в различни части на Варна, включително Младост, Левски, Чайка, Възраждане, Аспарухово, Владислав Варненчик, Галата, централната част на града и други обслужвани райони.
+          </p>
+          <p>
+            Клиентът не трябва да демонтира или транспортира бойлера до физически сервиз – техникът посещава посочения адрес.
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Често задавани въпроси</h2>
+          <div class="w-20 h-1 bg-teal-500 mx-auto"></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
   </article>
+
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-teal-600 to-teal-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Проблем с бойлера?</h2>
+      <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        Ако бойлерът не загрява водата, загрява твърде бавно, има теч, изключва предпазителя или не се включва, свържете се с РотоРем за диагностика и ремонт на адрес във Варна.
+      </p>
+      <p class="text-lg mb-8">Телефон: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        Обадете се за посещение
+      </a>
+    </section>
+  </div>
 </Layout>
 
+<style>
+  .boiler-service-page :global(#service-pricing-heading + div + p),
+  .boiler-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-600),
+  .boiler-service-page :global(section[aria-labelledby="service-pricing-heading"] .text-gray-500) {
+    color: rgb(31 41 55) !important;
+  }
+</style>
