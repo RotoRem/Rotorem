@@ -995,7 +995,7 @@ const serviceConfigs: ServiceConfig[] = [
     breadcrumbThird: "Ремонт на сушилни по домовете във Варна",
     serviceName: "Ремонт на сушилни по домовете във Варна",
     serviceType: "Ремонт на сушилни",
-    description: "Ремонт и диагностика на сушилни по домовете във Варна. Проблеми с нагряване, барабан, ремък, термопомпа, източване и електроника. Обадете се на РотоРем.",
+    description: "Ремонт и диагностика на сушилни по домовете във Варна. Проблеми с нагряване, термопомпа, барабан, ремък, помпа, шум и електроника. РотоРем.",
     cityName: "Варна",
     lat: 43.2141,
     lng: 27.9147,
@@ -1006,14 +1006,15 @@ const serviceConfigs: ServiceConfig[] = [
     personJobTitle: "Главен техник",
     personDescription: "Магистър по Автоматика и системи за управление с дългогодишен опит в ремонта на домакински уреди.",
     faq: [
-      { q: "Може ли сушилнята да бъде ремонтирана на адрес?", a: "Да. РотоРем извършва ремонт и диагностика на сушилни по домовете във Варна. В много случаи ремонтът може да бъде извършен при самото посещение." },
-      { q: "Как разбирате коя част на сушилнята е повредена?", a: "Техникът започва от конкретния симптом и проверява системите, които могат да го причинят. Подмяна на част се препоръчва след установяване на причината." },
-      { q: "Ремонтирате ли сушилни с термопомпа?", a: "Да. Работим при проблеми с нагряване, датчици, филтри, електроника и други достъпни компоненти. Не обещаваме ремонт на херметично запечатан компресор – след диагностика се преценява какво е възможно." },
-      { q: "Защо сушилнята не загрява?", a: "Възможните причини включват нагревател, термостат, сензори, електронен модул или проблем в системата за термопомпа или кондензно изсушаване, в зависимост от модела." },
-      { q: "Барабанът не се върти – какво може да е?", a: "Често се проверяват ремъкът, моторът, ролките, електрониката и механичното движение на барабана, преди да се определи ремонтът." },
-      { q: "Ремонтирате ли кондензни и сушилни с термопомпа?", a: "Да. Диагностиката се извършва според типа сушилня – кондензна, с термопомпа или вентилационна – и конкретния симптом." },
-      { q: "Извършвате ли монтаж на сушилня върху пералня?", a: "Да. При нужда от колонно разположение може да се извърши монтаж със стабилно закрепване. Подробности за монтаж на перални и колони са описани и на страницата за ремонт на перални." },
-      { q: "Давате ли гаранция за ремонта на сушилня?", a: "Да, предоставяме гаранция за извършените ремонти. Конкретните условия се обсъждат след диагностика и преди започване на работата." }
+      { q: "Може ли сушилнята да бъде ремонтирана на адрес?", a: "Да. РотоРем извършва диагностика и ремонт на сушилни по домовете във Варна. В много случаи ремонтът може да бъде направен при посещението." },
+      { q: "Ремонтирате ли сушилни с термопомпа?", a: "Да. Диагностиката при тези модели се съобразява със специфичната им конструкция и система. РотоРем обслужва достъпните компоненти, но не извършва ремонт на компресори и хладилната система на термопомпата." },
+      { q: "Защо сушилнята не загрява?", a: "Причината може да бъде нагревател, термостат, температурен датчик, електроника или друг компонент." },
+      { q: "Защо барабанът не се върти?", a: "Проверяват се ремъкът, моторът, ролките, лагерите и механичното движение на барабана." },
+      { q: "Защо сушилнята суши много бавно?", a: "Причината може да бъде ограничен въздушен поток, замърсени филтри, проблем с кондензатора, датчик или системата с термопомпа." },
+      { q: "Ремонтирате ли сушилни, които не източват водата?", a: "Да. Проверяват се помпата, резервоарът за конденз, маркучите и дренажната система." },
+      { q: "Монтирате ли сушилня върху пералня?", a: "Да, когато моделите и условията позволяват безопасно позициониране. При необходимост от свързващ комплект, той трябва да бъде осигурен предварително от собственика на уредите." },
+      { q: "Колко струва диагностиката?", a: "Диагностиката във Варна е 20 €." },
+      { q: "Давате ли гаранция?", a: "Да, предоставяме гаранция за извършените ремонти. Конкретните условия се обсъждат след диагностика и преди започване на работата." }
     ]
   },
   {
@@ -1312,7 +1313,7 @@ const serviceConfigs: ServiceConfig[] = [
     breadcrumbThird: "In-Home Dryer Repair in Varna",
     serviceName: "In-Home Dryer Repair in Varna",
     serviceType: "Dryer Repair",
-    description: "In-home dryer repair and diagnostics in Varna. Heating, drum, belt, heat pump, drainage and electronics problems. Call RotoRem.",
+    description: "In-home dryer repair and diagnostics in Varna. Heating, heat pump, drum, belt, pump, noise and electronics problems. RotoRem.",
     cityName: "Varna",
     lat: 43.2141,
     lng: 27.9147,
@@ -1323,14 +1324,15 @@ const serviceConfigs: ServiceConfig[] = [
     personJobTitle: "Chief Technician",
     personDescription: "Master in Automation and Control Systems with years of experience in household appliance repair.",
     faq: [
-      { q: "Can a dryer be repaired at my address?", a: "Yes. RotoRem provides in-home diagnostics and repair of dryers in Varna. In many cases the repair can be completed during the visit itself." },
-      { q: "How do you find out which part of the dryer is faulty?", a: "The technician starts from the specific symptom and checks the systems that could cause it. A part replacement is recommended only after the cause has been established." },
-      { q: "Do you repair heat pump dryers?", a: "Yes. We handle heating, sensor, filter, electronics and other accessible component problems. We do not promise to repair a hermetically sealed compressor – after diagnostics we assess what is possible." },
-      { q: "Why does my dryer not heat?", a: "Possible causes include the heating element, the thermostat, sensors, the electronic module or a problem in the heat pump or condenser drying system, depending on the model." },
-      { q: "The drum does not rotate – what could it be?", a: "The belt, motor, rollers, electronics and the mechanical movement of the drum are often checked before the repair is decided." },
-      { q: "Do you repair condenser and heat pump dryers?", a: "Yes. Diagnostics are carried out according to the type of dryer – condenser, heat pump or vented – and the specific symptom." },
-      { q: "Do you install a dryer on top of a washing machine?", a: "Yes. If you need a stacked installation, it can be done with secure fastening. Details on installing washing machines and stacked columns are also described on the washing machine repair page." },
-      { q: "Do you give a warranty on dryer repairs?", a: "Yes, we provide a warranty on completed repairs. The specific terms are discussed after diagnostics and before work begins." }
+      { q: "Can a dryer be repaired at my address?", a: "Yes. RotoRem provides in-home diagnostics and repair of dryers in Varna. In many cases the repair can be completed during the visit." },
+      { q: "Do you repair heat pump dryers?", a: "Yes. Diagnostics on these models take their specific construction and system into account. RotoRem services accessible components, but does not repair compressors or the refrigeration circuit of the heat pump." },
+      { q: "Why does my dryer not heat?", a: "The cause may be the heating element, thermostat, temperature sensor, electronics or another component." },
+      { q: "Why does the drum not rotate?", a: "We check the belt, motor, rollers, bearings and the mechanical movement of the drum." },
+      { q: "Why does the dryer dry very slowly?", a: "The cause may be restricted airflow, dirty filters, a condenser problem, a sensor or the heat pump system." },
+      { q: "Do you repair dryers that do not drain water?", a: "Yes. We check the pump, condensate tank, hoses and drainage system." },
+      { q: "Do you install a dryer on top of a washing machine?", a: "Yes, when the models and conditions allow safe positioning. If a stacking kit is required, it must be provided in advance by the owner of the appliances." },
+      { q: "How much does diagnostics cost?", a: "Diagnostics in Varna cost €20." },
+      { q: "Do you give a warranty?", a: "Yes, we provide a warranty on completed repairs. The specific terms are discussed after diagnostics and before work begins." }
     ]
   },
   {

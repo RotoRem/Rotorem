@@ -23,6 +23,7 @@ const serviceAreas = [
       ? 'Experienced technicians based in Varna cover seaside neighbourhoods and nearby resorts, including villages within roughly 20 km.'
       : 'Опитни техници във Варна покриват крайморските квартали и близките курорти, както и селата в радиус около 20 км.',
     mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d93863.19553341077!2d27.837949771951357!3d43.21719036667841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a4538baaf3d7a1%3A0x5727941c71a58b7c!2sVarna%2C%20Bulgaria!5e0!3m2!1sen!2sus!4v1715959693332!5m2!1sen!2sus',
+    mapsUrl: 'https://share.google/oSGu5kqy8Xle6tmRf',
     areas: isEN
       ? ['City Center', 'Chayka', 'Levski', 'Mladost', 'Asparuhovo', 'Galata', 'Golden Sands', 'Saints Constantine & Helena']
       : ['Център', 'Чайка', 'Левски', 'Младост', 'Аспарухово', 'Галата', 'Златни пясъци', 'Св. Константин и Елена'],
@@ -34,6 +35,7 @@ const serviceAreas = [
       ? 'Our Sofia crew handles downtown appointments and rapid response across the capital’s growing residential areas.'
       : 'Екипът в София поема адреси в центъра и осигурява бърза реакция във всички развиващи се столични квартали.',
     mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d94491.42422324641!2d23.2370273!3d42.6953464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa857464314fbf%3A0x400a01269bf6930!2sSofia%2C%20Bulgaria!5e0!3m2!1sen!2sbg!4v1715959693332!5m2!1sen!2sbg',
+    mapsUrl: 'https://share.google/jWXEcs9gj9CtwgnNR',
     areas: isEN
       ? ['City Center', 'Lozenets', 'Mladost', 'Lyulin', 'Studentski Grad', 'Vitosha', 'Ovcha Kupel', 'Manastirski Livadi']
       : ['Център', 'Лозенец', 'Младост', 'Люлин', 'Студентски град', 'Витоша', 'Овча купел', 'Манастирски ливади'],
@@ -62,7 +64,20 @@ const serviceAreas = [
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               class="absolute inset-0 w-full h-full"
+              title={area.heading}
             ></iframe>
+            <!-- Cover Google's default "Open in Maps" control with GBP profile link -->
+            <a
+              href={area.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="absolute bottom-0 left-0 z-10 inline-flex items-center gap-1.5 m-2 px-2.5 py-1.5 rounded bg-white text-xs sm:text-sm font-medium text-gray-800 shadow border border-gray-200 hover:bg-gray-50"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-gray-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+              </svg>
+              {isEN ? 'Open in Maps' : 'Отвори в Maps'}
+            </a>
           </div>
           <div class="p-6 flex flex-col gap-4">
             <div>
@@ -130,7 +145,7 @@ const serviceAreas = [
         <div class="space-y-3">
           <div class="flex justify-between items-center bg-white/50 p-2 rounded-lg">
             <span class="text-gray-700 font-medium">{isEN ? 'Monday - Friday' : 'Понеделник - Петък'}</span>
-            <span class="font-semibold text-gray-900 bg-white py-1 px-3 rounded-full shadow-sm border border-gray-100">08:00 - 17:00ч</span>
+            <span class="font-semibold text-gray-900 bg-white py-1 px-3 rounded-full shadow-sm border border-gray-100">{isEN ? '08:00 - 17:00' : '08:00 - 17:00ч'}</span>
           </div>
           <div class="flex justify-between items-center bg-white/50 p-2 rounded-lg">
             <span class="text-gray-700 font-medium">{isEN ? 'Saturday' : 'Събота'}</span>

@@ -163,14 +163,14 @@ const sortedReviews: DisplayReview[] = prioritizeAppliance
     
     <!-- Mobile layout - single prominent card with pagination -->
     <div class="mt-8 md:hidden">
-      <div id="mobile-review-carousel" class="relative">
+      <div id="customer-review-carousel" class="relative">
         <!-- Visually enhanced card with border accent and background -->
         <div class="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden">
           <div class="border-l-4 border-amber-500 p-5">
             <div class="flex justify-between items-start mb-3">
               <div>
-                <h3 id="review-name" class="font-semibold text-gray-900">{sortedReviews[0].name}</h3>
-                <p id="review-date" class="text-sm text-gray-500">{sortedReviews[0].date}</p>
+                <h3 id="customer-review-name" class="font-semibold text-gray-900">{sortedReviews[0].name}</h3>
+                <p id="customer-review-date" class="text-sm text-gray-500">{sortedReviews[0].date}</p>
               </div>
               <div class="flex">
                 {Array.from({ length: 5 }).map(() => (
@@ -182,11 +182,11 @@ const sortedReviews: DisplayReview[] = prioritizeAppliance
             </div>
             
             <div class="min-h-[100px]">
-              <p id="review-text" class="text-gray-700">{sortedReviews[0].text}</p>
+              <p id="customer-review-text" class="text-gray-700">{sortedReviews[0].text}</p>
             </div>
             
             <div class="mt-4 pt-3 border-t border-gray-200 flex justify-between items-center">
-              <span id="review-appliance" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              <span id="customer-review-appliance" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                 {sortedReviews[0].appliance}
               </span>
               
@@ -204,20 +204,20 @@ const sortedReviews: DisplayReview[] = prioritizeAppliance
         
         <!-- Navigation arrows and pagination dots with styling -->
         <div class="flex justify-between items-center mt-4">
-          <button id="review-prev" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 active:bg-gray-100 shadow-sm" aria-label={isEN ? 'Previous review' : 'Предишен отзив'}>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button id="customer-review-prev" type="button" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 active:bg-gray-100 shadow-sm touch-manipulation" aria-label={isEN ? 'Previous review' : 'Предишен отзив'}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
           
           <div class="flex gap-1.5">
-            <span class="review-dot w-2.5 h-2.5 rounded-full bg-primary"></span>
-            <span class="review-dot w-2.5 h-2.5 rounded-full bg-gray-300"></span>
-            <span class="review-dot w-2.5 h-2.5 rounded-full bg-gray-300"></span>
+            <span class="customer-review-dot w-2.5 h-2.5 rounded-full bg-primary"></span>
+            <span class="customer-review-dot w-2.5 h-2.5 rounded-full bg-gray-300"></span>
+            <span class="customer-review-dot w-2.5 h-2.5 rounded-full bg-gray-300"></span>
           </div>
           
-          <button id="review-next" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 active:bg-gray-100 shadow-sm" aria-label={isEN ? 'Next review' : 'Следващ отзив'}>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button id="customer-review-next" type="button" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 active:bg-gray-100 shadow-sm touch-manipulation" aria-label={isEN ? 'Next review' : 'Следващ отзив'}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
@@ -245,37 +245,32 @@ const sortedReviews: DisplayReview[] = prioritizeAppliance
 </section>
 
 <script define:vars={{ reviewData: sortedReviews.map((r) => ({ name: r.name, date: r.date, text: r.text, appliance: r.appliance })) }}>
-  // Mobile review carousel with transitions - using real reviews
-  document.addEventListener('DOMContentLoaded', () => {
-    
+  // Mobile review carousel — unique IDs to avoid conflict with Hero carousel
+  function initCustomerReviewCarousel() {
     let currentIndex = 0;
     
-    // Get DOM elements
-    const nameElement = document.getElementById('review-name');
-    const dateElement = document.getElementById('review-date');
-    const textElement = document.getElementById('review-text');
-    const applianceElement = document.getElementById('review-appliance');
-    const prevButton = document.getElementById('review-prev');
-    const nextButton = document.getElementById('review-next');
-    const dots = document.querySelectorAll('.review-dot');
+    const nameElement = document.getElementById('customer-review-name');
+    const dateElement = document.getElementById('customer-review-date');
+    const textElement = document.getElementById('customer-review-text');
+    const applianceElement = document.getElementById('customer-review-appliance');
+    const prevButton = document.getElementById('customer-review-prev');
+    const nextButton = document.getElementById('customer-review-next');
+    const dots = document.querySelectorAll('.customer-review-dot');
+    const carouselElement = document.getElementById('customer-review-carousel');
+
+    if (!nameElement || !dateElement || !textElement || !applianceElement || !carouselElement || !reviewData?.length) {
+      return;
+    }
     
-    // Function to update the review content with transition
-    function updateReview(index: number) {
-      const carouselElement = document.getElementById('mobile-review-carousel');
-      
-      if (!nameElement || !dateElement || !textElement || !applianceElement || !carouselElement) return;
-      
-      // Fade-out effect
+    function updateReview(index) {
       carouselElement.classList.add('opacity-0');
       
-      // Update content after a short delay
       setTimeout(() => {
         nameElement.textContent = reviewData[index].name;
         dateElement.textContent = reviewData[index].date;
         textElement.textContent = reviewData[index].text;
         applianceElement.textContent = reviewData[index].appliance;
         
-        // Update the dots
         dots.forEach((dot, i) => {
           if (i === index) {
             dot.classList.remove('bg-gray-300');
@@ -286,59 +281,49 @@ const sortedReviews: DisplayReview[] = prioritizeAppliance
           }
         });
         
-        // Fade back in
         carouselElement.classList.remove('opacity-0');
       }, 200);
     }
     
-    // Set up event listeners for the buttons
-    if (prevButton) {
-      prevButton.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + reviewData.length) % reviewData.length;
-        updateReview(currentIndex);
-      });
-    }
+    prevButton?.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + reviewData.length) % reviewData.length;
+      updateReview(currentIndex);
+    });
     
-    if (nextButton) {
-      nextButton.addEventListener('click', () => {
+    nextButton?.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % reviewData.length;
+      updateReview(currentIndex);
+    });
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carouselElement.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    carouselElement.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) {
         currentIndex = (currentIndex + 1) % reviewData.length;
         updateReview(currentIndex);
-      });
-    }
-    
-    // Set up touch swipe functionality for mobile
-    const carousel = document.getElementById('mobile-review-carousel');
-    if (carousel) {
-      let touchStartX = 0;
-      let touchEndX = 0;
-      
-      carousel.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-      
-      carousel.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, { passive: true });
-      
-      function handleSwipe() {
-        if (touchEndX < touchStartX - 50) {
-          // Swipe left
-          currentIndex = (currentIndex + 1) % reviewData.length;
-          updateReview(currentIndex);
-        } else if (touchEndX > touchStartX + 50) {
-          // Swipe right
-          currentIndex = (currentIndex - 1 + reviewData.length) % reviewData.length;
-          updateReview(currentIndex);
-        }
+      } else if (touchEndX > touchStartX + 50) {
+        currentIndex = (currentIndex - 1 + reviewData.length) % reviewData.length;
+        updateReview(currentIndex);
       }
-    }
-  });
+    }, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCustomerReviewCarousel);
+  } else {
+    initCustomerReviewCarousel();
+  }
 </script>
 
 <style>
   /* Enhanced styling for mobile reviews */
-  #mobile-review-carousel {
+  #customer-review-carousel {
     transition: opacity 0.2s ease-in-out;
   }
   

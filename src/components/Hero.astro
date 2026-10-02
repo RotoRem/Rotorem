@@ -463,8 +463,8 @@ const allServices = [
             <!-- First review only for initial display -->
             <div class="flex justify-between items-start p-5 pb-0">
               <div>
-                <h3 id="review-name" class="font-semibold text-gray-900 font-heading">Google</h3>
-                <p id="review-date" class="text-sm text-gray-500">...</p>
+                <h3 id="hero-review-name" class="font-semibold text-gray-900 font-heading">Google</h3>
+                <p id="hero-review-date" class="text-sm text-gray-500">...</p>
               </div>
               <div class="flex">
                 {Array.from({ length: 5 }).map(() => (
@@ -476,12 +476,12 @@ const allServices = [
             </div>
             
             <div class="flex-grow overflow-y-auto p-5 pt-3">
-              <p id="review-text" class="text-gray-800 font-heading">{initialReviewText}</p>
+              <p id="hero-review-text" class="text-gray-800 font-heading">{initialReviewText}</p>
             </div>
             
             <div class="px-5 pb-5 pt-3 border-t border-gray-200 flex justify-between items-center">
               <a
-                id="review-link"
+                id="hero-review-link"
                 href={googleReviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -503,16 +503,16 @@ const allServices = [
           
           <!-- Navigation arrows and pagination dots with improved contrast -->
           <div class="flex justify-between items-center mt-4">
-            <button id="review-prev" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur border border-gray-200 text-gray-500 hover:bg-gray-50 active:bg-gray-100 touch-manipulation shadow-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button id="hero-review-prev" type="button" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur border border-gray-200 text-gray-500 hover:bg-gray-50 active:bg-gray-100 touch-manipulation shadow-sm" aria-label={isEN ? 'Previous review' : 'Предишен отзив'}>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
             </button>
             
-            <div id="review-dots" class="flex gap-1"></div>
+            <div id="hero-review-dots" class="flex gap-1"></div>
             
-            <button id="review-next" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur border border-gray-200 text-gray-500 hover:bg-gray-50 active:bg-gray-100 touch-manipulation shadow-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button id="hero-review-next" type="button" class="review-nav-btn w-10 h-10 flex items-center justify-center rounded-full bg-white/80 backdrop-blur border border-gray-200 text-gray-500 hover:bg-gray-50 active:bg-gray-100 touch-manipulation shadow-sm" aria-label={isEN ? 'Next review' : 'Следващ отзив'}>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </button>
@@ -593,8 +593,7 @@ const allServices = [
 </style>
 
 <script define:vars={{ mobileReviews, readMoreLabel: isEN ? 'Read more' : 'Прочети повече', readLessLabel: isEN ? 'Show less' : 'Виж по-малко' }}>
-  document.addEventListener('DOMContentLoaded', () => {
-
+  function initHeroReviews() {
     const reviewsGrid = document.getElementById('desktop-reviews-grid');
 
     reviewsGrid?.addEventListener('click', (event) => {
@@ -623,14 +622,18 @@ const allServices = [
       }
     });
 
-    const nameElement = document.getElementById('review-name');
-    const dateElement = document.getElementById('review-date');
-    const textElement = document.getElementById('review-text');
-    const reviewLink = document.getElementById('review-link');
+    const nameElement = document.getElementById('hero-review-name');
+    const dateElement = document.getElementById('hero-review-date');
+    const textElement = document.getElementById('hero-review-text');
+    const reviewLink = document.getElementById('hero-review-link');
 
-    const prevButton = document.getElementById('review-prev');
-    const nextButton = document.getElementById('review-next');
-    const dotsContainer = document.getElementById('review-dots');
+    const prevButton = document.getElementById('hero-review-prev');
+    const nextButton = document.getElementById('hero-review-next');
+    const dotsContainer = document.getElementById('hero-review-dots');
+
+    if (!nameElement || !dateElement || !textElement || !reviewLink || !dotsContainer || !mobileReviews?.length) {
+      return;
+    }
 
     let current = 0;
 
@@ -647,7 +650,6 @@ const allServices = [
     }
 
     function render() {
-
       const review = mobileReviews[current];
 
       nameElement.textContent = review.authorName;
@@ -669,6 +671,11 @@ const allServices = [
     });
 
     render();
+  }
 
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroReviews);
+  } else {
+    initHeroReviews();
+  }
 </script>

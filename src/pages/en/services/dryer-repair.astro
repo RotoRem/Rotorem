@@ -4,12 +4,13 @@ import ServicePricing from '../../../components/ServicePricing.astro';
 import Reviews from '../../../components/Reviews.astro';
 import { getServicePricing } from '../../../data/service-prices';
 import { getServiceFaqItems } from '../../../lib/jsonldOverrides';
+
 const lang = 'en';
 const pricing = getServicePricing('dryer', 'varna', lang);
 
 const title = 'Dryer Repair in Varna | In-Home Service | RotoRem';
 const description =
-  'In-home dryer repair and diagnostics in Varna. Heating, drum, belt, heat pump, drainage and electronics problems. Call RotoRem.';
+  'In-home dryer repair and diagnostics in Varna. Heating, heat pump, drum, belt, pump, noise and electronics problems. RotoRem.';
 
 const heroImage = '/img/services/ремонт-на-сушилня-варна-HERO.webp';
 const diagnosticImage = '/img/services/ремонт-на-сушилня-варна-диагностика.webp';
@@ -23,75 +24,100 @@ const tableHeader = 'bg-fuchsia-600';
 const problems = [
   {
     title: 'Dryer does not heat',
-    text: 'When the program finishes and the clothes are still cold, the cause may be the heating element, thermostat, sensors, electronic module or another part of the heating system. In heat pump dryers the problem is not always the classic heating element, so diagnostics start from the way the appliance actually behaves.',
+    text: 'When the drum turns but the clothes stay cold and damp, the problem may be related to the heating element, thermostat, temperature sensor, electronic control or another part of the heating system. On heat pump dryers the cause can differ from standard condenser models, so the specific system is checked first.',
     border: 'border-fuchsia-500',
   },
   {
-    title: 'Clothes do not dry well',
-    text: 'Damp or partially dry clothes can point to a problem with the airflow, the filter, the condensing system, the humidity sensors or the electronic control. Load conditions are checked as well, but if the problem keeps coming back, technical diagnostics are needed.',
+    title: 'Dryer runs but does not dry well',
+    text: 'Longer drying times do not always mean a serious fault. The cause may be reduced airflow, dirty filters, a condenser problem, a temperature sensor, a fan or another part of the system. On heat pump models, the components related to that system are checked as well.',
     border: 'border-purple-500',
   },
   {
     title: 'Drum does not rotate',
-    text: 'If the dryer starts but the drum does not move, we can check the belt, motor, rollers, electronics and the mechanical part of the drum. The cause may be relatively minor, but it is important not to force the appliance until the fault has been found.',
+    text: 'If the program starts but the drum stays still, we check the belt, motor, rollers, bearings and the mechanical movement of the drum. A broken belt is one possible cause, but it is not the only one.',
     border: 'border-pink-500',
   },
   {
     title: 'Dryer does not start',
-    text: 'When the appliance does not respond or the program will not start, the inspection may cover the power supply, the door lock, the control board and the other electronic components. Not every dryer that "won\'t start" has a faulty board – diagnostics begin with the specific symptom.',
+    text: 'When the machine does not respond or the program will not start, we may check the power supply, the door mechanism, the electronic module, the programmer and the other components involved in starting.',
     border: 'border-violet-500',
   },
   {
-    title: 'Dryer stops mid-cycle',
-    text: 'An interrupted program may be related to overheating, sensors, a problem in the condensate drainage system, electronics or a mechanical part. The technician checks what the display shows and how the appliance behaves before repairing.',
+    title: 'Dryer stops during the program',
+    text: 'An interruption may be related to overheating, temperature sensors, insufficient airflow, the motor, electronics or a safety system. It is important to establish at which point the dryer stops and whether it shows an error code.',
     border: 'border-rose-500',
   },
   {
-    title: 'Dryer is noisy or vibrates',
-    text: 'Loud noise, banging or unusual vibration can come from worn rollers, bearings, a belt, a foreign object in the drum or incorrect positioning. The nature of the noise gives a first clue, but the final cause is established after inspection.',
+    title: 'Dryer is making a loud noise',
+    text: 'Humming, grinding, whistling or banging can be related to rollers, bearings, the motor, the drum or a foreign object. The type of noise and when it appears give important information during diagnostics.',
     border: 'border-indigo-500',
   },
   {
-    title: 'Dryer does not drain water',
-    text: 'In condenser models and some heat pump dryers, water may remain in the container or the drainage system. We check the hoses, pump, filter and related components according to the construction of the machine.',
+    title: 'Dryer vibrates',
+    text: 'Excessive vibration can be related to leveling of the appliance, the drum, rollers, bearings or another mechanical part. If the dryer is stacked on a washing machine, the stability of the installation should also be checked.',
     border: 'border-teal-500',
   },
   {
-    title: 'Burning smell or overheating',
-    text: 'This symptom needs attention – we recommend not using the dryer until it has been inspected. Possible causes include a problem with the heating element, airflow, an electrical component or a build-up of lint that restricts cooling.',
-    border: 'border-red-500',
+    title: 'Dryer does not collect or drain water',
+    text: 'On condenser models the problem may be related to the pump, the condensate tank, the hose or another part of the water drainage system. On models connected directly to the drain, the drainage connection is checked as well.',
+    border: 'border-cyan-500',
   },
   {
-    title: 'Door does not open',
-    text: 'A locked door may be related to the locking mechanism, residual heat, the program or electronics. We do not recommend forcing the door open, as this can damage the mechanism.',
+    title: 'Door does not close or the dryer does not detect closing',
+    text: 'If the machine does not recognize that the door is closed, the program may not start at all. We check the locking mechanism, the door sensor and the mechanical closing.',
     border: 'border-orange-500',
   },
   {
     title: 'Dryer shows an error code',
-    text: 'Error codes help with diagnostics, but a code does not always mean that a specific part must be replaced right away. The technician compares the information on the display with the appliance\'s actual behavior and checks the relevant systems.',
+    text: 'An error code helps direct diagnostics toward a specific system, but it does not by itself prove which part must be replaced. The technician compares the code with the machine’s behavior and checks the relevant components.',
     border: 'border-slate-500',
   },
 ];
 
 const partsTable = [
   { part: 'Heating element', problem: 'Dryer does not heat' },
-  { part: 'Thermostat and sensors', problem: 'Incorrect heating or interrupted cycle' },
-  { part: 'Motor and belt', problem: 'Drum does not rotate' },
-  { part: 'Rollers and bearings', problem: 'Noise and rotation problems' },
-  { part: 'Filter and airflow', problem: 'Poor drying' },
-  { part: 'Pump and drainage', problem: 'Water remains in condenser models' },
-  { part: 'Condenser / heat exchanger', problem: 'Problems with condenser drying' },
-  { part: 'Heat pump system', problem: 'Weak or no heating in heat pump models' },
-  { part: 'Door lock', problem: 'Machine does not start or the door stays locked' },
-  { part: 'Electronic module', problem: 'Interruptions, errors or an incorrect program' },
-  { part: 'Temperature and humidity sensor', problem: 'Under-drying or over-drying' },
-  { part: 'Ventilation and hoses', problem: 'Problems in vented models' },
+  { part: 'Thermostat', problem: 'No heating or overheating' },
+  { part: 'Temperature sensor', problem: 'Incorrect temperature' },
+  { part: 'Humidity sensor', problem: 'Program ends too early or too late' },
+  { part: 'Belt', problem: 'Drum does not rotate' },
+  { part: 'Rollers', problem: 'Noise or incorrect drum movement' },
+  { part: 'Bearings', problem: 'Loud noise during operation' },
+  { part: 'Motor', problem: 'Drum does not rotate' },
+  { part: 'Fan', problem: 'Reduced airflow' },
+  { part: 'Filter', problem: 'Long drying / overheating' },
+  { part: 'Condenser', problem: 'Reduced efficiency' },
+  { part: 'Pump', problem: 'Water is not drained' },
+  { part: 'Door lock', problem: 'Machine does not start' },
+  { part: 'Electronic module', problem: 'Interruptions or program problems' },
+  { part: 'Heat pump', problem: 'Low efficiency or lack of drying' },
+];
+
+const diagnosticChecks = [
+  'heating element;',
+  'thermostats;',
+  'temperature sensors;',
+  'humidity sensor;',
+  'drum;',
+  'belt;',
+  'rollers;',
+  'bearings;',
+  'motor;',
+  'fan;',
+  'filters;',
+  'condenser;',
+  'condensate water pump;',
+  'hoses;',
+  'door mechanism;',
+  'electronic module;',
+  'control board;',
+  'heat pump system;',
+  'visible error codes.',
 ];
 
 const realCases = [
   {
     brand: 'AEG',
-    problem: 'Clothes were not drying well',
+    problem: 'Dryer was not drying clothes well',
     area: 'Mladost',
     diagnosis: 'We found that the dryer was heavily contaminated.',
     repair: 'After maintenance and cleaning of the compressor unit, the dryer works like new.',
@@ -109,7 +135,7 @@ const realCases = [
   },
   {
     brand: 'BEKO',
-    problem: 'Overheating protection kept activating',
+    problem: 'Overheating protection kept activating.',
     area: 'City Center',
     diagnosis: 'We found that there was no air circulation because of contamination.',
     repair: 'After cleaning, the dryer started working normally and no longer showed any error.',
@@ -122,7 +148,7 @@ const processSteps = [
   {
     step: 1,
     title: 'Contact RotoRem',
-    text: 'Tell us what is wrong with the dryer and how the problem shows up.',
+    text: 'Describe how the problem shows up. If there is an error code, tell us that as well.',
     circleClass: 'bg-gradient-to-r from-fuchsia-500 to-fuchsia-600',
   },
   {
@@ -133,25 +159,25 @@ const processSteps = [
   },
   {
     step: 3,
-    title: 'We run diagnostics',
-    text: 'The components and systems related to the specific symptom are inspected.',
+    title: 'Diagnostics',
+    text: 'The components and systems that may cause the specific problem are checked.',
     circleClass: 'bg-gradient-to-r from-pink-500 to-pink-600',
   },
   {
     step: 4,
-    title: 'You get repair information',
-    text: 'We explain what fault was found and what needs to be done.',
+    title: 'Repair information',
+    text: 'The customer receives information about the fault found and what needs to be done.',
     circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600',
   },
   {
     step: 5,
     title: 'Repair and test',
-    text: 'Where possible, the repair is carried out on site and the dryer is tested before the visit ends.',
+    text: 'Where possible, the repair is carried out on site, after which the dryer is tested.',
     circleClass: 'bg-gradient-to-r from-indigo-500 to-indigo-600',
   },
 ];
 
-const brands = ['Bosch', 'Siemens', 'AEG', 'Electrolux', 'Gorenje', 'Samsung', 'LG', 'Beko', 'Indesit', 'Whirlpool', 'Candy', 'Miele'];
+const brands = ['AEG', 'Bosch', 'Whirlpool', 'Beko', 'Indesit', 'Samsung', 'LG', 'Electrolux'];
 
 const faqs = getServiceFaqItems('/en/services/dryer-repair/');
 const sectionClass = 'mb-28 pt-4';
@@ -178,19 +204,19 @@ const sectionClass = 'mb-28 pt-4';
             In-home service in Varna
           </span>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            In-Home Dryer Repair in Varna
+            In-home dryer repair in Varna
           </h1>
           <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
-            Problem with your dryer? RotoRem provides in-home diagnostics and repair of dryers in Varna. We handle heating, drum, belt, heat pump, drainage, noise and electronics issues.
+            Dryer not heating, not drying clothes well, drum not turning, or the machine interrupting mid-program?
           </p>
           <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
-            A technician visits your address, finds the cause of the fault and tells you what repair is needed before any work is carried out.
+            RotoRem provides in-home dryer diagnostics and repair in Varna. We work with condenser dryers and heat pump models, first establishing the cause of the problem before repairing or replacing a component.
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
             <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
               <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Diagnostics in Varna</p>
-              <p class="text-xl font-bold text-white">20 €</p>
+              <p class="text-xl font-bold text-white">€20</p>
             </div>
             <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
               <p class="text-xs uppercase tracking-wide text-white/80 mb-1">Phone</p>
@@ -209,30 +235,36 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Intro -->
       <section class={sectionClass}>
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">In-Home Dryer Repair and Diagnostics</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">In-home dryer repair and diagnostics</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
         <div class="max-w-4xl mx-auto space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
           <p>
-            When a dryer breaks down, the first task is to find out where the problem really comes from. The same symptom can be caused by different components – the heating element, sensors, belt, electronics or a heat pump system – which is why we do not recommend replacing parts before diagnostics.
+            With dryers, the same symptom can have different causes.
           </p>
           <p>
-            During the visit, the technician inspects the dryer according to the specific problem: heating, airflow, drum, drainage, filters, electronics and any other systems related to the symptom.
+            A machine that does not dry well, for example, may have a problem with airflow, filters, the heating system, a temperature sensor or the heat pump. If the drum does not rotate, the cause may be the belt, motor, rollers or another mechanical part.
           </p>
           <p>
-            When the repair can be done on site, it is carried out during the visit. If a specific spare part is needed, you are told in advance what has to be replaced. You can also read <a href="/en/reviews/" class={`${accentLink} font-medium hover:underline`}>RotoRem customer reviews</a>.
+            That is why repair starts with diagnostics of the systems related to the specific symptom.
+          </p>
+          <p>
+            Depending on the model and the problem, the technician may check the heating element, thermostats, temperature sensors, belt, drum, rollers, bearings, motor, fan, pump, condenser system, heat pump and electronic control.
+          </p>
+          <p>
+            When the fault allows it, the repair is carried out at your address.
           </p>
         </div>
       </section>
     </div>
 
-    <Reviews title="RotoRem customer reviews" prioritizeAppliance="Сушилня" />
+    <Reviews title="Customer Reviews of RotoRem" prioritizeAppliance="Сушилня" />
 
     <div class="container max-w-5xl">
       <!-- Problems -->
       <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Faults We Repair</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">What dryer problems we repair</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
 
@@ -248,35 +280,37 @@ const sectionClass = 'mb-28 pt-4';
         </div>
       </section>
 
-      {pricing && <div class={sectionClass}><ServicePricing pricing={pricing} accent="purple" /></div>}
+      <!-- Pricing — higher on the page -->
+      {pricing && (
+        <div class={sectionClass}>
+          <ServicePricing pricing={pricing} accent="purple" />
+          <p class="mt-6 text-center text-gray-800 leading-relaxed max-w-3xl mx-auto">
+            The final price depends on the fault found, the labour required and the spare parts used. The customer receives repair information after diagnostics.
+          </p>
+        </div>
+      )}
 
       <!-- Diagnostics -->
       <section class={sectionClass}>
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Diagnostics in Varna</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer diagnostics in Varna</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
-        <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="grid md:grid-cols-2 gap-10 items-start">
           <div class="space-y-5 text-gray-800 leading-relaxed">
             <p>
-              Diagnostics are a separate part of the repair and aim to establish the cause of the fault before any parts are replaced.
+              Diagnostics aim to establish the cause of the problem before parts are replaced.
             </p>
-            <p class="font-medium text-gray-900">Depending on the symptom and the type of dryer, we may check:</p>
-            <ul class="list-disc pl-5 space-y-2">
-              <li>the heating element and thermostat;</li>
-              <li>the temperature and humidity sensors;</li>
-              <li>the motor, belt and rollers;</li>
-              <li>the drum and its mechanical movement;</li>
-              <li>the filter and airflow;</li>
-              <li>the condensate drainage system;</li>
-              <li>heat pump components (accessible during diagnostics);</li>
-              <li>the door lock;</li>
-              <li>the electronic module and controls.</li>
+            <p class="font-medium text-gray-900">Depending on the symptom, the following may be checked:</p>
+            <ul class="list-disc pl-5 space-y-1.5 columns-1 sm:columns-2 gap-x-8">
+              {diagnosticChecks.map((item) => (
+                <li>{item}</li>
+              ))}
             </ul>
             <p>
-              After the inspection, you receive information about what was found and what repair is needed.
+              After the inspection, the customer receives information about what was found and what repair is needed.
             </p>
-            <p class="font-semibold text-gray-900">Diagnostics price in Varna: 20 €</p>
+            <p class="font-semibold text-gray-900">Diagnostics in Varna: €20</p>
           </div>
           <div>
             <img
@@ -294,7 +328,7 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Parts table -->
       <section class={sectionClass}>
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Parts and Systems We Inspect and Repair</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer parts and systems we check and repair</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
 
@@ -311,7 +345,7 @@ const sectionClass = 'mb-28 pt-4';
           <table class="w-full text-left">
             <thead>
               <tr class={`${tableHeader} text-white`}>
-                <th scope="col" class="px-5 py-4 text-sm font-semibold">Part or system</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Part / system</th>
                 <th scope="col" class="px-5 py-4 text-sm font-semibold">Commonly related problem</th>
               </tr>
             </thead>
@@ -327,25 +361,28 @@ const sectionClass = 'mb-28 pt-4';
         </div>
 
         <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
-          Not every fault means a part has to be replaced. In many cases, diagnostics reveal a different problem elsewhere in the system, so the exact repair is determined only after the inspection.
+          Not every symptom means a damaged part. A dirty filter, restricted airflow or another system problem can cause similar behavior, so the specific repair is determined after diagnostics.
         </p>
       </section>
 
       <!-- Heat pump -->
       <section class={sectionClass}>
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Heat Pump Dryer Repair</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Heat pump dryer repair</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
         <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
           <p>
-            Heat pump dryers are built differently from classic models with direct heating. During diagnostics we can check sensors, electronics, filters, airflow and other accessible components of the system.
+            Heat pump dryers work differently from standard models with a heating element and use a closed system to reuse heat.
           </p>
           <p>
-            RotoRem does not promise to repair a hermetically sealed compressor. After the inspection, the technician tells you what was found and whether the repair is technically and economically justified for your specific model.
+            When such an appliance starts drying significantly more slowly, does not reach the required temperature or interrupts the program, the cause may be related to airflow, sensors, the fan, the condenser system or heat pump components.
           </p>
           <p>
-            For recurring heating problems or interrupted programs, it is important that the appliance is diagnosed according to its type, and not only by a symptom that is common to different kinds of dryers.
+            Before repair is undertaken, it must be established which part of the system is actually causing the problem.
+          </p>
+          <p>
+            RotoRem diagnoses and services the accessible components of heat pump dryers. We do not repair compressors or the refrigeration circuit of the heat pump.
           </p>
         </div>
       </section>
@@ -353,18 +390,26 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Belt and drum -->
       <section class={sectionClass}>
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Belt, Drum and Dryer Mechanics</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Belt, rollers and drum problems</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
         <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
           <p>
-            When the drum does not turn or an unusual noise is heard, the inspection covers the belt, rollers, motor and the condition of the drum.
+            When the drum does not rotate or a strong mechanical noise appears during operation, the parts involved in its movement need to be checked.
+          </p>
+          <p class="font-medium text-gray-900">This may include:</p>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>the belt;</li>
+            <li>the rollers;</li>
+            <li>the bearings;</li>
+            <li>the motor;</li>
+            <li>the drum itself.</li>
+          </ul>
+          <p>
+            A broken or stretched belt can stop rotation completely, while a worn roller or bearing often shows up as loud noise.
           </p>
           <p>
-            A worn belt is a common cause, but before replacing it we also check whether there is an additional mechanical problem that could damage the new part again.
-          </p>
-          <p>
-            After the repair, the dryer is tested with a program to confirm normal rotation and operation without excessive noise.
+            The specific cause is established after a mechanical inspection.
           </p>
         </div>
       </section>
@@ -372,35 +417,47 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Installation -->
       <section class={sectionClass}>
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Installation and Removal</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer installation and removal</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
         <div class="space-y-8 text-gray-800 leading-relaxed">
-          <p>In addition to repairs, RotoRem installs and removes dryers in Varna.</p>
+          <p>RotoRem installs and removes dryers in Varna.</p>
 
           <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
             <h3 class="text-xl font-semibold text-gray-900 mb-4">Dryer installation</h3>
             <p class="mb-3 font-medium text-gray-900">Installation may include:</p>
             <ul class="list-disc pl-5 space-y-2 mb-4">
-              <li>positioning and leveling the appliance;</li>
-              <li>connection according to the dryer type (condenser, heat pump or vented);</li>
-              <li>checking ventilation or drainage where necessary;</li>
-              <li>a test run to confirm correct operation.</li>
+              <li>positioning;</li>
+              <li>leveling;</li>
+              <li>stability check;</li>
+              <li>connection to drainage when the model allows it;</li>
+              <li>checking the required space around the appliance;</li>
+              <li>testing the machine.</li>
             </ul>
+            <p>Correct placement is important for stable operation and normal airflow.</p>
           </div>
 
           <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Dryer removal</h3>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Installing a dryer on a washing machine</h3>
+            <p class="mb-4">
+              Where space is limited, the dryer can be placed on top of a washing machine when the models and conditions allow it.
+            </p>
+            <p class="mb-4">
+              The installation must ensure stability and safe positioning of both appliances.
+            </p>
+            <p class="mb-4">
+              If a stacking kit is required, it must be provided in advance by the owner of the appliances. RotoRem carries out the installation but does not supply stacking kits.
+            </p>
             <p>
-              When needed, an old or faulty dryer can be safely disconnected and removed from its place without damaging the surrounding connections and installation.
+              See also the page for{' '}
+              <a href="/en/services/washing-machine-repair/" class={`${accentLink} font-medium hover:underline`}>washing machine repair and installation in Varna</a>.
             </p>
           </div>
 
           <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder}`}>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Dryer on top of a washing machine</h3>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Removal of an old dryer</h3>
             <p>
-              For stacked installations, secure fastening and correct positioning of both appliances are essential. For installing a washing machine and dryer as a stacked column, see also our page on{' '}
-              <a href="/en/services/washing-machine-repair/" class={`${accentLink} font-medium hover:underline`}>washing machine repair and installation in Varna</a>, which also describes the washing machine + dryer installation service.
+              When replacing an appliance, RotoRem can remove and safely disconnect the old dryer.
             </p>
           </div>
         </div>
@@ -409,20 +466,29 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Dryer types -->
       <section class={sectionClass}>
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Condenser and Heat Pump Dryers</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Condenser dryers and heat pump dryers</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
+        <p class="text-center text-gray-800 leading-relaxed mb-8 max-w-3xl mx-auto">
+          RotoRem services different types of dryers, including:
+        </p>
         <div class="grid md:grid-cols-2 gap-8">
           <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder} space-y-4 text-gray-800 leading-relaxed`}>
             <h3 class="text-xl font-semibold text-gray-900">Condenser dryers</h3>
             <p>
-              In condenser models, moisture is collected in a container or drained through a hose. Common problems include a clogged filter, drainage, sensors and electronics. Diagnostics follow the construction of the specific model.
+              In these models moisture from the clothes is condensed and collected in a tank or drained through a hose.
+            </p>
+            <p>
+              Problems can be related to heating, the condenser, the pump, airflow or sensors.
             </p>
           </div>
           <div class={`bg-white p-6 md:p-8 rounded-2xl shadow-lg border ${accentBorder} space-y-4 text-gray-800 leading-relaxed`}>
             <h3 class="text-xl font-semibold text-gray-900">Heat pump dryers</h3>
             <p>
-              These models work at a lower temperature and use a different heat transfer system. For symptoms such as weak drying or interruptions, we check the accessible components, filters, sensors and controls – without promising to repair a hermetically sealed compressor.
+              These models use a more complex system for reusing heat and usually operate at a lower temperature.
+            </p>
+            <p>
+              When there is a problem, not only the filters and airflow need to be checked, but also the systems specific to the model.
             </p>
           </div>
         </div>
@@ -431,15 +497,15 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Brands -->
       <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Brands We Service</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer brands we service</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
 
         <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
           <p class="text-gray-800 leading-relaxed mb-6 text-center">
-            RotoRem repairs dryers from many manufacturers, including:
+            RotoRem provides diagnostics and repair of dryers from various manufacturers, including:
           </p>
-          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             {brands.map((brand) => (
               <div class="bg-white p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow border border-gray-200">
                 <h3 class="font-semibold text-gray-900">{brand}</h3>
@@ -447,7 +513,8 @@ const sectionClass = 'mb-28 pt-4';
             ))}
           </div>
           <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
-            Construction, electronics and error codes can differ between brands, so diagnostics are carried out according to the specific model and type of dryer.
+            Construction and diagnostics can differ by brand, model and dryer type.
+            When booking, it is helpful for the customer to provide the brand and model, as well as an error code if the machine shows one.
           </p>
         </div>
       </section>
@@ -455,7 +522,7 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Real cases -->
       <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Real Dryer Repairs in Varna</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Real dryer repairs in Varna</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
 
@@ -472,11 +539,11 @@ const sectionClass = 'mb-28 pt-4';
                   height="360"
                 />
                 <div class="p-6 md:p-7 flex-1 space-y-3">
-                  <h3 class="text-xl font-bold text-gray-900">{item.brand} – Dryer</h3>
+                  <h3 class="text-xl font-bold text-gray-900">{item.brand} dryer</h3>
                   <p class="text-gray-800"><span class="font-semibold">Problem:</span> {item.problem}</p>
                   <p class="text-gray-800"><span class="font-semibold">Area:</span> {item.area}</p>
-                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Cause identified:</span> {item.diagnosis}</p>
-                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair performed:</span> {item.repair}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {item.repair}</p>
                 </div>
               </article>
             ))}
@@ -492,11 +559,11 @@ const sectionClass = 'mb-28 pt-4';
               height="400"
             />
             <div class="p-6 md:p-8 flex-1 space-y-3">
-              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand} – Dryer</h3>
+              <h3 class="text-xl font-bold text-gray-900">{realCases[2].brand} dryer</h3>
               <p class="text-gray-800"><span class="font-semibold">Problem:</span> {realCases[2].problem}</p>
               <p class="text-gray-800"><span class="font-semibold">Area:</span> {realCases[2].area}</p>
-              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Cause identified:</span> {realCases[2].diagnosis}</p>
-              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair performed:</span> {realCases[2].repair}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {realCases[2].repair}</p>
             </div>
           </article>
         </div>
@@ -505,7 +572,7 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Process -->
       <section class={sectionClass}>
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">How the Repair Works</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">How the repair works</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
 
@@ -540,15 +607,19 @@ const sectionClass = 'mb-28 pt-4';
       <!-- Service areas -->
       <section class={sectionClass}>
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer Repair Across Varna</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer repair across Varna districts</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
         <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto`}>
           <p>
-            RotoRem makes home visits throughout Varna and serves many parts of the city, including neighborhoods such as Mladost, Levski, Chaika, Asparuhovo, Vladislav Varnenchik and other service areas.
+            RotoRem makes home visits in different parts of Varna, including:
+            Mladost, Levski, Chaika, Asparuhovo, Vladislav Varnenchik, Galata, the city center and other service areas.
           </p>
           <p>
-            You do not need to transport the dryer to a workshop – the technician comes to your address.
+            For addresses outside the standard zone, visit terms are confirmed in advance.
+          </p>
+          <p>
+            Customers do not need to transport the dryer to a physical service workshop.
           </p>
         </div>
       </section>
@@ -556,7 +627,7 @@ const sectionClass = 'mb-28 pt-4';
       <!-- FAQ -->
       <section class={sectionClass} id="faq">
         <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently asked questions</h2>
           <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
         </div>
 
@@ -587,7 +658,7 @@ const sectionClass = 'mb-28 pt-4';
     <section class="text-center bg-gradient-to-r from-fuchsia-600 to-purple-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
       <h2 class="text-3xl font-bold mb-4">Problem with your dryer?</h2>
       <p class="text-lg md:text-xl mb-4 text-white/90 max-w-3xl mx-auto leading-relaxed">
-        If your dryer does not heat, does not dry well, the drum does not rotate, it is noisy or shows an error, contact RotoRem for in-home diagnostics and repair in Varna.
+        If the dryer does not heat, does not dry well, the drum does not rotate, the machine stops, makes noise or shows an error, contact RotoRem for in-home diagnostics and repair in Varna.
       </p>
       <p class="text-lg mb-8">Phone: <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a></p>
       <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
