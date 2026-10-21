@@ -50,7 +50,8 @@ export const ui = {
     'contact.saturday': 'Събота',
     'contact.sunday': 'Неделя',
     'contact.closed': 'Затворено',
-    'contact.weekendClosedMessage': 'Не работим в събота и неделя, но можете да ни оставите съобщение и ще ви потърсим в понеделник.',
+    'contact.saturdayHours': '08:00 - 15:00ч',
+    'contact.weekendClosedMessage': 'В събота работим от 08:00 до 15:00 часа. Неделя е почивен ден, но можете да ни оставите съобщение и ще ви потърсим в понеделник.',
     
     // How It Works Section
     'howitworks.title': 'Как работим',
@@ -157,7 +158,8 @@ export const ui = {
     'contact.saturday': 'Saturday',
     'contact.sunday': 'Sunday',
     'contact.closed': 'Closed',
-    'contact.weekendClosedMessage': "We're closed on Saturday and Sunday, but you can leave a message and we'll contact you on Monday.",
+    'contact.saturdayHours': '08:00 - 15:00',
+    'contact.weekendClosedMessage': "We're open on Saturdays from 08:00 to 15:00. We're closed on Sunday, but you can leave a message and we'll contact you on Monday.",
     
     // How It Works Section
     'howitworks.title': 'How It Works',

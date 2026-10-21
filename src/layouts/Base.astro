@@ -232,6 +232,12 @@ const getPageSpecificSchema = () => {
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "08:00",
         "closes": "17:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday"],
+        "opens": "08:00",
+        "closes": "15:00"
       }
     ],
     "hasOfferCatalog": {
@@ -1433,7 +1439,7 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
               </h3>
               <div class="text-sm text-gray-400 space-y-1">
                 <div>{isEN ? 'Mon-Fri' : 'Пон-Пет'}: {isEN ? '08:00-17:00' : '08:00-17:00ч'}</div>
-                <div>{isEN ? 'Saturday' : 'Събота'}: {t('contact.closed')}</div>
+                <div>{isEN ? 'Saturday' : 'Събота'}: {t('contact.saturdayHours')}</div>
                 <div>{isEN ? 'Sunday' : 'Неделя'}: {t('contact.closed')}</div>
               </div>
             </div>

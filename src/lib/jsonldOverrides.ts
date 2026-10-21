@@ -19,6 +19,21 @@ const LOCAL_BUSINESS_TYPES = {
   sofia: ['LocalBusiness', 'HomeAndConstructionBusiness'],
 } as const;
 
+const OPENING_HOURS_SPECIFICATION = [
+  {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '08:00',
+    closes: '17:00',
+  },
+  {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Saturday'],
+    opens: '08:00',
+    closes: '15:00',
+  },
+];
+
 function getLocalBusinessTypes(city: ServiceCity): readonly string[] {
   return LOCAL_BUSINESS_TYPES[city];
 }
@@ -141,18 +156,7 @@ const bgHomeGraph = {
           "geoRadius": "20000"
         }
       ],
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "08:00",
-        "closes": "17:00"
-      },
+      "openingHoursSpecification": OPENING_HOURS_SPECIFICATION,
       "aggregateRating": AGGREGATE_RATING,
       "review": BG_SCHEMA_REVIEWS,
       "makesOffer": [
@@ -366,12 +370,7 @@ const enHomeGraph = {
           "geoRadius": "20000"
         }
       ],
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "08:00",
-        "closes": "17:00"
-      },
+      "openingHoursSpecification": OPENING_HOURS_SPECIFICATION,
       "aggregateRating": AGGREGATE_RATING,
       "review": EN_SCHEMA_REVIEWS,
       "makesOffer": [
@@ -513,9 +512,7 @@ const bgContactGraph = {
         { "@type": "PostalAddress", "addressLocality": "Varna", "postalCode": "9000", "addressCountry": "BG", "description": "Обслужване на всички квартали в град Варна" },
         { "@type": "PostalAddress", "addressLocality": "Sofia", "postalCode": "1000", "addressCountry": "BG", "description": "Обслужване на град София и прилежащите райони" }
       ],
-      "openingHoursSpecification": [
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:00" }
-      ],
+      "openingHoursSpecification": OPENING_HOURS_SPECIFICATION,
       "sameAs": ["https://www.facebook.com/profile.php?id=61583413912114"]
     }
   ]
@@ -563,9 +560,7 @@ const enContactGraph = {
         { "@type": "PostalAddress", "addressLocality": "Varna", "postalCode": "9000", "addressCountry": "BG", "description": "Serving all neighborhoods in Varna" },
         { "@type": "PostalAddress", "addressLocality": "Sofia", "postalCode": "1000", "addressCountry": "BG", "description": "Serving Sofia City and surrounding areas" }
       ],
-      "openingHoursSpecification": [
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:00" }
-      ],
+      "openingHoursSpecification": OPENING_HOURS_SPECIFICATION,
       "sameAs": ["https://www.facebook.com/profile.php?id=61583413912114"]
     }
   ]
@@ -919,12 +914,7 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
           "latitude": cfg.lat,
           "longitude": cfg.lng
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:00",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": OPENING_HOURS_SPECIFICATION,
         "aggregateRating": AGGREGATE_RATING,
         "review": cfg.lang === "en" ? EN_SCHEMA_REVIEWS : BG_SCHEMA_REVIEWS,
         "sameAs": ["https://www.facebook.com/profile.php?id=61583413912114"],
