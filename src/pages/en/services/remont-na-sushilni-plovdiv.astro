@@ -1,0 +1,284 @@
+---
+import Layout from '../../../layouts/Base.astro';
+import Reviews from '../../../components/Reviews.astro';
+import { getServiceFaqItems } from '../../../lib/jsonldOverrides';
+
+const title = 'Dryer Repair in Plovdiv | RotoRem';
+const description = 'Dryer repair in Plovdiv with on-site diagnostics and an at-home service. Clear pricing. Call 089 834 0982 to book.';
+
+const heroImage = '/img/services/ремонт-на-сушилни-пловдив-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-сушилни-пловдив-диагностика.webp';
+const accentBar = 'bg-fuchsia-500';
+const accentLink = 'text-fuchsia-700';
+
+const problems = [
+  { title: 'Clothes stay damp after a full cycle', text: 'The programme finishes, but the laundry is wet or only partly dry. The most common cause is a blocked condenser or filter, which stops the air from circulating. The dampness can also come from a faulty humidity sensor that makes the programme stop too early. Cleaning the condenser often solves the problem, but if it is damaged or the dryer still does not dry, the whole system is checked.', border: 'border-fuchsia-500' },
+  { title: 'The dryer does not heat', text: 'The drum turns, but the air inside stays cold. Possible causes are a burnt heater, a faulty thermostat or temperature sensor, and on heat-pump models a problem in the heat pump itself. Because the symptom is the same for different parts, the technician checks each of them before suggesting a replacement.', border: 'border-purple-500' },
+  { title: 'The drum does not turn', text: 'The programme starts and the motor can be heard, but the drum stays still. The most common cause is a broken or stretched belt. The rollers the drum rests on, and the motor itself, are also checked, because a worn roller can break a new belt as well.', border: 'border-pink-500' },
+  { title: 'The dryer stops during the cycle', text: 'The programme stops halfway or the dryer switches itself off. This is often the overheating protection, which trips when a filter or condenser is blocked. The cause can also be a sensor, the motor or the electronics. It matters to note when it stops and whether an error code appears.', border: 'border-violet-500' },
+  { title: 'The dryer does not collect or drain the water', text: 'The tank stays empty or water runs out of it. On condenser models the condensate pump, the hoses and the tank are checked. On models connected directly to the drain, the drain connection is checked as well.', border: 'border-indigo-500' },
+  { title: 'The dryer is noisy or shows an error', text: 'Squeaking, rattling or humming usually comes from worn rollers, bearings or the belt. A foreign object left in a pocket can also make noise in the drum. The error code points the technician toward a particular system, but it is compared with the actual check of the appliance.', border: 'border-rose-500' },
+  { title: 'It smells of burning', text: 'That smell is a signal to switch the dryer off and not use it until it is checked. The most common cause is lint built up around the heater or a blocked air duct, but it can also be an overheated electrical component.', border: 'border-amber-500' },
+];
+
+const partsTable = [
+  { part: 'Heater', problem: 'The air in the drum stays cold' },
+  { part: 'Thermostat', problem: 'Does not heat, or overheats and stops' },
+  { part: 'Temperature sensor', problem: 'Incorrect drying temperature' },
+  { part: 'Humidity sensor', problem: 'The programme stops too early or too late' },
+  { part: 'Condenser', problem: 'Clothes stay damp' },
+  { part: 'Filter', problem: 'Long drying, overheating protection trips' },
+  { part: 'Fan', problem: 'Weak airflow' },
+  { part: 'Belt', problem: 'The motor runs but the drum stays still' },
+  { part: 'Rollers and bearings', problem: 'Squeaking and noise while turning' },
+  { part: 'Motor', problem: 'The drum does not turn' },
+  { part: 'Condensate pump', problem: 'The tank does not fill or water leaks' },
+  { part: 'Door lock', problem: 'The programme does not start' },
+  { part: 'Electronic module', problem: 'Errors or the programme stops' },
+  { part: 'Heat pump', problem: 'Poor drying on heat-pump models' },
+];
+
+const priceRows = [
+  { service: 'Diagnostics', price: '25 €' },
+  { service: 'The dryer will not start', price: 'from 20 €' },
+  { service: 'The dryer does not drain water', price: 'from 26 €' },
+  { service: 'The drum does not turn', price: 'from 31 €' },
+  { service: 'Dryer installation', price: 'from 40 €' },
+  { service: 'Washing machine + dryer installation (stacked)', price: 'from 65 €' },
+];
+
+const brands = ['AEG', 'Bosch', 'Whirlpool', 'Beko', 'Indesit', 'Samsung', 'LG', 'Electrolux'];
+const realCases = [
+  { brand: 'BEKO', problem: 'The dryer was not heating.', area: 'Trakia, Plovdiv', diagnosis: 'A fault was found in the temperature sensor', repair: 'Replacement of the temperature sensor. After the repair the dryer heats and works normally.', image: '/img/services/ремонт-на-сушилня-пловдив-случай-1.webp', alt: 'Repair of a dryer that does not heat, with diagnostics and replacement of a faulty temperature sensor in Trakia, Plovdiv.' },
+  { brand: 'BEKO', problem: 'The dryer was not heating.', area: 'Smirnenski, Plovdiv', diagnosis: 'The heater was measured and found to be working, but the electronic board was not sending voltage to it.', repair: 'The board was repaired. After the repair the dryer heats and works normally.', image: '/img/services/ремонт-на-сушилня-пловдив-случай-2.webp', alt: 'Repair of a BEKO dryer that does not heat, with heater diagnostics and repair of a faulty electronic board in Hristo Smirnenski, Plovdiv.' },
+  { brand: 'Bosch', problem: 'The dryer was not drying the clothes because the drum was not turning.', area: 'Hristo Smirnenski, Plovdiv', diagnosis: 'The check found a broken belt and a worn roller on the motor that turns the drum.', repair: 'The belt and the worn roller were replaced. After the repair the drum turns normally and the dryer works correctly.', image: '/img/services/ремонт-на-сушилня-пловдив-случай-3.webp', alt: 'Repair of a Bosch dryer with a broken belt and a worn motor roller causing a drum-rotation problem in Hristo Smirnenski, Plovdiv.' },
+];
+const processSteps = [
+  { step: 1, text: 'You contact RotoRem and describe the problem.', circleClass: 'bg-gradient-to-r from-fuchsia-500 to-fuchsia-600' },
+  { step: 2, text: 'We arrange a visit to the address in Plovdiv.', circleClass: 'bg-gradient-to-r from-purple-500 to-purple-600' },
+  { step: 3, text: 'The technician carries out diagnostics.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 4, text: 'You are told what the fault is and what the repair will be.', circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600' },
+  { step: 5, text: 'Repair and test of the dryer on site.', circleClass: 'bg-gradient-to-r from-indigo-500 to-indigo-600' },
+];
+const faqs = getServiceFaqItems('/en/services/remont-na-sushilni-plovdiv/');
+const sectionClass = 'mb-28 pt-4';
+---
+
+<Layout title={title} description={description} image={heroImage} hideServiceFaq={true}>
+  <article>
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img src={heroImage} alt="Dryer repair at an address in Plovdiv" class="absolute inset-0 w-full h-full object-cover object-center scale-105" loading="eager" fetchpriority="high" width="1600" height="900" />
+      <div class="absolute inset-0 bg-gradient-to-b from-purple-950/85 via-fuchsia-900/75 to-purple-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">At-home dryer repair in Plovdiv</h1>
+          <p class="text-lg md:text-xl text-white/95 mb-8 leading-relaxed">RotoRem Plovdiv repairs dryers directly at the customer's address, with on-site diagnostics and replacement of worn parts such as heaters and thermostats, without the appliance having to be transported to a workshop.</p>
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md"><p class="text-xl font-bold text-white">Diagnostics in Plovdiv - 25 €</p></div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-sm text-white/80 mb-1">Phone</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">Call for a visit</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer diagnostics in Plovdiv</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+            <p>The team arrives at the address, inspects the dryer and checks the main components related to the fault described. Only after it is clear exactly what has to be repaired does the repair itself begin. The customer does not have to carry the dryer anywhere, and the diagnostics and the repair happen in one place, on the same day.</p>
+            <p>Besides dryer repair, RotoRem Plovdiv also provides <a href="/en/services/remont-na-peralni-plovdiv/" class={`${accentLink} font-medium hover:underline`}>washing machine repair</a> at the address, with the same approach of diagnostics and repair in the customer's home.</p>
+          </div>
+          <img src={diagnosticImage} alt="Dryer diagnostics in Plovdiv" class="w-full rounded-2xl shadow-lg object-cover" loading="lazy" width="600" height="450" />
+        </div>
+      </section>
+    </div>
+
+    <Reviews title="Customer reviews" prioritizeAppliance="Сушилня" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer faults we repair</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <p class="text-center text-gray-800 leading-relaxed mb-8 max-w-3xl mx-auto">Most dryer calls in Plovdiv come from a few recurring problems:</p>
+        <div class="bg-gradient-to-r from-fuchsia-50 via-white to-purple-50 p-6 md:p-8 rounded-2xl shadow-xl border border-fuchsia-100">
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">Each of these symptoms points to a different part, so on-site diagnostics before a repair is a necessary step, not a formality.</p>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer parts and systems we check and repair</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <p class="text-gray-800 leading-relaxed text-center max-w-4xl mx-auto mb-8">A large share of dryer faults come from worn components that are replaced rather than partly repaired. Every replacement is done after the diagnosis is confirmed, so a component that is actually working is not replaced.</p>
+        <div class="md:hidden space-y-4">{partsTable.map((row) => (<div class="bg-white rounded-xl border border-fuchsia-100 p-5 shadow-sm"><p class="font-semibold text-gray-900 mb-2">{row.part}</p><p class="text-gray-800">{row.problem}</p></div>))}</div>
+        <div class="hidden md:block overflow-hidden rounded-xl border border-fuchsia-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead><tr class="bg-fuchsia-600 text-white"><th scope="col" class="px-5 py-4 text-sm font-semibold">Part or system</th><th scope="col" class="px-5 py-4 text-sm font-semibold">The problem it most often causes</th></tr></thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-8 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>Not every fault means a part has to be replaced. The cause is often a dirty condenser or filter, so the decision to replace a part is made after the check.</p>
+          <p>Most often replaced parts: heater, temperature sensor, condensate pump, drum rollers and the roller of the motor that turns the drum, a problem in the electronic module, a full dryer clean, belt replacement</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Belt, rollers and drum problems</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="bg-gradient-to-r from-fuchsia-50 via-white to-purple-50 p-6 md:p-8 rounded-2xl shadow-lg border border-fuchsia-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>When the drum does not turn or there is a loud mechanical noise, the parts that drive it are checked: the belt, the rollers, the bearings and the motor.</p>
+          <p>A broken belt stops the rotation completely, and worn rollers are usually noticed by squeaking. That is why, when a belt is replaced, the technician also checks the rollers, so the new belt does not break again.</p>
+          <p>After the repair the dryer is run on a programme to check that the drum turns normally and without noise.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Heat-pump dryer repair</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-fuchsia-100 space-y-5 text-gray-800 leading-relaxed">
+          <p>Heat-pump dryers do not throw the warm air out. They return it to the drum, so they dry at a lower temperature and use less electricity. If they dry slowly, do not heat well or interrupt the programme, the cause can be the airflow, the sensors, the fan or the condensate system.</p>
+          <p>RotoRem diagnoses and repairs the accessible components. We do not repair compressors or the refrigeration system of the heat pump.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer installation and removal</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-fuchsia-100 space-y-5 text-gray-800 leading-relaxed">
+          <p>RotoRem installs and removes dryers in Plovdiv.</p>
+          <p>Installation includes positioning, levelling, a stability check, the space needed around the appliance and a test of the machine. On a suitable model a drain connection can also be made.</p>
+          <p>A dryer can also be installed on top of a washing machine when the conditions allow it. If the models need a stacking kit, the customer buys it in advance and we fit it.</p>
+          <p>When an appliance is replaced, we also remove and safely disconnect the old dryer.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} aria-labelledby="plovdiv-dryer-pricing-en">
+        <div class="text-center mb-8"><h2 id="plovdiv-dryer-pricing-en" class="text-3xl font-bold text-gray-900 mb-4">Dryer repair prices in Plovdiv</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="max-w-4xl mx-auto space-y-5 text-gray-800 leading-relaxed mb-8">
+          <p>Before work on the dryer begins, the customer is told exactly what is damaged and what is going to be replaced. That avoids a situation in which the fault turns out to be different from what was expected after the repair is already under way.</p>
+          <p>The prices are a guide for labour and do not include the cost of spare parts.</p>
+        </div>
+        <div class="bg-gradient-to-r from-fuchsia-50 via-white to-purple-50 p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-fuchsia-100">
+          <div class="md:hidden space-y-3">{priceRows.map((row) => (<div class="rounded-xl border border-fuchsia-100 bg-white p-4 shadow-sm"><p class="font-medium text-gray-900 mb-2">{row.service}</p><p class="text-xl font-bold text-fuchsia-700">{row.price}</p></div>))}</div>
+          <div class="hidden md:block overflow-hidden rounded-xl border border-white/60 bg-white shadow-md">
+            <table class="w-full text-left">
+              <thead><tr class="bg-fuchsia-600 text-white"><th scope="col" class="px-5 py-4 text-sm font-semibold">Service / problem</th><th scope="col" class="px-5 py-4 text-sm font-semibold text-right">Price (EUR)</th></tr></thead>
+              <tbody>
+                {priceRows.map((row, index) => (
+                  <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                    <td class="px-5 py-4 text-sm text-gray-800">{row.service}</td>
+                    <td class="px-5 py-4 text-sm font-bold text-fuchsia-700 text-right whitespace-nowrap">{row.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer brands we service</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">AEG, Bosch, Whirlpool, Beko, Indesit, Samsung, LG, Electrolux.</p>
+          <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">{brands.map((brand) => (<li class="bg-white border border-gray-200 rounded-lg shadow-sm h-full min-h-[4.5rem] px-4 py-4 flex items-center justify-center text-center font-semibold text-gray-900">{brand}</li>))}</ul>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">Real dryer repairs in Plovdiv</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <img src={item.image} alt={item.alt} class="w-full md:w-2/5 lg:w-5/12 h-64 md:h-auto object-cover md:min-h-[280px]" loading="lazy" width="480" height="360" />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">Brand / model: {item.brand}</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Problem:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Area:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden max-w-5xl mx-auto">
+            <img src={realCases[2].image} alt={realCases[2].alt} class="w-full lg:w-2/5 h-72 lg:h-auto object-cover lg:min-h-[300px]" loading="lazy" width="560" height="400" />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">Brand / model: {realCases[2].brand}</h3>
+              <p class="text-gray-800"><span class="font-semibold">Problem:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Area:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">How the repair works</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}><span class="text-xl font-bold">{item.step}</span></div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100"><p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p></div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}><span class="text-xl font-bold">{item.step}</span></div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100"><p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p></div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Dryer repair in different areas of Plovdiv</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="bg-gradient-to-r from-fuchsia-50 via-white to-purple-50 p-6 md:p-8 rounded-2xl shadow-lg border border-fuchsia-100 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>RotoRem provides an at-home service across Plovdiv and nearby. For addresses outside the city there is a surcharge of 2 € per kilometre.</p>
+          <p>Neighbourhoods we cover: Centre, Smirnenski, Karshiaka, Marasha, Kyuchuk Paris, Kamenitsa, Gagarin, Zaharna Fabrika, Filipovo, Proslav, Komatevo, Ostromila, Belomorski</p>
+          <p>The at-home dryer repair service is also available for customers in <a href="/en/services/dryer-repair/" class={`${accentLink} font-medium hover:underline`}>Varna</a>, and in <a href="/en/services/sofia/dryer-repair/" class={`${accentLink} font-medium hover:underline`}>Sofia</a>.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently asked questions</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer"><h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3></summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100"><p class="leading-relaxed">{faq.a}</p></div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </article>
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-fuchsia-600 to-purple-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Problem with the dryer?</h2>
+      <p class="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">Call 089 834 0982 now for fast on-site diagnostics in Plovdiv and book a repair.</p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">089 834 0982</a>
+    </section>
+  </div>
+</Layout>

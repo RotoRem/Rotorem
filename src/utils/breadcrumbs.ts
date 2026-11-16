@@ -46,6 +46,7 @@ export function buildBreadcrumbs({
     home: isEN ? 'Home' : 'Начало',
     servicesVarna: isEN ? 'Varna Services' : 'Услуги за Варна',
     servicesSofia: isEN ? 'Sofia Services' : 'Услуги за София',
+    servicesPlovdiv: isEN ? 'Plovdiv Services' : 'Услуги за Пловдив',
     blog: isEN ? 'Blog' : 'Блог',
     contact: t('nav.contact'),
     reviews: t('nav.reviews'),
@@ -69,6 +70,17 @@ export function buildBreadcrumbs({
       items.push({ label: labels.servicesSofia });
     } else {
       items.push({ label: labels.servicesSofia, href: sofiaHref });
+      items.push({ label: pageLabel });
+    }
+    return items;
+  }
+
+  if (normalizedRoute.startsWith('/services/plovdiv') || normalizedRoute.endsWith('-plovdiv')) {
+    const plovdivHref = isEN ? '/en/services/plovdiv/' : '/services/plovdiv/';
+    if (normalizedRoute === '/services/plovdiv') {
+      items.push({ label: labels.servicesPlovdiv });
+    } else {
+      items.push({ label: labels.servicesPlovdiv, href: plovdivHref });
       items.push({ label: pageLabel });
     }
     return items;

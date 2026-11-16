@@ -53,6 +53,15 @@ function getServiceKeyFromPath(path: string): ServicePriceKey | null {
 }
 
 function buildServiceOffers(cfg: ServiceConfig): Array<Record<string, unknown>> {
+  if (cfg.offers) {
+    return cfg.offers.map((offer) => ({
+      '@type': 'Offer',
+      name: offer.name,
+      price: offer.price,
+      priceCurrency: 'EUR',
+    }));
+  }
+
   const city = getCityFromServicePath(cfg.path);
   const serviceKey = getServiceKeyFromPath(cfg.path);
 
@@ -826,6 +835,7 @@ type ServiceConfig = {
   personJobTitle: string;
   personDescription: string;
   faq: FaqItem[];
+  offers?: { name: string; price: string }[];
 };
 
 function buildServiceGraph(cfg: ServiceConfig): JsonLd {
@@ -851,7 +861,9 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
             "name": cfg.breadcrumbSecond,
             "item": cfg.path.includes("/sofia/")
               ? `${baseRoot}/services/sofia/`
-              : `${baseRoot}/services/`
+              : cfg.path.includes("plovdiv")
+                ? `${baseRoot}/services/plovdiv/`
+                : `${baseRoot}/services/`
           },
           {
             "@type": "ListItem",
@@ -896,7 +908,9 @@ function buildServiceGraph(cfg: ServiceConfig): JsonLd {
         "logo": "https://www.rotorem.bg/favicon.svg"
       },
       {
-        "@type": [...getLocalBusinessTypes(getCityFromServicePath(cfg.path))],
+        "@type": [...(cfg.path.includes("plovdiv")
+          ? (["LocalBusiness", "HomeAndConstructionBusiness"] as const)
+          : getLocalBusinessTypes(getCityFromServicePath(cfg.path)))],
         "@id": `${baseRoot}/#localbusiness`,
         "name": cfg.localBusinessName,
         "url": `${baseRoot}/`,
@@ -1585,6 +1599,362 @@ const serviceConfigs: ServiceConfig[] = [
       { q: "How much does diagnostics cost?", a: "The visit and diagnostics in Sofia are 30 €." },
       { q: "Do you provide a warranty?", a: "Warranty terms depend on the repair and parts used. Specific conditions are confirmed with the technician." }
     ]
+  },
+  {
+    path: "/services/remont-na-peralni-plovdiv/",
+    lang: "bg",
+    breadcrumbSecond: "Услуги за Пловдив",
+    breadcrumbThird: "Ремонт на перални Пловдив",
+    serviceName: "Ремонт на перални машини по домовете в Пловдив",
+    serviceType: "Ремонт на перални",
+    description: "Диагностика на място и ремонт на перални машини в Пловдив, без транспортиране на уреда. Смяна на помпи, нагреватели и лагери. Обадете се на 089 834 0982.",
+    cityName: "Пловдив",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "РотоРем Пловдив",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Николай Иванов",
+    personJobTitle: "Главен техник",
+    personDescription: "Магистър по Автоматика и системи за управление с дългогодишен опит в ремонта на домакински уреди.",
+    offers: [
+      { name: "Диагностика", price: "25" },
+      { name: "Отстраняване на теч", price: "30.68" },
+      { name: "Проблем с източването", price: "35.79" },
+      { name: "Проблем с центрофугата", price: "35.79" },
+      { name: "Проблем с нагряването", price: "46.02" },
+      { name: "Смяна на лагери", price: "86.92" },
+      { name: "Монтаж на пералня", price: "40" }
+    ],
+    faq: [
+      { q: "Може ли пералнята да бъде ремонтирана на адрес?", a: "Да, диагностиката и ремонтът се правят в дома ви в Пловдив." },
+      { q: "Трябва ли да нося пералнята в сервиз?", a: "Не, техникът идва на адреса." },
+      { q: "Защо пералнята вие при центрофуга?", a: "Най-често заради износени лагери. Причината се потвърждава при диагностиката." },
+      { q: "Колко струва диагностиката?", a: "25 € в Пловдив." },
+      { q: "Ремонтирате ли всички марки?", a: "Да, всички популярни марки. При обаждане кажете марката и модела." },
+      { q: "Давате ли гаранция?", a: "Да. Всеки ремонт е с гаранция, а условията зависят от вида на ремонта и вложените части. Техникът ви ги обяснява преди да започне работа, за да знаете какво покрива гаранцията." }
+    ]
+  },
+  {
+    path: "/services/remont-na-sushilni-plovdiv/",
+    lang: "bg",
+    breadcrumbSecond: "Услуги за Пловдив",
+    breadcrumbThird: "Ремонт на сушилни Пловдив",
+    serviceName: "Ремонт на сушилни машини по домовете в Пловдив",
+    serviceType: "Ремонт на сушилни",
+    description: "Ремонт на сушилни машини в Пловдив с диагностика на място и сервиз по домовете. Прозрачно ценообразуване. Обадете се на 089 834 0982 за час.",
+    cityName: "Пловдив",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "РотоРем Пловдив",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Николай Иванов",
+    personJobTitle: "Главен техник",
+    personDescription: "Магистър по Автоматика и системи за управление с дългогодишен опит в ремонта на домакински уреди.",
+    offers: [
+      { name: "Диагностика", price: "25" },
+      { name: "Сушилнята не стартира", price: "20.45" },
+      { name: "Сушилнята не източва вода", price: "25.56" },
+      { name: "Барабанът не се върти", price: "30.68" },
+      { name: "Монтаж на сушилня", price: "40" },
+      { name: "Монтаж пералня + сушилня (колона)", price: "65" }
+    ],
+    faq: [
+      { q: "Може ли сушилнята да бъде ремонтирана на адрес?", a: "Да, в дома ви в Пловдив." },
+      { q: "Защо дрехите излизат влажни?", a: "Най-често заради запушен кондензатор или филтър." },
+      { q: "Защо барабанът не се върти?", a: "Проверяват се ремъкът, моторът и ролките." },
+      { q: "Колко струва диагностиката?", a: "25 € в Пловдив." },
+      { q: "Монтирате ли сушилня върху пералня?", a: "Да, ако двата уреда са съвместими и могат да се закрепят стабилно. Свързващият комплект се купува от клиента предварително." },
+      { q: "Давате ли гаранция?", a: "Да, предоставяме гаранция за извършените ремонти. Условията и срокът на гаранцията се уточняват след диагностиката и преди започване на ремонта." }
+    ]
+  },
+  {
+    path: "/services/remont-na-sadomiyalni-plovdiv/",
+    lang: "bg",
+    breadcrumbSecond: "Услуги за Пловдив",
+    breadcrumbThird: "Ремонт на съдомиялни в Пловдив",
+    serviceName: "Ремонт на съдомиялни по домовете в Пловдив",
+    serviceType: "Ремонт на съдомиялни",
+    description: "Ремонт на съдомиялни в Пловдив на адрес, с диагностика на място и прозрачно ценообразуване. Смяна на помпа и нагревател. Обадете се на 089 834 0982.",
+    cityName: "Пловдив",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "РотоРем Пловдив",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Николай Иванов",
+    personJobTitle: "Главен техник",
+    personDescription: "Магистър по Автоматика и системи за управление с дългогодишен опит в ремонта на домакински уреди.",
+    offers: [
+      { name: "Посещение и диагностика", price: "25" },
+      { name: "Монтаж на свободностояща съдомиялна", price: "45" },
+      { name: "Монтаж на вградена съдомиялна", price: "60" },
+      { name: "Демонтаж на стар уред", price: "15" },
+      { name: "Съдомиялната не загрява водата", price: "20.45" },
+      { name: "Проблем със затварянето на вратата", price: "20.45" },
+      { name: "Съдомиялната не пълни вода", price: "25.56" },
+      { name: "Съдомиялната не източва водата", price: "25.56" }
+    ],
+    faq: [
+      { q: "Може ли съдомиялната да бъде ремонтирана на адрес?", a: "Да, в дома или офиса ви в Пловдив." },
+      { q: "Ремонтирате ли вградени съдомиялни?", a: "Да. Понякога машината се издърпва частично от шкафа, за да се стигне до частта." },
+      { q: "Защо водата остава на дъното?", a: "Най-често заради запушен филтър, маркуч или повредена помпа за източване." },
+      { q: "Защо съдовете излизат мръсни?", a: "Причината може да е в студена вода, запушени филтри или дюзи, или в циркулационната помпа." },
+      { q: "Монтирате ли нови съдомиялни?", a: "Да, правим връзките към вода, канал и ток." },
+      { q: "Колко струва диагностиката?", a: "25 € в Пловдив." },
+      { q: "Давате ли гаранция?", a: "Да, за всеки извършен ремонт. Колко е гаранцията и какво покрива зависи от сменените части, а техникът ви казва условията, преди да започне." }
+    ]
+  },
+  {
+    path: "/services/remont-na-furni-plovdiv/",
+    lang: "bg",
+    breadcrumbSecond: "Услуги за Пловдив",
+    breadcrumbThird: "Ремонт на фурни в Пловдив",
+    serviceName: "Ремонт на фурни по домовете в Пловдив",
+    serviceType: "Ремонт на фурни",
+    description: "Ремонт на фурни в Пловдив - диагностика на място и смяна на нагреватели, термостати и котлони, без транспортиране на уреда. Обадете се на РотоРем.",
+    cityName: "Пловдив",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "РотоРем Пловдив",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Николай Иванов",
+    personJobTitle: "Главен техник",
+    personDescription: "Магистър по Автоматика и системи за управление с дългогодишен опит в ремонта на домакински уреди.",
+    offers: [
+      { name: "Посещение и диагностика", price: "25" },
+      { name: "Монтаж на свободностояща фурна", price: "40" },
+      { name: "Монтаж на фурна за вграждане", price: "50" },
+      { name: "Демонтаж на стар уред", price: "15" },
+      { name: "Проблем с вентилатора на фурната", price: "20.45" },
+      { name: "Фурната не загрява", price: "25.56" },
+      { name: "Уредът не се включва / не стартира", price: "30.68" }
+    ],
+    faq: [
+      { q: "Може ли фурната да бъде ремонтирана на адрес?", a: "Да, в дома ви в Пловдив, без да се демонтира за пренасяне." },
+      { q: "Защо фурната не загрява?", a: "Най-често заради нагревател, термостат или термозащита." },
+      { q: "Защо фурната изключва предпазителя?", a: "Обикновено нагревател с пробита изолация. Не я включвайте до проверката." },
+      { q: "Може ли да се смени само един нагревател?", a: "Да, когато диагностиката покаже, че той е причината." },
+      { q: "Ремонтирате ли вградени фурни?", a: "Да, вградени и свободностоящи." },
+      { q: "Колко струва диагностиката?", a: "25 € в Пловдив." },
+      { q: "Давате ли гаранция?", a: "Да. За всеки ремонт на фурна получавате гаранция, а срокът зависи от сменената част. Техникът ви казва условията, преди да започне." }
+    ]
+  },
+  {
+    path: "/services/remont-na-boileri-plovdiv/",
+    lang: "bg",
+    breadcrumbSecond: "Услуги за Пловдив",
+    breadcrumbThird: "Ремонт на бойлери в Пловдив",
+    serviceName: "Ремонт на бойлери по домовете в Пловдив",
+    serviceType: "Ремонт на бойлери",
+    description: "РотоРем Пловдив ремонтира бойлери на адрес с диагностика на място, смяна на нагреватели и термостати. Обадете се на 089 834 0982 за час за ремонт.",
+    cityName: "Пловдив",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "РотоРем Пловдив",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Николай Иванов",
+    personJobTitle: "Главен техник",
+    personDescription: "Магистър по Автоматика и системи за управление с дългогодишен опит в ремонта на домакински уреди.",
+    offers: [
+      { name: "Посещение и диагностика", price: "25" },
+      { name: "Монтаж на бойлер до 80 л", price: "65" },
+      { name: "Монтаж на бойлер над 80 л", price: "75" },
+      { name: "Демонтаж на стар уред", price: "15" },
+      { name: "Бойлерът тече или прокапва", price: "15.34" },
+      { name: "Бойлерът не загрява водата", price: "25.56" },
+      { name: "Профилактика и почистване на котлен камък", price: "35.79" }
+    ],
+    faq: [
+      { q: "Може ли бойлерът да бъде ремонтиран на адрес?", a: "Да, без да се сваля от стената." },
+      { q: "Как се разбира дали нагревателят е изгорял?", a: "Техникът го измерва. Студената вода сама по себе си не доказва, че той е повреден." },
+      { q: "Защо бойлерът изключва предпазителя?", a: "Обикновено заради пробит нагревател или изгоряла връзка. Не го включвайте до проверката." },
+      { q: "Нормално ли е предпазният клапан да капе?", a: "Няколко капки при загряване да, постоянен теч - не." },
+      { q: "Правите ли профилактика и почистване от котлен камък?", a: "Да." },
+      { q: "Колко струва диагностиката?", a: "25 € в Пловдив." },
+      { q: "Давате ли гаранция?", a: "Да. Гаранцията покрива извършения ремонт и вложените части, а срокът ѝ зависи от вида на ремонта. Техникът ви го казва, преди да започне." }
+    ]
+  },
+  {
+    path: "/en/services/remont-na-peralni-plovdiv/",
+    lang: "en",
+    breadcrumbSecond: "Plovdiv Services",
+    breadcrumbThird: "Washing Machine Repair in Plovdiv",
+    serviceName: "At-home washing machine repair in Plovdiv",
+    serviceType: "Washing Machine Repair",
+    description: "On-site diagnostics and washing machine repair in Plovdiv, without transporting the appliance. Pump, heater and bearing replacement. Call 089 834 0982.",
+    cityName: "Plovdiv",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "RotoRem Plovdiv",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Nikolay Ivanov",
+    personJobTitle: "Chief Technician",
+    personDescription: "Master in Automation and Control Systems with extensive experience in household appliance repair.",
+    offers: [
+      { name: "Diagnostics", price: "25" },
+      { name: "Leak repair", price: "30.68" },
+      { name: "Draining problem", price: "35.79" },
+      { name: "Spin problem", price: "35.79" },
+      { name: "Heating problem", price: "46.02" },
+      { name: "Bearing replacement", price: "86.92" },
+      { name: "Washing machine installation", price: "40" }
+    ],
+    faq: [
+      { q: "Can the washing machine be repaired at my address?", a: "Yes. Diagnostics and the repair are done in your home in Plovdiv." },
+      { q: "Do I have to take the washing machine to a workshop?", a: "No. The technician comes to the address." },
+      { q: "Why does the washing machine howl on spin?", a: "Most often because of worn bearings. The cause is confirmed during diagnostics." },
+      { q: "How much do diagnostics cost?", a: "25 € in Plovdiv." },
+      { q: "Do you repair all brands?", a: "Yes, all popular brands. When you call, say the brand and model." },
+      { q: "Do you provide a warranty?", a: "Yes. Every repair comes with a warranty, and the terms depend on the type of repair and the parts used. The technician explains them before work starts, so you know what the warranty covers." }
+    ]
+  },
+  {
+    path: "/en/services/remont-na-sushilni-plovdiv/",
+    lang: "en",
+    breadcrumbSecond: "Plovdiv Services",
+    breadcrumbThird: "Dryer Repair in Plovdiv",
+    serviceName: "At-home dryer repair in Plovdiv",
+    serviceType: "Dryer Repair",
+    description: "Dryer repair in Plovdiv with on-site diagnostics and an at-home service. Clear pricing. Call 089 834 0982 to book.",
+    cityName: "Plovdiv",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "RotoRem Plovdiv",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Nikolay Ivanov",
+    personJobTitle: "Chief Technician",
+    personDescription: "Master in Automation and Control Systems with extensive experience in household appliance repair.",
+    offers: [
+      { name: "Diagnostics", price: "25" },
+      { name: "The dryer will not start", price: "20.45" },
+      { name: "The dryer does not drain water", price: "25.56" },
+      { name: "The drum does not turn", price: "30.68" },
+      { name: "Dryer installation", price: "40" },
+      { name: "Washing machine and dryer installation", price: "65" }
+    ],
+    faq: [
+      { q: "Can the dryer be repaired at my address?", a: "Yes, in your home in Plovdiv." },
+      { q: "Why do the clothes come out damp?", a: "Most often because of a blocked condenser or filter." },
+      { q: "Why does the drum not turn?", a: "The belt, the motor and the rollers are checked." },
+      { q: "How much do diagnostics cost?", a: "25 € in Plovdiv." },
+      { q: "Do you install a dryer on top of a washing machine?", a: "Yes, if the two appliances are compatible and can be fixed securely. The customer buys the stacking kit in advance." },
+      { q: "Do you provide a warranty?", a: "Yes, we provide a warranty for the repairs carried out. The terms and the length of the warranty are confirmed after diagnostics and before the repair starts." }
+    ]
+  },
+  {
+    path: "/en/services/remont-na-sadomiyalni-plovdiv/",
+    lang: "en",
+    breadcrumbSecond: "Plovdiv Services",
+    breadcrumbThird: "Dishwasher Repair in Plovdiv",
+    serviceName: "At-home dishwasher repair in Plovdiv",
+    serviceType: "Dishwasher Repair",
+    description: "At-home dishwasher repair in Plovdiv, with on-site diagnostics and clear pricing. Pump and heater replacement. Call 089 834 0982.",
+    cityName: "Plovdiv",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "RotoRem Plovdiv",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Nikolay Ivanov",
+    personJobTitle: "Chief Technician",
+    personDescription: "Master in Automation and Control Systems with extensive experience in household appliance repair.",
+    offers: [
+      { name: "Visit and diagnostics", price: "25" },
+      { name: "Installation of a freestanding dishwasher", price: "45" },
+      { name: "Installation of a built-in dishwasher", price: "60" },
+      { name: "Removal of an old appliance", price: "15" },
+      { name: "The dishwasher does not heat the water", price: "20.45" },
+      { name: "Problem with the door closing", price: "20.45" },
+      { name: "The dishwasher does not fill with water", price: "25.56" },
+      { name: "The dishwasher does not drain", price: "25.56" }
+    ],
+    faq: [
+      { q: "Can the dishwasher be repaired at the address?", a: "Yes, in your home or office in Plovdiv." },
+      { q: "Do you repair built-in dishwashers?", a: "Yes. Sometimes the machine is pulled partly out of the cabinet to reach the part." },
+      { q: "Why does water stay at the bottom?", a: "Most often because of a blocked filter, a hose or a damaged drain pump." },
+      { q: "Why do the dishes come out dirty?", a: "The cause can be cold water, blocked filters or nozzles, or the circulation pump." },
+      { q: "Do you install new dishwashers?", a: "Yes. We make the connections to water, drain and power." },
+      { q: "How much do diagnostics cost?", a: "25 € in Plovdiv." },
+      { q: "Do you provide a warranty?", a: "Yes, for every repair carried out. How long the warranty is and what it covers depends on the parts replaced, and the technician tells you the terms before starting." }
+    ]
+  },
+  {
+    path: "/en/services/remont-na-furni-plovdiv/",
+    lang: "en",
+    breadcrumbSecond: "Plovdiv Services",
+    breadcrumbThird: "Oven Repair in Plovdiv",
+    serviceName: "At-home oven repair in Plovdiv",
+    serviceType: "Oven Repair",
+    description: "Oven repair in Plovdiv - on-site diagnostics and replacement of heaters, thermostats and hobs, without transporting the appliance. Call RotoRem.",
+    cityName: "Plovdiv",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "RotoRem Plovdiv",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Nikolay Ivanov",
+    personJobTitle: "Chief Technician",
+    personDescription: "Master in Automation and Control Systems with extensive experience in household appliance repair.",
+    offers: [
+      { name: "Visit and diagnostics", price: "25" },
+      { name: "Installation of a freestanding oven", price: "40" },
+      { name: "Installation of a built-in oven", price: "50" },
+      { name: "Removal of an old appliance", price: "15" },
+      { name: "Problem with the oven fan", price: "20.45" },
+      { name: "The oven does not heat", price: "25.56" },
+      { name: "The appliance does not switch on", price: "30.68" }
+    ],
+    faq: [
+      { q: "Can the oven be repaired at the address?", a: "Yes, in your home in Plovdiv, without removing it for transport." },
+      { q: "Why does the oven not heat?", a: "Most often because of a heater, a thermostat or a thermal cut-out." },
+      { q: "Why does the oven trip the breaker?", a: "Usually a heater with broken insulation. Do not switch it on until it is checked." },
+      { q: "Can only one heater be replaced?", a: "Yes, when diagnostics show that it is the cause." },
+      { q: "Do you repair built-in ovens?", a: "Yes, built-in and freestanding." },
+      { q: "How much do diagnostics cost?", a: "25 € in Plovdiv." },
+      { q: "Do you provide a warranty?", a: "Yes. Every oven repair comes with a warranty, and the length depends on the part replaced. The technician tells you the terms before starting." }
+    ]
+  },
+  {
+    path: "/en/services/remont-na-boileri-plovdiv/",
+    lang: "en",
+    breadcrumbSecond: "Plovdiv Services",
+    breadcrumbThird: "Water Heater Repair in Plovdiv",
+    serviceName: "At-home water heater repair in Plovdiv",
+    serviceType: "Water Heater Repair",
+    description: "RotoRem Plovdiv repairs water heaters at the address with on-site diagnostics and replacement of heaters and thermostats. Call 089 834 0982 to book a repair.",
+    cityName: "Plovdiv",
+    lat: 42.1354,
+    lng: 24.7453,
+    localBusinessName: "RotoRem Plovdiv",
+    addressLocality: "Plovdiv",
+    postalCode: "4000",
+    personName: "Nikolay Ivanov",
+    personJobTitle: "Chief Technician",
+    personDescription: "Master in Automation and Control Systems with extensive experience in household appliance repair.",
+    offers: [
+      { name: "Visit and diagnostics", price: "25" },
+      { name: "Installation of a water heater up to 80 l", price: "65" },
+      { name: "Installation of a water heater over 80 l", price: "75" },
+      { name: "Removal of an old appliance", price: "15" },
+      { name: "The water heater leaks or drips", price: "15.34" },
+      { name: "The water heater does not heat the water", price: "25.56" },
+      { name: "Maintenance and limescale cleaning", price: "35.79" }
+    ],
+    faq: [
+      { q: "Can the water heater be repaired at the address?", a: "Yes, without taking it off the wall." },
+      { q: "How can you tell if the heater has burnt out?", a: "The technician measures it. Cold water by itself does not prove that it is faulty." },
+      { q: "Why does the water heater trip the breaker?", a: "Usually because of a failed heater or a burnt connection. Do not switch it on until it is checked." },
+      { q: "Is it normal for the safety valve to drip?", a: "A few drops while heating, yes. A constant leak - no." },
+      { q: "Do you do maintenance and limescale cleaning?", a: "Yes." },
+      { q: "How much do diagnostics cost?", a: "25 € in Plovdiv." },
+      { q: "Do you provide a warranty?", a: "Yes. The warranty covers the repair carried out and the parts used, and its length depends on the type of repair. The technician tells you before starting." }
+    ]
   }
 ];
 
@@ -2224,6 +2594,45 @@ const enLyubomirProfileGraph = {
   ]
 };
 
+const bgPlovdivPageGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.rotorem.bg/services/plovdiv/#webpage",
+      "url": "https://www.rotorem.bg/services/plovdiv/",
+      "name": "Ремонт на перални Пловдив | РотоРем",
+      "description": "Диагностика на място и ремонт на перални, котлони сушилни, съдомиялни, фурни и бойлери в Пловдив. Без транспорт на уреда. Обадете се на 089 834 0982.",
+      "breadcrumb": { "@id": "https://www.rotorem.bg/services/plovdiv/#breadcrumb" },
+      "mainEntity": { "@id": "https://www.rotorem.bg/services/plovdiv/#business" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.rotorem.bg/services/plovdiv/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://www.rotorem.bg/" },
+        { "@type": "ListItem", "position": 2, "name": "РотоРем Пловдив, сервиз за бяла техника", "item": "https://www.rotorem.bg/services/plovdiv/" }
+      ]
+    },
+    {
+      "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+      "@id": "https://www.rotorem.bg/services/plovdiv/#business",
+      "name": "РотоРем Пловдив",
+      "url": "https://www.rotorem.bg/services/plovdiv/",
+      "image": "https://www.rotorem.bg/img/hero-page-plovdiv.webp",
+      "description": "Диагностика на място и ремонт на перални, котлони сушилни, съдомиялни, фурни и бойлери в Пловдив. Без транспорт на уреда.",
+      "telephone": "089 834 0982",
+      "email": "n.ivanov.ivanov@abv.bg",
+      "priceRange": "25EUR",
+      "address": { "@type": "PostalAddress", "addressLocality": "Plovdiv", "postalCode": "4000", "addressCountry": "BG" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 42.1354, "longitude": 24.7453 },
+      "areaServed": { "@type": "City", "name": "Plovdiv" },
+      "aggregateRating": AGGREGATE_RATING,
+      "review": BG_SCHEMA_REVIEWS
+    }
+  ]
+};
+
 const simplePageOverrides: Record<string, JsonLd> = {
   "/": bgHomeGraph,
   "/en/": enHomeGraph,
@@ -2233,6 +2642,8 @@ const simplePageOverrides: Record<string, JsonLd> = {
   "/en/services/": enServicesIndexGraph,
   "/services/sofia/": bgSofiaIndexGraph,
   "/en/services/sofia/": enSofiaIndexGraph,
+  "/services/plovdiv": bgPlovdivPageGraph,
+  "/services/plovdiv/": bgPlovdivPageGraph,
   "/ekip/": bgTeamGraph,
   "/en/team/": enTeamGraph,
   "/ekip/nikolay-ivanov/": bgNikolayProfileGraph,

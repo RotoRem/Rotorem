@@ -1,0 +1,394 @@
+---
+import Layout from '../../../layouts/Base.astro';
+import Reviews from '../../../components/Reviews.astro';
+import { getServiceFaqItems } from '../../../lib/jsonldOverrides';
+
+const title = 'Washing Machine Repair in Plovdiv | RotoRem';
+const description = 'On-site diagnostics and washing machine repair in Plovdiv, without transporting the appliance. Pump, heater and bearing replacement. Call 089 834 0982.';
+
+const heroImage = '/img/services/ремонт-на-перални-пловдив-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-перални-пловдив-диагностика.webp';
+
+const problems = [
+  {
+    title: 'Worn bearings',
+    text: 'The washing machine is very noisy on spin and the drum moves. The noise usually starts as a light hum and grows into rattling or a metallic sound, especially at high speed. If the drum has visible play when you move it by hand, the bearings are most likely worn. The seal is often replaced with them, because water may have reached the bearings through it. The sooner the repair is done, the smaller the risk of damage to the drum and the tub.',
+    border: 'border-blue-500',
+  },
+  {
+    title: 'Cracked or burnt-out heater',
+    text: 'The water stays cold and the programme does not heat the clothes. Sometimes the machine keeps washing normally, but the laundry comes out cool and the stains are not removed. On some models a burnt heater trips the breaker or stops the programme with an error code. A common cause is limescale that builds up on the heater and overheats it. The technician measures the heater on site and replaces it only if the check confirms that it is faulty.',
+    border: 'border-green-500',
+  },
+  {
+    title: 'Blocked or damaged pump',
+    text: 'The machine does not drain or stops with a full drum. The cause is often an object stuck in the filter or the pump, such as a coin, a button or a hairpin. If the filter is clean and the pump hums without pumping, or cannot be heard at all, it has most likely burnt out. The drain hose and the connection to the waste are also checked, because a blockage there causes the same symptom. With a full drum the water is drained safely before the repair starts.',
+    border: 'border-amber-500',
+  },
+  {
+    title: 'Faulty thermostat',
+    text: 'The water heats incorrectly, or heating does not switch on at all. The thermostat or temperature sensor tells the washing machine when the water has reached the required temperature. When it is faulty, the water can stay cold, overheat and damage clothes, or the programme can run for an unusually long time. Because the symptoms look like a faulty heater, both parts are checked together.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'The washing machine is leaking',
+    text: 'Water under the machine or around the door. The most common cause is a torn or worn door boot, especially on older machines. The leak can also come from a cracked hose, a loose connection, the pump or the tub. Where the water appears, and the point in the programme when it leaks, help to find the source. With a leak it is better not to use the machine until the repair, so the room is not flooded.',
+    border: 'border-purple-500',
+  },
+  {
+    title: 'The washing machine will not start or shows an error',
+    text: 'Nothing happens when start is pressed, the door does not lock, or an error code appears on the display. The power supply, the door lock, the programmer and the electronic board are checked. The error code points the technician toward a particular system, but it does not always mean that specific part needs replacing. The code is compared with the actual check of the machine.',
+    border: 'border-indigo-500',
+  },
+];
+
+const partsTable = [
+  { part: 'Drain pump', problem: 'Water is not pumped out, the machine stops with a full drum' },
+  { part: 'Filter and drain hose', problem: 'Slow draining or the programme stops' },
+  { part: 'Heater', problem: 'The laundry comes out cold' },
+  { part: 'Thermostat / temperature sensor', problem: 'The water does not heat or overheats' },
+  { part: 'Bearings', problem: 'Loud humming and rattling on spin' },
+  { part: 'Tub seal', problem: 'Water reaches the bearings' },
+  { part: 'Belt', problem: 'The motor runs but the drum stays still' },
+  { part: 'Motor and brushes', problem: 'The drum does not turn or does not spin' },
+  { part: 'Shock absorbers', problem: 'The machine jumps and vibrates' },
+  { part: 'Door boot', problem: 'Leak at the front, around the door' },
+  { part: 'Inlet valve', problem: 'The machine does not fill, or fills without stopping' },
+  { part: 'Door lock', problem: 'The programme does not start or the door will not open' },
+  { part: 'Programmer and electronic board', problem: 'Errors, interruption, or the machine does not respond' },
+];
+
+const priceRows = [
+  { service: 'Diagnostics', price: '25 €' },
+  { service: 'Leak repair', price: 'from 31 €' },
+  { service: 'Draining problem', price: 'from 36 €' },
+  { service: 'Spin problem', price: 'from 36 €' },
+  { service: 'Heating problem', price: 'from 46 €' },
+  { service: 'Bearing replacement', price: 'from 87 €' },
+  { service: 'Washing machine installation', price: 'from 40 €' },
+];
+
+const brands = ['Bosch', 'Siemens', 'AEG', 'Electrolux', 'Gorenje', 'Samsung', 'LG', 'Beko', 'Indesit', 'Whirlpool'];
+
+const realCases = [
+  {
+    brand: 'Indesit',
+    problem: 'The washing machine would not start any programme.',
+    area: 'Proslav, Plovdiv',
+    diagnosis: 'A problem was found in the bimetal door lock.',
+    repair: 'Replacement of the bimetal lock. After the repair the washing machine starts its programmes and works normally.',
+    image: '/img/services/ремонт-на-перални-пловдив-случай-1.webp',
+    alt: 'Repair of an Indesit washing machine that does not start a programme, with diagnostics and replacement of a faulty bimetal lock in Proslav, Plovdiv.',
+  },
+  {
+    brand: 'Whirlpool',
+    problem: 'The washing machine was not turning the drum.',
+    area: 'Kyuchuk Paris, Plovdiv',
+    diagnosis: 'The check found that the motor responsible for turning the drum had burnt out.',
+    repair: 'The faulty motor was replaced with a new one. After the repair the washing machine turns the drum and works normally.',
+    image: '/img/services/ремонт-на-перални-пловдив-случай-2.webp',
+    alt: 'Repair of a Whirlpool washing machine that does not turn the drum, with diagnostics and replacement of a burnt motor in Kyuchuk Paris, Plovdiv.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'The washing machine would not start any of its programmes.',
+    area: 'Proslav, Plovdiv',
+    diagnosis: 'A problem was found in the door lock. The bimetal lock had burnt out and was not sending a correct signal that the door was locked.',
+    repair: 'The faulty bimetal lock was replaced with a new one. After the repair the washing machine starts its programmes and works normally.',
+    image: '/img/services/ремонт-на-перални-пловдив-случай-3.webp',
+    alt: 'Repair of a Bosch washing machine that does not start a programme, with diagnostics and replacement of a burnt bimetal lock in Proslav, Plovdiv.',
+  },
+];
+
+const processSteps = [
+  { step: 1, text: 'You contact RotoRem and describe the problem.', circleClass: 'bg-gradient-to-r from-blue-500 to-blue-600' },
+  { step: 2, text: 'We arrange a visit to the address in Plovdiv.', circleClass: 'bg-gradient-to-r from-green-500 to-green-600' },
+  { step: 3, text: 'The technician carries out diagnostics.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 4, text: 'You are told what the fault is and what will be repaired.', circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600' },
+  { step: 5, text: 'Repair and test of the washing machine on site.', circleClass: 'bg-gradient-to-r from-indigo-500 to-indigo-600' },
+];
+
+const faqs = getServiceFaqItems('/en/services/remont-na-peralni-plovdiv/');
+const sectionClass = 'mb-28 pt-4';
+---
+
+<Layout title={title} description={description} image={heroImage} hideServiceFaq={true}>
+  <article>
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img src={heroImage} alt="Washing machine repair at an address in Plovdiv" class="absolute inset-0 w-full h-full object-cover object-center scale-105" loading="eager" fetchpriority="high" width="1600" height="900" />
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-950/85 via-blue-900/75 to-blue-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">At-home washing machine repair in Plovdiv</h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">RotoRem Plovdiv carries out on-site diagnostics and washing machine repair in the home, without the appliance having to be removed or transported to a workshop. The team arrives at the address, finds the fault and offers a solution on the first visit.</p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed">The service is for people whose washing machine does not heat the water, does not spin, leaks or stops in the middle of the programme. Instead of arranging transport for a heavy appliance, a technician comes directly to the home and works on site.</p>
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xl font-bold text-white">Diagnostics in Plovdiv - 25 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-sm text-white/80 mb-1">Phone</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">Call for a visit</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">At-home washing machine repair and diagnostics</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+            <p>A washing machine full of water, or one weighing more than 60-70 kilograms, is awkward to move, and transport often costs more than the repair itself. RotoRem works in homes across Plovdiv for that reason: the technician brings tools and spare parts to the address and diagnoses the machine on site, instead of loading it into a service van.</p>
+            <p>During the visit the specialist opens the machine, checks the electronics, the pump, the heater and the bearings, and finds the specific cause of the fault. If a part needs replacing, that is discussed with the customer before work starts.</p>
+            <p>Besides washing machine repair, RotoRem Plovdiv also provides <a href="/en/services/remont-na-sushilni-plovdiv/" class="text-blue-700 font-medium hover:underline">dryer repair</a> at the address, with the same approach of diagnostics and repair in the customer's home.</p>
+          </div>
+          <div>
+            <img src={diagnosticImage} alt="Washing machine diagnostics in Plovdiv" class="w-full rounded-2xl shadow-lg object-cover" loading="lazy" width="600" height="450" />
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <Reviews title="Customer reviews" prioritizeAppliance="Пералня" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing machine faults we repair</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-xl border border-blue-100">
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing machine parts and systems we check and repair</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+        <div class="hidden md:block overflow-hidden rounded-xl border border-blue-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-blue-600 text-white">
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Part or system</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">The problem it most often causes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-8 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>Not every fault means a part has to be replaced. Sometimes the cause is a blocked filter or a loose connection, so the decision to replace a part is made after the check.</p>
+          <p>Most often replaced parts: bimetal lock, solenoid valve, drain pump, inlet and outlet water hoses, heating element and temperature sensor, shock absorbers, and sometimes a repair of the control board is needed</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Bearing replacement and drum problems</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Humming that gets louder on spin, or a metallic sound from the drum, most often means worn bearings. Before the repair the technician also checks the other parts around the drum: the seal, the shock absorbers and the belt.</p>
+          <p>For heavier work, such as a full replacement of the drum assembly when the bearings are worn, the customer is told in advance, because the job takes longer than a simple pump replacement.</p>
+          <p>On older washing machines the technician says honestly whether the repair is worthwhile compared with the price of a new machine. The decision stays with the customer.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing machine installation and removal</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100 space-y-5 text-gray-800 leading-relaxed">
+          <p>RotoRem installs and removes washing machines in Plovdiv.</p>
+          <p>Installation can include positioning, levelling, connection to the water supply and the drain, a check of the connections and a test of the appliance. Correct levelling matters, so vibration and movement on spin are reduced.</p>
+          <p>When a washing machine is replaced, we also safely remove and disconnect the old appliance.</p>
+          <p>If the washing machine is combined with a dryer, an extra check of the position and the connection of the two appliances may be needed.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} aria-labelledby="plovdiv-wm-pricing-en">
+        <div class="text-center mb-8">
+          <h2 id="plovdiv-wm-pricing-en" class="text-3xl font-bold text-gray-900 mb-4">Washing machine repair prices in Plovdiv</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-gray-800 leading-relaxed mb-8">
+          <p>The customer learns what the fault is and what the repair includes before a decision is made to continue. That avoids surprises after the work is finished.</p>
+          <p>The prices are a guide for labour and do not include the cost of spare parts.</p>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-blue-100">
+          <div class="md:hidden space-y-3">
+            {priceRows.map((row) => (
+              <div class="rounded-xl border border-blue-100 bg-white p-4 shadow-sm">
+                <p class="font-medium text-gray-900 mb-2">{row.service}</p>
+                <p class="text-xl font-bold text-blue-700">{row.price}</p>
+              </div>
+            ))}
+          </div>
+          <div class="hidden md:block overflow-hidden rounded-xl border border-white/60 bg-white shadow-md">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="bg-blue-600 text-white">
+                  <th scope="col" class="px-5 py-4 text-sm font-semibold">Service / problem</th>
+                  <th scope="col" class="px-5 py-4 text-sm font-semibold text-right">Price (EUR)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {priceRows.map((row, index) => (
+                  <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                    <td class="px-5 py-4 text-sm text-gray-800">{row.service}</td>
+                    <td class="px-5 py-4 text-sm font-bold text-blue-700 text-right whitespace-nowrap">{row.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing machine brands we service</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">Bosch, Siemens, AEG, Electrolux, Gorenje, Samsung, LG, Beko, Indesit, Whirlpool.</p>
+          <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {brands.map((brand) => (
+              <li class="bg-white border border-gray-200 rounded-lg shadow-sm h-full min-h-[4.5rem] px-4 py-4 flex items-center justify-center text-center font-semibold text-gray-900">{brand}</li>
+            ))}
+          </ul>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">Each manufacturer has its own construction, electronics and error-code system, so the technician checks the washing machine according to the specific model. If you know the brand and model, say so when you call, so the technician arrives prepared.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Real washing machine repairs in Plovdiv</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img src={item.image} alt={item.alt} class="w-full md:w-2/5 lg:w-5/12 h-64 md:h-auto object-cover md:min-h-[280px]" loading="lazy" width="480" height="360" />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">Brand / model: {item.brand}</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Problem:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Area:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img src={realCases[2].image} alt={realCases[2].alt} class="w-full lg:w-2/5 h-72 lg:h-auto object-cover lg:min-h-[300px]" loading="lazy" width="560" height="400" />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">Brand / model: {realCases[2].brand}</h3>
+              <p class="text-gray-800"><span class="font-semibold">Problem:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Area:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">How the repair works</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}><span class="text-xl font-bold">{item.step}</span></div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100"><p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p></div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}><span class="text-xl font-bold">{item.step}</span></div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100"><p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p></div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Washing machine repair in different areas of Plovdiv</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>RotoRem provides an at-home service across Plovdiv and nearby. For addresses outside the city there is a surcharge of 2 € per kilometre.</p>
+          <p>Neighbourhoods we cover: Centre, Smirnenski, Karshiaka, Marasha, Kyuchuk Paris, Kamenitsa, Gagarin, Zaharna Fabrika, Filipovo, Proslav, Komatevo, Ostromila, Belomorski</p>
+          <p>Besides Plovdiv, RotoRem also repairs washing machines at customers' homes in <a href="/en/services/washing-machine-repair/" class="text-blue-700 font-medium hover:underline">Varna</a> and <a href="/en/services/sofia/washing-machine-repair/" class="text-blue-700 font-medium hover:underline">Sofia</a>.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently asked questions</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100"><p class="leading-relaxed">{faq.a}</p></div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </article>
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Problem with the washing machine?</h2>
+      <p class="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">Call 089 834 0982 now for fast on-site diagnostics in Plovdiv and book a repair.</p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">089 834 0982</a>
+    </section>
+  </div>
+</Layout>

@@ -8,8 +8,8 @@ export const defaultLang = 'bg';
 export const ui = {
   bg: {
     // SEO Meta Tags
-    'meta.homepage.title': 'Професионален ремонт на електроуреди в София и Варна | РотоРем',
-    'meta.homepage.description': 'Сервиз за битова техника по домовете ✓ Ремонт на електроуреди в София и Варна ✓ Включена гаранция ✓ Всички марки ✓ Свържете се с нас на ☎ 089 834 0982!',
+    'meta.homepage.title': 'Професионален ремонт на електроуреди във Варна | РотоРем',
+    'meta.homepage.description': 'Сервиз за битова техника по домовете ✓ Ремонт на електроуреди във Варна ✓ Включена гаранция ✓ Всички марки ✓ Свържете се с нас на ☎ 089 834 0982!',
     
     // Navigation
     'nav.services': 'Услуги',
@@ -116,8 +116,8 @@ export const ui = {
   },
   en: {
     // SEO Meta Tags
-    'meta.homepage.title': 'Professional Appliance Repair in Sofia & Varna | RotoRem',
-    'meta.homepage.description': 'In-home appliance service ✓ Appliance repair in Sofia & Varna ✓ Included warranty ✓ All brands ✓ Contact us at ☎ 089 834 0982!',
+    'meta.homepage.title': 'Professional Appliance Repair in Varna | RotoRem',
+    'meta.homepage.description': 'In-home appliance service ✓ Appliance repair in Varna ✓ Included warranty ✓ All brands ✓ Contact us at ☎ 089 834 0982!',
     
     // Navigation
     'nav.services': 'Services',

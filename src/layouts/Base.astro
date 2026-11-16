@@ -44,7 +44,7 @@ const serviceDefinitions = [
       en: 'Washing Machine Repair',
       bg: 'Ремонт на перални'
     },
-    availableIn: ['varna', 'sofia'],
+    availableIn: ['varna', 'sofia', 'plovdiv'],
     availableLanguages: ['en', 'bg']
   },
   {
@@ -55,7 +55,7 @@ const serviceDefinitions = [
       en: 'Dryer Repair',
       bg: 'Ремонт на сушилни'
     },
-    availableIn: ['varna', 'sofia'],
+    availableIn: ['varna', 'sofia', 'plovdiv'],
     availableLanguages: ['en', 'bg']
   },
   {
@@ -66,7 +66,7 @@ const serviceDefinitions = [
       en: 'Dishwasher Repair',
       bg: 'Ремонт на съдомиялни'
     },
-    availableIn: ['varna', 'sofia'],
+    availableIn: ['varna', 'sofia', 'plovdiv'],
     availableLanguages: ['en', 'bg']
   },
   {
@@ -77,7 +77,7 @@ const serviceDefinitions = [
       en: 'Oven Repair',
       bg: 'Ремонт на фурни'
     },
-    availableIn: ['varna', 'sofia'],
+    availableIn: ['varna', 'sofia', 'plovdiv'],
     availableLanguages: ['en', 'bg']
   },
   {
@@ -88,7 +88,7 @@ const serviceDefinitions = [
       en: 'Boiler Repair',
       bg: 'Ремонт на бойлери'
     },
-    availableIn: ['varna', 'sofia'],
+    availableIn: ['varna', 'sofia', 'plovdiv'],
     availableLanguages: ['en', 'bg']
   },
   {
@@ -104,23 +104,52 @@ const serviceDefinitions = [
   }
 ];
 
+const plovdivPrefix = isEN ? '/en/services' : '/services';
+const plovdivServiceUrls: Record<string, string> = {
+  washing: `${plovdivPrefix}/remont-na-peralni-plovdiv/`,
+  dryer: `${plovdivPrefix}/remont-na-sushilni-plovdiv/`,
+  dishwasher: `${plovdivPrefix}/remont-na-sadomiyalni-plovdiv/`,
+  oven: `${plovdivPrefix}/remont-na-furni-plovdiv/`,
+  boiler: `${plovdivPrefix}/remont-na-boileri-plovdiv/`,
+};
+
 const serviceCityConfigs = [
   {
     key: 'varna',
     label: isEN ? 'Varna' : 'Варна',
-    pathSuffix: ''
+    pathSuffix: '',
+    languages: ['en', 'bg'],
+    allServicesUrl: '',
+    itemUrls: {} as Record<string, string>,
   },
   {
     key: 'sofia',
     label: isEN ? 'Sofia' : 'София',
-    pathSuffix: 'sofia'
+    pathSuffix: 'sofia',
+    languages: ['en', 'bg'],
+    allServicesUrl: '',
+    itemUrls: {} as Record<string, string>,
+  },
+  {
+    key: 'plovdiv',
+    label: isEN ? 'Plovdiv' : 'Пловдив',
+    pathSuffix: 'plovdiv',
+    languages: ['en', 'bg'],
+    allServicesUrl: '',
+    itemUrls: plovdivServiceUrls,
   }
 ];
 
 const baseServicesPath = isEN ? '/en/services' : '/services';
 
-const serviceMenuSections = serviceCityConfigs.map(({ key, label, pathSuffix }) => {
-  const allServicesUrl = pathSuffix ? `${baseServicesPath}/${pathSuffix}/` : `${baseServicesPath}/`;
+const serviceMenuSections = serviceCityConfigs
+  .filter((city) => city.languages.includes(locale))
+  .map(({ key, label, pathSuffix, allServicesUrl: allServicesOverride, itemUrls }) => {
+  const allServicesUrl = allServicesOverride
+    ? allServicesOverride
+    : pathSuffix
+      ? `${baseServicesPath}/${pathSuffix}/`
+      : `${baseServicesPath}/`;
   const buttonLabel = isEN ? `${label} Services` : `Услуги ${label}`;
   const viewAllLabel = isEN ? `View all ${label} services` : `Всички услуги за ${label}`;
 
@@ -139,7 +168,7 @@ const serviceMenuSections = serviceCityConfigs.map(({ key, label, pathSuffix }) 
       .map((item) => ({
         title: item.titles[locale],
         icon: item.icon,
-        url: `${allServicesUrl}${item.slug}/`
+        url: itemUrls[item.key] ?? `${allServicesUrl}${item.slug}/`
       }))
   };
 });
@@ -148,10 +177,10 @@ const varnaServices = serviceMenuSections.find((section) => section.key === 'var
 const quickLinkServices = varnaServices.slice(0, 2);
 
 const {
-  title = isEN ? 'RotoRem Varna & Sofia | Appliance Repair Services' : 'РотоРем Варна и София | Ремонт на битова техника',
+  title = isEN ? 'RotoRem Varna | Appliance Repair Services' : 'РотоРем Варна | Ремонт на битова техника',
   description = isEN 
-    ? 'Professional appliance repair in Varna & Sofia. Fast in-home repairs for washing machines, dishwashers, ovens, boilers and more.'
-    : 'Професионален ремонт на битова техника във Варна и София. Бързи ремонти на място за перални, съдомиялни, фурни, бойлери и други.',
+    ? 'Professional appliance repair in Varna. Fast in-home repairs for washing machines, dishwashers, ovens, boilers and more.'
+    : 'Професионален ремонт на битова техника във Варна. Бързи ремонти на място за перални, съдомиялни, фурни, бойлери и други.',
   image = '/img/hero.webp',
   noindex: noindexProp = false,
   hideServiceFaq = false,
@@ -159,6 +188,38 @@ const {
 
 const route = getRouteFromUrl(Astro.url);
 const canonicalPath = Astro.url.pathname;
+
+const isSofiaPage = /\/sofia(\/|$)/.test(canonicalPath);
+const isPlovdivPage = /plovdiv(\/|$)/.test(canonicalPath);
+const isServicesPage = /\/services(\/|$)/.test(canonicalPath);
+const isHomePage = canonicalPath === '/' || canonicalPath === '/en' || canonicalPath === '/en/';
+const footerOffice = isSofiaPage
+  ? 'sofia'
+  : (isHomePage || (isServicesPage && !isPlovdivPage))
+    ? 'varna'
+    : null;
+
+const footerLocations = {
+  varna: {
+    address: isEN
+      ? '15 Akademik Andrey Saharov St., entrance B, Mladost Northern Industrial Zone, 9009 Varna'
+      : 'Северна промишлена зона Младост, ул. „Академик Андрей Сахаров“ 15, вх.Б, 9009 Варна',
+    map: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.15833672271!2d27.898483676998847!3d43.22346497112555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa93ffafd0b6cdf85%3A0x33a482acc1e986da!2z0KDQvtGC0L7QoNC10LwgLSDQktCw0YDQvdCw!5e1!3m2!1sbg!2sbg!4v1794398619909!5m2!1sbg!2sbg',
+    mapTitle: isEN ? 'RotoRem map in Varna' : 'Карта на РотоРем във Варна',
+  },
+  sofia: {
+    address: isEN
+      ? '68 Ivan Susanin St., Manastirski Livadi, 1618 Sofia'
+      : 'кв. Манастирски ливади, ул. „Иван Сусанин“ 68, 1618 София',
+    map: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.9341859801743!2d23.27874747697783!3d42.66116087116668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a455ad63ce0aa9%3A0x95fcc464b8dabb3a!2zUm90b1JlbSAtINCg0LXQvNC-0L3RgiDQvdCwINC_0LXRgNCw0LvQvdC4!5e1!3m2!1sbg!2sbg!4v1794399000983!5m2!1sbg!2sbg',
+    mapTitle: isEN ? 'RotoRem map in Sofia' : 'Карта на РотоРем в София',
+  },
+} as const;
+
+const footerLocation = footerOffice ? footerLocations[footerOffice] : null;
+const footerAddress = footerLocation
+  ? footerLocation.address
+  : (isEN ? 'Varna & Sofia, Bulgaria' : 'Варна и София, България');
 const canonicalURL = new URL(canonicalPath, Astro.site);
 const shouldNoindex = noindexProp;
 const isHomeRoute = route === '/';
@@ -767,7 +828,7 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
         }
         
         .dropdown-item {
-          @apply flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary transition-colors;
+          @apply flex items-center px-4 py-3 lg:text-lg xl:text-xl text-gray-700 hover:bg-blue-50 hover:text-primary transition-colors;
         }
 
         .dropdown-section {
@@ -888,6 +949,74 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
 
         .dropdown-section + .dropdown-section {
           @apply border-t border-gray-200 mt-2 pt-2;
+        }
+
+        /* Cities → city → services */
+        .cities-dropdown {
+          @apply relative;
+        }
+
+        .cities-dropdown::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 100%;
+          height: 10px;
+        }
+
+        .cities-toggle {
+          @apply lg:text-lg xl:text-xl text-gray-700 hover:text-primary font-medium font-heading flex items-center transition-colors;
+        }
+
+        .cities-menu {
+          @apply absolute top-full left-0 mt-1 min-w-[13rem] bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 opacity-0 invisible transition-all duration-200 transform scale-95 origin-top-left;
+        }
+
+        .cities-dropdown:hover > .cities-menu,
+        .cities-dropdown:focus-within > .cities-menu,
+        .cities-dropdown.is-open > .cities-menu {
+          @apply opacity-100 visible scale-100;
+        }
+
+        .cities-dropdown:hover > .cities-toggle .cities-chevron,
+        .cities-dropdown:focus-within > .cities-toggle .cities-chevron,
+        .cities-dropdown.is-open > .cities-toggle .cities-chevron {
+          transform: rotate(180deg);
+        }
+
+        .city-row {
+          @apply relative;
+        }
+
+        .city-row-btn {
+          @apply w-full flex items-center justify-between gap-3 px-4 py-3 lg:text-lg xl:text-xl text-gray-700 hover:bg-blue-50 hover:text-primary transition-colors font-medium font-heading text-left;
+        }
+
+        .city-row:hover > .city-row-btn,
+        .city-row:focus-within > .city-row-btn,
+        .city-row.is-open > .city-row-btn {
+          @apply bg-blue-50 text-primary;
+        }
+
+        .city-flyout {
+          @apply absolute top-0 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 opacity-0 invisible min-w-[22rem];
+          left: calc(100% - 6px);
+        }
+
+        .city-flyout::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -10px;
+          width: 10px;
+        }
+
+        .city-row:hover > .city-flyout,
+        .city-row:focus-within > .city-flyout,
+        .city-row.is-open > .city-flyout {
+          @apply opacity-100 visible;
         }
       }
 
@@ -1163,48 +1292,56 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
         </a>
 
         <div class="flex gap-4 md:gap-8 items-center">
-                    <!-- Desktop navigation with Services dropdown -->
+                    <!-- Desktop navigation: Cities → city → services -->
           <nav class="hidden md:flex gap-6 items-center">
-            {serviceMenuSections.map((section) => (
-              <div class="dropdown" data-section-key={section.key}>
-                <button class="text-gray-700 hover:text-primary font-medium font-heading flex items-center transition-colors">
-                  {section.buttonLabel}
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </button>
-                
-                <div class="dropdown-menu">
-                  <div class="dropdown-section">
-                    <div class="dropdown-section-title">{section.label}</div>
-                    {section.items.map((item) => (
-                      <a href={item.url} class="dropdown-item">
-                        <span class="text-primary mr-3" set:html={item.icon}></span>
-                        <span>{item.title} {section.label}</span>
+            <div class="cities-dropdown dropdown">
+              <button type="button" class="cities-toggle" aria-haspopup="true" aria-expanded="false">
+                {isEN ? 'Cities' : 'Градове'}
+                <svg xmlns="http://www.w3.org/2000/svg" class="cities-chevron w-4 h-4 ml-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <div class="cities-menu">
+                {serviceMenuSections.map((section) => (
+                  <div class="city-row" data-city-key={section.key}>
+                    <button type="button" class="city-row-btn" aria-haspopup="true">
+                      <span>{section.label}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+                    <div class="city-flyout">
+                      <div class="dropdown-section-title">{isEN ? `${section.label} services` : `Услуги ${section.label}`}</div>
+                      {section.items.map((item) => (
+                        <a href={item.url} class="dropdown-item">
+                          <span class="text-primary mr-3" set:html={item.icon}></span>
+                          <span>{item.title}</span>
+                        </a>
+                      ))}
+                      <div class="border-t border-gray-200 mt-2 mb-2"></div>
+                      <a href={section.allServicesUrl} class="dropdown-item font-medium text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M9 6l6 6-6 6"/>
+                        </svg>
+                        {section.viewAllLabel}
                       </a>
-                    ))}
+                    </div>
                   </div>
-                  <div class="border-t border-gray-200 mt-2 mb-2"></div>
-                  <a href={section.allServicesUrl} class="dropdown-item font-medium text-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M9 6l6 6-6 6"/>
-                    </svg>
-                    {section.viewAllLabel}
-                  </a>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
             
-            <a href={navPaths.reviews} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
+            <a href={navPaths.reviews} class="lg:text-lg xl:text-xl text-gray-700 hover:text-primary font-medium font-heading transition-colors">
               {t('nav.reviews')}
             </a>
-            <a href={navPaths.blog} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
+            <a href={navPaths.blog} class="lg:text-lg xl:text-xl text-gray-700 hover:text-primary font-medium font-heading transition-colors">
               {t('nav.blog')}
             </a>
-            <a href={navPaths.team} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
+            <a href={navPaths.team} class="lg:text-lg xl:text-xl text-gray-700 hover:text-primary font-medium font-heading transition-colors">
               {t('nav.team')}
             </a>
-            <a href={navPaths.contact} class="text-gray-700 hover:text-primary font-medium font-heading transition-colors">
+            <a href={navPaths.contact} class="lg:text-lg xl:text-xl text-gray-700 hover:text-primary font-medium font-heading transition-colors">
               {t('nav.contact')}
             </a>
           </nav>
@@ -1237,7 +1374,7 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
       
       <!-- Mobile Navigation Overlay - WITH SERVICES SUBMENU AND CAREERS -->
       <div id="mobile-menu" class="fixed inset-0 bg-gray-900/80 z-50 hidden">
-        <div class="h-full w-64 max-w-[80%] bg-white shadow-xl ml-auto flex flex-col">
+        <div class="h-full w-80 max-w-[88%] bg-white shadow-xl ml-auto flex flex-col">
           <div class="p-4 border-b border-gray-200 flex items-center justify-between">
             <span class="font-bold text-lg text-primary font-heading">
               {isEN ? 'RotoRem' : 'РотоРем'}
@@ -1249,36 +1386,50 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
             </button>
           </div>
           
-          <!-- Mobile menu links with Services expandable -->
-          <nav class="flex flex-col py-4">
-            {serviceMenuSections.map((section) => (
-              <div class="border-t border-gray-200 first:border-t-0" data-mobile-services-section={section.key}>
-                <button 
-                  class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading text-left flex items-center justify-between"
-                  type="button"
-                  data-mobile-services-toggle={section.key}
-                >
-                  <span>{section.buttonLabel}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-mobile-services-arrow>
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </button>
-                <div
-                  class="hidden bg-gray-50 border-t border-gray-200"
-                  data-mobile-services-submenu={section.key}
-                >
-                  {section.items.map((item) => (
-                    <a href={item.url} class="py-2 px-8 text-gray-600 hover:bg-gray-100 active:bg-gray-200 text-sm font-heading flex items-center">
-                      <span class="text-primary mr-3" set:html={item.icon}></span>
-                      <span>{item.title} {section.label}</span>
-                    </a>
-                  ))}
-                  <a href={section.allServicesUrl} class="py-2 px-8 text-primary hover:bg-gray-100 active:bg-gray-200 text-sm font-heading font-medium">
-                    {section.viewAllLabel}
-                  </a>
-                </div>
+          <!-- Mobile menu: Cities → city → services -->
+          <nav class="flex flex-col py-4 flex-1 overflow-y-auto min-h-0">
+            <div class="border-b border-gray-200" data-mobile-cities>
+              <button
+                class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading text-left flex items-center justify-between w-full"
+                type="button"
+                data-mobile-cities-toggle
+              >
+                <span>{isEN ? 'Cities' : 'Градове'}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-mobile-cities-arrow>
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+              <div class="hidden bg-gray-50 border-t border-gray-200" data-mobile-cities-panel>
+                {serviceMenuSections.map((section) => (
+                  <div data-mobile-services-section={section.key}>
+                    <button
+                      class="py-3 px-6 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading text-left flex items-center justify-between w-full"
+                      type="button"
+                      data-mobile-services-toggle={section.key}
+                    >
+                      <span>{section.label}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-mobile-services-arrow>
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+                    <div
+                      class="hidden bg-white border-t border-gray-200"
+                      data-mobile-services-submenu={section.key}
+                    >
+                      {section.items.map((item) => (
+                        <a href={item.url} class="py-2 px-8 text-gray-600 hover:bg-gray-100 active:bg-gray-200 text-sm font-heading flex items-center">
+                          <span class="text-primary mr-3" set:html={item.icon}></span>
+                          <span>{item.title}</span>
+                        </a>
+                      ))}
+                      <a href={section.allServicesUrl} class="py-2 px-8 text-primary hover:bg-gray-100 active:bg-gray-200 text-sm font-heading font-medium">
+                        {section.viewAllLabel}
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
             
             <a href={navPaths.reviews} class="py-3 px-4 text-gray-700 hover:bg-gray-100 active:bg-gray-200 font-heading">
               {t('nav.reviews')}
@@ -1394,13 +1545,15 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
                 </svg>
                 <a href="tel:0898340982" class="hover:text-white transition-colors">089 834 0982</a>
               </div>
-              <div class="flex items-center text-sm text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-                <span>{isEN ? 'Varna & Sofia, Bulgaria' : 'Варна и София, България'}</span>
-              </div>
+              {!isPlovdivPage && (
+                <div class="flex items-start text-sm text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <span>{footerAddress}</span>
+                </div>
+              )}
             </div>
           </div>
           
@@ -1423,14 +1576,31 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
                 </svg>
                 <a href="mailto:n.ivanov.ivanov@abv.bg" class="hover:text-white font-heading">n.ivanov.ivanov@abv.bg</a>
               </li>
-              <li class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-gray-400 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-                <span class="font-heading">{isEN ? 'Varna & Sofia, Bulgaria' : 'Варна и София, България'}</span>
-              </li>
+              {!isPlovdivPage && (
+                <li class="flex items-start">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-gray-400 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <span class="font-heading">{footerAddress}</span>
+                </li>
+              )}
             </ul>
+            {footerLocation && (
+              <div class="mt-4 overflow-hidden rounded-lg border border-gray-700 h-52">
+                <iframe
+                  src={footerLocation.map}
+                  title={footerLocation.mapTitle}
+                  width="600"
+                  height="450"
+                  style="border:0;"
+                  allowfullscreen
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  class="w-full h-full"
+                ></iframe>
+              </div>
+            )}
             
             <!-- Updated working hours -->
             <div class="mt-4">
@@ -1556,9 +1726,12 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
       const menuPanel = mobileMenu?.querySelector('div');
       const floatingButton = document.getElementById('floating-phone-btn');
       
-      // Mobile services submenu functionality
+      // Mobile cities → services
       const serviceToggleButtons = document.querySelectorAll('[data-mobile-services-toggle]');
       const serviceSubmenus = document.querySelectorAll('[data-mobile-services-submenu]');
+      const citiesToggle = document.querySelector('[data-mobile-cities-toggle]');
+      const citiesPanel = document.querySelector('[data-mobile-cities-panel]');
+      const citiesArrow = citiesToggle?.querySelector('[data-mobile-cities-arrow]');
 
       const resetServicesSubmenus = () => {
         serviceSubmenus.forEach((submenu) => submenu.classList.add('hidden'));
@@ -1566,6 +1739,13 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
           const arrow = toggle.querySelector('[data-mobile-services-arrow]');
           if (arrow) arrow.setAttribute('style', 'transform: rotate(0deg)');
         });
+      };
+
+      const setCitiesOpen = (open) => {
+        if (!citiesPanel) return;
+        citiesPanel.classList.toggle('hidden', !open);
+        if (citiesArrow) citiesArrow.setAttribute('style', `transform: rotate(${open ? 90 : 0}deg)`);
+        if (!open) resetServicesSubmenus();
       };
 
       function openMenu() {
@@ -1595,7 +1775,7 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
             menuPanel.classList.remove('slide-out-right');
             document.body.style.overflow = '';
             if (floatingButton) floatingButton.style.display = 'flex';
-            resetServicesSubmenus();
+            setCitiesOpen(false);
           }, 300);
 
           // Track menu close
@@ -1606,6 +1786,22 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
             label: 'Mobile Menu',
           });
         }
+      }
+
+      if (citiesToggle) {
+        citiesToggle.addEventListener('click', () => {
+          const shouldOpen = citiesPanel?.classList.contains('hidden');
+          setCitiesOpen(Boolean(shouldOpen));
+
+          if (shouldOpen) {
+            trackDataLayerEvent({
+              event: 'cities_menu_open',
+              category: 'Navigation',
+              action: 'opened',
+              label: 'Cities',
+            });
+          }
+        });
       }
 
       serviceToggleButtons.forEach((toggle) => {
@@ -1623,7 +1819,6 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
             submenu.classList.remove('hidden');
             if (arrow) arrow.setAttribute('style', 'transform: rotate(90deg)');
 
-            // Track service submenu open
             trackDataLayerEvent({
               event: 'service_submenu_open',
               category: 'Navigation',
@@ -1633,6 +1828,40 @@ const shouldRenderBreadcrumbJsonLd = !hasBreadcrumbListInJsonLd(jsonLdSchema);
           }
         });
       });
+
+      const citiesDropdown = document.querySelector('.cities-dropdown');
+      const citiesDesktopToggle = citiesDropdown?.querySelector('.cities-toggle');
+
+      if (citiesDropdown && citiesDesktopToggle) {
+        citiesDesktopToggle.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const open = citiesDropdown.classList.toggle('is-open');
+          citiesDesktopToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+
+        citiesDropdown.querySelectorAll('.city-row-btn').forEach((button) => {
+          button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const row = button.closest('.city-row');
+            if (!row) return;
+            const willOpen = !row.classList.contains('is-open');
+            citiesDropdown.querySelectorAll('.city-row.is-open').forEach((openRow) => {
+              openRow.classList.remove('is-open');
+            });
+            if (willOpen) row.classList.add('is-open');
+          });
+        });
+
+        document.addEventListener('click', (event) => {
+          if (!citiesDropdown.contains(event.target)) {
+            citiesDropdown.classList.remove('is-open');
+            citiesDesktopToggle.setAttribute('aria-expanded', 'false');
+            citiesDropdown.querySelectorAll('.city-row.is-open').forEach((openRow) => {
+              openRow.classList.remove('is-open');
+            });
+          }
+        });
+      }
 
       if (mobileMenuButton) mobileMenuButton.addEventListener('click', openMenu);
       if (closeMenuButton) closeMenuButton.addEventListener('click', closeMenu);

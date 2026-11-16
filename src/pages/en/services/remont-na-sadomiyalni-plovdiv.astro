@@ -1,0 +1,485 @@
+---
+import Layout from '../../../layouts/Base.astro';
+import Reviews from '../../../components/Reviews.astro';
+import { getServiceFaqItems } from '../../../lib/jsonldOverrides';
+
+const title = 'Dishwasher Repair in Plovdiv | RotoRem';
+const description = 'At-home dishwasher repair in Plovdiv, with on-site diagnostics and clear pricing. Pump and heater replacement. Call 089 834 0982.';
+
+const heroImage = '/img/services/ремонт-на-съдомиялни-пловдив-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-съдомиялна-пловдив-диагностика.webp';
+
+const accentBar = 'bg-emerald-500';
+const accentLink = 'text-emerald-700';
+const accentShell = 'from-emerald-50 via-white to-teal-50 border-emerald-100';
+const accentBorder = 'border-emerald-100';
+const tableHeader = 'bg-emerald-600';
+
+const problems = [
+  {
+    title: 'The dishwasher does not heat the water',
+    text: 'When the machine fills with water but it stays cold and the dishes come out dirty, the cause is often the heating element. Cold water does not dissolve grease and detergent well, so the dishes come out stained or greasy. The temperature sensor and the controls are checked as well as the heater, because they can cause the same symptom.',
+    border: 'border-emerald-500',
+  },
+  {
+    title: 'The dishwasher does not drain',
+    text: 'When the water does not drain and stays at the bottom after a cycle, the problem is usually the pump. Before a replacement, the filter at the bottom is checked, because it is often blocked with food residue. A kinked or blocked drain hose also stops draining.',
+    border: 'border-teal-500',
+  },
+  {
+    title: 'The dishwasher does not fill with water',
+    text: 'The programme starts, but no water enters, or only a very small amount. The tap and inlet hose, the inlet filter and the inlet valve are checked. The cause can also be the sensor that monitors the water level.',
+    border: 'border-cyan-500',
+  },
+  {
+    title: 'The dishes are not washed well',
+    text: 'Food residue and stains on the dishes do not always mean a fault. The filters or the spray-arm nozzles are often blocked, and limescale also reduces the pressure. If the problem remains after cleaning, the circulation pump is checked.',
+    border: 'border-green-500',
+  },
+  {
+    title: 'The dishwasher is leaking',
+    text: 'Water under the machine or around the door. A worn door seal is the most common cause, but the leak can also come from a hose, a connection or a pump. Until the repair, it is better not to run the machine, so the kitchen cabinets and the floor are not damaged.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'The dishwasher will not start',
+    text: 'There are cases in which the appliance does not start at all. The power supply, the door lock and the electronics are checked. On built-in models the door sometimes does not close fully because of the furniture panel or the installation.',
+    border: 'border-amber-500',
+  },
+  {
+    title: 'The programme stops in the middle of the cycle',
+    text: 'The machine interrupts the programme and does not finish it. The cause can be filling, draining, heating or a sensor. It helps to note the stage at which it stops and whether an error code appears.',
+    border: 'border-indigo-500',
+  },
+  {
+    title: 'The dishwasher makes an unusual noise',
+    text: 'Humming, rattling or grinding during operation most often comes from the pump or from a foreign object caught under the spray arm or in the filter. The sound and the moment it appears point the technician to a specific part.',
+    border: 'border-purple-500',
+  },
+  {
+    title: 'The door does not close or lock',
+    text: 'Without a closed door the programme will not start. The lock mechanism, the hinges and the springs are checked, and on built-in models the furniture-panel installation as well.',
+    border: 'border-orange-500',
+  },
+  {
+    title: 'The dishwasher shows an error code',
+    text: 'The code points the diagnostics toward a particular system, but by itself it does not say which part needs replacing. The technician compares it with the actual check of the machine.',
+    border: 'border-slate-500',
+  },
+];
+
+const checks = [
+  'the filters and the drain system;',
+  'the drain pump and the circulation pump;',
+  'the inlet valve and the hoses;',
+  'the heater and the temperature sensors;',
+  'the spray arms and nozzles;',
+  'the seals and the door lock;',
+  'the electronic module and the error codes.',
+];
+
+const partsTable = [
+  { part: 'Drain pump', problem: 'Water stays at the bottom' },
+  { part: 'Circulation pump', problem: 'Poor washing, water is not sprayed' },
+  { part: 'Filter', problem: 'Dirty dishes, slow draining' },
+  { part: 'Drain hose', problem: 'The machine does not drain' },
+  { part: 'Inlet valve', problem: 'Does not fill with water' },
+  { part: 'Heating element', problem: 'The water stays cold' },
+  { part: 'Temperature sensor', problem: 'Incorrect heating' },
+  { part: 'Spray arms and nozzles', problem: 'Dishes are washed unevenly' },
+  { part: 'Door seal', problem: 'Leak around the door' },
+  { part: 'Door lock', problem: 'The programme does not start' },
+  { part: 'Electronic module and board', problem: 'Interruption, errors, will not start' },
+];
+
+const priceRows = [
+  { service: 'Visit and diagnostics', price: '25 €' },
+  { service: 'Installation of a freestanding dishwasher', price: 'from 45 €' },
+  { service: 'Installation of a built-in dishwasher', price: 'from 60 €' },
+  { service: 'Removal of an old appliance', price: 'from 15 €' },
+  { service: 'The dishwasher does not heat the water', price: 'from 20 €' },
+  { service: 'Problem with the door closing', price: 'from 20 €' },
+  { service: 'The dishwasher does not fill with water', price: 'from 26 €' },
+  { service: 'The dishwasher does not drain', price: 'from 26 €' },
+];
+
+const brands = ['Bosch', 'Siemens', 'Electrolux', 'Whirlpool', 'Indesit', 'Candy', 'Miele'];
+
+const realCases = [
+  {
+    brand: 'Bosch',
+    problem: 'The Bosch dishwasher was not draining.',
+    area: 'Kyuchuk Paris, Plovdiv',
+    diagnosis: 'The drain pump was working, but a piece of a broken glass was found at its impeller and was blocking it.',
+    repair: 'The foreign object was removed and the pump was cleaned. After the repair the dishwasher drains and works normally.',
+    image: '/img/services/ремонт-на-съдомиялна-пловдив-случай-1.webp',
+    alt: 'Repair of a Bosch dishwasher that does not drain, with diagnostics and cleaning of a blocked drain pump in Kyuchuk Paris, Plovdiv.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'The dishwasher was not draining properly.',
+    area: 'Kyuchuk Paris, Plovdiv',
+    diagnosis: 'The appliance was tilted to reach the pump, the hoses and the other components at the bottom. The check found a partial blockage in the drain system.',
+    repair: 'The drain system was cleaned and the pump and connections were checked. After the repair the dishwasher drains and works normally.',
+    image: '/img/services/ремонт-на-съдомиялна-пловдив-случай-2.webp',
+    alt: 'Diagnostics and repair of a Bosch dishwasher, tilted for access to the pump and internal components, in Kyuchuk Paris, Plovdiv.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'The dishwasher was running, but the dishes were still poorly washed at the end of the programme.',
+    area: 'Trakia, Plovdiv',
+    diagnosis: 'The check found a problem in the electrical supply to the circulation pump, which prevented normal water circulation during washing.',
+    repair: 'The supply to the circulation pump was restored and the appliance was tested. After the repair the dishwasher works normally and washes the dishes correctly.',
+    image: '/img/services/ремонт-на-съдомиялна-пловдив-случай-3.webp',
+    alt: 'Repair of a Bosch dishwasher with a circulation-pump power problem in Hristo Botev, Plovdiv.',
+  },
+];
+
+const processSteps = [
+  { step: 1, text: 'You contact RotoRem and describe the problem. If there is an error code, mention that as well.', circleClass: 'bg-gradient-to-r from-emerald-500 to-emerald-600' },
+  { step: 2, text: 'We arrange a visit to the address in Plovdiv.', circleClass: 'bg-gradient-to-r from-teal-500 to-teal-600' },
+  { step: 3, text: 'The technician carries out diagnostics.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 4, text: 'You are told what the fault is and what will be repaired.', circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600' },
+  { step: 5, text: 'Repair and test of the dishwasher on site.', circleClass: 'bg-gradient-to-r from-emerald-600 to-teal-700' },
+];
+
+const faqs = getServiceFaqItems('/en/services/remont-na-sadomiyalni-plovdiv/');
+const sectionClass = 'mb-28 pt-4';
+---
+
+<Layout title={title} description={description} image={heroImage} hideServiceFaq={true}>
+  <article>
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Dishwasher repair at an address in Plovdiv"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        fetchpriority="high"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-emerald-950/85 via-emerald-900/75 to-emerald-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            At-home dishwasher repair in Plovdiv
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-8 leading-relaxed">
+            RotoRem Plovdiv repairs dishwashers at the address, with on-site diagnostics and replacement of components such as the heating element and the pump, without the appliance having to be taken to a workshop. The team comes to the home or office, finds the fault and explains on site what needs to be done. Call <a href="tel:0898340982" class="font-semibold text-white hover:underline">089 834 0982</a> for on-site diagnostics in Plovdiv.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xl font-bold text-white">Diagnostics in Plovdiv - 25 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-sm text-white/80 mb-1">Phone</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Call for a visit
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">At-home dishwasher repair and diagnostics</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+            <p>Dishwashers are heavy and difficult to move, and taking them apart and transporting them to a workshop often takes longer than the repair itself. That is why RotoRem works in homes in Plovdiv, and diagnostics are carried out directly at the customer's address.</p>
+            <p>RotoRem offers professional dishwasher repair as part of its <a href="/en/services/plovdiv/" class={`${accentLink} font-medium hover:underline`}>appliance repair service in Plovdiv</a>.</p>
+            <p>Besides dishwasher repair, RotoRem Plovdiv also provides <a href="/en/services/remont-na-furni-plovdiv/" class={`${accentLink} font-medium hover:underline`}>oven repair</a> at the address, with the same approach of diagnostics and repair in the customer's home.</p>
+          </div>
+          <div>
+            <img src={diagnosticImage} alt="Dishwasher diagnostics in Plovdiv" class="w-full rounded-2xl shadow-lg object-cover" loading="lazy" width="600" height="450" />
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <Reviews title="Customer reviews" prioritizeAppliance="Съдомиялна" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dishwasher faults we repair</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <p class="text-center text-gray-800 leading-relaxed mb-8 max-w-3xl mx-auto">A dishwasher stops working for different reasons, and the symptoms usually indicate where the problem is.</p>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-xl border`}>
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">Each of these symptoms needs its own inspection, because the same fault can have different causes on different models.</p>
+      </section>
+
+      <section class={sectionClass} aria-labelledby="plovdiv-dw-pricing-en">
+        <div class="text-center mb-8">
+          <h2 id="plovdiv-dw-pricing-en" class="text-3xl font-bold text-gray-900 mb-4">Dishwasher repair prices in Plovdiv</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-gray-800 leading-relaxed mb-8">
+          <p>The repair price is given after on-site diagnostics, before any work on the appliance begins.</p>
+          <p>The prices are a guide for labour and do not include the cost of spare parts.</p>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border`}>
+          <div class="md:hidden space-y-3">
+            {priceRows.map((row) => (
+              <div class={`rounded-xl border ${accentBorder} bg-white p-4 shadow-sm`}>
+                <p class="font-medium text-gray-900 mb-2">{row.service}</p>
+                <p class="text-xl font-bold text-emerald-700">{row.price}</p>
+              </div>
+            ))}
+          </div>
+          <div class="hidden md:block overflow-hidden rounded-xl border border-white/60 bg-white shadow-md">
+            <table class="w-full text-left">
+              <thead>
+                <tr class={`${tableHeader} text-white`}>
+                  <th scope="col" class="px-5 py-4 text-sm font-semibold">Service / problem</th>
+                  <th scope="col" class="px-5 py-4 text-sm font-semibold text-right">Price (EUR)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {priceRows.map((row, index) => (
+                  <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                    <td class="px-5 py-4 text-sm text-gray-800">{row.service}</td>
+                    <td class="px-5 py-4 text-sm font-bold text-emerald-700 text-right whitespace-nowrap">{row.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dishwasher diagnostics in Plovdiv</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`max-w-4xl mx-auto bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed`}>
+          <p>Diagnostics are meant to find the cause before anything is replaced. Depending on the symptom, the following are checked:</p>
+          <ul class="list-disc pl-5 space-y-2">
+            {checks.map((item) => <li>{item}</li>)}
+          </ul>
+          <p>After the check the customer learns what the fault is and what repair is needed.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dishwasher parts and systems we check and repair</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <p class="text-gray-800 leading-relaxed text-center max-w-4xl mx-auto mb-8">After diagnostics the team replaces worn or damaged parts. The most common work on dishwashers is replacing the heating element when the appliance does not heat the water, and replacing the pump when the water does not drain properly. Both jobs are done on site, without the machine having to leave the customer's home.</p>
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class={`bg-white rounded-xl border ${accentBorder} p-5 shadow-sm`}>
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+        <div class={`hidden md:block overflow-hidden rounded-xl border ${accentBorder} bg-white shadow-lg`}>
+          <table class="w-full text-left">
+            <thead>
+              <tr class={`${tableHeader} text-white`}>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Part or system</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">The problem it most often causes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-8 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>Not every fault means a part has to be replaced. The cause is often a blocked filter or hose, so the decision is made after the check.</p>
+          <p>Most often replaced parts: inlet solenoid valve, drain pump, inlet fill hose, outlet drain hose, heating element, lock, and less often the circulation pump</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Pumps and water-circulation problems</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>A dishwasher has two pumps: one moves the water to the spray arms during washing, and the other pumps it out at the end. That is why the same pump fault can look completely different: water at the bottom, dirty dishes, humming or a programme that stops.</p>
+          <p>Before a replacement the technician checks whether the problem is a blockage or a foreign object jamming the pump. A pump is replaced only when the check shows that it is the cause.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dishwasher installation and removal</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-emerald-100 space-y-5 text-gray-800 leading-relaxed">
+          <p>Besides repair, RotoRem also installs dishwashers for customers who are fitting a new appliance and want the water, drain and power connections done correctly from the start.</p>
+          <h3 class="text-xl font-semibold text-gray-900">Installation of a freestanding dishwasher</h3>
+          <p>Positioning and levelling, connection to water and drain, a leak check of the connections and a test run.</p>
+          <h3 class="text-xl font-semibold text-gray-900">Installation of a built-in dishwasher</h3>
+          <p>The machine is aligned with the kitchen cabinet and the existing connections. The level, the water, the drain and whether the door with the furniture panel opens freely are checked.</p>
+          <h3 class="text-xl font-semibold text-gray-900">Removal of an old dishwasher</h3>
+          <p>The old machine is disconnected from the water and the drain without damaging the cabinets and the connections.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Freestanding and built-in dishwashers</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>RotoRem repairs both freestanding and built-in dishwashers. On built-in models the machine sometimes has to be pulled partly out of the cabinet to reach the damaged part. When you call, it helps to say whether the machine is built in, and to give the brand and model.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dishwasher brands we service</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">Bosch, Siemens, Electrolux, Whirlpool, Indesit, Candy, Miele.</p>
+          <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {brands.map((brand) => (
+              <li class="bg-white border border-gray-200 rounded-lg shadow-sm h-full min-h-[4.5rem] px-4 py-4 flex items-center justify-center text-center font-semibold text-gray-900">
+                {brand}
+              </li>
+            ))}
+          </ul>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">Programmes, electronics and error codes differ by brand and model. When you book, give the brand, the model and the error code if there is one.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Real dishwasher repairs in Plovdiv</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img src={item.image} alt={item.alt} class="w-full md:w-2/5 lg:w-5/12 h-64 md:h-auto object-cover md:min-h-[280px]" loading="lazy" width="480" height="360" />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">Brand / model: {item.brand}</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Problem:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Area:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img src={realCases[2].image} alt={realCases[2].alt} class="w-full lg:w-2/5 h-72 lg:h-auto object-cover lg:min-h-[300px]" loading="lazy" width="560" height="400" />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">Brand / model: {realCases[2].brand}</h3>
+              <p class="text-gray-800"><span class="font-semibold">Problem:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Area:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">How the repair works</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dishwasher repair in different areas of Plovdiv</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto`}>
+          <p>RotoRem provides an at-home service across Plovdiv and nearby. For addresses outside the city there is a surcharge of 2 € per kilometre.</p>
+          <p>Neighbourhoods we cover: Centre, Smirnenski, Karshiaka, Marasha, Kyuchuk Paris, Kamenitsa, Gagarin, Zaharna Fabrika, Filipovo, Proslav, Komatevo, Ostromila, Belomorski</p>
+          <p>At-home dishwasher repair is also available for customers in <a href="/en/services/dishwasher-repair/" class={`${accentLink} font-medium hover:underline`}>Varna</a> and in <a href="/en/services/sofia/dishwasher-repair/" class={`${accentLink} font-medium hover:underline`}>Sofia</a>.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently asked questions</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-emerald-600 to-emerald-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Problem with the dishwasher?</h2>
+      <p class="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">Call 089 834 0982 now for fast on-site diagnostics in Plovdiv and book a repair.</p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">089 834 0982</a>
+    </section>
+  </div>
+</Layout>

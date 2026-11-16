@@ -1,0 +1,179 @@
+---
+import Layout from '../../../../layouts/Base.astro';
+import Reviews from '../../../../components/Reviews.astro';
+
+const title = 'Appliance Repair in Plovdiv | RotoRem';
+const description = 'On-site diagnostics and repair of washing machines, hobs, dryers, dishwashers, ovens and water heaters in Plovdiv. No transport of the appliance. Call 089 834 0982.';
+
+type IconKey = 'washing-machine' | 'dryer' | 'dishwasher' | 'oven' | 'boiler';
+
+const serviceColors: Record<IconKey, string> = {
+  'washing-machine': 'from-blue-700/80 to-blue-600/80',
+  dryer: 'from-indigo-700/80 to-indigo-600/80',
+  dishwasher: 'from-emerald-700/80 to-emerald-600/80',
+  oven: 'from-amber-700/80 to-amber-600/80',
+  boiler: 'from-teal-700/80 to-teal-600/80',
+};
+
+const icons: Record<IconKey, string> = {
+  'washing-machine': `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="14" r="4"/><circle cx="12" cy="14" r="1"/><path d="M8 6h.01M11 6h.01M14 6h.01"/></svg>`,
+  dryer: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="14" r="4"/><path d="M8 6h.01M11 6h.01M14 6h.01"/><path d="M16 10l2 2"/></svg>`,
+  dishwasher: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M8 16v-4"/><path d="M16 16v-4"/><path d="M8 6h.01"/><path d="M12 6h.01"/><path d="M16 6h.01"/></svg>`,
+  oven: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M7 16h10"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 7v6"/><path d="M17 7v6"/></svg>`,
+  boiler: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="18" x="5" y="3" rx="2"/><path d="M8 21v-2M12 21v-2M16 21v-2"/><path d="M8 7h8M8 11h8"/></svg>`,
+};
+
+const services: { icon: IconKey; title: string; description: string; url: string }[] = [
+  { icon: 'washing-machine', title: 'Washing machines', description: 'The most common washing machine faults are worn bearings, a heater that does not work, or a damaged drain pump. RotoRem Plovdiv carries out diagnostics and washing machine repair at the address in Plovdiv, including replacement of bearings, heaters and pumps.', url: '/en/services/remont-na-peralni-plovdiv/' },
+  { icon: 'dryer', title: 'Dryers', description: 'Dryers often stop drying effectively because of a blocked condenser or a burnt heater. RotoRem Plovdiv carries out diagnostics and repair at the address, without the appliance having to be removed and taken out of the home.', url: '/en/services/remont-na-sushilni-plovdiv/' },
+  { icon: 'dishwasher', title: 'Dishwashers', description: 'Dishwashers most often need a heating element or a pump replaced. RotoRem Plovdiv carries out diagnostics and repair at the address, without the appliance having to be removed and taken out of the home.', url: '/en/services/remont-na-sadomiyalni-plovdiv/' },
+  { icon: 'oven', title: 'Ovens and hobs', description: 'Common oven faults are a burnt heater or a faulty thermostat. For hobs, RotoRem Plovdiv carries out diagnostics and replacement of a damaged heating zone.', url: '/en/services/remont-na-furni-plovdiv/' },
+  { icon: 'boiler', title: 'Water heaters', description: 'The most common work on water heaters is replacement of a heater or thermostat, and maintenance to extend the life of the appliance. The work is done where it is installed in Plovdiv, without removal, except when a full replacement is needed.', url: '/en/services/remont-na-boileri-plovdiv/' },
+];
+
+const stats = [
+  { value: '5000', label: 'Successful repairs' },
+  { value: '15+', label: 'Years of experience' },
+  { value: '24h', label: 'Response time' },
+  { value: '5★', label: 'Google rating' },
+];
+
+const steps = [
+  'Call - contact us by phone.',
+  'Visit - the technician comes at the agreed time.',
+  'Diagnostics - diagnostics for 25 € and a quote for the repair.',
+  'Repair - repair on site with a warranty for the work.',
+];
+
+const brands = ['Bosch', 'Siemens', 'AEG', 'Electrolux', 'Whirlpool', 'Samsung', 'LG', 'Gorenje', 'Beko', 'Indesit'];
+---
+
+<Layout title={title} description={description} image="/img/hero-page-plovdiv.webp">
+  <section class="relative overflow-hidden text-white">
+    <img src="/img/hero-page-plovdiv.webp" alt="At-home appliance repair in Plovdiv" class="absolute inset-0 w-full h-full object-cover object-center" width="1600" height="900" fetchpriority="high" decoding="async" loading="eager" />
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/65"></div>
+    <div class="container relative z-10 max-w-4xl text-center py-16 md:py-24">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading drop-shadow-sm">RotoRem Plovdiv, appliance repair service</h1>
+      <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">RotoRem Plovdiv carries out on-site diagnostics and repair of washing machines, hobs, dryers, dishwashers, ovens and water heaters in the customer's home, without the appliance having to be transported to a workshop.</p>
+      <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto mb-4">Diagnostics in Plovdiv - 25 €</p>
+      <p class="text-lg text-white font-medium mb-8">Repair the same day.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">Send an email</a>
+        <a href="/en/contact/" class="bg-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-dark transition-colors shadow-lg">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gradient-to-r from-blue-600 to-blue-800 py-8 shadow-inner border-t border-b border-blue-900/20">
+    <div class="container">
+      <div class="hidden md:grid md:grid-cols-4 gap-6 text-center">
+        {stats.map((stat) => (<div class="flex flex-col items-center justify-center p-4"><div class="text-3xl font-bold text-white mb-1">{stat.value}</div><div class="text-sm text-white/90 font-medium">{stat.label}</div></div>))}
+      </div>
+      <div class="grid grid-cols-2 gap-4 md:hidden">
+        {stats.map((stat) => (<div class="flex flex-col items-center justify-center p-4 bg-white/10 rounded-lg backdrop-blur-sm"><div class="text-2xl font-bold text-white mb-1">{stat.value}</div><div class="text-xs text-white/90 font-medium text-center">{stat.label}</div></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-gradient-to-b from-blue-50 to-white relative overflow-hidden">
+    <div class="container relative z-10">
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">Our services</h2>
+        <div class="w-24 h-1 bg-primary mx-auto my-4"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-10">
+        {services.map((service) => (
+          <div class="relative rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
+            <div class="absolute inset-0">
+              <div class={`absolute inset-0 bg-gradient-to-br ${serviceColors[service.icon]} group-hover:opacity-80 transition-opacity duration-300`}></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            </div>
+            <div class="relative z-10 p-6 md:p-8 h-full flex flex-col text-white">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="p-2 bg-white/20 rounded-full text-white"><Fragment set:html={icons[service.icon]} /></div>
+                <h3 class="text-xl font-semibold drop-shadow-sm">{service.title}</h3>
+              </div>
+              <p class="mt-2 text-white/90 flex-grow">{service.description}</p>
+              <div class="mt-6 pt-4 border-t border-white/20">
+                <a href={service.url} class="bg-white/30 hover:bg-white/40 backdrop-blur-sm text-white font-medium py-2 px-4 rounded-lg inline-flex items-center transition-colors shadow-sm">Learn more</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-b from-white to-gray-50">
+    <div class="container">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Why choose RotoRem</h2>
+        <div class="w-20 h-1 bg-accent mx-auto my-4"></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <article class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Appliance repair service in Plovdiv</h3>
+          <p class="text-gray-600">RotoRem Plovdiv is a service specialised in diagnostics, repair and installation of white goods. The RotoRem team covers washing machines, dryers, dishwashers, ovens, hobs and water heaters. The business does not take work outside these appliance categories and focuses entirely on them, which lets the team recognise faults quickly and bring the specific parts needed for the repair.</p>
+        </article>
+        <article class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">On-site diagnostics, without taking the appliance to a workshop</h3>
+          <p class="text-gray-600">A washing machine that weighs more than 60 kilograms, or a built-in water heater connected to pipes and the electrical installation, is not an appliance that is easy to take to a workshop. That is why RotoRem works as an at-home service: the technician comes with tools and spare parts to the address in Plovdiv, inspects the appliance on site and explains exactly what is not working before the repair starts.</p>
+          <p class="text-gray-600 mt-4">On-site diagnostics save time and remove the risk of extra damage when a heavy or built-in appliance is transported. The customer stays at home throughout and can see exactly what the technician is doing.</p>
+        </article>
+        <article class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Clear pricing</h3>
+          <p class="text-gray-600">Before any work begins, the RotoRem technician explains to the customer exactly what the diagnostics found and what will be done to fix the fault.</p>
+          <p class="text-gray-600 mt-4">The price for the visit and diagnostics is 25 euro. Everything else is discussed on site with the customer according to the problem.</p>
+        </article>
+        <article class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">We cover the whole of Plovdiv</h3>
+          <p class="text-gray-600">RotoRem comes to addresses in Plovdiv. Neighbourhoods we cover: Centre, Smirnenski, Karshiaka, Marasha, Kyuchuk Paris, Kamenitsa, Gagarin, Zaharna Fabrika, Filipovo, Proslav, Komatevo, Ostromila, Belomorski. For addresses outside the city there is a surcharge of 2 € per kilometre.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="container">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">How our service works</h2>
+        <div class="w-20 h-1 bg-accent mx-auto my-4"></div>
+      </div>
+      <div class="grid md:grid-cols-4 gap-8">
+        {steps.map((step, index) => (
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">{index + 1}</div>
+            <p class="text-gray-900 font-semibold">{step}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-b from-gray-50 to-white">
+    <div class="container">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Brands we service</h2>
+        <div class="w-20 h-1 bg-accent mx-auto my-4"></div>
+        <p class="mt-6 text-gray-800 leading-relaxed">RotoRem repairs white goods from all popular brands, including Bosch, Siemens, AEG, Electrolux, Whirlpool, Samsung, LG, Gorenje, Beko and Indesit.</p>
+      </div>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        {brands.map((brand) => (
+          <li class="bg-white border border-gray-200 rounded-lg shadow-sm min-h-[4.5rem] px-4 py-4 flex items-center justify-center text-center font-semibold text-gray-900">{brand}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Reviews title="RotoRem customer reviews" />
+
+  <section class="container pb-8">
+    <div class="text-center bg-gradient-to-r from-primary to-primary-dark text-white py-16 px-6 rounded-2xl shadow-2xl">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 max-w-3xl mx-auto">Call 089 834 0982 now for fast on-site diagnostics in Plovdiv and book a repair.</h2>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:n.ivanov.ivanov@abv.bg" class="inline-flex items-center justify-center bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">Send an email</a>
+        <a href="tel:0898340982" class="bg-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-dark transition-colors shadow-lg">Call 089 834 0982</a>
+      </div>
+    </div>
+  </section>
+</Layout>

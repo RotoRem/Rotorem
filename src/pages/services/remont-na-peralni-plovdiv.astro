@@ -1,0 +1,491 @@
+---
+import Layout from '../../layouts/Base.astro';
+import Reviews from '../../components/Reviews.astro';
+import { getServiceFaqItems } from '../../lib/jsonldOverrides';
+
+const title = 'Ремонт на перални Пловдив | РотоРем';
+const description = 'Диагностика на място и ремонт на перални машини в Пловдив, без транспортиране на уреда. Смяна на помпи, нагреватели и лагери. Обадете се на 089 834 0982.';
+
+const heroImage = '/img/services/ремонт-на-перални-пловдив-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-перални-пловдив-диагностика.webp';
+
+const problems = [
+  {
+    title: 'Износени лагери',
+    text: 'Пералнята шуми силно при центрофуга, барабанът се клати. Шумът обикновено започва като леко бучене и с времето се засилва до тракане или метален звук, особено при високи обороти. Ако барабанът има видима хлабина, когато го раздвижите с ръка, лагерите най-вероятно са износени. Често заедно с тях се сменя и семерингът, защото през него вода може да е проникнала до лагерите. Колкото по-рано се направи ремонтът, толкова по-малък е рискът от повреда по барабана и казана.',
+    border: 'border-blue-500',
+  },
+  {
+    title: 'Спукан или изгорял нагревател',
+    text: 'Водата остава студена, програмата не загрява дрехите. Понякога пералнята продължава да пере нормално, но прането излиза хладно и петната не се махат. При някои модели изгорелият нагревател изключва бушона или прекъсва програмата с код за грешка. Честа причина е котленият камък, който се натрупва по нагревателя и го прегрява. Техникът измерва нагревателя на място и го сменя само ако проверката потвърди, че той е повреден.',
+    border: 'border-green-500',
+  },
+  {
+    title: 'Запушена или повредена помпа',
+    text: 'Машината не източва водата или спира с пълен барабан. Често причината е предмет, заседнал във филтъра или в помпата, като монета, копче или фиба. Ако филтърът е чист, а помпата бръмчи, без да изпомпва, или изобщо не се чува, тя най-вероятно е изгоряла. Проверяват се също дренажният маркуч и връзката към канала, защото запушване там дава същия симптом. При пълен барабан водата се източва безопасно, преди да започне ремонтът.',
+    border: 'border-amber-500',
+  },
+  {
+    title: 'Неизправен термостат',
+    text: 'Водата се загрява неправилно или въобще не се включва нагряването. Термостатът или температурният датчик казва на пералнята кога водата е достигнала нужната температура. Когато е повреден, водата може да остане студена, да прегрява и да поврежда дрехите, или програмата да продължава необичайно дълго. Тъй като симптомите приличат на повреден нагревател, двете части се проверяват заедно.',
+    border: 'border-red-500',
+  },
+  {
+    title: 'Пералнята тече',
+    text: 'Вода под машината или около люка. Най-честата причина е скъсан или износен маншон на люка, особено при по-стари перални. Течът може да идва и от напукан маркуч, разхлабена връзка, помпата или казана. Мястото, където се появява водата, и моментът от програмата, в който тече, помагат да се открие източникът. При теч е по-добре пералнята да не се използва до ремонта, за да не се наводни помещението.',
+    border: 'border-purple-500',
+  },
+  {
+    title: 'Пералнята не стартира или показва грешка',
+    text: 'При натискане на старт нищо не се случва, люкът не се заключва или на дисплея излиза код за грешка. Проверяват се захранването, заключването на люка, програматорът и електронната платка. Кодът за грешка насочва техника към определена система, но не винаги означава, че конкретната част е за смяна. Затова кодът се съпоставя с реалната проверка на пералнята.',
+    border: 'border-indigo-500',
+  },
+];
+
+const partsTable = [
+  { part: 'Помпа за източване', problem: 'Водата не се изтегля, машината спира с пълен барабан' },
+  { part: 'Филтър и дренажен маркуч', problem: 'Бавно източване или прекъсване на програмата' },
+  { part: 'Нагревател', problem: 'Прането излиза студено' },
+  { part: 'Термостат / температурен датчик', problem: 'Водата не се загрява или прегрява' },
+  { part: 'Лагери', problem: 'Силно бучене и тракане при центрофуга' },
+  { part: 'Семеринг', problem: 'Вода прониква към лагерите' },
+  { part: 'Ремък', problem: 'Моторът работи, но барабанът стои' },
+  { part: 'Мотор и четки', problem: 'Барабанът не се върти или не центрофугира' },
+  { part: 'Амортисьори', problem: 'Пералнята подскача и вибрира' },
+  { part: 'Маншон на люка', problem: 'Теч отпред, около вратата' },
+  { part: 'Входящ клапан (електроклапан)', problem: 'Пералнята не пълни вода или пълни без спиране' },
+  { part: 'Заключване на люка', problem: 'Програмата не тръгва или вратата не се отваря' },
+  { part: 'Програматор и електронна платка', problem: 'Грешки, прекъсване или машината не реагира' },
+];
+
+const priceRows = [
+  { service: 'Диагностика', price: '25 €' },
+  { service: 'Отстраняване на теч', price: 'от 31 €' },
+  { service: 'Проблем с източването', price: 'от 36 €' },
+  { service: 'Проблем с центрофугата', price: 'от 36 €' },
+  { service: 'Проблем с нагряването', price: 'от 46 €' },
+  { service: 'Смяна на лагери', price: 'от 87 €' },
+  { service: 'Монтаж на пералня', price: 'от 40 €' },
+];
+
+const brands = ['Bosch', 'Siemens', 'AEG', 'Electrolux', 'Gorenje', 'Samsung', 'LG', 'Beko', 'Indesit', 'Whirlpool'];
+
+const realCases = [
+  {
+    brand: 'Indesit',
+    problem: 'Пералнята не стартираше нито една програма.',
+    area: 'кв. Прослав, Пловдив',
+    diagnosis: 'Установен проблем в биметалната ключалка на вратата.',
+    diagnosisTight: true,
+    repair: 'Подмяна на биметалната ключалка. След ремонта пералнята стартира програмите и работи нормално.',
+    image: '/img/services/ремонт-на-перални-пловдив-случай-1.webp',
+    alt: 'Ремонт на пералня Indesit, която не стартира програма, с диагностика и подмяна на дефектна биметална ключалка в кв. Прослав, Пловдив.',
+  },
+  {
+    brand: 'Whirlpool',
+    problem: 'Пералнята не завърташе барабана.',
+    area: 'Кючук Париж, Пловдив',
+    diagnosis: 'След проверка беше установено, че моторът, отговарящ за въртенето на барабана, е изгорял.',
+    diagnosisTight: false,
+    repair: 'Подменен е дефектният мотор с нов. След ремонта пералнята завърта барабана и работи нормално.',
+    image: '/img/services/ремонт-на-перални-пловдив-случай-2.webp',
+    alt: 'Ремонт на пералня Whirlpool, която не завърта барабана, с диагностика и подмяна на изгорял мотор в кв. Кючук Париж, Пловдив.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'Пералнята не стартираше нито една от програмите.',
+    area: 'Прослав, Пловдив',
+    diagnosis: 'Установен е проблем в заключването на люка. Биметалната ключалка беше изгоряла и не подаваше коректен сигнал, че вратата е заключена.',
+    diagnosisTight: false,
+    repair: 'Подменена е дефектната биметална ключалка с нова. След ремонта пералнята стартира програмите и работи нормално.',
+    image: '/img/services/ремонт-на-перални-пловдив-случай-3.webp',
+    alt: 'Ремонт на пералня Bosch, която не стартира програма, с диагностика и подмяна на изгоряла биметална ключалка в кв. Прослав, Пловдив.',
+  },
+];
+
+const processSteps = [
+  { step: 1, text: 'Свързвате се с РотоРем и описвате проблема.', circleClass: 'bg-gradient-to-r from-blue-500 to-blue-600' },
+  { step: 2, text: 'Уговаряме посещение на адреса в Пловдив.', circleClass: 'bg-gradient-to-r from-green-500 to-green-600' },
+  { step: 3, text: 'Техникът прави диагностика.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 4, text: 'Получавате информация каква е повредата и какво ще се ремонтира.', circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600' },
+  { step: 5, text: 'Ремонт и тест на пералнята на място.', circleClass: 'bg-gradient-to-r from-indigo-500 to-indigo-600' },
+];
+
+const faqs = getServiceFaqItems('/services/remont-na-peralni-plovdiv/');
+const sectionClass = 'mb-28 pt-4';
+---
+
+<Layout title={title} description={description} image={heroImage} hideServiceFaq={true}>
+  <article>
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Ремонт на пералня на адрес в Пловдив"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        fetchpriority="high"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-950/85 via-blue-900/75 to-blue-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Ремонт на перални машини по домовете в Пловдив
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-5 leading-relaxed">
+            РотоРем Пловдив извършва диагностика на място и ремонт на перални машини по домовете, без да е нужно уредът да се сваля или транспортира до сервиз. Екипът пристига на адреса, установява повредата и предлага решение още при първото посещение.
+          </p>
+          <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed">
+            Услугата е насочена към хора с повредена пералня, която не загрява вода, не центрофугира, тече или спира по средата на програмата. Вместо да се търси превоз на тежък уред, техник идва директно в дома и работи на място.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xl font-bold text-white">Диагностика в Пловдив - 25 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-sm text-white/80 mb-1">Телефон</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Обадете се за посещение
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт и диагностика на перални на адрес</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+            <p>
+              Пералня, пълна с вода или тежаща над 60-70 килограма, е неудобна за местене, а транспортът често струва повече от самия ремонт. РотоРем работи по домовете на територията на Пловдив именно затова: техникът носи инструменти и резервни части на адреса и прави диагностика на място, вместо да товари уреда в сервизен автомобил.
+            </p>
+            <p>
+              При посещение специалистът отваря машината, проверява електрониката, помпата, нагревателя и лагерите, и установява конкретната причина за повредата. Ако се налага смяна на част, тя се обсъжда с клиента преди да започне работа.
+            </p>
+            <p>
+              Освен ремонт на перални, РотоРем Пловдив извършва и <a href="/services/remont-na-sushilni-plovdiv/" class="text-blue-700 font-medium hover:underline">ремонт на сушилни</a> на адрес, със същия подход на диагностика и ремонт в дома на клиента.
+            </p>
+          </div>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Диагностика на перални в Пловдив"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <Reviews title="Отзиви от клиенти" prioritizeAppliance="Пералня" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какви повреди на перални ремонтираме</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <p class="text-center text-gray-800 leading-relaxed mb-8 max-w-3xl mx-auto">
+          Повечето обаждания в Пловдив се дължат на няколко повтарящи се проблема:
+        </p>
+
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-xl border border-blue-100">
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Всеки от тези симптоми сочи към различна част, затова диагностика на място преди ремонт е задължителна стъпка, а не формалност.
+        </p>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Части и системи на пералнята, които проверяваме и ремонтираме</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <p class="text-gray-800 leading-relaxed text-center max-w-4xl mx-auto mb-8">
+          Когато диагностиката потвърди коя част е неизправна, екипът извършва смяна на помпа на пералня, смяна на нагревател на пералня или смяна на лагери на пералня според конкретния случай. Работата включва разглобяване на съответния възел, монтаж на новата част и проверка на машината в работен режим, преди техникът да напусне адреса.
+        </p>
+
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="hidden md:block overflow-hidden rounded-xl border border-blue-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-blue-600 text-white">
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Част или система</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Какъв проблем причинява най-често</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-8 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>Не всяка повреда означава смяна на част. Понякога причината е запушен филтър или разхлабена връзка, затова решението за смяна се взема след проверката.</p>
+          <p>Най-чести части за подмяна: биметална ключалка, електромагнитен клапан, помпа за източване, входящ и изходящ маркуч за водата, нагревателен елемент и температурен сензор, амортисьори, понякога е необходим и ремонт на управлението (платката)</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Смяна на лагери и проблеми с барабана</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Бучене, което се усилва при центрофуга, или метален звук от барабана най-често означават износени лагери. Преди ремонт техникът проверява и останалите части около барабана: семеринга, амортисьорите и ремъка.</p>
+          <p>За по-тежки намеси, като пълна подмяна на барабанния възел при износени лагери, клиентът получава информация предварително, тъй като времето за работа е по-дълго от обикновена смяна на помпа.</p>
+          <p>При по-стари перални техникът казва честно дали ремонтът си струва спрямо цената на нова машина. Решението остава за клиента.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Монтаж и демонтаж на перални</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100 space-y-5 text-gray-800 leading-relaxed">
+          <p>РотоРем извършва монтаж и демонтаж на перални в Пловдив.</p>
+          <p>При монтаж могат да бъдат включени позициониране, нивелиране, свързване към водопровод и канализация, проверка на връзките и тест на уреда. Правилното нивелиране е важно, за да се намалят вибрациите и местенето при центрофуга.</p>
+          <p>При подмяна на пералня извършваме и безопасен демонтаж и разкачване на стария уред.</p>
+          <p>Ако пералнята е комбинирана със сушилня, може да се наложи допълнителна проверка на разположението и свързването на двата уреда.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} aria-labelledby="plovdiv-wm-pricing">
+        <div class="text-center mb-8">
+          <h2 id="plovdiv-wm-pricing" class="text-3xl font-bold text-gray-900 mb-4">Цени за ремонт на перални в Пловдив</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-gray-800 leading-relaxed mb-8">
+          <p>Клиентът научава каква е повредата и какво включва ремонтът, преди да бъде взето решение за продължаване. Така се избягват изненади след приключване на работата.</p>
+          <p>Цените са ориентировъчни за труд и не включват стойността на резервните части.</p>
+        </div>
+
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-blue-100">
+          <div class="md:hidden space-y-3">
+            {priceRows.map((row) => (
+              <div class="rounded-xl border border-blue-100 bg-white p-4 shadow-sm">
+                <p class="font-medium text-gray-900 mb-2">{row.service}</p>
+                <p class="text-xl font-bold text-blue-700">{row.price}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="hidden md:block overflow-hidden rounded-xl border border-white/60 bg-white shadow-md">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="bg-blue-600 text-white">
+                  <th scope="col" class="px-5 py-4 text-sm font-semibold">Услуга / проблем</th>
+                  <th scope="col" class="px-5 py-4 text-sm font-semibold text-right">Цена (EUR)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {priceRows.map((row, index) => (
+                  <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                    <td class="px-5 py-4 text-sm text-gray-800">{row.service}</td>
+                    <td class="px-5 py-4 text-sm font-bold text-blue-700 text-right whitespace-nowrap">{row.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки перални, които обслужваме</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">
+            Bosch, Siemens, AEG, Electrolux, Gorenje, Samsung, LG, Beko, Indesit, Whirlpool.
+          </p>
+          <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {brands.map((brand) => (
+              <li class="bg-white border border-gray-200 rounded-lg shadow-sm h-full min-h-[4.5rem] px-4 py-4 flex items-center justify-center text-center font-semibold text-gray-900">
+                {brand}
+              </li>
+            ))}
+          </ul>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            Всеки производител има своя конструкция, електроника и система от кодове за грешка, затова техникът проверява пералнята според конкретния модел. Ако знаете марката и модела, кажете ги още при обаждането, така техникът идва подготвен.
+          </p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Реални ремонти на перални в Пловдив</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 h-64 md:h-auto object-cover md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">Марка / модел: {item.brand}</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Район:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span>{item.diagnosisTight ? '' : ' '}{item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 h-72 lg:h-auto object-cover lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">Марка / модел: {realCases[2].brand}</h3>
+              <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Район:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Как протича ремонтът</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на перални в различни райони на Пловдив</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+        <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6 md:p-8 rounded-2xl shadow-lg border border-blue-100 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>РотоРем извършва сервиз по домовете на територията на Пловдив и в близост до него. За адреси извън града се прилага доплащане от 2 € на километър.</p>
+          <p>Квартали, които обслужваме: Център, Смирненски, Кършияка, Мараша, Кючук Париж, Каменица, Гагарин, Захарна фабрика, Филипово, Прослав, Коматево, Остромила, Беломорски</p>
+          <p>
+            Освен в Пловдив, РотоРем ремонтира перални на адрес и в домовете на клиенти във <a href="/services/washing-machine-repair/" class="text-blue-700 font-medium hover:underline">Варна</a> и <a href="/services/sofia/washing-machine-repair/" class="text-blue-700 font-medium hover:underline">София</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Често задавани въпроси</h2>
+          <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Проблем с пералнята?</h2>
+      <p class="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        Обадете се сега на 089 834 0982 за бърза диагностика на място в Пловдив и заявете час за ремонт.
+      </p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        089 834 0982
+      </a>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,501 @@
+---
+import Layout from '../../layouts/Base.astro';
+import Reviews from '../../components/Reviews.astro';
+import { getServiceFaqItems } from '../../lib/jsonldOverrides';
+
+const title = 'Ремонт на сушилни Пловдив | РотоРем';
+const description = 'Ремонт на сушилни машини в Пловдив с диагностика на място и сервиз по домовете. Прозрачно ценообразуване. Обадете се на 089 834 0982 за час.';
+
+const heroImage = '/img/services/ремонт-на-сушилни-пловдив-HERO.webp';
+const diagnosticImage = '/img/services/ремонт-на-сушилни-пловдив-диагностика.webp';
+
+const accentBar = 'bg-fuchsia-500';
+const accentLink = 'text-fuchsia-700';
+
+const problems = [
+  {
+    title: 'Дрехите остават влажни след цял цикъл',
+    text: 'Програмата приключва, но прането е мокро или само частично изсъхнало. Най-честата причина е запушен кондензатор или филтър, които спират въздуха да циркулира. Влажността може да идва и от повреден датчик за влажност, който кара програмата да спре твърде рано. Почистването на кондензатора често решава проблема, но ако той е повреден или сушилнята продължава да не суши, се проверява цялата система.',
+    border: 'border-fuchsia-500',
+  },
+  {
+    title: 'Сушилнята не загрява',
+    text: 'Барабанът се върти, но въздухът вътре остава студен. Възможните причини са изгорял нагревател, повреден термостат или температурен датчик, а при моделите с термопомпа - проблем в самата термопомпа. Тъй като симптомът е един и същ за различни части, техникът проверява всяка от тях, преди да предложи смяна.',
+    border: 'border-purple-500',
+  },
+  {
+    title: 'Барабанът не се върти',
+    text: 'Програмата стартира и се чува моторът, но барабанът стои неподвижен. Най-често причината е скъсан или разтегнат ремък. Проверяват се и ролките, на които се опира барабанът, и самият мотор, защото износена ролка може да скъса и новия ремък.',
+    border: 'border-pink-500',
+  },
+  {
+    title: 'Сушилнята спира по време на цикъла',
+    text: 'Програмата прекъсва по средата или сушилнята се изключва сама. Често това е защитата от прегряване, която се задейства при запушен филтър или кондензатор. Причината може да е и в датчик, мотора или електрониката. Важно е да се отбележи в кой момент спира и дали излиза код за грешка.',
+    border: 'border-violet-500',
+  },
+  {
+    title: 'Сушилнята не събира или не източва водата',
+    text: 'Резервоарът остава празен или водата изтича извън него. При кондензните модели се проверяват помпата за конденз, маркучите и резервоарът. При модели, свързани директно към канала, се проверява и дренажната връзка.',
+    border: 'border-indigo-500',
+  },
+  {
+    title: 'Сушилнята шуми или показва грешка',
+    text: 'Скърцане, тракане или бучене обикновено идва от износени ролки, лагери или ремък. Чужд предмет, забравен в джоб, също може да шуми в барабана. Кодът за грешка насочва техника към определена система, но се съпоставя с реалната проверка на уреда.',
+    border: 'border-rose-500',
+  },
+  {
+    title: 'Мирише на изгоряло',
+    text: 'Такъв мирис е сигнал сушилнята да се изключи и да не се използва до проверка. Най-често причината е натрупан мъх около нагревателя или запушен въздуховод, но може да е и прегрял електрически компонент.',
+    border: 'border-amber-500',
+  },
+];
+
+const partsTable = [
+  { part: 'Нагревател', problem: 'Въздухът в барабана остава студен' },
+  { part: 'Термостат', problem: 'Не загрява или прегрява и спира' },
+  { part: 'Температурен датчик', problem: 'Неправилна температура при сушене' },
+  { part: 'Датчик за влажност', problem: 'Програмата спира твърде рано или твърде късно' },
+  { part: 'Кондензатор', problem: 'Дрехите остават влажни' },
+  { part: 'Филтър', problem: 'Дълго сушене, задейства се защитата от прегряване' },
+  { part: 'Вентилатор', problem: 'Слаб въздушен поток' },
+  { part: 'Ремък', problem: 'Моторът работи, но барабанът стои' },
+  { part: 'Ролки и лагери', problem: 'Скърцане и шум при въртене' },
+  { part: 'Мотор', problem: 'Барабанът не се върти' },
+  { part: 'Помпа за конденз', problem: 'Резервоарът не се пълни или водата изтича' },
+  { part: 'Заключване на вратата', problem: 'Програмата не тръгва' },
+  { part: 'Електронен модул', problem: 'Грешки или прекъсване на програмата' },
+  { part: 'Термопомпа', problem: 'Слабо сушене при модели с термопомпа' },
+];
+
+const priceRows = [
+  { service: 'Диагностика', price: '25 €' },
+  { service: 'Сушилнята не стартира', price: 'от 20 €' },
+  { service: 'Сушилнята не източва вода', price: 'от 26 €' },
+  { service: 'Барабанът не се върти', price: 'от 31 €' },
+  { service: 'Монтаж на сушилня', price: 'от 40 €' },
+  { service: 'Монтаж пералня + сушилня (колона)', price: 'от 65 €' },
+];
+
+const brands = ['AEG', 'Bosch', 'Whirlpool', 'Beko', 'Indesit', 'Samsung', 'LG', 'Electrolux'];
+
+const realCases = [
+  {
+    brand: 'BEKO',
+    problem: 'Сушилнята не нагряваше.',
+    area: 'кв.Тракия, Пловдив',
+    diagnosis: 'Установен дефект в температурния сензор',
+    repair: 'Подмяна на температурния сензор. След ремонта сушилнята нагрява и работи нормално.',
+    image: '/img/services/ремонт-на-сушилня-пловдив-случай-1.webp',
+    alt: 'Ремонт на сушилня, която не нагрява, с диагностика и подмяна на дефектен температурен сензор в кв. Тракия, Пловдив.',
+  },
+  {
+    brand: 'BEKO',
+    problem: 'Сушилнята не нагряваше.',
+    area: 'кв. Смирненски, Пловдив',
+    diagnosis: 'Нагревателят беше измерен и се установи, че е изправен, но електронната платка не подава напрежение към него.',
+    repair: 'Извършен ремонт на платката. След ремонта сушилнята нагрява и работи нормално.',
+    image: '/img/services/ремонт-на-сушилня-пловдив-случай-2.webp',
+    alt: 'Ремонт на сушилня BEKO, която не нагрява, с диагностика на нагревателя и ремонт на дефектна електронна платка в кв. Христо Смирненски, Пловдив.',
+  },
+  {
+    brand: 'Bosch',
+    problem: 'Сушилнята не изсушаваше дрехите, тъй като барабанът не се въртеше.',
+    area: 'Христо Смирненски, Пловдив',
+    diagnosis: 'При проверката беше установен скъсан ремък и износена ролка на мотора, отговарящ за въртенето на барабана.',
+    repair: 'Подменени са ремъкът и износената ролка. След ремонта барабанът се върти нормално и сушилнята работи правилно.',
+    image: '/img/services/ремонт-на-сушилня-пловдив-случай-3.webp',
+    alt: 'Ремонт на сушилня Bosch със скъсан ремък и износена ролка на мотора, причиняващи проблем с въртенето на барабана, в кв. Христо Смирненски, Пловдив.',
+  },
+];
+
+const processSteps = [
+  { step: 1, text: 'Свързвате се с РотоРем и описвате проблема.', circleClass: 'bg-gradient-to-r from-fuchsia-500 to-fuchsia-600' },
+  { step: 2, text: 'Уговаряме посещение на адреса в Пловдив.', circleClass: 'bg-gradient-to-r from-purple-500 to-purple-600' },
+  { step: 3, text: 'Техникът прави диагностика.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 4, text: 'Получавате информация за повредата и ремонта.', circleClass: 'bg-gradient-to-r from-violet-500 to-violet-600' },
+  { step: 5, text: 'Ремонт и тест на сушилнята на място.', circleClass: 'bg-gradient-to-r from-indigo-500 to-indigo-600' },
+];
+
+const faqs = getServiceFaqItems('/services/remont-na-sushilni-plovdiv/');
+const sectionClass = 'mb-28 pt-4';
+---
+
+<Layout title={title} description={description} image={heroImage} hideServiceFaq={true}>
+  <article>
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img
+        src={heroImage}
+        alt="Ремонт на сушилня на адрес в Пловдив"
+        class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        loading="eager"
+        fetchpriority="high"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-purple-950/85 via-fuchsia-900/75 to-purple-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Ремонт на сушилни машини по домовете в Пловдив
+          </h1>
+          <p class="text-lg md:text-xl text-white/95 mb-8 leading-relaxed">
+            РотоРем Пловдив извършва ремонт на сушилни директно на адреса на клиента, с диагностика на място и смяна на износени части като нагреватели и термостати, без да е необходим транспорт на уреда до сервиз.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-xl font-bold text-white">Диагностика в Пловдив - 25 €</p>
+            </div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-sm text-white/80 mb-1">Телефон</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">
+            Обадете се за посещение
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Диагностика на сушилни в Пловдив</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+            <p>
+              Екипът пристига на адреса, прави оглед на сушилнята и проверява основните компоненти, свързани с описаната повреда. Едва след като е ясно какво точно трябва да се поправи, се преминава към самия ремонт. Клиентът не мъкне сушилнята никъде, а диагностиката и ремонтът стават на едно място, в един и същи ден.
+            </p>
+            <p>
+              Освен ремонт на сушилни, РотоРем Пловдив извършва и <a href="/services/remont-na-peralni-plovdiv/" class={`${accentLink} font-medium hover:underline`}>ремонт на перални</a> на адрес, със същия подход на диагностика и ремонт в дома на клиента.
+            </p>
+          </div>
+          <div>
+            <img
+              src={diagnosticImage}
+              alt="Диагностика на сушилни в Пловдив"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              loading="lazy"
+              width="600"
+              height="450"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <Reviews title="Отзиви от клиенти" prioritizeAppliance="Сушилня" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Какви повреди на сушилни ремонтираме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <p class="text-center text-gray-800 leading-relaxed mb-8 max-w-3xl mx-auto">
+          Повечето обаждания за сушилни в Пловдив се дължат на няколко повтарящи се проблема:
+        </p>
+
+        <div class="bg-gradient-to-r from-fuchsia-50 via-white to-purple-50 p-6 md:p-8 rounded-2xl shadow-xl border border-fuchsia-100">
+          <div class="grid md:grid-cols-2 gap-8">
+            {problems.map((item) => (
+              <div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}>
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3>
+                <p class="text-gray-800 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          Всеки от тези симптоми сочи към различна част, затова диагностика на място преди ремонт е задължителна стъпка, а не формалност.
+        </p>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Части и системи на сушилнята, които проверяваме и ремонтираме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <p class="text-gray-800 leading-relaxed text-center max-w-4xl mx-auto mb-8">
+          Голяма част от повредите в сушилните се дължат на амортизирани компоненти, които се сменят, а не се ремонтират частично. Всяка смяна става след потвърждение на диагнозата, за да не се подменя компонент, който всъщност работи изправно.
+        </p>
+
+        <div class="md:hidden space-y-4">
+          {partsTable.map((row) => (
+            <div class="bg-white rounded-xl border border-fuchsia-100 p-5 shadow-sm">
+              <p class="font-semibold text-gray-900 mb-2">{row.part}</p>
+              <p class="text-gray-800">{row.problem}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="hidden md:block overflow-hidden rounded-xl border border-fuchsia-100 bg-white shadow-lg">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-fuchsia-600 text-white">
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Част или система</th>
+                <th scope="col" class="px-5 py-4 text-sm font-semibold">Какъв проблем причинява най-често</th>
+              </tr>
+            </thead>
+            <tbody>
+              {partsTable.map((row, index) => (
+                <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                  <td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td>
+                  <td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-8 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>Не всяка повреда означава смяна на част. Често причината е замърсен кондензатор или филтър, затова решението за смяна се взема след проверката.</p>
+          <p>Най-често сменяни части: нагревател, температурен сензор, кондензационна помпа, ролки на барабана и ролка на мотора въртящ барабана, проблем в електронен модул, пълно почистване на сушилнята, смяна на ремък</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремък, ролки и проблеми с барабана</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="bg-gradient-to-r from-fuchsia-50 via-white to-purple-50 p-6 md:p-8 rounded-2xl shadow-lg border border-fuchsia-100 space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <p>Когато барабанът не се върти или се чува силен механичен шум, се проверяват частите, които го движат: ремъкът, ролките, лагерите и моторът.</p>
+          <p>Скъсаният ремък спира въртенето изцяло, а износените ролки обикновено се усещат по скърцане. Затова при смяна на ремъка техникът проверява и ролките, за да не се скъса новият ремък отново.</p>
+          <p>След ремонта сушилнята се пуска на програма, за да се провери, че барабанът се върти нормално и без шум.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на сушилни с термопомпа</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-fuchsia-100 space-y-5 text-gray-800 leading-relaxed">
+          <p>Сушилните с термопомпа не изхвърлят топлия въздух, а го връщат обратно в барабана, затова сушат при по-ниска температура и пестят ток. Ако сушат бавно, не загряват добре или прекъсват програмата, причината може да е във въздушния поток, датчиците, вентилатора или кондензната система.</p>
+          <p>РотоРем извършва диагностика и ремонт на достъпните компоненти. Не ремонтираме компресори и хладилната система на термопомпата.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Монтаж и демонтаж на сушилни</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-fuchsia-100 space-y-5 text-gray-800 leading-relaxed">
+          <p>РотоРем извършва монтаж и демонтаж на сушилни в Пловдив.</p>
+          <p>При монтаж се извършват позициониране, нивелиране, проверка на стабилността, необходимото пространство около уреда и тест на машината. При подходящ модел може да се направи и свързване към дренаж.</p>
+          <p>Сушилня може да бъде монтирана и върху пералня, когато условията позволяват. Ако моделите изискват свързващ комплект, клиентът го купува предварително, а ние го монтираме.</p>
+          <p>При подмяна на уред извършваме и демонтаж и безопасно разкачване на старата сушилня.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} aria-labelledby="plovdiv-dryer-pricing">
+        <div class="text-center mb-8">
+          <h2 id="plovdiv-dryer-pricing" class="text-3xl font-bold text-gray-900 mb-4">Цени за ремонт на сушилни в Пловдив</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="max-w-4xl mx-auto space-y-5 text-gray-800 leading-relaxed mb-8">
+          <p>Преди да започне работа по сушилнята, клиентът получава информация какво точно е повредено и какво предстои да се смени. Така се избягва ситуацията повредата да се окаже различна от очакваната, след като ремонтът вече е в ход.</p>
+          <p>Цените са ориентировъчни за труд и не включват стойността на резервните части.</p>
+        </div>
+
+        <div class="bg-gradient-to-r from-fuchsia-50 via-white to-purple-50 p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border border-fuchsia-100">
+          <div class="md:hidden space-y-3">
+            {priceRows.map((row) => (
+              <div class="rounded-xl border border-fuchsia-100 bg-white p-4 shadow-sm">
+                <p class="font-medium text-gray-900 mb-2">{row.service}</p>
+                <p class="text-xl font-bold text-fuchsia-700">{row.price}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="hidden md:block overflow-hidden rounded-xl border border-white/60 bg-white shadow-md">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="bg-fuchsia-600 text-white">
+                  <th scope="col" class="px-5 py-4 text-sm font-semibold">Услуга / проблем</th>
+                  <th scope="col" class="px-5 py-4 text-sm font-semibold text-right">Цена (EUR)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {priceRows.map((row, index) => (
+                  <tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}>
+                    <td class="px-5 py-4 text-sm text-gray-800">{row.service}</td>
+                    <td class="px-5 py-4 text-sm font-bold text-fuchsia-700 text-right whitespace-nowrap">{row.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Марки сушилни, които обслужваме</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">
+            AEG, Bosch, Whirlpool, Beko, Indesit, Samsung, LG, Electrolux.
+          </p>
+          <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {brands.map((brand) => (
+              <li class="bg-white border border-gray-200 rounded-lg shadow-sm h-full min-h-[4.5rem] px-4 py-4 flex items-center justify-center text-center font-semibold text-gray-900">
+                {brand}
+              </li>
+            ))}
+          </ul>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">
+            Всеки производител има своя конструкция и кодове за грешка. Ако кажете марката, модела и кода от дисплея още при обаждането, техникът идва подготвен.
+          </p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Реални ремонти на сушилни в Пловдив</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full md:w-2/5 lg:w-5/12 h-64 md:h-auto object-cover md:min-h-[280px]"
+                  loading="lazy"
+                  width="480"
+                  height="360"
+                />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">Марка / модел: {item.brand}</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Район:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow max-w-5xl mx-auto">
+            <img
+              src={realCases[2].image}
+              alt={realCases[2].alt}
+              class="w-full lg:w-2/5 h-72 lg:h-auto object-cover lg:min-h-[300px]"
+              loading="lazy"
+              width="560"
+              height="400"
+            />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">Марка / модел: {realCases[2].brand}</h3>
+              <p class="text-gray-800"><span class="font-semibold">Проблем:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Район:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Диагностика:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Ремонт:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Как протича ремонтът</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          {processSteps.slice(0, 3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          {processSteps.slice(3).map((item) => (
+            <div class="text-center">
+              <div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}>
+                <span class="text-xl font-bold">{item.step}</span>
+              </div>
+              <div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100">
+                <p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ремонт на сушилни в различни райони на Пловдив</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+        <div class="bg-gradient-to-r from-fuchsia-50 via-white to-purple-50 p-6 md:p-8 rounded-2xl shadow-lg border border-fuchsia-100 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>РотоРем извършва сервиз по домовете на територията на Пловдив и в близост до него. За адреси извън града се прилага доплащане от 2 € на километър.</p>
+          <p>Квартали, които обслужваме: Център, Смирненски, Кършияка, Мараша, Кючук Париж, Каменица, Гагарин, Захарна фабрика, Филипово, Прослав, Коматево, Остромила, Беломорски</p>
+          <p>
+            Ремонт на сушилни на адрес РотоРем извършва не само в Пловдив, а и във <a href="/services/dryer-repair/" class={`${accentLink} font-medium hover:underline`}>Варна</a>, и в <a href="/services/sofia/dryer-repair/" class={`${accentLink} font-medium hover:underline`}>София</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Често задавани въпроси</h2>
+          <div class={`w-20 h-1 ${accentBar} mx-auto`}></div>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+              <details class="group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer">
+                  <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <div class="flex-shrink-0 text-gray-600 transition-transform duration-300 group-open:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="p-5 pt-0 text-gray-800 border-t border-gray-100">
+                  <p class="leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-fuchsia-700 to-purple-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Проблем със сушилнята?</h2>
+      <p class="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+        Обадете се сега на 089 834 0982 за бърза диагностика на място в Пловдив и заявете час за ремонт.
+      </p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+        089 834 0982
+      </a>
+    </section>
+  </div>
+</Layout>

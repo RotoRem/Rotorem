@@ -1,0 +1,258 @@
+---
+import Layout from '../../../layouts/Base.astro';
+import Reviews from '../../../components/Reviews.astro';
+import { getServiceFaqItems } from '../../../lib/jsonldOverrides';
+
+const title = 'Water Heater Repair in Plovdiv | RotoRem';
+const description = 'RotoRem Plovdiv repairs water heaters at the address with on-site diagnostics and replacement of heaters and thermostats. Call 089 834 0982 to book a repair.';
+
+const heroImage = '/img/services/ремонт-на-бойлери-пловдив-HERO.webp';
+const accentBar = 'bg-teal-500';
+const accentLink = 'text-teal-700';
+const accentShell = 'from-teal-50 via-white to-teal-50 border-teal-100';
+const accentBorder = 'border-teal-100';
+const tableHeader = 'bg-teal-600';
+
+const problems = [
+  { title: 'No hot water, even though the appliance is switched on', text: 'The indicator is lit, but the water stays cold. The most common cause is a burnt heater, but a faulty thermostat, a tripped thermal cut-out or a broken connection cause the same symptom. The heater is therefore measured before it is replaced.', border: 'border-teal-500' },
+  { title: 'The water heater does not reach the required temperature', text: 'The water is lukewarm or heats very slowly. A common cause is limescale around the heater, which stops the heat from passing into the water. The thermostat and the condition of the heater are checked as well.', border: 'border-cyan-500' },
+  { title: 'Burnt heater', text: 'The water stops heating, often together with the breaker tripping. On older water heaters the heater is often covered in limescale, which overheats it and shortens its life. Cleaning is done when it is replaced.', border: 'border-amber-500' },
+  { title: 'A faulty thermostat that does not regulate the temperature correctly', text: 'The water is too hot, or the water heater stops heating too early. Overheating is dangerous because it increases the pressure in the tank, so the thermostat and the thermal cut-out are checked together.', border: 'border-red-500' },
+  { title: 'A breaker that trips when the appliance is switched on', text: 'The breaker trips when it is switched on or during heating. Usually the heater insulation has failed or there is a burnt connection. The water heater should not be switched on again until it is checked.', border: 'border-orange-500' },
+  { title: 'A leak from the tank or the connections', text: 'The first step is to find where the water is coming from: the connections, the safety valve, the flange underneath or the tank itself. Leaks from connections and seals are usually repaired on site. If the tank itself has leaked, it is often more sensible to replace the water heater.', border: 'border-sky-500' },
+  { title: 'The safety valve drips constantly', text: 'A few drops while heating are normal, because the valve releases the pressure. If it runs constantly or heavily, the valve itself and the pressure in the water supply need to be checked.', border: 'border-blue-500' },
+  { title: 'The water heater does not switch on', text: 'There is no indication and heating does not start. The power supply, the switch, the cables and the thermal cut-out are checked.', border: 'border-slate-500' },
+  { title: 'The water heater is noisy while heating', text: 'Popping or hissing from the water heater usually comes from limescale built up on the bottom and around the heater. Maintenance usually solves the problem.', border: 'border-emerald-500' },
+];
+
+const checks = [
+  'the heater, the thermostat and the thermal cut-out;',
+  'the electrical connections, the cable and the switch;',
+  'the flange and the seal;',
+  'the safety valve and the water connections;',
+  'the presence of limescale;',
+  'the anode protection, when the water heater is open',
+];
+
+const partsTable = [
+  { part: 'Heater', problem: 'No hot water, the breaker trips' },
+  { part: 'Thermostat', problem: 'The water is lukewarm or too hot' },
+  { part: 'Thermal cut-out', problem: 'The water heater stops and will not switch on again' },
+  { part: 'Flange and seal', problem: 'Leak from below' },
+  { part: 'Safety valve', problem: 'Constant dripping' },
+  { part: 'Water connections', problem: 'Leak along the pipes' },
+  { part: 'Electrical connections, cable, switch', problem: 'Does not switch on or switches off' },
+  { part: 'Anode protection', problem: 'Rust and corrosion of the tank' },
+  { part: 'Limescale', problem: 'Slow heating, noise' },
+];
+
+const priceRows = [
+  { service: 'Visit and diagnostics', price: '25 €' },
+  { service: 'Installation of a water heater up to 80 l', price: 'from 65 €' },
+  { service: 'Installation of a water heater over 80 l', price: 'from 75 €' },
+  { service: 'Removal of an old appliance', price: 'from 15 €' },
+  { service: 'The water heater leaks or drips', price: 'from 15 €' },
+  { service: 'The water heater does not heat the water', price: 'from 26 €' },
+  { service: 'Maintenance and limescale cleaning', price: 'from 36 €' },
+];
+
+const brands = ['TESY', 'Ariston', 'Atlantic', 'Eldom', 'Diplomat', 'Gorenje', 'AEG', 'Beko'];
+const realCases = [
+  { brand: 'Tesy', problem: 'The water heater was heating slowly and was not reaching the set temperature normally.', area: 'Karshiaka, Plovdiv', diagnosis: 'After the heater was removed, heavy limescale was found around the heating element, which was making it hard for it to work normally.', repair: 'The water heater was cleaned of limescale and the heater was replaced. After the repair the appliance heats normally.', image: '/img/services/ремонт-на-бойлер-пловдив-случай-1.webp', alt: 'A removed Tesy water-heater element with built-up limescale during repair and cleaning in Karshiaka, Plovdiv.' },
+  { brand: 'Eldom', problem: 'The water heater was not holding the set temperature correctly and was switching off incorrectly.', area: 'Trakia, Plovdiv', diagnosis: 'Measuring the thermostat showed that it was not reading or controlling the temperature correctly.', repair: 'The faulty thermostat was replaced and the heating and switch-off were tested. After the repair the water heater works normally.', image: '/img/services/ремонт-на-бойлер-пловдив-случай-2.webp', alt: 'Measuring and repair of an Eldom water-heater thermostat with a temperature-control problem in Trakia, Plovdiv.' },
+  { brand: 'Tesy', problem: 'The water heater was not heating the water enough.', area: 'Hristo Smirnenski, Plovdiv', diagnosis: 'Measuring the heater showed that the heating element had failed and was not working within normal values.', repair: 'The faulty heater was replaced and the appliance was tested. After the repair the water heater heats the water normally.', image: '/img/services/ремонт-на-бойлер-пловдив-случай-3.webp', alt: 'Measuring and repair of a Tesy water-heater element with a water-heating problem in Hristo Smirnenski, Plovdiv.' },
+];
+const processSteps = [
+  { step: 1, text: 'You contact RotoRem and describe the problem: no hot water, a leak, or the breaker trips.', circleClass: 'bg-gradient-to-r from-teal-500 to-teal-600' },
+  { step: 2, text: 'We arrange a visit to the address in Plovdiv.', circleClass: 'bg-gradient-to-r from-emerald-500 to-emerald-600' },
+  { step: 3, text: 'The technician carries out diagnostics.', circleClass: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+  { step: 4, text: 'You are told what the fault is and what will be repaired.', circleClass: 'bg-gradient-to-r from-cyan-500 to-cyan-600' },
+  { step: 5, text: 'Repair and a check that the water heater is safe to use.', circleClass: 'bg-gradient-to-r from-teal-600 to-teal-700' },
+];
+const faqs = getServiceFaqItems('/en/services/remont-na-boileri-plovdiv/');
+const sectionClass = 'mb-28 pt-4';
+---
+
+<Layout title={title} description={description} image={heroImage} hideServiceFaq={true}>
+  <article>
+    <section class="relative min-h-[560px] md:min-h-[640px] flex items-center overflow-hidden mb-24">
+      <img src={heroImage} alt="Water heater repair at an address in Plovdiv" class="absolute inset-0 w-full h-full object-cover object-center scale-105" loading="eager" fetchpriority="high" width="1600" height="900" />
+      <div class="absolute inset-0 bg-gradient-to-b from-teal-950/85 via-teal-900/75 to-teal-800/90"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_45%)]"></div>
+      <div class="container max-w-5xl relative z-10 py-16 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">At-home water heater repair in Plovdiv</h1>
+          <p class="text-lg md:text-xl text-white/95 mb-8 leading-relaxed">RotoRem Plovdiv repairs water heaters at the address, with on-site diagnostics and replacement of worn parts such as heaters and thermostats, without the appliance having to be removed and transported to a workshop.</p>
+          <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md"><p class="text-xl font-bold text-white">Diagnostics in Plovdiv - 25 €</p></div>
+            <div class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
+              <p class="text-sm text-white/80 mb-1">Phone</p>
+              <a href="tel:0898340982" class="text-xl font-bold text-white hover:underline">089 834 0982</a>
+            </div>
+          </div>
+          <a href="tel:0898340982" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold shadow-xl shadow-amber-900/30 transition-colors text-lg">Call for a visit</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">At-home water heater repair and diagnostics</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="max-w-4xl mx-auto space-y-5 text-base md:text-lg text-gray-800 leading-relaxed">
+          <p>A water heater is an appliance that is difficult to move, especially when it is mounted on a wall or in a bathroom with limited access. That is why diagnostics and repair are carried out directly in the customer's home, in Plovdiv.</p>
+          <p>The team comes to the customer's address and inspects the water heater without removing it first. This lets the technician establish whether the problem is in the heater, the thermostat or another component before starting a repair.</p>
+          <p>On-site diagnostics save the customer from having to take down and carry a heavy appliance to a workshop, which with water heaters is almost always inconvenient and needs extra help.</p>
+          <p>After diagnostics the customer is told what was found and what repair is needed. Water heater repair is part of RotoRem's <a href="/en/services/plovdiv/" class={`${accentLink} font-medium hover:underline`}>appliance repair service in Plovdiv</a>, which is carried out in customers' homes.</p>
+        </div>
+      </section>
+    </div>
+
+    <Reviews title="Customer reviews" prioritizeAppliance="Бойлер" />
+
+    <div class="container max-w-5xl">
+      <section class={sectionClass}>
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">Water heater faults we repair</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <p class="text-center text-gray-800 leading-relaxed mb-8 max-w-3xl mx-auto">The most common reasons customers look for water heater repair are:</p>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-xl border`}>
+          <div class="grid md:grid-cols-2 gap-8">{problems.map((item) => (<div class={`bg-white p-6 rounded-xl shadow-md border-l-4 ${item.border}`}><h3 class="text-lg font-semibold mb-3 text-gray-900">{item.title}</h3><p class="text-gray-800 leading-relaxed">{item.text}</p></div>))}</div>
+        </div>
+        <p class="mt-8 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">Each of these faults needs a different approach and different parts, so on-site diagnostics are the first step before a solution is offered.</p>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Water heater diagnostics in Plovdiv</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class={`max-w-4xl mx-auto bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed`}>
+          <p>Depending on the symptom, the following are checked:</p>
+          <ul class="list-disc pl-5 space-y-2">{checks.map((item) => <li>{item}</li>)}</ul>
+          <p>After the check the customer learns what the fault is and what repair is recommended.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Water heater parts and systems we check and repair</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="md:hidden space-y-4">{partsTable.map((row) => (<div class={`bg-white rounded-xl border ${accentBorder} p-5 shadow-sm`}><p class="font-semibold text-gray-900 mb-2">{row.part}</p><p class="text-gray-800">{row.problem}</p></div>))}</div>
+        <div class={`hidden md:block overflow-hidden rounded-xl border ${accentBorder} bg-white shadow-lg`}>
+          <table class="w-full text-left">
+            <thead><tr class={`${tableHeader} text-white`}><th scope="col" class="px-5 py-4 text-sm font-semibold">Part or system</th><th scope="col" class="px-5 py-4 text-sm font-semibold">The problem it most often causes</th></tr></thead>
+            <tbody>{partsTable.map((row, index) => (<tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}><td class="px-5 py-3 text-sm font-medium text-gray-900">{row.part}</td><td class="px-5 py-3 text-sm text-gray-800">{row.problem}</td></tr>))}</tbody>
+          </table>
+        </div>
+        <div class="mt-8 space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto">
+          <p>The same symptom can come from different parts, so the repair needed is decided after the check.</p>
+          <p>The most often replaced parts are: thermostat, safety thermostat, on/off switch, cables, heater</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Water heater heater and thermostat replacement</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border text-gray-800 leading-relaxed max-w-4xl mx-auto`}><p>When diagnostics show a worn or burnt heater, it is replaced with a part suitable for that water heater model. The same applies to the thermostat, which regulates the water temperature. The thermal cut-out is a separate component that switches the water heater off if it overheats. If it has tripped, the technician looks for the cause instead of only resetting it.</p></div>
+      </section>
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Leaks from the water heater</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border text-gray-800 leading-relaxed max-w-4xl mx-auto`}><p>Different leaks have a different cause and a different repair. A leak around the flange is often fixed with a new seal, and a leak at the connections - with replacement of a fitting or valve. If water is coming from the tank itself, the technician says honestly whether a repair makes sense.</p></div>
+      </section>
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Limescale cleaning and anode protection</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>Regular water heater maintenance helps to catch early signs of wear on the heater, the thermostat or the tank, before they lead to a complete failure of the appliance.</p>
+          <p>During maintenance the water heater is drained and opened, the heater is cleaned of limescale, and the magnesium anode is checked and replaced if needed. The anode protects the tank from rust, so a worn anode shortens the life of the water heater.</p>
+        </div>
+      </section>
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Water heater installation and removal</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed max-w-4xl mx-auto`}>
+          <p>RotoRem installs and removes electric water heaters.</p>
+          <p>Installation can include positioning and fixing, a check of the water connections and the safety valve, connection, filling, a leak check and a test of the appliance.</p>
+          <p>When one is replaced, we also remove, drain and safely take down the old water heater.</p>
+        </div>
+      </section>
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Types of water heaters we service</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border text-gray-800 leading-relaxed max-w-4xl mx-auto`}><p>Vertical, horizontal and compact water heaters for installation under a sink. The position of the parts and access to them differ by type, so when you call it helps to say the brand, the model and the capacity of the water heater.</p></div>
+      </section>
+
+      <section class={sectionClass} aria-labelledby="plovdiv-boiler-pricing-en">
+        <div class="text-center mb-8"><h2 id="plovdiv-boiler-pricing-en" class="text-3xl font-bold text-gray-900 mb-4">Water heater repair prices in Plovdiv</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="max-w-4xl mx-auto space-y-5 text-gray-800 leading-relaxed mb-8">
+          <p>The customer is told the scope of the repair before work on the appliance begins.</p>
+          <p>The prices are a guide for labour and do not include the cost of spare parts.</p>
+        </div>
+        <div class={`bg-gradient-to-r ${accentShell} p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl border`}>
+          <div class="md:hidden space-y-3">{priceRows.map((row) => (<div class={`rounded-xl border ${accentBorder} bg-white p-4 shadow-sm`}><p class="font-medium text-gray-900 mb-2">{row.service}</p><p class="text-xl font-bold text-teal-700">{row.price}</p></div>))}</div>
+          <div class="hidden md:block overflow-hidden rounded-xl border border-white/60 bg-white shadow-md">
+            <table class="w-full text-left">
+              <thead><tr class={`${tableHeader} text-white`}><th scope="col" class="px-5 py-4 text-sm font-semibold">Service / problem</th><th scope="col" class="px-5 py-4 text-sm font-semibold text-right">Price (EUR)</th></tr></thead>
+              <tbody>{priceRows.map((row, index) => (<tr class:list={['border-t border-gray-100', index % 2 === 1 ? 'bg-gray-50/70' : 'bg-white']}><td class="px-5 py-4 text-sm text-gray-800">{row.service}</td><td class="px-5 py-4 text-sm font-bold text-teal-700 text-right whitespace-nowrap">{row.price}</td></tr>))}</tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">Water heater brands we service</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-800 leading-relaxed mb-6 text-center">TESY, Ariston, Atlantic, Eldom, Diplomat, Gorenje, AEG, Beko.</p>
+          <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">{brands.map((brand) => (<li class="bg-white border border-gray-200 rounded-lg shadow-sm h-full min-h-[4.5rem] px-4 py-4 flex items-center justify-center text-center font-semibold text-gray-900">{brand}</li>))}</ul>
+          <p class="text-gray-800 leading-relaxed mt-6 text-center max-w-3xl mx-auto">Heaters, flanges and thermostats are not the same across manufacturers. If you tell us the brand and how many litres the water heater is, the technician will bring the right part the first time.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">Real water heater repairs in Plovdiv</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="space-y-8">
+          <div class="grid lg:grid-cols-2 gap-8">
+            {realCases.slice(0, 2).map((item) => (
+              <article class="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <img src={item.image} alt={item.alt} class="w-full md:w-2/5 lg:w-5/12 h-64 md:h-auto object-cover md:min-h-[280px]" loading="lazy" width="480" height="360" />
+                <div class="p-6 md:p-7 flex-1 space-y-3">
+                  <h3 class="text-xl font-bold text-gray-900">Brand / model: {item.brand}</h3>
+                  <p class="text-gray-800"><span class="font-semibold">Problem:</span> {item.problem}</p>
+                  <p class="text-gray-800"><span class="font-semibold">Area:</span> {item.area}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {item.diagnosis}</p>
+                  <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {item.repair}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <article class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden max-w-5xl mx-auto">
+            <img src={realCases[2].image} alt={realCases[2].alt} class="w-full lg:w-2/5 h-72 lg:h-auto object-cover lg:min-h-[300px]" loading="lazy" width="560" height="400" />
+            <div class="p-6 md:p-8 flex-1 space-y-3">
+              <h3 class="text-xl font-bold text-gray-900">Brand / model: {realCases[2].brand}</h3>
+              <p class="text-gray-800"><span class="font-semibold">Problem:</span> {realCases[2].problem}</p>
+              <p class="text-gray-800"><span class="font-semibold">Area:</span> {realCases[2].area}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Diagnostics:</span> {realCases[2].diagnosis}</p>
+              <p class="text-gray-800 leading-relaxed"><span class="font-semibold">Repair:</span> {realCases[2].repair}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900 mb-4">How the repair works</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="grid md:grid-cols-3 gap-8 mb-8">{processSteps.slice(0, 3).map((item) => (<div class="text-center"><div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}><span class="text-xl font-bold">{item.step}</span></div><div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100"><p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p></div></div>))}</div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">{processSteps.slice(3).map((item) => (<div class="text-center"><div class:list={['w-16 h-16 text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-4', item.circleClass]}><span class="text-xl font-bold">{item.step}</span></div><div class="bg-white p-5 rounded-xl shadow-lg border border-gray-100"><p class="text-gray-900 font-semibold leading-relaxed">{item.text}</p></div></div>))}</div>
+      </section>
+
+      <section class={sectionClass}>
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Water heater repair in the different areas of Plovdiv</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class={`bg-gradient-to-r ${accentShell} p-6 md:p-8 rounded-2xl shadow-lg border space-y-5 text-gray-800 leading-relaxed text-center max-w-3xl mx-auto`}>
+          <p>RotoRem provides an at-home service across Plovdiv and nearby. For addresses outside the city there is a surcharge of 2 € per kilometre.</p>
+          <p>Neighbourhoods we cover: Centre, Smirnenski, Karshiaka, Marasha, Kyuchuk Paris, Kamenitsa, Gagarin, Zaharna Fabrika, Filipovo, Proslav, Komatevo, Ostromila, Belomorski</p>
+          <p>RotoRem repairs water heaters at the address with local teams in <a href="/en/services/boiler-repair/" class={`${accentLink} font-medium hover:underline`}>Varna</a>, and in <a href="/en/services/sofia/boiler-repair/" class={`${accentLink} font-medium hover:underline`}>Sofia</a>.</p>
+        </div>
+      </section>
+
+      <section class={sectionClass} id="faq">
+        <div class="text-center mb-10"><h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently asked questions</h2><div class={`w-20 h-1 ${accentBar} mx-auto`}></div></div>
+        <div class="max-w-3xl mx-auto space-y-4">{faqs.map((faq) => (<div class="bg-gradient-to-r from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden shadow-sm"><details class="group"><summary class="flex justify-between items-center p-5 cursor-pointer"><h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.q}</h3></summary><div class="p-5 pt-0 text-gray-800 border-t border-gray-100"><p class="leading-relaxed">{faq.a}</p></div></details></div>))}</div>
+      </section>
+    </div>
+  </article>
+  <div class="container max-w-5xl mb-28">
+    <section class="text-center bg-gradient-to-r from-teal-600 to-teal-800 text-white p-12 md:p-14 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-4">Problem with the water heater?</h2>
+      <p class="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">Call 089 834 0982 now for fast on-site diagnostics in Plovdiv and book a repair.</p>
+      <a href="tel:0898340982" class="inline-block bg-amber-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-600 transition-colors shadow-lg">089 834 0982</a>
+    </section>
+  </div>
+</Layout>
